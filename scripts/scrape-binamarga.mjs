@@ -100,7 +100,7 @@ async function main() {
     road: options.road,
     sourcePage,
     scrapedAt,
-  });
+  }, existing);
 
   const outputPath = resolve(options.out);
   await mkdir(dirname(outputPath), { recursive: true });

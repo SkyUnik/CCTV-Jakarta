@@ -20,6 +20,9 @@ test("static page exposes the required accessible controls with relative assets"
     "retry-button",
     "skip-button",
     "open-player-button",
+    "manual-camera-picker",
+    "manual-camera-select",
+    "manual-camera-button",
   ]) {
     assert.equal($(`#${id}`).length, 1, `Missing unique #${id}`);
   }
@@ -52,7 +55,7 @@ test("vendored HLS player and license are committed for offline site loading", a
   assert.match(license, /Apache License/);
 });
 
-test("normal camera data cannot accidentally start unverified streams", async () => {
+test("normal camera data cannot enter automatic switching before verification", async () => {
   const data = JSON.parse(
     await readFile(new URL("../docs/data/cameras.json", import.meta.url), "utf8"),
   );

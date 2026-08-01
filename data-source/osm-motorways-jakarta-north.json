@@ -1,0 +1,7225 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-05-31T22:37:44Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "way",
+  "id": 161418900,
+  "nodes": [
+    1743656036,
+    2369219474,
+    12336637359,
+    12336637360,
+    7007730539,
+    12336593863,
+    1743656045,
+    12336593865,
+    1743656047,
+    1733899313
+  ],
+  "tags": {
+    "bicycle": "no",
+    "bus:lanes": "designated|no",
+    "est_width": "9.01",
+    "foot": "no",
+    "hgv:lanes": "designated|no",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "2",
+    "maxspeed": "100",
+    "motorcycle": "no",
+    "name": "Jalan Tol Jagorawi",
+    "oneway": "yes",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 161418912,
+  "nodes": [
+    5931122644,
+    9376228789,
+    1743656017,
+    12336655022,
+    7027865438,
+    1733687057,
+    5934475123,
+    7027865437,
+    5934475124,
+    1733686921,
+    1743656005,
+    1743656001,
+    12336655030,
+    1742690183,
+    12336655031,
+    1742690182,
+    1733686871
+  ],
+  "tags": {
+    "access": "yes",
+    "est_width": "9.7",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "2",
+    "maxspeed": "60",
+    "motorcycle": "no",
+    "name": "Jalan Tol Jagorawi",
+    "oneway": "yes",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 161818241,
+  "nodes": [
+    1737734325,
+    1737734326
+  ],
+  "tags": {
+    "access": "yes",
+    "bridge": "yes",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "2",
+    "layer": "1",
+    "maxspeed": "60",
+    "motorcycle": "no",
+    "name": "Jalan Tol Jagorawi",
+    "oneway": "yes",
+    "surface": "asphalt",
+    "toll": "yes",
+    "width": "10.60"
+  }
+},
+{
+  "type": "way",
+  "id": 161818257,
+  "nodes": [
+    1737734326,
+    7027865434,
+    12336593804,
+    1733686949,
+    1742690187,
+    1742690188,
+    1733687000,
+    1733687065,
+    1733687106
+  ],
+  "tags": {
+    "access": "yes",
+    "est_width": "9.7",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "2",
+    "maxspeed": "60",
+    "motorcycle": "no",
+    "name": "Jalan Tol Jagorawi",
+    "oneway": "yes",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 161818260,
+  "nodes": [
+    1737734294,
+    1737966883,
+    1737734292
+  ],
+  "tags": {
+    "access": "yes",
+    "bridge": "yes",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "3",
+    "layer": "1",
+    "maxspeed": "60",
+    "motorcycle": "no",
+    "name": "Jalan Tol Jagorawi",
+    "oneway": "yes",
+    "surface": "asphalt",
+    "toll": "yes",
+    "width": "8.60"
+  }
+},
+{
+  "type": "way",
+  "id": 164115250,
+  "nodes": [
+    310329483,
+    2415550026,
+    2415550023,
+    2415550049,
+    2415550054,
+    2415550052,
+    2415550051,
+    2415550047,
+    2415550069,
+    317349564
+  ],
+  "tags": {
+    "est_width": "10",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "3",
+    "motorcar": "yes",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "2",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 232410749,
+  "nodes": [
+    4031342545,
+    2408660279,
+    2407635620,
+    2408660274,
+    2407635604,
+    5665428833,
+    4919828241,
+    4031342515,
+    4031342512,
+    2408660273,
+    4031336161,
+    5630170833,
+    2408660272
+  ],
+  "tags": {
+    "bridge": "yes",
+    "est_width": "5.2",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "2",
+    "layer": "2",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "1",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 233198856,
+  "nodes": [
+    310330452,
+    2415529890,
+    2415529888,
+    2415529874
+  ],
+  "tags": {
+    "access": "yes",
+    "bridge": "yes",
+    "est_width": "8.66",
+    "highway": "motorway",
+    "lanes": "2",
+    "layer": "1",
+    "motorcar": "yes",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "2",
+    "source": "www.jasamarga.com",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 361809259,
+  "nodes": [
+    1757739563,
+    1757739518,
+    1757739557,
+    1757739552,
+    1757739572,
+    317350271,
+    12313828598,
+    2415550048,
+    2415550058,
+    2415550040,
+    2415550025,
+    2415550062,
+    2415550027,
+    5067932048
+  ],
+  "tags": {
+    "access": "yes",
+    "est_width": "10",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "3",
+    "motorcar": "yes",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "2",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 361809261,
+  "nodes": [
+    12313853201,
+    1757721375,
+    1757721339,
+    1757721367,
+    1757721407,
+    1757721403,
+    1757721392,
+    1757721338
+  ],
+  "tags": {
+    "est_width": "10",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "3",
+    "motorcar": "yes",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "2",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 368509824,
+  "nodes": [
+    3723687952,
+    2407634675,
+    4488583007,
+    4031341650,
+    6334959836,
+    4031342564,
+    4756695660,
+    4756695661,
+    6334959837,
+    2407635614,
+    4756695664,
+    3647036099,
+    2407634724,
+    2407635622,
+    4756695665,
+    3647036104,
+    4031342527,
+    3647036098,
+    4756695667,
+    3647036103,
+    7115209923,
+    2407634685,
+    5671903483,
+    2407634697,
+    7702064215,
+    4031342314
+  ],
+  "tags": {
+    "bridge": "yes",
+    "est_width": "10",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "3",
+    "layer": "1",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "note": "Open for Public Since April 2017. Source: https://finance.detik.com/berita-ekonomi-bisnis/3474957/jokowi-resmikan-tol-akses-tanjung-priok-siang-ini",
+    "oneway": "yes",
+    "ref": "1",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 368509825,
+  "nodes": [
+    3723687951,
+    5671841197,
+    12319840084,
+    12319886410,
+    2407634703,
+    12319886409,
+    6334959833,
+    6334959832,
+    12319886408,
+    2407634682,
+    12319886407,
+    7654910949,
+    12319886406,
+    7654910948,
+    12319886405,
+    12319886404,
+    12319886403,
+    7654910947,
+    12319886402,
+    12319886401,
+    12319840100,
+    2407634710,
+    3732688186,
+    10170742057,
+    12751893571,
+    403994230
+  ],
+  "tags": {
+    "bridge": "yes",
+    "highway": "motorway",
+    "lanes": "3",
+    "layer": "1",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "1",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 368509826,
+  "nodes": [
+    11373254510,
+    9551693499,
+    4031341654
+  ],
+  "tags": {
+    "est_width": "10",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "3",
+    "motorcar": "yes",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "1",
+    "surface": "concrete",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 400587440,
+  "nodes": [
+    4031342314,
+    2407635605,
+    4756695671,
+    4756695673,
+    11329214994
+  ],
+  "tags": {
+    "bridge": "yes",
+    "est_width": "10",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "3",
+    "layer": "1",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "1",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 400587441,
+  "nodes": [
+    4031342551,
+    5466001542,
+    2407634735,
+    4756695669,
+    2407634718,
+    7115209924,
+    13323211857,
+    5665665548,
+    2407635616,
+    3647036093,
+    3647036100,
+    3647036101,
+    3647036094,
+    4756695666,
+    3647036095,
+    3647036102,
+    3647036097,
+    4756695663,
+    2407635612,
+    5665665546,
+    4756695662,
+    4756695659,
+    4031342563,
+    6334959835,
+    4031341649,
+    4488583008,
+    2407634720,
+    3723687951
+  ],
+  "tags": {
+    "bridge": "yes",
+    "est_width": "10",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "3",
+    "layer": "1",
+    "maxspeed": "80",
+    "minspeed": "60",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "note": "Open for public since April 2017. Source: https://finance.detik.com/berita-ekonomi-bisnis/3474957/jokowi-resmikan-tol-akses-tanjung-priok-siang-ini",
+    "oneway": "yes",
+    "ref": "1",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 400587443,
+  "nodes": [
+    7114843993,
+    4919828240,
+    4919828239,
+    2408660271,
+    4919828238,
+    9864968243,
+    7229879573,
+    4031342542,
+    7229879572,
+    5113072150,
+    2407635607,
+    4919828237,
+    2408660277,
+    11342760254,
+    5113072180
+  ],
+  "tags": {
+    "bridge": "yes",
+    "est_width": "7.75",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "2",
+    "layer": "1",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "1",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 400587444,
+  "nodes": [
+    7112698147,
+    4031341652,
+    4488441538,
+    4488441535,
+    6461083525,
+    4031341653
+  ],
+  "tags": {
+    "bridge": "yes",
+    "est_width": "6",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "2",
+    "layer": "1",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "1",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 414062642,
+  "nodes": [
+    1757721338,
+    1757721391,
+    1757721446,
+    1757721368,
+    1757721415,
+    317349440
+  ],
+  "tags": {
+    "bridge": "yes",
+    "est_width": "10",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "3",
+    "layer": "1",
+    "motorcar": "yes",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "2",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 414062643,
+  "nodes": [
+    11143513357,
+    11143513356,
+    11143513355,
+    11143513354,
+    11143513353,
+    12419429778,
+    12419429779,
+    1757739563
+  ],
+  "tags": {
+    "access": "yes",
+    "est_width": "10",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "3",
+    "motorcar": "yes",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "2",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 414062644,
+  "nodes": [
+    10127119804,
+    1757721396,
+    1757721417,
+    1757721409
+  ],
+  "tags": {
+    "access": "yes",
+    "bridge": "yes",
+    "est_width": "10",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "3",
+    "layer": "1",
+    "motorcar": "yes",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "2",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 414062645,
+  "nodes": [
+    317349440,
+    5668757533,
+    5004972145,
+    6463730443
+  ],
+  "tags": {
+    "bridge": "yes",
+    "est_width": "10",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "2",
+    "layer": "1",
+    "motorcar": "yes",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "2",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 517498546,
+  "nodes": [
+    5049969275,
+    6429655475,
+    10127071153
+  ],
+  "tags": {
+    "highway": "motorway",
+    "lane_markings": "no",
+    "lanes": "5",
+    "motorcar": "yes",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "1",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 517498547,
+  "nodes": [
+    10127135824,
+    3723687947,
+    10127135823,
+    5049969274
+  ],
+  "tags": {
+    "highway": "motorway",
+    "lane_markings": "no",
+    "lanes": "3",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "1",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 521140033,
+  "nodes": [
+    403994155,
+    12751893572,
+    3732688214,
+    10028516116,
+    3732688204,
+    12319886427,
+    2407634699,
+    12319886426,
+    12319886425,
+    12319886424,
+    7654910951,
+    12319886423,
+    12319886422,
+    2407634716,
+    12319886421,
+    9938560634
+  ],
+  "tags": {
+    "bridge": "yes",
+    "highway": "motorway",
+    "lanes": "3",
+    "layer": "1",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "1",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 525628626,
+  "nodes": [
+    4031336181,
+    2408660280,
+    4756695672,
+    4756695670,
+    7702064214,
+    2407635618,
+    4031342551
+  ],
+  "tags": {
+    "bridge": "yes",
+    "est_width": "12",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "3",
+    "layer": "1",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "1",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 553412534,
+  "nodes": [
+    1743656030,
+    1743656036
+  ],
+  "tags": {
+    "bicycle": "no",
+    "est_width": "14.89",
+    "foot": "no",
+    "highway": "motorway",
+    "lane_markings": "no",
+    "lanes": "2",
+    "maxspeed": "100",
+    "name": "Jalan Tol Jagorawi",
+    "oneway": "yes",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 553412537,
+  "nodes": [
+    319889231,
+    1743656030
+  ],
+  "tags": {
+    "access": "yes",
+    "highway": "motorway",
+    "lanes": "2",
+    "maxspeed": "100",
+    "motorcycle": "no",
+    "name": "Jalan Tol Jagorawi",
+    "oneway": "yes",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 553412538,
+  "nodes": [
+    1733899280,
+    12336637364,
+    9376044919,
+    7007730545,
+    12336593867,
+    7007730544,
+    12336637354,
+    12351728803,
+    1733687714
+  ],
+  "tags": {
+    "bicycle": "no",
+    "est_width": "9.2",
+    "foot": "no",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "2",
+    "maxspeed": "100",
+    "motorcycle": "no",
+    "name": "Jalan Tol Jagorawi",
+    "oneway": "yes",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 562943389,
+  "nodes": [
+    5067932048,
+    2415550044,
+    310330452
+  ],
+  "tags": {
+    "access": "yes",
+    "est_width": "10",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "3",
+    "motorcar": "yes",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "2",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 564205960,
+  "nodes": [
+    5113072180,
+    5436692235
+  ],
+  "tags": {
+    "bridge": "yes",
+    "est_width": "6",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "2",
+    "layer": "1",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "1",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 564205965,
+  "nodes": [
+    5436692234,
+    7112698137
+  ],
+  "tags": {
+    "bridge": "yes",
+    "est_width": "6",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "2",
+    "layer": "1",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "1",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 587356652,
+  "nodes": [
+    319889876,
+    1737734325
+  ],
+  "tags": {
+    "est_width": "9.20",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "2",
+    "maxspeed": "60",
+    "motorcycle": "no",
+    "name": "Jalan Tol Jagorawi",
+    "oneway": "yes",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 654826572,
+  "nodes": [
+    8869531905,
+    12666679330,
+    6997071331,
+    12666679329,
+    12666679328,
+    6997071332,
+    12666679327,
+    12666679326,
+    8869531904,
+    12666679325,
+    6997071333,
+    12666679324,
+    12666679323,
+    6136000605,
+    12666679322,
+    8869531903,
+    12666679321,
+    8869531902,
+    6804467062,
+    8869531901,
+    8869531900,
+    7033996230,
+    8869531899,
+    7033996227,
+    7033996225,
+    12717722677,
+    7033996219,
+    12717722678,
+    8869531898,
+    12717722679,
+    7033996217,
+    12717722680,
+    7033996223,
+    6136000604,
+    12717722681,
+    6136000603,
+    12717722682,
+    6801763160,
+    12717722683,
+    6136000602,
+    12717722684,
+    8869531897,
+    12717722685,
+    8869531896,
+    12717722686,
+    8869531895,
+    8869531894,
+    8869531893,
+    12717722687,
+    7149726254,
+    12717722689,
+    6136000601,
+    8869531892,
+    8869531891,
+    8869531890,
+    8869531889,
+    8869531888,
+    9446845223,
+    9446845224,
+    9446845225,
+    12704213165,
+    12704213164,
+    12704213170
+  ],
+  "tags": {
+    "bridge": "yes",
+    "highway": "motorway",
+    "layer": "2",
+    "motorcycle": "no",
+    "name": "Jalan Tol Sunter–Pulo Gebang",
+    "oneway": "yes",
+    "ref": "21",
+    "surface": "concrete",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 654826573,
+  "nodes": [
+    8869531855,
+    9446845220,
+    8869531854,
+    8869531853,
+    8869531852,
+    8869531851,
+    6135996778,
+    7149726255,
+    8869531850,
+    12717722688,
+    12470781749,
+    8869531849,
+    8869531848,
+    8869531847,
+    8869531846,
+    12717722665,
+    12717722666,
+    8869531845,
+    12717722667,
+    12717722664,
+    12717722668,
+    6804467059,
+    7033996222,
+    12717722669,
+    6135996781,
+    12717722670,
+    7033996224,
+    12717722671,
+    7033996218,
+    12717722672,
+    8869531844,
+    12717722676,
+    7033996220,
+    12717722675,
+    7033996226,
+    12717722674,
+    12717722673,
+    7033996228,
+    8869531843,
+    8869531842,
+    7033996231,
+    8869531841,
+    8869531840,
+    6771426462,
+    8869531839,
+    12666679312,
+    8869531838,
+    12666679313,
+    6135996782,
+    12666679314,
+    6997071334,
+    12666679315,
+    8869531837,
+    12666679316,
+    6997071335,
+    12666679317,
+    6997071336,
+    12666679318,
+    8869531836
+  ],
+  "tags": {
+    "bridge": "yes",
+    "highway": "motorway",
+    "layer": "2",
+    "motorcycle": "no",
+    "name": "Jalan Tol Sunter–Pulo Gebang",
+    "oneway": "yes",
+    "ref": "21",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 685787954,
+  "nodes": [
+    6335321166,
+    12245783641,
+    12245783642,
+    7641908681,
+    12245783643,
+    6335321165
+  ],
+  "tags": {
+    "highway": "motorway",
+    "lanes": "2",
+    "motorcycle": "no",
+    "name": "Jalan Tol Sunter–Pulo Gebang",
+    "oneway": "yes",
+    "smoothness": "good",
+    "source": "HOT_InAWARESurvey_2017",
+    "surface": "asphalt",
+    "toll": "yes",
+    "width": "7"
+  }
+},
+{
+  "type": "way",
+  "id": 685787960,
+  "nodes": [
+    316771577,
+    7641908676,
+    7641908677,
+    316771578,
+    7641908678,
+    12245783638,
+    12245783639,
+    316771580,
+    12245783640,
+    7641908679,
+    7641908680,
+    6335321166
+  ],
+  "tags": {
+    "highway": "motorway",
+    "lanes": "2",
+    "motorcycle": "no",
+    "name": "Jalan Tol Sunter–Pulo Gebang",
+    "oneway": "yes",
+    "smoothness": "good",
+    "source": "HOT_InAWARESurvey_2017",
+    "surface": "asphalt",
+    "toll": "yes",
+    "width": "7"
+  }
+},
+{
+  "type": "way",
+  "id": 688834766,
+  "nodes": [
+    5049969274,
+    6461083526,
+    4516185303,
+    4488441539,
+    3723687944,
+    7112698146
+  ],
+  "tags": {
+    "bridge": "yes",
+    "est_width": "6",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "2",
+    "layer": "1",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "1",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 689069104,
+  "nodes": [
+    7225007696,
+    3723687955
+  ],
+  "tags": {
+    "est_width": "10",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "3",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "1",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 718766684,
+  "nodes": [
+    1733687714,
+    9663246711,
+    1733687388,
+    1733687269,
+    5931122644
+  ],
+  "tags": {
+    "access": "yes",
+    "est_width": "9.73",
+    "highway": "motorway",
+    "lane_markings": "no",
+    "lanes": "2",
+    "maxspeed": "100",
+    "motorcycle": "no",
+    "name": "Jalan Tol Jagorawi",
+    "oneway": "yes",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 741808935,
+  "nodes": [
+    317349467,
+    5004972143,
+    5004972142,
+    1757721394,
+    10127119804
+  ],
+  "tags": {
+    "bridge": "yes",
+    "est_width": "5.2",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "2",
+    "layer": "1",
+    "motorcar": "yes",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "2",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 741812344,
+  "nodes": [
+    2415550034,
+    2415529880,
+    2415529887,
+    310329483
+  ],
+  "tags": {
+    "bridge": "yes",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "3",
+    "layer": "1",
+    "maxspeed": "100",
+    "motorcar": "yes",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "2",
+    "source": "www.jasamarga.com",
+    "surface": "asphalt",
+    "toll": "yes",
+    "width": "11.02"
+  }
+},
+{
+  "type": "way",
+  "id": 754682128,
+  "nodes": [
+    319889229,
+    319889231
+  ],
+  "tags": {
+    "access": "yes",
+    "highway": "motorway",
+    "lane_markings": "no",
+    "lanes": "8",
+    "maxspeed": "60",
+    "motorcycle": "no",
+    "name": "Jalan Tol Jagorawi",
+    "oneway": "yes",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 754682129,
+  "nodes": [
+    1733687106,
+    7027865436,
+    1733687211,
+    1743656019,
+    319889229
+  ],
+  "tags": {
+    "access": "yes",
+    "highway": "motorway",
+    "lane_markings": "no",
+    "lanes": "8",
+    "maxspeed": "60",
+    "motorcycle": "no",
+    "name": "Jalan Tol Jagorawi",
+    "oneway": "yes",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 761297176,
+  "nodes": [
+    7112698136,
+    5436692237
+  ],
+  "tags": {
+    "bridge": "yes",
+    "est_width": "6",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "2",
+    "layer": "1",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "1",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 761297177,
+  "nodes": [
+    7112698137,
+    7112698136
+  ],
+  "tags": {
+    "bridge": "yes",
+    "est_width": "6",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "2",
+    "layer": "2",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "1",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 761297178,
+  "nodes": [
+    7112698146,
+    5671906713
+  ],
+  "tags": {
+    "bridge": "yes",
+    "est_width": "6",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "2",
+    "layer": "2",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "1",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 761297179,
+  "nodes": [
+    5671906713,
+    5436692234
+  ],
+  "tags": {
+    "bridge": "yes",
+    "est_width": "6",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "2",
+    "layer": "1",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "1",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 761297180,
+  "nodes": [
+    5671906712,
+    7112698147
+  ],
+  "tags": {
+    "bridge": "yes",
+    "est_width": "6",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "2",
+    "layer": "2",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "1",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 761297181,
+  "nodes": [
+    5436692235,
+    5671906712
+  ],
+  "tags": {
+    "bridge": "yes",
+    "est_width": "6",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "2",
+    "layer": "1",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "1",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 761524523,
+  "nodes": [
+    2407634708,
+    2408660275
+  ],
+  "tags": {
+    "bridge": "yes",
+    "est_width": "10",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "3",
+    "layer": "2",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "1",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 761524524,
+  "nodes": [
+    2408660275,
+    4919847418
+  ],
+  "tags": {
+    "bridge": "yes",
+    "est_width": "10",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "2",
+    "layer": "2",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "1",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 761524525,
+  "nodes": [
+    4919847418,
+    2407634740
+  ],
+  "tags": {
+    "bridge": "yes",
+    "est_width": "10",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "2",
+    "layer": "2",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "1",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 765533777,
+  "nodes": [
+    12704213170,
+    9446845238,
+    12248351769,
+    12704213163,
+    12248351770,
+    12245780856,
+    7149771310,
+    7149771307,
+    12245780857,
+    12245780858,
+    8869531885,
+    12245780859,
+    12245780860,
+    12245780861,
+    8869531884,
+    12245780862,
+    8869531883,
+    12245780863,
+    12245780864,
+    8869531882,
+    12245780865,
+    12245780866,
+    8869531881,
+    12245780867,
+    12245780868,
+    12245780869,
+    12245780871,
+    8869531880,
+    12245780872,
+    12245780873,
+    8869531879,
+    12245780875,
+    12245780876,
+    8869531878,
+    12245780878,
+    12245780879,
+    8869531877,
+    12245780880,
+    12245780881,
+    12704213173,
+    8869531876,
+    12245780883,
+    8869531875,
+    12245780884,
+    12245780885,
+    12245780886,
+    12245780887,
+    12245780888,
+    8869531874,
+    12245780889,
+    12245780890,
+    12245780891,
+    12245780892,
+    12245780893,
+    8869531873,
+    12245780894,
+    12245780895,
+    12245780897,
+    8869531872,
+    12245780896,
+    12245783637
+  ],
+  "tags": {
+    "bridge": "yes",
+    "destination": "Tanjung Priok;Cikampek",
+    "destination:street": "Lingkar Luar",
+    "highway": "motorway",
+    "lanes": "2",
+    "layer": "2",
+    "motorcycle": "no",
+    "name": "Jalan Tol Sunter–Pulo Gebang",
+    "oneway": "yes",
+    "surface": "concrete",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 765533779,
+  "nodes": [
+    7129198399,
+    7129198390,
+    12245783723,
+    12245783724,
+    12245783725,
+    12245783726,
+    6135996767,
+    12245783727,
+    11924979069,
+    12245783728,
+    12245783729,
+    6135996772,
+    12245783730,
+    12245783731,
+    12245783732,
+    11924979070,
+    6135996773,
+    12245783733,
+    12245783734,
+    12248351773,
+    7129198391,
+    12245783735,
+    7129198393,
+    12245783736,
+    12245783737,
+    7129198395,
+    12245783739,
+    7129198402,
+    12245783741,
+    12245783742,
+    12245783740,
+    12245783743,
+    12245783744,
+    7129198400,
+    12245783745,
+    12245783747,
+    6135996775,
+    12491806250,
+    12245783749,
+    12245783750,
+    12244294259,
+    6135996776,
+    12245783751,
+    12245783752,
+    9446845234,
+    12245783753,
+    9446845233,
+    9989714341,
+    9446845232,
+    7139899590,
+    9989714339,
+    9446845227,
+    9989714338,
+    6135996777,
+    9989714337,
+    9989714336,
+    8869531855
+  ],
+  "tags": {
+    "bridge": "yes",
+    "destination:ref": "21",
+    "highway": "motorway",
+    "lanes": "2",
+    "layer": "2",
+    "motorcycle": "no",
+    "name": "Jalan Tol Sunter–Pulo Gebang",
+    "oneway": "yes",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 773912308,
+  "nodes": [
+    2408660272,
+    12042807689
+  ],
+  "tags": {
+    "bridge": "yes",
+    "est_width": "15",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "3",
+    "layer": "2",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "1",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 774162450,
+  "nodes": [
+    4031341655,
+    9551693500,
+    7225007696
+  ],
+  "tags": {
+    "est_width": "10",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "3",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "1",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 774162451,
+  "nodes": [
+    6463730443,
+    4031341655
+  ],
+  "tags": {
+    "est_width": "5.6",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "2",
+    "motorcar": "yes",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "2",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 808485764,
+  "nodes": [
+    1737734292,
+    7298615796
+  ],
+  "tags": {
+    "access": "yes",
+    "est_width": "7",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "3",
+    "maxspeed": "60",
+    "motorcar": "yes",
+    "motorcycle": "no",
+    "name": "Jalan Tol Jagorawi",
+    "oneway": "yes",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 808588560,
+  "nodes": [
+    317349564,
+    1757721354,
+    1757721331,
+    1757721341,
+    1757721380,
+    1757721393,
+    1757721334,
+    1757721457,
+    1757721352
+  ],
+  "tags": {
+    "destination": "Tanjung Priok;Cikampek",
+    "est_width": "10",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "3",
+    "motorcar": "yes",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "2",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 958590002,
+  "nodes": [
+    8869531867,
+    12245783607,
+    12245783608,
+    12245783609,
+    8869531866,
+    12245783610,
+    9055431638,
+    12245783611,
+    8869531865,
+    12245783612,
+    12245783613,
+    12245783614,
+    8869531864,
+    12245783615,
+    12245783616,
+    12245783617,
+    8869531863,
+    12245783618,
+    12245783619,
+    8869531862,
+    8869531861,
+    12245783620,
+    8869531860,
+    13015788513,
+    13015788514,
+    8869531859,
+    8869531858,
+    12245893806,
+    8869531857,
+    13015786595,
+    12245893804,
+    12244294276,
+    12244294278,
+    12245893807,
+    12245893805,
+    316771429
+  ],
+  "tags": {
+    "highway": "motorway",
+    "motorcycle": "no",
+    "name": "Jalan Tol Sunter–Pulo Gebang",
+    "oneway": "yes",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 958590003,
+  "nodes": [
+    316771582,
+    12183778513,
+    12245783651,
+    12245783652,
+    12717722663,
+    12245783653,
+    12245783654,
+    12183778514,
+    7129198414,
+    12183778512,
+    12245783709,
+    12245783710,
+    13015788515,
+    7129198412,
+    7129198410,
+    13015788516,
+    12245783712,
+    12245783713,
+    7129198407,
+    12245783714,
+    12245783715,
+    12245783716,
+    9078379398,
+    12245783717,
+    7129198406,
+    12245783718,
+    12245783721,
+    12245783719,
+    12245783720,
+    7129198405,
+    13015788517,
+    12245783722,
+    13015788518,
+    7129198399
+  ],
+  "tags": {
+    "destination:ref": "21",
+    "highway": "motorway",
+    "lanes": "2",
+    "motorcycle": "no",
+    "name": "Jalan Tol Sunter–Pulo Gebang",
+    "oneway": "yes",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1084561699,
+  "nodes": [
+    9938560634,
+    12319886420,
+    12319886419,
+    2407634693
+  ],
+  "tags": {
+    "bridge": "yes",
+    "highway": "motorway",
+    "lanes": "3",
+    "layer": "1",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "1",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1084561700,
+  "nodes": [
+    2407634693,
+    12319886418,
+    6334959831,
+    12319886417,
+    6334959834,
+    12319886416,
+    12319886415,
+    2407634695,
+    12319886414,
+    7654910950,
+    5078199476,
+    5078199477,
+    11381239767
+  ],
+  "tags": {
+    "bridge": "yes",
+    "highway": "motorway",
+    "lanes": "3",
+    "layer": "1",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "1",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1087413358,
+  "nodes": [
+    6427407278,
+    12245783646,
+    12245783647,
+    12245783648,
+    9013015384
+  ],
+  "tags": {
+    "highway": "motorway",
+    "lanes": "2",
+    "motorcycle": "no",
+    "name": "Jalan Tol Sunter–Pulo Gebang",
+    "oneway": "yes",
+    "smoothness": "good",
+    "source": "HOT_InAWARESurvey_2017",
+    "surface": "asphalt",
+    "width": "7"
+  }
+},
+{
+  "type": "way",
+  "id": 1103015361,
+  "nodes": [
+    1733686871,
+    203461788,
+    1737734294
+  ],
+  "tags": {
+    "access": "yes",
+    "est_width": "9.7",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "3",
+    "maxspeed": "60",
+    "motorcycle": "no",
+    "name": "Jalan Tol Jagorawi",
+    "oneway": "yes",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1106706069,
+  "nodes": [
+    5426017925,
+    3723687956
+  ],
+  "tags": {
+    "highway": "motorway",
+    "lane_markings": "no",
+    "lanes": "3",
+    "motorcar": "yes",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "1",
+    "surface": "concrete",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1106706070,
+  "nodes": [
+    4031341653,
+    10127071152,
+    5049969275
+  ],
+  "tags": {
+    "highway": "motorway",
+    "lane_markings": "no",
+    "lanes": "2",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "1",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1106706071,
+  "nodes": [
+    10127071153,
+    5426017925
+  ],
+  "tags": {
+    "highway": "motorway",
+    "lane_markings": "no",
+    "lanes": "4",
+    "motorcar": "yes",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "1",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1106712948,
+  "nodes": [
+    3723687955,
+    10127135824
+  ],
+  "tags": {
+    "highway": "motorway",
+    "lane_markings": "no",
+    "lanes": "2",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "1",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1106717721,
+  "nodes": [
+    10127156670,
+    317349467
+  ],
+  "tags": {
+    "bridge": "yes",
+    "est_width": "10",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "4",
+    "layer": "1",
+    "motorcar": "yes",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "1",
+    "surface": "concrete",
+    "toll": "yes",
+    "turn:lanes": "slight_left|slight_left|through|through"
+  }
+},
+{
+  "type": "way",
+  "id": 1221533690,
+  "nodes": [
+    11329214993,
+    11329214992
+  ],
+  "tags": {
+    "bridge": "yes",
+    "change:lanes": "no|not_left|yes",
+    "est_width": "10",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "3",
+    "layer": "1",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "1",
+    "surface": "asphalt",
+    "toll": "yes",
+    "turn:lanes": "slight_left;through|through|through"
+  }
+},
+{
+  "type": "way",
+  "id": 1221533691,
+  "nodes": [
+    11329214992,
+    4031342479
+  ],
+  "tags": {
+    "bridge": "yes",
+    "change:lanes": "yes|not_right|not_left|yes",
+    "est_width": "10",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "4",
+    "layer": "1",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "1",
+    "surface": "asphalt",
+    "toll": "yes",
+    "turn:lanes": "slight_left|through|through|through"
+  }
+},
+{
+  "type": "way",
+  "id": 1221533692,
+  "nodes": [
+    4031342479,
+    2407634708
+  ],
+  "tags": {
+    "bridge": "yes",
+    "est_width": "10",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "3",
+    "layer": "1",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "1",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1221533693,
+  "nodes": [
+    11329214994,
+    2408660276,
+    11329214993
+  ],
+  "tags": {
+    "bridge": "yes",
+    "est_width": "10",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "3",
+    "layer": "1",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "1",
+    "surface": "asphalt",
+    "toll": "yes",
+    "turn:lanes": "slight_left;through|through|through"
+  }
+},
+{
+  "type": "way",
+  "id": 1226444995,
+  "nodes": [
+    9013015384,
+    12245783649,
+    12245783650,
+    316771582
+  ],
+  "tags": {
+    "highway": "motorway",
+    "lanes": "2",
+    "motorcycle": "no",
+    "name": "Jalan Tol Sunter–Pulo Gebang",
+    "oneway": "yes",
+    "smoothness": "good",
+    "source": "HOT_InAWARESurvey_2017",
+    "surface": "asphalt",
+    "turn:lanes": "slight_left||",
+    "width": "7"
+  }
+},
+{
+  "type": "way",
+  "id": 1226457177,
+  "nodes": [
+    3723687956,
+    11373254510
+  ],
+  "tags": {
+    "est_width": "10",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "3",
+    "motorcar": "yes",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "1",
+    "surface": "concrete",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1227335957,
+  "nodes": [
+    11381239767,
+    3723687952
+  ],
+  "tags": {
+    "bridge": "yes",
+    "highway": "motorway",
+    "lanes": "4",
+    "layer": "1",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "1",
+    "surface": "asphalt",
+    "toll": "yes",
+    "turn:lanes": "slight_left|||"
+  }
+},
+{
+  "type": "way",
+  "id": 1238907869,
+  "nodes": [
+    316771429,
+    13015786596,
+    13015786598,
+    13015786597,
+    7641908654,
+    5492926343
+  ],
+  "tags": {
+    "highway": "motorway",
+    "lanes": "2",
+    "motorcycle": "no",
+    "name": "Jalan Tol Sunter–Pulo Gebang",
+    "oneway": "yes",
+    "smoothness": "good",
+    "source": "HOT_InAWARESurvey_2017",
+    "surface": "asphalt",
+    "toll": "yes",
+    "width": "7"
+  }
+},
+{
+  "type": "way",
+  "id": 1300146074,
+  "nodes": [
+    5436692237,
+    11342760253,
+    2407635603,
+    4031336170,
+    4031342545
+  ],
+  "tags": {
+    "bridge": "yes",
+    "est_width": "5.2",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "2",
+    "layer": "1",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "1",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1300146075,
+  "nodes": [
+    2407634740,
+    12556173252,
+    7114843993
+  ],
+  "tags": {
+    "bridge": "yes",
+    "est_width": "7.75",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "2",
+    "layer": "2",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "1",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1300146076,
+  "nodes": [
+    12042807689,
+    2408660278,
+    4031336181
+  ],
+  "tags": {
+    "bridge": "yes",
+    "est_width": "15",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "3",
+    "layer": "1",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "1",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1323353932,
+  "nodes": [
+    12245783636,
+    8869531871,
+    12245780898,
+    12245780899,
+    12245780900,
+    12245783627,
+    8869531870,
+    12245783601,
+    12245783602,
+    12245783603,
+    12245783626,
+    8869531869,
+    12245783625,
+    12245783624,
+    12245783604,
+    12245783605,
+    12245783623,
+    12245783606,
+    8869531868,
+    12245783622,
+    12245783621,
+    8869531867
+  ],
+  "tags": {
+    "bridge": "yes",
+    "destination": "Tanjung Priok;Cikampek",
+    "destination:street": "Lingkar Luar",
+    "highway": "motorway",
+    "lanes": "2",
+    "layer": "2",
+    "motorcycle": "no",
+    "name": "Jalan Tol Sunter–Pulo Gebang",
+    "oneway": "yes",
+    "surface": "concrete",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1323353933,
+  "nodes": [
+    12245783637,
+    8956339735,
+    12245893801,
+    12245783636
+  ],
+  "tags": {
+    "bridge": "yes",
+    "covered": "yes",
+    "destination": "Tanjung Priok;Cikampek",
+    "destination:street": "Lingkar Luar",
+    "highway": "motorway",
+    "lanes": "2",
+    "layer": "2",
+    "motorcycle": "no",
+    "name": "Jalan Tol Sunter–Pulo Gebang",
+    "oneway": "yes",
+    "surface": "concrete",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1323353934,
+  "nodes": [
+    12245783644,
+    12245783645,
+    6427407278
+  ],
+  "tags": {
+    "highway": "motorway",
+    "lanes": "2",
+    "motorcycle": "no",
+    "name": "Jalan Tol Sunter–Pulo Gebang",
+    "oneway": "yes",
+    "smoothness": "good",
+    "source": "HOT_InAWARESurvey_2017",
+    "surface": "asphalt",
+    "toll": "yes",
+    "width": "7"
+  }
+},
+{
+  "type": "way",
+  "id": 1323353935,
+  "nodes": [
+    6335321165,
+    12245893816,
+    12245783644
+  ],
+  "tags": {
+    "covered": "yes",
+    "highway": "motorway",
+    "lanes": "2",
+    "motorcycle": "no",
+    "name": "Jalan Tol Sunter–Pulo Gebang",
+    "oneway": "yes",
+    "smoothness": "good",
+    "source": "HOT_InAWARESurvey_2017",
+    "surface": "asphalt",
+    "toll": "yes",
+    "width": "7"
+  }
+},
+{
+  "type": "way",
+  "id": 1330843117,
+  "nodes": [
+    1757721352,
+    1757721471
+  ],
+  "tags": {
+    "destination": "Tanjung Priok;Cikampek",
+    "est_width": "10",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "3",
+    "motorcar": "yes",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "2",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1330843129,
+  "nodes": [
+    1757721471,
+    1757721397,
+    1757721455,
+    1757721445,
+    1757721340,
+    12313853201
+  ],
+  "tags": {
+    "est_width": "10",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "3",
+    "motorcar": "yes",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "2",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1330843131,
+  "nodes": [
+    1757721409,
+    1757721365,
+    1757721363,
+    1757721357,
+    1757721386,
+    1757721374,
+    11143513357
+  ],
+  "tags": {
+    "access": "yes",
+    "est_width": "10",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "3",
+    "motorcar": "yes",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "2",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1331512908,
+  "nodes": [
+    8869531829,
+    6581061310,
+    6136000618,
+    6135996769,
+    6136000616,
+    12319808844
+  ],
+  "tags": {
+    "bridge": "yes",
+    "highway": "motorway",
+    "layer": "2",
+    "motorcycle": "no",
+    "name": "Jalan Tol Sunter–Pulo Gebang",
+    "oneway": "yes",
+    "ref": "21",
+    "surface": "concrete",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1331512909,
+  "nodes": [
+    12319808845,
+    6136000621,
+    6135996768,
+    6136000619,
+    8956339734
+  ],
+  "tags": {
+    "bridge": "yes",
+    "highway": "motorway",
+    "layer": "2",
+    "motorcycle": "no",
+    "name": "Jalan Tol Sunter–Pulo Gebang",
+    "oneway": "yes",
+    "ref": "21",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1331512910,
+  "nodes": [
+    12319808844,
+    6581014242
+  ],
+  "tags": {
+    "bridge": "yes",
+    "highway": "motorway",
+    "layer": "3",
+    "motorcycle": "no",
+    "name": "Jalan Tol Sunter–Pulo Gebang",
+    "oneway": "yes",
+    "ref": "21",
+    "surface": "concrete",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1331512911,
+  "nodes": [
+    6581014243,
+    12319808845
+  ],
+  "tags": {
+    "bridge": "yes",
+    "highway": "motorway",
+    "layer": "3",
+    "motorcycle": "no",
+    "name": "Jalan Tol Sunter–Pulo Gebang",
+    "oneway": "yes",
+    "ref": "21",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1367662203,
+  "nodes": [
+    6581014242,
+    6581014245
+  ],
+  "tags": {
+    "bridge": "yes",
+    "highway": "motorway",
+    "layer": "2",
+    "motorcycle": "no",
+    "name": "Jalan Tol Sunter–Pulo Gebang",
+    "oneway": "yes",
+    "ref": "21",
+    "surface": "concrete",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1367662204,
+  "nodes": [
+    6581014246,
+    10705768100,
+    10705768099,
+    10705768101,
+    6581014243
+  ],
+  "tags": {
+    "bridge": "yes",
+    "highway": "motorway",
+    "layer": "2",
+    "motorcycle": "no",
+    "name": "Jalan Tol Sunter–Pulo Gebang",
+    "oneway": "yes",
+    "ref": "21",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1367662205,
+  "nodes": [
+    6581014245,
+    12745846780,
+    8869531909,
+    6136000615,
+    8869531908,
+    6136000614,
+    8869531907,
+    6136000613,
+    12666679335,
+    6136000612,
+    12666679333,
+    8869531906,
+    12666679332,
+    12666679331,
+    8869531905
+  ],
+  "tags": {
+    "bridge": "yes",
+    "highway": "motorway",
+    "layer": "2",
+    "motorcycle": "no",
+    "name": "Jalan Tol Sunter–Pulo Gebang",
+    "oneway": "yes",
+    "ref": "21",
+    "surface": "concrete",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1367662206,
+  "nodes": [
+    8869531836,
+    12666679319,
+    6997071337,
+    12666679320,
+    6136000589,
+    6136000590,
+    6136000591,
+    8869531835,
+    6136000622,
+    12745846779,
+    8869531834,
+    6581014246
+  ],
+  "tags": {
+    "bridge": "yes",
+    "highway": "motorway",
+    "layer": "2",
+    "motorcycle": "no",
+    "name": "Jalan Tol Sunter–Pulo Gebang",
+    "oneway": "yes",
+    "ref": "21",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1376488068,
+  "nodes": [
+    6322137640,
+    2415529889,
+    2415550034
+  ],
+  "tags": {
+    "bridge": "yes",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "3",
+    "layer": "2",
+    "maxspeed": "100",
+    "motorcar": "yes",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "2",
+    "source": "www.jasamarga.com",
+    "surface": "asphalt",
+    "toll": "yes",
+    "width": "11.02"
+  }
+},
+{
+  "type": "way",
+  "id": 1376488069,
+  "nodes": [
+    2415529874,
+    2415529886,
+    6322167590
+  ],
+  "tags": {
+    "bridge": "yes",
+    "est_width": "8.66",
+    "highway": "motorway",
+    "lanes": "2",
+    "layer": "2",
+    "motorcar": "yes",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "2",
+    "source": "www.jasamarga.com",
+    "surface": "asphalt",
+    "toll": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1524398092,
+  "nodes": [
+    4031341654,
+    10127156670
+  ],
+  "tags": {
+    "est_width": "10",
+    "highway": "motorway",
+    "lane_markings": "yes",
+    "lanes": "4",
+    "motorcar": "yes",
+    "motorcycle": "no",
+    "name": "Jalan Tol Akses Tanjung Priok",
+    "oneway": "yes",
+    "ref": "1",
+    "surface": "concrete",
+    "toll": "yes",
+    "turn:lanes": "slight_left|slight_left|through|through"
+  }
+},
+{
+  "type": "node",
+  "id": 1733899280,
+  "lat": -6.6020630,
+  "lon": 106.8103718
+},
+{
+  "type": "node",
+  "id": 9376044919,
+  "lat": -6.6019707,
+  "lon": 106.8104402
+},
+{
+  "type": "node",
+  "id": 12336637364,
+  "lat": -6.6020004,
+  "lon": 106.8104080
+},
+{
+  "type": "node",
+  "id": 1733687388,
+  "lat": -6.5979449,
+  "lon": 106.8164144
+},
+{
+  "type": "node",
+  "id": 1733687714,
+  "lat": -6.5989001,
+  "lon": 106.8149549
+},
+{
+  "type": "node",
+  "id": 1733899313,
+  "lat": -6.6021153,
+  "lon": 106.8106670
+},
+{
+  "type": "node",
+  "id": 1743656030,
+  "lat": -6.5983767,
+  "lon": 106.8160021
+},
+{
+  "type": "node",
+  "id": 1743656036,
+  "lat": -6.5988982,
+  "lon": 106.8152540
+},
+{
+  "type": "node",
+  "id": 1743656045,
+  "lat": -6.6015347,
+  "lon": 106.8115437
+},
+{
+  "type": "node",
+  "id": 1743656047,
+  "lat": -6.6018456,
+  "lon": 106.8111261
+},
+{
+  "type": "node",
+  "id": 2369219474,
+  "lat": -6.5990582,
+  "lon": 106.8150668
+},
+{
+  "type": "node",
+  "id": 7007730539,
+  "lat": -6.6006528,
+  "lon": 106.8127771
+},
+{
+  "type": "node",
+  "id": 7007730544,
+  "lat": -6.6015217,
+  "lon": 106.8110959
+},
+{
+  "type": "node",
+  "id": 7007730545,
+  "lat": -6.6018145,
+  "lon": 106.8106774
+},
+{
+  "type": "node",
+  "id": 9663246711,
+  "lat": -6.5984478,
+  "lon": 106.8156157
+},
+{
+  "type": "node",
+  "id": 12336593863,
+  "lat": -6.6009303,
+  "lon": 106.8123557
+},
+{
+  "type": "node",
+  "id": 12336593865,
+  "lat": -6.6016948,
+  "lon": 106.8113445
+},
+{
+  "type": "node",
+  "id": 12336593867,
+  "lat": -6.6016198,
+  "lon": 106.8109417
+},
+{
+  "type": "node",
+  "id": 12336637354,
+  "lat": -6.6011179,
+  "lon": 106.8117483
+},
+{
+  "type": "node",
+  "id": 12336637359,
+  "lat": -6.5991665,
+  "lon": 106.8149013
+},
+{
+  "type": "node",
+  "id": 12336637360,
+  "lat": -6.5993708,
+  "lon": 106.8146238
+},
+{
+  "type": "node",
+  "id": 12351728803,
+  "lat": -6.6000736,
+  "lon": 106.8132700
+},
+{
+  "type": "node",
+  "id": 203461788,
+  "lat": -6.5961865,
+  "lon": 106.8229437
+},
+{
+  "type": "node",
+  "id": 319889229,
+  "lat": -6.5975053,
+  "lon": 106.8176890
+},
+{
+  "type": "node",
+  "id": 319889231,
+  "lat": -6.5976733,
+  "lon": 106.8172467
+},
+{
+  "type": "node",
+  "id": 1733686871,
+  "lat": -6.5962464,
+  "lon": 106.8220881
+},
+{
+  "type": "node",
+  "id": 1733686921,
+  "lat": -6.5966697,
+  "lon": 106.8195139
+},
+{
+  "type": "node",
+  "id": 1733686949,
+  "lat": -6.5964587,
+  "lon": 106.8218366
+},
+{
+  "type": "node",
+  "id": 1733687000,
+  "lat": -6.5966540,
+  "lon": 106.8204896
+},
+{
+  "type": "node",
+  "id": 1733687057,
+  "lat": -6.5968735,
+  "lon": 106.8186158
+},
+{
+  "type": "node",
+  "id": 1733687065,
+  "lat": -6.5968020,
+  "lon": 106.8197197
+},
+{
+  "type": "node",
+  "id": 1733687106,
+  "lat": -6.5969752,
+  "lon": 106.8191028
+},
+{
+  "type": "node",
+  "id": 1733687211,
+  "lat": -6.5971270,
+  "lon": 106.8186668
+},
+{
+  "type": "node",
+  "id": 1733687269,
+  "lat": -6.5974153,
+  "lon": 106.8172353
+},
+{
+  "type": "node",
+  "id": 1742690182,
+  "lat": -6.5963063,
+  "lon": 106.8214685
+},
+{
+  "type": "node",
+  "id": 1742690183,
+  "lat": -6.5963810,
+  "lon": 106.8208878
+},
+{
+  "type": "node",
+  "id": 1742690187,
+  "lat": -6.5964863,
+  "lon": 106.8215677
+},
+{
+  "type": "node",
+  "id": 1742690188,
+  "lat": -6.5965475,
+  "lon": 106.8210729
+},
+{
+  "type": "node",
+  "id": 1743656001,
+  "lat": -6.5965089,
+  "lon": 106.8202266
+},
+{
+  "type": "node",
+  "id": 1743656005,
+  "lat": -6.5966394,
+  "lon": 106.8196500
+},
+{
+  "type": "node",
+  "id": 1743656017,
+  "lat": -6.5970071,
+  "lon": 106.8180809
+},
+{
+  "type": "node",
+  "id": 1743656019,
+  "lat": -6.5973082,
+  "lon": 106.8181828
+},
+{
+  "type": "node",
+  "id": 5931122644,
+  "lat": -6.5972056,
+  "lon": 106.8175679
+},
+{
+  "type": "node",
+  "id": 5934475123,
+  "lat": -6.5967873,
+  "lon": 106.8189888
+},
+{
+  "type": "node",
+  "id": 5934475124,
+  "lat": -6.5967156,
+  "lon": 106.8193072
+},
+{
+  "type": "node",
+  "id": 7027865434,
+  "lat": -6.5963676,
+  "lon": 106.8234936
+},
+{
+  "type": "node",
+  "id": 7027865436,
+  "lat": -6.5971084,
+  "lon": 106.8187165
+},
+{
+  "type": "node",
+  "id": 7027865437,
+  "lat": -6.5967647,
+  "lon": 106.8190867
+},
+{
+  "type": "node",
+  "id": 7027865438,
+  "lat": -6.5969258,
+  "lon": 106.8183893
+},
+{
+  "type": "node",
+  "id": 9376228789,
+  "lat": -6.5971030,
+  "lon": 106.8178099
+},
+{
+  "type": "node",
+  "id": 12336593804,
+  "lat": -6.5964223,
+  "lon": 106.8223368
+},
+{
+  "type": "node",
+  "id": 12336655022,
+  "lat": -6.5969337,
+  "lon": 106.8183593
+},
+{
+  "type": "node",
+  "id": 12336655030,
+  "lat": -6.5964041,
+  "lon": 106.8207682
+},
+{
+  "type": "node",
+  "id": 12336655031,
+  "lat": -6.5963089,
+  "lon": 106.8214485
+},
+{
+  "type": "node",
+  "id": 319889876,
+  "lat": -6.5962676,
+  "lon": 106.8268441
+},
+{
+  "type": "node",
+  "id": 1737734325,
+  "lat": -6.5962932,
+  "lon": 106.8253258
+},
+{
+  "type": "node",
+  "id": 1737734326,
+  "lat": -6.5963057,
+  "lon": 106.8249388
+},
+{
+  "type": "node",
+  "id": 1737734292,
+  "lat": -6.5960886,
+  "lon": 106.8253033
+},
+{
+  "type": "node",
+  "id": 1737734294,
+  "lat": -6.5961059,
+  "lon": 106.8249225
+},
+{
+  "type": "node",
+  "id": 1737966883,
+  "lat": -6.5960926,
+  "lon": 106.8252158
+},
+{
+  "type": "node",
+  "id": 7298615796,
+  "lat": -6.5960856,
+  "lon": 106.8254678
+},
+{
+  "type": "node",
+  "id": 6135996778,
+  "lat": -6.1835163,
+  "lon": 106.9250399
+},
+{
+  "type": "node",
+  "id": 7149726255,
+  "lat": -6.1833937,
+  "lon": 106.9243278
+},
+{
+  "type": "node",
+  "id": 8869531850,
+  "lat": -6.1833244,
+  "lon": 106.9238657
+},
+{
+  "type": "node",
+  "id": 8869531851,
+  "lat": -6.1835932,
+  "lon": 106.9254046
+},
+{
+  "type": "node",
+  "id": 8869531852,
+  "lat": -6.1836430,
+  "lon": 106.9257087
+},
+{
+  "type": "node",
+  "id": 8869531853,
+  "lat": -6.1836709,
+  "lon": 106.9260537
+},
+{
+  "type": "node",
+  "id": 8869531854,
+  "lat": -6.1836523,
+  "lon": 106.9267535
+},
+{
+  "type": "node",
+  "id": 8869531888,
+  "lat": -6.1835080,
+  "lon": 106.9271687
+},
+{
+  "type": "node",
+  "id": 8869531889,
+  "lat": -6.1835475,
+  "lon": 106.9267792
+},
+{
+  "type": "node",
+  "id": 8869531890,
+  "lat": -6.1835735,
+  "lon": 106.9264071
+},
+{
+  "type": "node",
+  "id": 8869531891,
+  "lat": -6.1835653,
+  "lon": 106.9260327
+},
+{
+  "type": "node",
+  "id": 8869531892,
+  "lat": -6.1835358,
+  "lon": 106.9256658
+},
+{
+  "type": "node",
+  "id": 6135996781,
+  "lat": -6.1824194,
+  "lon": 106.9184079
+},
+{
+  "type": "node",
+  "id": 6136000602,
+  "lat": -6.1827424,
+  "lon": 106.9191363
+},
+{
+  "type": "node",
+  "id": 6136000603,
+  "lat": -6.1825224,
+  "lon": 106.9187140
+},
+{
+  "type": "node",
+  "id": 6136000604,
+  "lat": -6.1823206,
+  "lon": 106.9184802
+},
+{
+  "type": "node",
+  "id": 6801763160,
+  "lat": -6.1826362,
+  "lon": 106.9189010
+},
+{
+  "type": "node",
+  "id": 6804467059,
+  "lat": -6.1826868,
+  "lon": 106.9187397
+},
+{
+  "type": "node",
+  "id": 7033996217,
+  "lat": -6.1819829,
+  "lon": 106.9182198
+},
+{
+  "type": "node",
+  "id": 7033996218,
+  "lat": -6.1819520,
+  "lon": 106.9180767
+},
+{
+  "type": "node",
+  "id": 7033996219,
+  "lat": -6.1814260,
+  "lon": 106.9180046
+},
+{
+  "type": "node",
+  "id": 7033996220,
+  "lat": -6.1814328,
+  "lon": 106.9178853
+},
+{
+  "type": "node",
+  "id": 7033996222,
+  "lat": -6.1825995,
+  "lon": 106.9186043
+},
+{
+  "type": "node",
+  "id": 7033996223,
+  "lat": -6.1821907,
+  "lon": 106.9183649
+},
+{
+  "type": "node",
+  "id": 7033996224,
+  "lat": -6.1822100,
+  "lon": 106.9182315
+},
+{
+  "type": "node",
+  "id": 7033996225,
+  "lat": -6.1811312,
+  "lon": 106.9179654
+},
+{
+  "type": "node",
+  "id": 7033996226,
+  "lat": -6.1811508,
+  "lon": 106.9178470
+},
+{
+  "type": "node",
+  "id": 7033996227,
+  "lat": -6.1807470,
+  "lon": 106.9179637
+},
+{
+  "type": "node",
+  "id": 7033996228,
+  "lat": -6.1807384,
+  "lon": 106.9178529
+},
+{
+  "type": "node",
+  "id": 7033996230,
+  "lat": -6.1774877,
+  "lon": 106.9181649
+},
+{
+  "type": "node",
+  "id": 7033996231,
+  "lat": -6.1774954,
+  "lon": 106.9180564
+},
+{
+  "type": "node",
+  "id": 8869531841,
+  "lat": -6.1768173,
+  "lon": 106.9180453
+},
+{
+  "type": "node",
+  "id": 8869531842,
+  "lat": -6.1781145,
+  "lon": 106.9180560
+},
+{
+  "type": "node",
+  "id": 8869531843,
+  "lat": -6.1787160,
+  "lon": 106.9180211
+},
+{
+  "type": "node",
+  "id": 8869531844,
+  "lat": -6.1817034,
+  "lon": 106.9179649
+},
+{
+  "type": "node",
+  "id": 8869531845,
+  "lat": -6.1828853,
+  "lon": 106.9192502
+},
+{
+  "type": "node",
+  "id": 8869531846,
+  "lat": -6.1829597,
+  "lon": 106.9197094
+},
+{
+  "type": "node",
+  "id": 8869531847,
+  "lat": -6.1829775,
+  "lon": 106.9199202
+},
+{
+  "type": "node",
+  "id": 8869531848,
+  "lat": -6.1830117,
+  "lon": 106.9203984
+},
+{
+  "type": "node",
+  "id": 8869531849,
+  "lat": -6.1830654,
+  "lon": 106.9210825
+},
+{
+  "type": "node",
+  "id": 8869531893,
+  "lat": -6.1829562,
+  "lon": 106.9210063
+},
+{
+  "type": "node",
+  "id": 8869531894,
+  "lat": -6.1829103,
+  "lon": 106.9204342
+},
+{
+  "type": "node",
+  "id": 8869531895,
+  "lat": -6.1828876,
+  "lon": 106.9200387
+},
+{
+  "type": "node",
+  "id": 8869531896,
+  "lat": -6.1828552,
+  "lon": 106.9196590
+},
+{
+  "type": "node",
+  "id": 8869531897,
+  "lat": -6.1828082,
+  "lon": 106.9193844
+},
+{
+  "type": "node",
+  "id": 8869531898,
+  "lat": -6.1816915,
+  "lon": 106.9180845
+},
+{
+  "type": "node",
+  "id": 8869531899,
+  "lat": -6.1787144,
+  "lon": 106.9181438
+},
+{
+  "type": "node",
+  "id": 8869531900,
+  "lat": -6.1767951,
+  "lon": 106.9181626
+},
+{
+  "type": "node",
+  "id": 12717722664,
+  "lat": -6.1828091,
+  "lon": 106.9189971
+},
+{
+  "type": "node",
+  "id": 12717722665,
+  "lat": -6.1829412,
+  "lon": 106.9195442
+},
+{
+  "type": "node",
+  "id": 12717722666,
+  "lat": -6.1829164,
+  "lon": 106.9193874
+},
+{
+  "type": "node",
+  "id": 12717722667,
+  "lat": -6.1828498,
+  "lon": 106.9191177
+},
+{
+  "type": "node",
+  "id": 12717722668,
+  "lat": -6.1827558,
+  "lon": 106.9188666
+},
+{
+  "type": "node",
+  "id": 12717722669,
+  "lat": -6.1825062,
+  "lon": 106.9184984
+},
+{
+  "type": "node",
+  "id": 12717722670,
+  "lat": -6.1823112,
+  "lon": 106.9183112
+},
+{
+  "type": "node",
+  "id": 12717722671,
+  "lat": -6.1820851,
+  "lon": 106.9181470
+},
+{
+  "type": "node",
+  "id": 12717722672,
+  "lat": -6.1818192,
+  "lon": 106.9180137
+},
+{
+  "type": "node",
+  "id": 12717722673,
+  "lat": -6.1808983,
+  "lon": 106.9178441
+},
+{
+  "type": "node",
+  "id": 12717722674,
+  "lat": -6.1810105,
+  "lon": 106.9178408
+},
+{
+  "type": "node",
+  "id": 12717722675,
+  "lat": -6.1812874,
+  "lon": 106.9178597
+},
+{
+  "type": "node",
+  "id": 12717722676,
+  "lat": -6.1815561,
+  "lon": 106.9179168
+},
+{
+  "type": "node",
+  "id": 12717722677,
+  "lat": -6.1812771,
+  "lon": 106.9179768
+},
+{
+  "type": "node",
+  "id": 12717722678,
+  "lat": -6.1815549,
+  "lon": 106.9180375
+},
+{
+  "type": "node",
+  "id": 12717722679,
+  "lat": -6.1818318,
+  "lon": 106.9181416
+},
+{
+  "type": "node",
+  "id": 12717722680,
+  "lat": -6.1820678,
+  "lon": 106.9182729
+},
+{
+  "type": "node",
+  "id": 12717722681,
+  "lat": -6.1824188,
+  "lon": 106.9185870
+},
+{
+  "type": "node",
+  "id": 12717722682,
+  "lat": -6.1825793,
+  "lon": 106.9188028
+},
+{
+  "type": "node",
+  "id": 12717722683,
+  "lat": -6.1826912,
+  "lon": 106.9190093
+},
+{
+  "type": "node",
+  "id": 12717722684,
+  "lat": -6.1827775,
+  "lon": 106.9192583
+},
+{
+  "type": "node",
+  "id": 12717722685,
+  "lat": -6.1828355,
+  "lon": 106.9195259
+},
+{
+  "type": "node",
+  "id": 12717722686,
+  "lat": -6.1828714,
+  "lon": 106.9198200
+},
+{
+  "type": "node",
+  "id": 6136000601,
+  "lat": -6.1832928,
+  "lon": 106.9243786
+},
+{
+  "type": "node",
+  "id": 7149726254,
+  "lat": -6.1832135,
+  "lon": 106.9238271
+},
+{
+  "type": "node",
+  "id": 12470781749,
+  "lat": -6.1832329,
+  "lon": 106.9230303
+},
+{
+  "type": "node",
+  "id": 12717722687,
+  "lat": -6.1831438,
+  "lon": 106.9231784
+},
+{
+  "type": "node",
+  "id": 12717722688,
+  "lat": -6.1832763,
+  "lon": 106.9234822
+},
+{
+  "type": "node",
+  "id": 12717722689,
+  "lat": -6.1832438,
+  "lon": 106.9240675
+},
+{
+  "type": "node",
+  "id": 6771426462,
+  "lat": -6.1729775,
+  "lon": 106.9177763
+},
+{
+  "type": "node",
+  "id": 6804467062,
+  "lat": -6.1729489,
+  "lon": 106.9178849
+},
+{
+  "type": "node",
+  "id": 8869531840,
+  "lat": -6.1762632,
+  "lon": 106.9180102
+},
+{
+  "type": "node",
+  "id": 8869531901,
+  "lat": -6.1762491,
+  "lon": 106.9181360
+},
+{
+  "type": "node",
+  "id": 8869531855,
+  "lat": -6.1833532,
+  "lon": 106.9296126
+},
+{
+  "type": "node",
+  "id": 9446845220,
+  "lat": -6.1834592,
+  "lon": 106.9286610
+},
+{
+  "type": "node",
+  "id": 316771429,
+  "lat": -6.1879576,
+  "lon": 106.9397243
+},
+{
+  "type": "node",
+  "id": 316771577,
+  "lat": -6.1884140,
+  "lon": 106.9410977
+},
+{
+  "type": "node",
+  "id": 316771578,
+  "lat": -6.1880554,
+  "lon": 106.9397351
+},
+{
+  "type": "node",
+  "id": 316771580,
+  "lat": -6.1879220,
+  "lon": 106.9393737
+},
+{
+  "type": "node",
+  "id": 316771582,
+  "lat": -6.1863811,
+  "lon": 106.9373772
+},
+{
+  "type": "node",
+  "id": 5492926343,
+  "lat": -6.1882465,
+  "lon": 106.9407776
+},
+{
+  "type": "node",
+  "id": 6135996767,
+  "lat": -6.1834078,
+  "lon": 106.9375175
+},
+{
+  "type": "node",
+  "id": 6335321165,
+  "lat": -6.1872614,
+  "lon": 106.9383711
+},
+{
+  "type": "node",
+  "id": 6335321166,
+  "lat": -6.1875865,
+  "lon": 106.9388122
+},
+{
+  "type": "node",
+  "id": 6427407278,
+  "lat": -6.1869746,
+  "lon": 106.9380556
+},
+{
+  "type": "node",
+  "id": 7129198390,
+  "lat": -6.1837117,
+  "lon": 106.9373563
+},
+{
+  "type": "node",
+  "id": 7129198399,
+  "lat": -6.1838278,
+  "lon": 106.9372821
+},
+{
+  "type": "node",
+  "id": 7129198405,
+  "lat": -6.1845854,
+  "lon": 106.9368122
+},
+{
+  "type": "node",
+  "id": 7129198406,
+  "lat": -6.1849012,
+  "lon": 106.9366968
+},
+{
+  "type": "node",
+  "id": 7129198407,
+  "lat": -6.1852491,
+  "lon": 106.9366828
+},
+{
+  "type": "node",
+  "id": 7129198410,
+  "lat": -6.1855023,
+  "lon": 106.9367364
+},
+{
+  "type": "node",
+  "id": 7129198412,
+  "lat": -6.1855630,
+  "lon": 106.9367551
+},
+{
+  "type": "node",
+  "id": 7129198414,
+  "lat": -6.1859371,
+  "lon": 106.9369465
+},
+{
+  "type": "node",
+  "id": 7641908654,
+  "lat": -6.1880642,
+  "lon": 106.9400582
+},
+{
+  "type": "node",
+  "id": 7641908676,
+  "lat": -6.1882500,
+  "lon": 106.9404834
+},
+{
+  "type": "node",
+  "id": 7641908677,
+  "lat": -6.1881300,
+  "lon": 106.9400033
+},
+{
+  "type": "node",
+  "id": 7641908678,
+  "lat": -6.1880197,
+  "lon": 106.9396202
+},
+{
+  "type": "node",
+  "id": 7641908679,
+  "lat": -6.1878215,
+  "lon": 106.9391902
+},
+{
+  "type": "node",
+  "id": 7641908680,
+  "lat": -6.1876923,
+  "lon": 106.9389797
+},
+{
+  "type": "node",
+  "id": 7641908681,
+  "lat": -6.1874081,
+  "lon": 106.9385551
+},
+{
+  "type": "node",
+  "id": 8869531857,
+  "lat": -6.1877112,
+  "lon": 106.9392962
+},
+{
+  "type": "node",
+  "id": 8869531858,
+  "lat": -6.1876022,
+  "lon": 106.9391611
+},
+{
+  "type": "node",
+  "id": 8869531859,
+  "lat": -6.1873409,
+  "lon": 106.9388650
+},
+{
+  "type": "node",
+  "id": 8869531860,
+  "lat": -6.1867273,
+  "lon": 106.9381410
+},
+{
+  "type": "node",
+  "id": 8869531861,
+  "lat": -6.1866335,
+  "lon": 106.9380182
+},
+{
+  "type": "node",
+  "id": 8869531862,
+  "lat": -6.1863564,
+  "lon": 106.9376426
+},
+{
+  "type": "node",
+  "id": 8869531863,
+  "lat": -6.1861631,
+  "lon": 106.9374086
+},
+{
+  "type": "node",
+  "id": 8869531864,
+  "lat": -6.1859720,
+  "lon": 106.9372238
+},
+{
+  "type": "node",
+  "id": 8869531865,
+  "lat": -6.1857514,
+  "lon": 106.9370816
+},
+{
+  "type": "node",
+  "id": 8869531866,
+  "lat": -6.1855424,
+  "lon": 106.9369964
+},
+{
+  "type": "node",
+  "id": 8869531867,
+  "lat": -6.1853543,
+  "lon": 106.9369658
+},
+{
+  "type": "node",
+  "id": 8869531868,
+  "lat": -6.1851765,
+  "lon": 106.9369599
+},
+{
+  "type": "node",
+  "id": 8869531869,
+  "lat": -6.1848245,
+  "lon": 106.9370314
+},
+{
+  "type": "node",
+  "id": 8869531870,
+  "lat": -6.1844669,
+  "lon": 106.9372284
+},
+{
+  "type": "node",
+  "id": 8869531871,
+  "lat": -6.1841147,
+  "lon": 106.9375284
+},
+{
+  "type": "node",
+  "id": 8869531872,
+  "lat": -6.1835560,
+  "lon": 106.9381356
+},
+{
+  "type": "node",
+  "id": 8869531873,
+  "lat": -6.1834674,
+  "lon": 106.9382020
+},
+{
+  "type": "node",
+  "id": 8956339735,
+  "lat": -6.1839898,
+  "lon": 106.9376617
+},
+{
+  "type": "node",
+  "id": 9013015384,
+  "lat": -6.1866266,
+  "lon": 106.9376955
+},
+{
+  "type": "node",
+  "id": 9055431638,
+  "lat": -6.1856383,
+  "lon": 106.9370292
+},
+{
+  "type": "node",
+  "id": 9078379398,
+  "lat": -6.1850153,
+  "lon": 106.9366805
+},
+{
+  "type": "node",
+  "id": 11924979069,
+  "lat": -6.1833134,
+  "lon": 106.9375492
+},
+{
+  "type": "node",
+  "id": 12183778512,
+  "lat": -6.1858435,
+  "lon": 106.9368875
+},
+{
+  "type": "node",
+  "id": 12183778513,
+  "lat": -6.1863324,
+  "lon": 106.9373140
+},
+{
+  "type": "node",
+  "id": 12183778514,
+  "lat": -6.1860141,
+  "lon": 106.9370018
+},
+{
+  "type": "node",
+  "id": 12244294276,
+  "lat": -6.1878259,
+  "lon": 106.9394663
+},
+{
+  "type": "node",
+  "id": 12244294278,
+  "lat": -6.1878588,
+  "lon": 106.9395211
+},
+{
+  "type": "node",
+  "id": 12245780889,
+  "lat": -6.1833311,
+  "lon": 106.9382483
+},
+{
+  "type": "node",
+  "id": 12245780890,
+  "lat": -6.1833661,
+  "lon": 106.9382398
+},
+{
+  "type": "node",
+  "id": 12245780891,
+  "lat": -6.1833912,
+  "lon": 106.9382330
+},
+{
+  "type": "node",
+  "id": 12245780892,
+  "lat": -6.1834145,
+  "lon": 106.9382250
+},
+{
+  "type": "node",
+  "id": 12245780893,
+  "lat": -6.1834476,
+  "lon": 106.9382117
+},
+{
+  "type": "node",
+  "id": 12245780894,
+  "lat": -6.1834882,
+  "lon": 106.9381894
+},
+{
+  "type": "node",
+  "id": 12245780895,
+  "lat": -6.1835078,
+  "lon": 106.9381759
+},
+{
+  "type": "node",
+  "id": 12245780896,
+  "lat": -6.1835825,
+  "lon": 106.9381094
+},
+{
+  "type": "node",
+  "id": 12245780897,
+  "lat": -6.1835283,
+  "lon": 106.9381600
+},
+{
+  "type": "node",
+  "id": 12245780898,
+  "lat": -6.1841846,
+  "lon": 106.9374580
+},
+{
+  "type": "node",
+  "id": 12245780899,
+  "lat": -6.1842324,
+  "lon": 106.9374126
+},
+{
+  "type": "node",
+  "id": 12245780900,
+  "lat": -6.1842838,
+  "lon": 106.9373673
+},
+{
+  "type": "node",
+  "id": 12245783601,
+  "lat": -6.1845626,
+  "lon": 106.9371677
+},
+{
+  "type": "node",
+  "id": 12245783602,
+  "lat": -6.1846408,
+  "lon": 106.9371213
+},
+{
+  "type": "node",
+  "id": 12245783603,
+  "lat": -6.1847166,
+  "lon": 106.9370823
+},
+{
+  "type": "node",
+  "id": 12245783604,
+  "lat": -6.1849511,
+  "lon": 106.9369882
+},
+{
+  "type": "node",
+  "id": 12245783605,
+  "lat": -6.1850025,
+  "lon": 106.9369774
+},
+{
+  "type": "node",
+  "id": 12245783606,
+  "lat": -6.1851139,
+  "lon": 106.9369629
+},
+{
+  "type": "node",
+  "id": 12245783607,
+  "lat": -6.1854087,
+  "lon": 106.9369707
+},
+{
+  "type": "node",
+  "id": 12245783608,
+  "lat": -6.1854534,
+  "lon": 106.9369765
+},
+{
+  "type": "node",
+  "id": 12245783609,
+  "lat": -6.1854954,
+  "lon": 106.9369842
+},
+{
+  "type": "node",
+  "id": 12245783610,
+  "lat": -6.1855889,
+  "lon": 106.9370110
+},
+{
+  "type": "node",
+  "id": 12245783611,
+  "lat": -6.1856923,
+  "lon": 106.9370528
+},
+{
+  "type": "node",
+  "id": 12245783612,
+  "lat": -6.1858195,
+  "lon": 106.9371182
+},
+{
+  "type": "node",
+  "id": 12245783613,
+  "lat": -6.1858672,
+  "lon": 106.9371483
+},
+{
+  "type": "node",
+  "id": 12245783614,
+  "lat": -6.1859190,
+  "lon": 106.9371838
+},
+{
+  "type": "node",
+  "id": 12245783615,
+  "lat": -6.1860165,
+  "lon": 106.9372611
+},
+{
+  "type": "node",
+  "id": 12245783616,
+  "lat": -6.1860635,
+  "lon": 106.9373052
+},
+{
+  "type": "node",
+  "id": 12245783617,
+  "lat": -6.1861092,
+  "lon": 106.9373510
+},
+{
+  "type": "node",
+  "id": 12245783618,
+  "lat": -6.1862200,
+  "lon": 106.9374737
+},
+{
+  "type": "node",
+  "id": 12245783619,
+  "lat": -6.1862794,
+  "lon": 106.9375450
+},
+{
+  "type": "node",
+  "id": 12245783620,
+  "lat": -6.1866798,
+  "lon": 106.9380796
+},
+{
+  "type": "node",
+  "id": 12245783621,
+  "lat": -6.1853147,
+  "lon": 106.9369631
+},
+{
+  "type": "node",
+  "id": 12245783622,
+  "lat": -6.1852410,
+  "lon": 106.9369606
+},
+{
+  "type": "node",
+  "id": 12245783623,
+  "lat": -6.1850569,
+  "lon": 106.9369685
+},
+{
+  "type": "node",
+  "id": 12245783624,
+  "lat": -6.1849073,
+  "lon": 106.9369997
+},
+{
+  "type": "node",
+  "id": 12245783625,
+  "lat": -6.1848707,
+  "lon": 106.9370124
+},
+{
+  "type": "node",
+  "id": 12245783626,
+  "lat": -6.1847643,
+  "lon": 106.9370587
+},
+{
+  "type": "node",
+  "id": 12245783627,
+  "lat": -6.1843663,
+  "lon": 106.9373014
+},
+{
+  "type": "node",
+  "id": 12245783636,
+  "lat": -6.1840461,
+  "lon": 106.9376012
+},
+{
+  "type": "node",
+  "id": 12245783637,
+  "lat": -6.1839322,
+  "lon": 106.9377241
+},
+{
+  "type": "node",
+  "id": 12245783638,
+  "lat": -6.1879871,
+  "lon": 106.9395256
+},
+{
+  "type": "node",
+  "id": 12245783639,
+  "lat": -6.1879500,
+  "lon": 106.9394340
+},
+{
+  "type": "node",
+  "id": 12245783640,
+  "lat": -6.1878837,
+  "lon": 106.9393001
+},
+{
+  "type": "node",
+  "id": 12245783641,
+  "lat": -6.1875287,
+  "lon": 106.9387258
+},
+{
+  "type": "node",
+  "id": 12245783642,
+  "lat": -6.1874596,
+  "lon": 106.9386251
+},
+{
+  "type": "node",
+  "id": 12245783643,
+  "lat": -6.1873650,
+  "lon": 106.9384985
+},
+{
+  "type": "node",
+  "id": 12245783644,
+  "lat": -6.1871825,
+  "lon": 106.9382799
+},
+{
+  "type": "node",
+  "id": 12245783645,
+  "lat": -6.1870295,
+  "lon": 106.9381123
+},
+{
+  "type": "node",
+  "id": 12245783646,
+  "lat": -6.1868865,
+  "lon": 106.9379681
+},
+{
+  "type": "node",
+  "id": 12245783647,
+  "lat": -6.1867473,
+  "lon": 106.9378290
+},
+{
+  "type": "node",
+  "id": 12245783648,
+  "lat": -6.1866880,
+  "lon": 106.9377671
+},
+{
+  "type": "node",
+  "id": 12245783649,
+  "lat": -6.1865447,
+  "lon": 106.9375983
+},
+{
+  "type": "node",
+  "id": 12245783650,
+  "lat": -6.1864782,
+  "lon": 106.9375115
+},
+{
+  "type": "node",
+  "id": 12245783651,
+  "lat": -6.1862919,
+  "lon": 106.9372635
+},
+{
+  "type": "node",
+  "id": 12245783652,
+  "lat": -6.1862505,
+  "lon": 106.9372162
+},
+{
+  "type": "node",
+  "id": 12245783653,
+  "lat": -6.1861444,
+  "lon": 106.9371086
+},
+{
+  "type": "node",
+  "id": 12245783654,
+  "lat": -6.1860904,
+  "lon": 106.9370608
+},
+{
+  "type": "node",
+  "id": 12245783709,
+  "lat": -6.1857421,
+  "lon": 106.9368327
+},
+{
+  "type": "node",
+  "id": 12245783710,
+  "lat": -6.1856739,
+  "lon": 106.9367999
+},
+{
+  "type": "node",
+  "id": 12245783712,
+  "lat": -6.1853685,
+  "lon": 106.9367033
+},
+{
+  "type": "node",
+  "id": 12245783713,
+  "lat": -6.1853130,
+  "lon": 106.9366922
+},
+{
+  "type": "node",
+  "id": 12245783714,
+  "lat": -6.1851925,
+  "lon": 106.9366781
+},
+{
+  "type": "node",
+  "id": 12245783715,
+  "lat": -6.1851376,
+  "lon": 106.9366762
+},
+{
+  "type": "node",
+  "id": 12245783716,
+  "lat": -6.1850754,
+  "lon": 106.9366772
+},
+{
+  "type": "node",
+  "id": 12245783717,
+  "lat": -6.1849545,
+  "lon": 106.9366870
+},
+{
+  "type": "node",
+  "id": 12245783718,
+  "lat": -6.1848360,
+  "lon": 106.9367134
+},
+{
+  "type": "node",
+  "id": 12245783719,
+  "lat": -6.1847187,
+  "lon": 106.9367522
+},
+{
+  "type": "node",
+  "id": 12245783720,
+  "lat": -6.1846617,
+  "lon": 106.9367757
+},
+{
+  "type": "node",
+  "id": 12245783721,
+  "lat": -6.1847808,
+  "lon": 106.9367304
+},
+{
+  "type": "node",
+  "id": 12245783722,
+  "lat": -6.1844179,
+  "lon": 106.9369029
+},
+{
+  "type": "node",
+  "id": 12245783723,
+  "lat": -6.1836477,
+  "lon": 106.9373954
+},
+{
+  "type": "node",
+  "id": 12245783724,
+  "lat": -6.1835926,
+  "lon": 106.9374271
+},
+{
+  "type": "node",
+  "id": 12245783725,
+  "lat": -6.1835187,
+  "lon": 106.9374662
+},
+{
+  "type": "node",
+  "id": 12245783726,
+  "lat": -6.1834568,
+  "lon": 106.9374970
+},
+{
+  "type": "node",
+  "id": 12245783727,
+  "lat": -6.1833486,
+  "lon": 106.9375389
+},
+{
+  "type": "node",
+  "id": 12245893801,
+  "lat": -6.1840261,
+  "lon": 106.9376227
+},
+{
+  "type": "node",
+  "id": 12245893804,
+  "lat": -6.1877907,
+  "lon": 106.9394105
+},
+{
+  "type": "node",
+  "id": 12245893805,
+  "lat": -6.1879247,
+  "lon": 106.9396492
+},
+{
+  "type": "node",
+  "id": 12245893806,
+  "lat": -6.1876617,
+  "lon": 106.9392324
+},
+{
+  "type": "node",
+  "id": 12245893807,
+  "lat": -6.1878934,
+  "lon": 106.9395847
+},
+{
+  "type": "node",
+  "id": 12245893816,
+  "lat": -6.1872203,
+  "lon": 106.9383236
+},
+{
+  "type": "node",
+  "id": 12717722663,
+  "lat": -6.1862062,
+  "lon": 106.9371686
+},
+{
+  "type": "node",
+  "id": 13015786595,
+  "lat": -6.1877542,
+  "lon": 106.9393563
+},
+{
+  "type": "node",
+  "id": 13015786596,
+  "lat": -6.1879901,
+  "lon": 106.9398113
+},
+{
+  "type": "node",
+  "id": 13015786597,
+  "lat": -6.1880436,
+  "lon": 106.9399854
+},
+{
+  "type": "node",
+  "id": 13015786598,
+  "lat": -6.1880160,
+  "lon": 106.9398907
+},
+{
+  "type": "node",
+  "id": 13015788513,
+  "lat": -6.1868444,
+  "lon": 106.9382861
+},
+{
+  "type": "node",
+  "id": 13015788514,
+  "lat": -6.1872187,
+  "lon": 106.9387268
+},
+{
+  "type": "node",
+  "id": 13015788515,
+  "lat": -6.1856146,
+  "lon": 106.9367739
+},
+{
+  "type": "node",
+  "id": 13015788516,
+  "lat": -6.1854349,
+  "lon": 106.9367183
+},
+{
+  "type": "node",
+  "id": 13015788517,
+  "lat": -6.1845009,
+  "lon": 106.9368563
+},
+{
+  "type": "node",
+  "id": 13015788518,
+  "lat": -6.1843426,
+  "lon": 106.9369490
+},
+{
+  "type": "node",
+  "id": 6135996777,
+  "lat": -6.1831051,
+  "lon": 106.9317428
+},
+{
+  "type": "node",
+  "id": 7139899590,
+  "lat": -6.1829091,
+  "lon": 106.9332288
+},
+{
+  "type": "node",
+  "id": 9446845223,
+  "lat": -6.1832036,
+  "lon": 106.9295676
+},
+{
+  "type": "node",
+  "id": 9446845224,
+  "lat": -6.1831433,
+  "lon": 106.9300694
+},
+{
+  "type": "node",
+  "id": 9446845225,
+  "lat": -6.1830871,
+  "lon": 106.9305668
+},
+{
+  "type": "node",
+  "id": 9446845227,
+  "lat": -6.1829872,
+  "lon": 106.9325903
+},
+{
+  "type": "node",
+  "id": 9446845232,
+  "lat": -6.1828385,
+  "lon": 106.9338222
+},
+{
+  "type": "node",
+  "id": 9446845233,
+  "lat": -6.1827272,
+  "lon": 106.9346222
+},
+{
+  "type": "node",
+  "id": 9446845238,
+  "lat": -6.1827758,
+  "lon": 106.9327264
+},
+{
+  "type": "node",
+  "id": 9989714336,
+  "lat": -6.1831466,
+  "lon": 106.9314117
+},
+{
+  "type": "node",
+  "id": 9989714337,
+  "lat": -6.1831215,
+  "lon": 106.9316160
+},
+{
+  "type": "node",
+  "id": 9989714338,
+  "lat": -6.1830314,
+  "lon": 106.9322663
+},
+{
+  "type": "node",
+  "id": 9989714339,
+  "lat": -6.1829375,
+  "lon": 106.9330222
+},
+{
+  "type": "node",
+  "id": 9989714341,
+  "lat": -6.1828040,
+  "lon": 106.9340303
+},
+{
+  "type": "node",
+  "id": 12248351769,
+  "lat": -6.1826011,
+  "lon": 106.9337839
+},
+{
+  "type": "node",
+  "id": 12248351770,
+  "lat": -6.1823739,
+  "lon": 106.9350684
+},
+{
+  "type": "node",
+  "id": 12704213163,
+  "lat": -6.1824545,
+  "lon": 106.9346386
+},
+{
+  "type": "node",
+  "id": 12704213164,
+  "lat": -6.1829616,
+  "lon": 106.9315618
+},
+{
+  "type": "node",
+  "id": 12704213165,
+  "lat": -6.1830264,
+  "lon": 106.9310661
+},
+{
+  "type": "node",
+  "id": 12704213170,
+  "lat": -6.1829022,
+  "lon": 106.9319515
+},
+{
+  "type": "node",
+  "id": 6135996772,
+  "lat": -6.1831841,
+  "lon": 106.9375628
+},
+{
+  "type": "node",
+  "id": 6135996773,
+  "lat": -6.1830241,
+  "lon": 106.9375269
+},
+{
+  "type": "node",
+  "id": 6135996775,
+  "lat": -6.1824943,
+  "lon": 106.9366633
+},
+{
+  "type": "node",
+  "id": 6135996776,
+  "lat": -6.1824961,
+  "lon": 106.9363194
+},
+{
+  "type": "node",
+  "id": 7129198391,
+  "lat": -6.1828714,
+  "lon": 106.9374481
+},
+{
+  "type": "node",
+  "id": 7129198393,
+  "lat": -6.1827993,
+  "lon": 106.9373951
+},
+{
+  "type": "node",
+  "id": 7129198395,
+  "lat": -6.1827147,
+  "lon": 106.9373006
+},
+{
+  "type": "node",
+  "id": 7129198400,
+  "lat": -6.1825324,
+  "lon": 106.9368750
+},
+{
+  "type": "node",
+  "id": 7129198402,
+  "lat": -6.1826617,
+  "lon": 106.9372186
+},
+{
+  "type": "node",
+  "id": 7149771307,
+  "lat": -6.1821134,
+  "lon": 106.9365207
+},
+{
+  "type": "node",
+  "id": 7149771310,
+  "lat": -6.1821348,
+  "lon": 106.9363859
+},
+{
+  "type": "node",
+  "id": 8869531874,
+  "lat": -6.1832974,
+  "lon": 106.9382546
+},
+{
+  "type": "node",
+  "id": 8869531875,
+  "lat": -6.1830784,
+  "lon": 106.9382656
+},
+{
+  "type": "node",
+  "id": 8869531876,
+  "lat": -6.1829835,
+  "lon": 106.9382496
+},
+{
+  "type": "node",
+  "id": 8869531877,
+  "lat": -6.1827821,
+  "lon": 106.9381795
+},
+{
+  "type": "node",
+  "id": 8869531878,
+  "lat": -6.1826317,
+  "lon": 106.9380905
+},
+{
+  "type": "node",
+  "id": 8869531879,
+  "lat": -6.1825305,
+  "lon": 106.9380074
+},
+{
+  "type": "node",
+  "id": 8869531880,
+  "lat": -6.1823922,
+  "lon": 106.9378525
+},
+{
+  "type": "node",
+  "id": 8869531881,
+  "lat": -6.1822419,
+  "lon": 106.9375956
+},
+{
+  "type": "node",
+  "id": 8869531882,
+  "lat": -6.1821738,
+  "lon": 106.9374023
+},
+{
+  "type": "node",
+  "id": 8869531883,
+  "lat": -6.1821266,
+  "lon": 106.9372154
+},
+{
+  "type": "node",
+  "id": 8869531884,
+  "lat": -6.1820982,
+  "lon": 106.9370521
+},
+{
+  "type": "node",
+  "id": 8869531885,
+  "lat": -6.1820887,
+  "lon": 106.9368018
+},
+{
+  "type": "node",
+  "id": 9446845234,
+  "lat": -6.1825857,
+  "lon": 106.9356296
+},
+{
+  "type": "node",
+  "id": 11924979070,
+  "lat": -6.1830716,
+  "lon": 106.9375440
+},
+{
+  "type": "node",
+  "id": 12244294259,
+  "lat": -6.1824917,
+  "lon": 106.9363833
+},
+{
+  "type": "node",
+  "id": 12245780856,
+  "lat": -6.1821962,
+  "lon": 106.9360314
+},
+{
+  "type": "node",
+  "id": 12245780857,
+  "lat": -6.1821003,
+  "lon": 106.9366266
+},
+{
+  "type": "node",
+  "id": 12245780858,
+  "lat": -6.1820914,
+  "lon": 106.9367364
+},
+{
+  "type": "node",
+  "id": 12245780859,
+  "lat": -6.1820870,
+  "lon": 106.9368752
+},
+{
+  "type": "node",
+  "id": 12245780860,
+  "lat": -6.1820886,
+  "lon": 106.9369387
+},
+{
+  "type": "node",
+  "id": 12245780861,
+  "lat": -6.1820924,
+  "lon": 106.9369970
+},
+{
+  "type": "node",
+  "id": 12245780862,
+  "lat": -6.1821105,
+  "lon": 106.9371343
+},
+{
+  "type": "node",
+  "id": 12245780863,
+  "lat": -6.1821427,
+  "lon": 106.9372861
+},
+{
+  "type": "node",
+  "id": 12245780864,
+  "lat": -6.1821580,
+  "lon": 106.9373471
+},
+{
+  "type": "node",
+  "id": 12245780865,
+  "lat": -6.1821943,
+  "lon": 106.9374676
+},
+{
+  "type": "node",
+  "id": 12245780866,
+  "lat": -6.1822189,
+  "lon": 106.9375384
+},
+{
+  "type": "node",
+  "id": 12245780867,
+  "lat": -6.1822681,
+  "lon": 106.9376535
+},
+{
+  "type": "node",
+  "id": 12245780868,
+  "lat": -6.1822939,
+  "lon": 106.9377043
+},
+{
+  "type": "node",
+  "id": 12245780869,
+  "lat": -6.1823204,
+  "lon": 106.9377485
+},
+{
+  "type": "node",
+  "id": 12245780871,
+  "lat": -6.1823559,
+  "lon": 106.9378028
+},
+{
+  "type": "node",
+  "id": 12245780872,
+  "lat": -6.1824341,
+  "lon": 106.9379043
+},
+{
+  "type": "node",
+  "id": 12245780873,
+  "lat": -6.1824838,
+  "lon": 106.9379609
+},
+{
+  "type": "node",
+  "id": 12245780875,
+  "lat": -6.1825684,
+  "lon": 106.9380411
+},
+{
+  "type": "node",
+  "id": 12245780876,
+  "lat": -6.1826041,
+  "lon": 106.9380703
+},
+{
+  "type": "node",
+  "id": 12245780878,
+  "lat": -6.1826815,
+  "lon": 106.9381237
+},
+{
+  "type": "node",
+  "id": 12245780879,
+  "lat": -6.1827255,
+  "lon": 106.9381497
+},
+{
+  "type": "node",
+  "id": 12245780880,
+  "lat": -6.1828280,
+  "lon": 106.9382000
+},
+{
+  "type": "node",
+  "id": 12245780881,
+  "lat": -6.1828750,
+  "lon": 106.9382174
+},
+{
+  "type": "node",
+  "id": 12245780883,
+  "lat": -6.1830347,
+  "lon": 106.9382598
+},
+{
+  "type": "node",
+  "id": 12245780884,
+  "lat": -6.1831256,
+  "lon": 106.9382702
+},
+{
+  "type": "node",
+  "id": 12245780885,
+  "lat": -6.1831569,
+  "lon": 106.9382702
+},
+{
+  "type": "node",
+  "id": 12245780886,
+  "lat": -6.1831784,
+  "lon": 106.9382690
+},
+{
+  "type": "node",
+  "id": 12245780887,
+  "lat": -6.1832155,
+  "lon": 106.9382657
+},
+{
+  "type": "node",
+  "id": 12245780888,
+  "lat": -6.1832642,
+  "lon": 106.9382602
+},
+{
+  "type": "node",
+  "id": 12245783728,
+  "lat": -6.1832700,
+  "lon": 106.9375575
+},
+{
+  "type": "node",
+  "id": 12245783729,
+  "lat": -6.1832298,
+  "lon": 106.9375617
+},
+{
+  "type": "node",
+  "id": 12245783730,
+  "lat": -6.1831605,
+  "lon": 106.9375615
+},
+{
+  "type": "node",
+  "id": 12245783731,
+  "lat": -6.1831367,
+  "lon": 106.9375588
+},
+{
+  "type": "node",
+  "id": 12245783732,
+  "lat": -6.1831094,
+  "lon": 106.9375539
+},
+{
+  "type": "node",
+  "id": 12245783733,
+  "lat": -6.1829790,
+  "lon": 106.9375062
+},
+{
+  "type": "node",
+  "id": 12245783734,
+  "lat": -6.1829298,
+  "lon": 106.9374817
+},
+{
+  "type": "node",
+  "id": 12245783735,
+  "lat": -6.1828350,
+  "lon": 106.9374239
+},
+{
+  "type": "node",
+  "id": 12245783736,
+  "lat": -6.1827703,
+  "lon": 106.9373678
+},
+{
+  "type": "node",
+  "id": 12245783737,
+  "lat": -6.1827457,
+  "lon": 106.9373399
+},
+{
+  "type": "node",
+  "id": 12245783739,
+  "lat": -6.1826850,
+  "lon": 106.9372575
+},
+{
+  "type": "node",
+  "id": 12245783740,
+  "lat": -6.1825927,
+  "lon": 106.9370700
+},
+{
+  "type": "node",
+  "id": 12245783741,
+  "lat": -6.1826377,
+  "lon": 106.9371728
+},
+{
+  "type": "node",
+  "id": 12245783742,
+  "lat": -6.1826125,
+  "lon": 106.9371188
+},
+{
+  "type": "node",
+  "id": 12245783743,
+  "lat": -6.1825708,
+  "lon": 106.9370079
+},
+{
+  "type": "node",
+  "id": 12245783744,
+  "lat": -6.1825499,
+  "lon": 106.9369411
+},
+{
+  "type": "node",
+  "id": 12245783745,
+  "lat": -6.1825143,
+  "lon": 106.9368026
+},
+{
+  "type": "node",
+  "id": 12245783747,
+  "lat": -6.1825029,
+  "lon": 106.9367320
+},
+{
+  "type": "node",
+  "id": 12245783749,
+  "lat": -6.1824875,
+  "lon": 106.9365323
+},
+{
+  "type": "node",
+  "id": 12245783750,
+  "lat": -6.1824883,
+  "lon": 106.9364544
+},
+{
+  "type": "node",
+  "id": 12245783751,
+  "lat": -6.1825206,
+  "lon": 106.9360779
+},
+{
+  "type": "node",
+  "id": 12245783752,
+  "lat": -6.1825399,
+  "lon": 106.9359389
+},
+{
+  "type": "node",
+  "id": 12245783753,
+  "lat": -6.1826040,
+  "lon": 106.9354938
+},
+{
+  "type": "node",
+  "id": 12248351773,
+  "lat": -6.1828910,
+  "lon": 106.9374593
+},
+{
+  "type": "node",
+  "id": 12491806250,
+  "lat": -6.1824891,
+  "lon": 106.9365980
+},
+{
+  "type": "node",
+  "id": 12704213173,
+  "lat": -6.1829278,
+  "lon": 106.9382344
+},
+{
+  "type": "node",
+  "id": 6136000619,
+  "lat": -6.1585217,
+  "lon": 106.9019640
+},
+{
+  "type": "node",
+  "id": 6581061310,
+  "lat": -6.1584146,
+  "lon": 106.9019972
+},
+{
+  "type": "node",
+  "id": 8956339734,
+  "lat": -6.1578297,
+  "lon": 106.9006945
+},
+{
+  "type": "node",
+  "id": 8869531829,
+  "lat": -6.1561414,
+  "lon": 106.8979335
+},
+{
+  "type": "node",
+  "id": 2415529874,
+  "lat": -6.1400123,
+  "lon": 106.8914883
+},
+{
+  "type": "node",
+  "id": 2415529880,
+  "lat": -6.1386494,
+  "lon": 106.8916940
+},
+{
+  "type": "node",
+  "id": 2415529886,
+  "lat": -6.1421310,
+  "lon": 106.8909859
+},
+{
+  "type": "node",
+  "id": 2415529888,
+  "lat": -6.1386742,
+  "lon": 106.8918008
+},
+{
+  "type": "node",
+  "id": 2415529889,
+  "lat": -6.1421124,
+  "lon": 106.8908793
+},
+{
+  "type": "node",
+  "id": 2415550034,
+  "lat": -6.1399857,
+  "lon": 106.8913799
+},
+{
+  "type": "node",
+  "id": 6322137640,
+  "lat": -6.1426322,
+  "lon": 106.8907728
+},
+{
+  "type": "node",
+  "id": 6322167590,
+  "lat": -6.1428396,
+  "lon": 106.8908076
+},
+{
+  "type": "node",
+  "id": 310329483,
+  "lat": -6.1365841,
+  "lon": 106.8921850
+},
+{
+  "type": "node",
+  "id": 310330452,
+  "lat": -6.1366130,
+  "lon": 106.8922941
+},
+{
+  "type": "node",
+  "id": 317349564,
+  "lat": -6.1339865,
+  "lon": 106.8922640
+},
+{
+  "type": "node",
+  "id": 317350271,
+  "lat": -6.1341943,
+  "lon": 106.8924626
+},
+{
+  "type": "node",
+  "id": 1757721331,
+  "lat": -6.1336702,
+  "lon": 106.8922766
+},
+{
+  "type": "node",
+  "id": 1757721334,
+  "lat": -6.1332476,
+  "lon": 106.8923806
+},
+{
+  "type": "node",
+  "id": 1757721340,
+  "lat": -6.1318261,
+  "lon": 106.8930109
+},
+{
+  "type": "node",
+  "id": 1757721341,
+  "lat": -6.1336029,
+  "lon": 106.8922903
+},
+{
+  "type": "node",
+  "id": 1757721352,
+  "lat": -6.1330428,
+  "lon": 106.8924551
+},
+{
+  "type": "node",
+  "id": 1757721354,
+  "lat": -6.1337382,
+  "lon": 106.8922710
+},
+{
+  "type": "node",
+  "id": 1757721375,
+  "lat": -6.1309861,
+  "lon": 106.8933328
+},
+{
+  "type": "node",
+  "id": 1757721380,
+  "lat": -6.1335263,
+  "lon": 106.8923042
+},
+{
+  "type": "node",
+  "id": 1757721393,
+  "lat": -6.1333996,
+  "lon": 106.8923404
+},
+{
+  "type": "node",
+  "id": 1757721397,
+  "lat": -6.1324928,
+  "lon": 106.8927454
+},
+{
+  "type": "node",
+  "id": 1757721445,
+  "lat": -6.1321195,
+  "lon": 106.8928956
+},
+{
+  "type": "node",
+  "id": 1757721455,
+  "lat": -6.1323222,
+  "lon": 106.8928178
+},
+{
+  "type": "node",
+  "id": 1757721457,
+  "lat": -6.1331142,
+  "lon": 106.8924262
+},
+{
+  "type": "node",
+  "id": 1757721471,
+  "lat": -6.1326848,
+  "lon": 106.8926462
+},
+{
+  "type": "node",
+  "id": 1757739518,
+  "lat": -6.1335943,
+  "lon": 106.8925481
+},
+{
+  "type": "node",
+  "id": 1757739552,
+  "lat": -6.1338343,
+  "lon": 106.8924987
+},
+{
+  "type": "node",
+  "id": 1757739557,
+  "lat": -6.1336785,
+  "lon": 106.8925281
+},
+{
+  "type": "node",
+  "id": 1757739563,
+  "lat": -6.1334923,
+  "lon": 106.8925758
+},
+{
+  "type": "node",
+  "id": 1757739572,
+  "lat": -6.1340023,
+  "lon": 106.8924745
+},
+{
+  "type": "node",
+  "id": 2415529887,
+  "lat": -6.1373442,
+  "lon": 106.8920042
+},
+{
+  "type": "node",
+  "id": 2415529890,
+  "lat": -6.1372596,
+  "lon": 106.8921323
+},
+{
+  "type": "node",
+  "id": 2415550023,
+  "lat": -6.1359170,
+  "lon": 106.8923377
+},
+{
+  "type": "node",
+  "id": 2415550025,
+  "lat": -6.1351783,
+  "lon": 106.8925577
+},
+{
+  "type": "node",
+  "id": 2415550026,
+  "lat": -6.1361117,
+  "lon": 106.8922921
+},
+{
+  "type": "node",
+  "id": 2415550027,
+  "lat": -6.1355517,
+  "lon": 106.8925041
+},
+{
+  "type": "node",
+  "id": 2415550040,
+  "lat": -6.1348849,
+  "lon": 106.8925631
+},
+{
+  "type": "node",
+  "id": 2415550044,
+  "lat": -6.1360850,
+  "lon": 106.8924182
+},
+{
+  "type": "node",
+  "id": 2415550047,
+  "lat": -6.1344776,
+  "lon": 106.8923317
+},
+{
+  "type": "node",
+  "id": 2415550048,
+  "lat": -6.1343782,
+  "lon": 106.8924826
+},
+{
+  "type": "node",
+  "id": 2415550049,
+  "lat": -6.1355090,
+  "lon": 106.8924129
+},
+{
+  "type": "node",
+  "id": 2415550051,
+  "lat": -6.1346789,
+  "lon": 106.8923780
+},
+{
+  "type": "node",
+  "id": 2415550052,
+  "lat": -6.1350009,
+  "lon": 106.8924236
+},
+{
+  "type": "node",
+  "id": 2415550054,
+  "lat": -6.1352863,
+  "lon": 106.8924283
+},
+{
+  "type": "node",
+  "id": 2415550058,
+  "lat": -6.1346023,
+  "lon": 106.8925255
+},
+{
+  "type": "node",
+  "id": 2415550062,
+  "lat": -6.1353276,
+  "lon": 106.8925523
+},
+{
+  "type": "node",
+  "id": 2415550069,
+  "lat": -6.1342896,
+  "lon": 106.8922875
+},
+{
+  "type": "node",
+  "id": 5067932048,
+  "lat": -6.1359308,
+  "lon": 106.8924430
+},
+{
+  "type": "node",
+  "id": 11143513353,
+  "lat": -6.1329330,
+  "lon": 106.8927053
+},
+{
+  "type": "node",
+  "id": 11143513354,
+  "lat": -6.1327129,
+  "lon": 106.8927750
+},
+{
+  "type": "node",
+  "id": 11143513355,
+  "lat": -6.1323009,
+  "lon": 106.8929453
+},
+{
+  "type": "node",
+  "id": 11143513356,
+  "lat": -6.1317822,
+  "lon": 106.8931438
+},
+{
+  "type": "node",
+  "id": 11143513357,
+  "lat": -6.1314407,
+  "lon": 106.8932794
+},
+{
+  "type": "node",
+  "id": 12313828598,
+  "lat": -6.1342108,
+  "lon": 106.8924644
+},
+{
+  "type": "node",
+  "id": 12313853201,
+  "lat": -6.1317053,
+  "lon": 106.8930572
+},
+{
+  "type": "node",
+  "id": 12419429778,
+  "lat": -6.1329979,
+  "lon": 106.8926890
+},
+{
+  "type": "node",
+  "id": 12419429779,
+  "lat": -6.1332369,
+  "lon": 106.8926383
+},
+{
+  "type": "node",
+  "id": 317349440,
+  "lat": -6.1282773,
+  "lon": 106.8936288
+},
+{
+  "type": "node",
+  "id": 317349467,
+  "lat": -6.1263304,
+  "lon": 106.8936865
+},
+{
+  "type": "node",
+  "id": 1757721338,
+  "lat": -6.1296579,
+  "lon": 106.8936520
+},
+{
+  "type": "node",
+  "id": 1757721339,
+  "lat": -6.1304287,
+  "lon": 106.8935125
+},
+{
+  "type": "node",
+  "id": 1757721357,
+  "lat": -6.1304220,
+  "lon": 106.8936452
+},
+{
+  "type": "node",
+  "id": 1757721363,
+  "lat": -6.1302060,
+  "lon": 106.8936989
+},
+{
+  "type": "node",
+  "id": 1757721365,
+  "lat": -6.1300086,
+  "lon": 106.8937311
+},
+{
+  "type": "node",
+  "id": 1757721367,
+  "lat": -6.1303007,
+  "lon": 106.8935501
+},
+{
+  "type": "node",
+  "id": 1757721368,
+  "lat": -6.1290766,
+  "lon": 106.8936681
+},
+{
+  "type": "node",
+  "id": 1757721374,
+  "lat": -6.1307873,
+  "lon": 106.8935406
+},
+{
+  "type": "node",
+  "id": 1757721386,
+  "lat": -6.1305953,
+  "lon": 106.8935996
+},
+{
+  "type": "node",
+  "id": 1757721391,
+  "lat": -6.1294686,
+  "lon": 106.8936654
+},
+{
+  "type": "node",
+  "id": 1757721392,
+  "lat": -6.1298606,
+  "lon": 106.8936305
+},
+{
+  "type": "node",
+  "id": 1757721394,
+  "lat": -6.1288260,
+  "lon": 106.8937646
+},
+{
+  "type": "node",
+  "id": 1757721396,
+  "lat": -6.1292099,
+  "lon": 106.8937780
+},
+{
+  "type": "node",
+  "id": 1757721403,
+  "lat": -6.1299993,
+  "lon": 106.8936091
+},
+{
+  "type": "node",
+  "id": 1757721407,
+  "lat": -6.1301460,
+  "lon": 106.8935822
+},
+{
+  "type": "node",
+  "id": 1757721409,
+  "lat": -6.1296646,
+  "lon": 106.8937605
+},
+{
+  "type": "node",
+  "id": 1757721415,
+  "lat": -6.1288047,
+  "lon": 106.8936520
+},
+{
+  "type": "node",
+  "id": 1757721417,
+  "lat": -6.1295353,
+  "lon": 106.8937754
+},
+{
+  "type": "node",
+  "id": 1757721446,
+  "lat": -6.1292606,
+  "lon": 106.8936734
+},
+{
+  "type": "node",
+  "id": 4031341654,
+  "lat": -6.1256969,
+  "lon": 106.8936716
+},
+{
+  "type": "node",
+  "id": 4031341655,
+  "lat": -6.1260764,
+  "lon": 106.8935062
+},
+{
+  "type": "node",
+  "id": 5004972142,
+  "lat": -6.1286001,
+  "lon": 106.8937567
+},
+{
+  "type": "node",
+  "id": 5004972143,
+  "lat": -6.1284874,
+  "lon": 106.8937528
+},
+{
+  "type": "node",
+  "id": 5004972145,
+  "lat": -6.1280766,
+  "lon": 106.8936197
+},
+{
+  "type": "node",
+  "id": 5668757533,
+  "lat": -6.1281792,
+  "lon": 106.8936246
+},
+{
+  "type": "node",
+  "id": 6463730443,
+  "lat": -6.1274685,
+  "lon": 106.8935958
+},
+{
+  "type": "node",
+  "id": 7225007696,
+  "lat": -6.1254339,
+  "lon": 106.8934977
+},
+{
+  "type": "node",
+  "id": 9551693499,
+  "lat": -6.1255287,
+  "lon": 106.8936628
+},
+{
+  "type": "node",
+  "id": 9551693500,
+  "lat": -6.1255349,
+  "lon": 106.8934987
+},
+{
+  "type": "node",
+  "id": 10127119804,
+  "lat": -6.1289504,
+  "lon": 106.8937683
+},
+{
+  "type": "node",
+  "id": 10127156670,
+  "lat": -6.1261824,
+  "lon": 106.8936823
+},
+{
+  "type": "node",
+  "id": 11373254510,
+  "lat": -6.1251271,
+  "lon": 106.8936437
+},
+{
+  "type": "node",
+  "id": 3723687947,
+  "lat": -6.1195249,
+  "lon": 106.8932535
+},
+{
+  "type": "node",
+  "id": 3723687955,
+  "lat": -6.1232196,
+  "lon": 106.8934149
+},
+{
+  "type": "node",
+  "id": 3723687956,
+  "lat": -6.1221651,
+  "lon": 106.8935032
+},
+{
+  "type": "node",
+  "id": 4031341653,
+  "lat": -6.1187406,
+  "lon": 106.8933315
+},
+{
+  "type": "node",
+  "id": 5049969274,
+  "lat": -6.1187413,
+  "lon": 106.8932256
+},
+{
+  "type": "node",
+  "id": 5049969275,
+  "lat": -6.1191426,
+  "lon": 106.8933672
+},
+{
+  "type": "node",
+  "id": 5426017925,
+  "lat": -6.1202612,
+  "lon": 106.8934100
+},
+{
+  "type": "node",
+  "id": 6429655475,
+  "lat": -6.1195158,
+  "lon": 106.8933812
+},
+{
+  "type": "node",
+  "id": 6461083525,
+  "lat": -6.1181770,
+  "lon": 106.8932994
+},
+{
+  "type": "node",
+  "id": 6461083526,
+  "lat": -6.1181757,
+  "lon": 106.8932028
+},
+{
+  "type": "node",
+  "id": 10127071152,
+  "lat": -6.1190224,
+  "lon": 106.8933538
+},
+{
+  "type": "node",
+  "id": 10127071153,
+  "lat": -6.1199946,
+  "lon": 106.8933989
+},
+{
+  "type": "node",
+  "id": 10127135823,
+  "lat": -6.1189893,
+  "lon": 106.8932336
+},
+{
+  "type": "node",
+  "id": 10127135824,
+  "lat": -6.1201726,
+  "lon": 106.8932820
+},
+{
+  "type": "node",
+  "id": 6136000591,
+  "lat": -6.1664307,
+  "lon": 106.9151470
+},
+{
+  "type": "node",
+  "id": 6136000614,
+  "lat": -6.1663247,
+  "lon": 106.9151629
+},
+{
+  "type": "node",
+  "id": 6136000615,
+  "lat": -6.1659570,
+  "lon": 106.9143472
+},
+{
+  "type": "node",
+  "id": 6136000622,
+  "lat": -6.1660552,
+  "lon": 106.9143247
+},
+{
+  "type": "node",
+  "id": 6581014245,
+  "lat": -6.1654773,
+  "lon": 106.9135071
+},
+{
+  "type": "node",
+  "id": 6581014246,
+  "lat": -6.1655597,
+  "lon": 106.9134567
+},
+{
+  "type": "node",
+  "id": 8869531834,
+  "lat": -6.1658028,
+  "lon": 106.9138625
+},
+{
+  "type": "node",
+  "id": 8869531835,
+  "lat": -6.1662645,
+  "lon": 106.9147615
+},
+{
+  "type": "node",
+  "id": 8869531908,
+  "lat": -6.1661623,
+  "lon": 106.9147712
+},
+{
+  "type": "node",
+  "id": 8869531909,
+  "lat": -6.1657829,
+  "lon": 106.9140205
+},
+{
+  "type": "node",
+  "id": 10705768099,
+  "lat": -6.1648350,
+  "lon": 106.9122769
+},
+{
+  "type": "node",
+  "id": 10705768100,
+  "lat": -6.1653319,
+  "lon": 106.9130814
+},
+{
+  "type": "node",
+  "id": 12745846779,
+  "lat": -6.1659592,
+  "lon": 106.9141402
+},
+{
+  "type": "node",
+  "id": 12745846780,
+  "lat": -6.1656329,
+  "lon": 106.9137600
+},
+{
+  "type": "node",
+  "id": 6135996768,
+  "lat": -6.1589803,
+  "lon": 106.9028222
+},
+{
+  "type": "node",
+  "id": 6135996769,
+  "lat": -6.1591676,
+  "lon": 106.9033827
+},
+{
+  "type": "node",
+  "id": 6136000616,
+  "lat": -6.1595365,
+  "lon": 106.9039987
+},
+{
+  "type": "node",
+  "id": 6136000618,
+  "lat": -6.1588717,
+  "lon": 106.9028551
+},
+{
+  "type": "node",
+  "id": 6136000621,
+  "lat": -6.1596512,
+  "lon": 106.9039504
+},
+{
+  "type": "node",
+  "id": 6581014242,
+  "lat": -6.1608934,
+  "lon": 106.9061403
+},
+{
+  "type": "node",
+  "id": 6581014243,
+  "lat": -6.1609821,
+  "lon": 106.9060879
+},
+{
+  "type": "node",
+  "id": 10705768101,
+  "lat": -6.1619495,
+  "lon": 106.9076528
+},
+{
+  "type": "node",
+  "id": 12319808844,
+  "lat": -6.1599684,
+  "lon": 106.9046834
+},
+{
+  "type": "node",
+  "id": 12319808845,
+  "lat": -6.1600699,
+  "lon": 106.9046165
+},
+{
+  "type": "node",
+  "id": 6135996782,
+  "lat": -6.1684216,
+  "lon": 106.9174529
+},
+{
+  "type": "node",
+  "id": 6136000589,
+  "lat": -6.1669419,
+  "lon": 106.9163631
+},
+{
+  "type": "node",
+  "id": 6136000590,
+  "lat": -6.1667997,
+  "lon": 106.9160627
+},
+{
+  "type": "node",
+  "id": 6136000605,
+  "lat": -6.1684125,
+  "lon": 106.9175823
+},
+{
+  "type": "node",
+  "id": 6136000612,
+  "lat": -6.1668234,
+  "lon": 106.9163846
+},
+{
+  "type": "node",
+  "id": 6136000613,
+  "lat": -6.1666194,
+  "lon": 106.9159123
+},
+{
+  "type": "node",
+  "id": 6997071331,
+  "lat": -6.1673308,
+  "lon": 106.9170503
+},
+{
+  "type": "node",
+  "id": 6997071332,
+  "lat": -6.1676060,
+  "lon": 106.9172602
+},
+{
+  "type": "node",
+  "id": 6997071333,
+  "lat": -6.1681235,
+  "lon": 106.9175102
+},
+{
+  "type": "node",
+  "id": 6997071334,
+  "lat": -6.1681858,
+  "lon": 106.9173932
+},
+{
+  "type": "node",
+  "id": 6997071335,
+  "lat": -6.1676837,
+  "lon": 106.9171674
+},
+{
+  "type": "node",
+  "id": 6997071336,
+  "lat": -6.1674551,
+  "lon": 106.9169950
+},
+{
+  "type": "node",
+  "id": 6997071337,
+  "lat": -6.1670852,
+  "lon": 106.9165910
+},
+{
+  "type": "node",
+  "id": 8869531836,
+  "lat": -6.1672518,
+  "lon": 106.9168001
+},
+{
+  "type": "node",
+  "id": 8869531837,
+  "lat": -6.1679440,
+  "lon": 106.9173031
+},
+{
+  "type": "node",
+  "id": 8869531838,
+  "lat": -6.1687276,
+  "lon": 106.9175110
+},
+{
+  "type": "node",
+  "id": 8869531839,
+  "lat": -6.1691129,
+  "lon": 106.9175533
+},
+{
+  "type": "node",
+  "id": 8869531902,
+  "lat": -6.1690996,
+  "lon": 106.9176731
+},
+{
+  "type": "node",
+  "id": 8869531903,
+  "lat": -6.1687512,
+  "lon": 106.9176367
+},
+{
+  "type": "node",
+  "id": 8869531904,
+  "lat": -6.1678850,
+  "lon": 106.9174190
+},
+{
+  "type": "node",
+  "id": 8869531905,
+  "lat": -6.1671494,
+  "lon": 106.9168720
+},
+{
+  "type": "node",
+  "id": 8869531906,
+  "lat": -6.1669186,
+  "lon": 106.9165647
+},
+{
+  "type": "node",
+  "id": 8869531907,
+  "lat": -6.1665050,
+  "lon": 106.9156281
+},
+{
+  "type": "node",
+  "id": 12666679312,
+  "lat": -6.1688835,
+  "lon": 106.9175332
+},
+{
+  "type": "node",
+  "id": 12666679313,
+  "lat": -6.1685824,
+  "lon": 106.9174867
+},
+{
+  "type": "node",
+  "id": 12666679314,
+  "lat": -6.1683044,
+  "lon": 106.9174257
+},
+{
+  "type": "node",
+  "id": 12666679315,
+  "lat": -6.1680629,
+  "lon": 106.9173522
+},
+{
+  "type": "node",
+  "id": 12666679316,
+  "lat": -6.1678118,
+  "lon": 106.9172393
+},
+{
+  "type": "node",
+  "id": 12666679317,
+  "lat": -6.1675657,
+  "lon": 106.9170846
+},
+{
+  "type": "node",
+  "id": 12666679318,
+  "lat": -6.1673527,
+  "lon": 106.9169029
+},
+{
+  "type": "node",
+  "id": 12666679319,
+  "lat": -6.1671651,
+  "lon": 106.9166972
+},
+{
+  "type": "node",
+  "id": 12666679320,
+  "lat": -6.1670130,
+  "lon": 106.9164837
+},
+{
+  "type": "node",
+  "id": 12666679321,
+  "lat": -6.1689250,
+  "lon": 106.9176572
+},
+{
+  "type": "node",
+  "id": 12666679322,
+  "lat": -6.1685815,
+  "lon": 106.9176141
+},
+{
+  "type": "node",
+  "id": 12666679323,
+  "lat": -6.1682936,
+  "lon": 106.9175560
+},
+{
+  "type": "node",
+  "id": 12666679324,
+  "lat": -6.1682075,
+  "lon": 106.9175353
+},
+{
+  "type": "node",
+  "id": 12666679325,
+  "lat": -6.1680192,
+  "lon": 106.9174737
+},
+{
+  "type": "node",
+  "id": 12666679326,
+  "lat": -6.1677691,
+  "lon": 106.9173603
+},
+{
+  "type": "node",
+  "id": 12666679327,
+  "lat": -6.1676929,
+  "lon": 106.9173167
+},
+{
+  "type": "node",
+  "id": 12666679328,
+  "lat": -6.1675048,
+  "lon": 106.9171915
+},
+{
+  "type": "node",
+  "id": 12666679329,
+  "lat": -6.1674229,
+  "lon": 106.9171284
+},
+{
+  "type": "node",
+  "id": 12666679330,
+  "lat": -6.1672438,
+  "lon": 106.9169720
+},
+{
+  "type": "node",
+  "id": 12666679331,
+  "lat": -6.1670677,
+  "lon": 106.9167753
+},
+{
+  "type": "node",
+  "id": 12666679332,
+  "lat": -6.1669877,
+  "lon": 106.9166693
+},
+{
+  "type": "node",
+  "id": 12666679333,
+  "lat": -6.1668687,
+  "lon": 106.9164769
+},
+{
+  "type": "node",
+  "id": 12666679335,
+  "lat": -6.1667252,
+  "lon": 106.9161643
+},
+{
+  "type": "node",
+  "id": 2407634682,
+  "lat": -6.1244294,
+  "lon": 106.9276219
+},
+{
+  "type": "node",
+  "id": 2407634693,
+  "lat": -6.1245096,
+  "lon": 106.9275270
+},
+{
+  "type": "node",
+  "id": 7654910948,
+  "lat": -6.1253030,
+  "lon": 106.9281855
+},
+{
+  "type": "node",
+  "id": 7654910949,
+  "lat": -6.1248310,
+  "lon": 106.9278757
+},
+{
+  "type": "node",
+  "id": 9938560634,
+  "lat": -6.1251150,
+  "lon": 106.9279361
+},
+{
+  "type": "node",
+  "id": 12319886405,
+  "lat": -6.1257239,
+  "lon": 106.9284852
+},
+{
+  "type": "node",
+  "id": 12319886406,
+  "lat": -6.1251505,
+  "lon": 106.9280854
+},
+{
+  "type": "node",
+  "id": 12319886407,
+  "lat": -6.1246624,
+  "lon": 106.9277692
+},
+{
+  "type": "node",
+  "id": 12319886419,
+  "lat": -6.1247955,
+  "lon": 106.9277202
+},
+{
+  "type": "node",
+  "id": 12319886420,
+  "lat": -6.1250530,
+  "lon": 106.9278942
+},
+{
+  "type": "node",
+  "id": 12319886421,
+  "lat": -6.1258982,
+  "lon": 106.9284722
+},
+{
+  "type": "node",
+  "id": 2407634695,
+  "lat": -6.1227511,
+  "lon": 106.9266909
+},
+{
+  "type": "node",
+  "id": 2407634703,
+  "lat": -6.1227316,
+  "lon": 106.9268293
+},
+{
+  "type": "node",
+  "id": 3723687951,
+  "lat": -6.1219238,
+  "lon": 106.9265387
+},
+{
+  "type": "node",
+  "id": 3723687952,
+  "lat": -6.1212394,
+  "lon": 106.9262100
+},
+{
+  "type": "node",
+  "id": 5078199476,
+  "lat": -6.1224104,
+  "lon": 106.9265669
+},
+{
+  "type": "node",
+  "id": 5078199477,
+  "lat": -6.1222873,
+  "lon": 106.9265233
+},
+{
+  "type": "node",
+  "id": 5671841197,
+  "lat": -6.1220294,
+  "lon": 106.9265775
+},
+{
+  "type": "node",
+  "id": 6334959831,
+  "lat": -6.1240002,
+  "lon": 106.9272360
+},
+{
+  "type": "node",
+  "id": 6334959832,
+  "lat": -6.1240882,
+  "lon": 106.9274278
+},
+{
+  "type": "node",
+  "id": 6334959833,
+  "lat": -6.1235149,
+  "lon": 106.9271435
+},
+{
+  "type": "node",
+  "id": 6334959834,
+  "lat": -6.1234882,
+  "lon": 106.9270000
+},
+{
+  "type": "node",
+  "id": 7654910950,
+  "lat": -6.1225641,
+  "lon": 106.9266218
+},
+{
+  "type": "node",
+  "id": 11381239767,
+  "lat": -6.1216641,
+  "lon": 106.9263370
+},
+{
+  "type": "node",
+  "id": 12319840084,
+  "lat": -6.1223539,
+  "lon": 106.9266938
+},
+{
+  "type": "node",
+  "id": 12319886408,
+  "lat": -6.1243084,
+  "lon": 106.9275531
+},
+{
+  "type": "node",
+  "id": 12319886409,
+  "lat": -6.1229450,
+  "lon": 106.9269149
+},
+{
+  "type": "node",
+  "id": 12319886410,
+  "lat": -6.1226196,
+  "lon": 106.9267891
+},
+{
+  "type": "node",
+  "id": 12319886414,
+  "lat": -6.1226582,
+  "lon": 106.9266566
+},
+{
+  "type": "node",
+  "id": 12319886415,
+  "lat": -6.1229043,
+  "lon": 106.9267552
+},
+{
+  "type": "node",
+  "id": 12319886416,
+  "lat": -6.1232744,
+  "lon": 106.9269104
+},
+{
+  "type": "node",
+  "id": 12319886417,
+  "lat": -6.1236531,
+  "lon": 106.9270760
+},
+{
+  "type": "node",
+  "id": 12319886418,
+  "lat": -6.1242807,
+  "lon": 106.9273962
+},
+{
+  "type": "node",
+  "id": 403994155,
+  "lat": -6.1394147,
+  "lon": 106.9381472
+},
+{
+  "type": "node",
+  "id": 403994230,
+  "lat": -6.1393420,
+  "lon": 106.9382415
+},
+{
+  "type": "node",
+  "id": 12751893571,
+  "lat": -6.1374599,
+  "lon": 106.9368812
+},
+{
+  "type": "node",
+  "id": 12751893572,
+  "lat": -6.1380226,
+  "lon": 106.9371454
+},
+{
+  "type": "node",
+  "id": 3732688186,
+  "lat": -6.1314407,
+  "lon": 106.9325560
+},
+{
+  "type": "node",
+  "id": 3732688204,
+  "lat": -6.1309550,
+  "lon": 106.9320590
+},
+{
+  "type": "node",
+  "id": 10170742057,
+  "lat": -6.1328360,
+  "lon": 106.9335634
+},
+{
+  "type": "node",
+  "id": 3732688214,
+  "lat": -6.1369232,
+  "lon": 106.9363445
+},
+{
+  "type": "node",
+  "id": 10028516116,
+  "lat": -6.1363955,
+  "lon": 106.9359558
+},
+{
+  "type": "node",
+  "id": 2407634699,
+  "lat": -6.1293711,
+  "lon": 106.9309084
+},
+{
+  "type": "node",
+  "id": 2407634710,
+  "lat": -6.1304205,
+  "lon": 106.9318406
+},
+{
+  "type": "node",
+  "id": 2407634716,
+  "lat": -6.1260671,
+  "lon": 106.9285879
+},
+{
+  "type": "node",
+  "id": 7654910947,
+  "lat": -6.1268098,
+  "lon": 106.9292584
+},
+{
+  "type": "node",
+  "id": 7654910951,
+  "lat": -6.1272512,
+  "lon": 106.9294287
+},
+{
+  "type": "node",
+  "id": 12319840100,
+  "lat": -6.1289606,
+  "lon": 106.9307965
+},
+{
+  "type": "node",
+  "id": 12319886401,
+  "lat": -6.1282883,
+  "lon": 106.9303158
+},
+{
+  "type": "node",
+  "id": 12319886402,
+  "lat": -6.1277589,
+  "lon": 106.9299371
+},
+{
+  "type": "node",
+  "id": 12319886403,
+  "lat": -6.1267559,
+  "lon": 106.9292200
+},
+{
+  "type": "node",
+  "id": 12319886404,
+  "lat": -6.1263607,
+  "lon": 106.9289386
+},
+{
+  "type": "node",
+  "id": 12319886422,
+  "lat": -6.1263541,
+  "lon": 106.9287917
+},
+{
+  "type": "node",
+  "id": 12319886423,
+  "lat": -6.1267935,
+  "lon": 106.9291037
+},
+{
+  "type": "node",
+  "id": 12319886424,
+  "lat": -6.1274783,
+  "lon": 106.9295872
+},
+{
+  "type": "node",
+  "id": 12319886425,
+  "lat": -6.1282861,
+  "lon": 106.9301510
+},
+{
+  "type": "node",
+  "id": 12319886426,
+  "lat": -6.1288952,
+  "lon": 106.9305762
+},
+{
+  "type": "node",
+  "id": 12319886427,
+  "lat": -6.1293772,
+  "lon": 106.9309130
+},
+{
+  "type": "node",
+  "id": 3723687944,
+  "lat": -6.1152303,
+  "lon": 106.8930566
+},
+{
+  "type": "node",
+  "id": 4031341652,
+  "lat": -6.1146668,
+  "lon": 106.8931152
+},
+{
+  "type": "node",
+  "id": 4488441535,
+  "lat": -6.1168762,
+  "lon": 106.8932579
+},
+{
+  "type": "node",
+  "id": 4488441538,
+  "lat": -6.1168130,
+  "lon": 106.8932551
+},
+{
+  "type": "node",
+  "id": 4488441539,
+  "lat": -6.1167601,
+  "lon": 106.8931576
+},
+{
+  "type": "node",
+  "id": 4516185303,
+  "lat": -6.1168544,
+  "lon": 106.8931619
+},
+{
+  "type": "node",
+  "id": 5436692234,
+  "lat": -6.1118779,
+  "lon": 106.8930868
+},
+{
+  "type": "node",
+  "id": 5436692235,
+  "lat": -6.1118979,
+  "lon": 106.8931777
+},
+{
+  "type": "node",
+  "id": 5671906712,
+  "lat": -6.1136219,
+  "lon": 106.8931036
+},
+{
+  "type": "node",
+  "id": 5671906713,
+  "lat": -6.1136212,
+  "lon": 106.8930137
+},
+{
+  "type": "node",
+  "id": 7112698136,
+  "lat": -6.1112475,
+  "lon": 106.8931142
+},
+{
+  "type": "node",
+  "id": 7112698137,
+  "lat": -6.1116871,
+  "lon": 106.8930992
+},
+{
+  "type": "node",
+  "id": 7112698146,
+  "lat": -6.1139013,
+  "lon": 106.8930115
+},
+{
+  "type": "node",
+  "id": 7112698147,
+  "lat": -6.1138986,
+  "lon": 106.8930963
+},
+{
+  "type": "node",
+  "id": 2407635603,
+  "lat": -6.1081162,
+  "lon": 106.8930898
+},
+{
+  "type": "node",
+  "id": 2407635604,
+  "lat": -6.1071398,
+  "lon": 106.8936172
+},
+{
+  "type": "node",
+  "id": 2407635607,
+  "lat": -6.1083302,
+  "lon": 106.8932880
+},
+{
+  "type": "node",
+  "id": 2407635620,
+  "lat": -6.1074238,
+  "lon": 106.8933128
+},
+{
+  "type": "node",
+  "id": 2408660271,
+  "lat": -6.1077972,
+  "lon": 106.8938197
+},
+{
+  "type": "node",
+  "id": 2408660273,
+  "lat": -6.1069984,
+  "lon": 106.8946726
+},
+{
+  "type": "node",
+  "id": 2408660274,
+  "lat": -6.1072452,
+  "lon": 106.8934777
+},
+{
+  "type": "node",
+  "id": 2408660277,
+  "lat": -6.1086696,
+  "lon": 106.8932279
+},
+{
+  "type": "node",
+  "id": 2408660279,
+  "lat": -6.1075879,
+  "lon": 106.8932162
+},
+{
+  "type": "node",
+  "id": 4031336170,
+  "lat": -6.1079715,
+  "lon": 106.8931028
+},
+{
+  "type": "node",
+  "id": 4031342512,
+  "lat": -6.1069571,
+  "lon": 106.8943736
+},
+{
+  "type": "node",
+  "id": 4031342515,
+  "lat": -6.1069625,
+  "lon": 106.8941187
+},
+{
+  "type": "node",
+  "id": 4031342542,
+  "lat": -6.1079977,
+  "lon": 106.8934788
+},
+{
+  "type": "node",
+  "id": 4031342545,
+  "lat": -6.1077725,
+  "lon": 106.8931439
+},
+{
+  "type": "node",
+  "id": 4919828237,
+  "lat": -6.1084348,
+  "lon": 106.8932578
+},
+{
+  "type": "node",
+  "id": 4919828238,
+  "lat": -6.1078412,
+  "lon": 106.8937138
+},
+{
+  "type": "node",
+  "id": 4919828239,
+  "lat": -6.1077505,
+  "lon": 106.8939552
+},
+{
+  "type": "node",
+  "id": 4919828240,
+  "lat": -6.1077100,
+  "lon": 106.8941530
+},
+{
+  "type": "node",
+  "id": 4919828241,
+  "lat": -6.1069958,
+  "lon": 106.8939578
+},
+{
+  "type": "node",
+  "id": 5113072150,
+  "lat": -6.1081766,
+  "lon": 106.8933573
+},
+{
+  "type": "node",
+  "id": 5113072180,
+  "lat": -6.1109107,
+  "lon": 106.8932192
+},
+{
+  "type": "node",
+  "id": 5436692237,
+  "lat": -6.1109155,
+  "lon": 106.8931245
+},
+{
+  "type": "node",
+  "id": 5665428833,
+  "lat": -6.1070465,
+  "lon": 106.8937996
+},
+{
+  "type": "node",
+  "id": 7114843993,
+  "lat": -6.1076522,
+  "lon": 106.8950166
+},
+{
+  "type": "node",
+  "id": 7229879572,
+  "lat": -6.1081026,
+  "lon": 106.8933993
+},
+{
+  "type": "node",
+  "id": 7229879573,
+  "lat": -6.1079266,
+  "lon": 106.8935736
+},
+{
+  "type": "node",
+  "id": 9864968243,
+  "lat": -6.1078766,
+  "lon": 106.8936447
+},
+{
+  "type": "node",
+  "id": 11342760253,
+  "lat": -6.1099775,
+  "lon": 106.8931331
+},
+{
+  "type": "node",
+  "id": 11342760254,
+  "lat": -6.1100975,
+  "lon": 106.8932430
+},
+{
+  "type": "node",
+  "id": 12556173252,
+  "lat": -6.1076285,
+  "lon": 106.8955040
+},
+{
+  "type": "node",
+  "id": 2407634708,
+  "lat": -6.1081839,
+  "lon": 106.9019267
+},
+{
+  "type": "node",
+  "id": 2407634740,
+  "lat": -6.1076150,
+  "lon": 106.8959934
+},
+{
+  "type": "node",
+  "id": 2408660272,
+  "lat": -6.1077452,
+  "lon": 106.8991023
+},
+{
+  "type": "node",
+  "id": 2408660275,
+  "lat": -6.1078466,
+  "lon": 106.8989374
+},
+{
+  "type": "node",
+  "id": 4031336161,
+  "lat": -6.1073585,
+  "lon": 106.8969137
+},
+{
+  "type": "node",
+  "id": 4919847418,
+  "lat": -6.1076475,
+  "lon": 106.8966835
+},
+{
+  "type": "node",
+  "id": 5630170833,
+  "lat": -6.1075652,
+  "lon": 106.8984613
+},
+{
+  "type": "node",
+  "id": 12042807689,
+  "lat": -6.1080795,
+  "lon": 106.9019361
+},
+{
+  "type": "node",
+  "id": 2408660276,
+  "lat": -6.1086200,
+  "lon": 106.9053331
+},
+{
+  "type": "node",
+  "id": 2408660278,
+  "lat": -6.1081573,
+  "lon": 106.9025959
+},
+{
+  "type": "node",
+  "id": 2408660280,
+  "lat": -6.1085173,
+  "lon": 106.9053358
+},
+{
+  "type": "node",
+  "id": 4031336181,
+  "lat": -6.1083786,
+  "lon": 106.9043984
+},
+{
+  "type": "node",
+  "id": 4031342479,
+  "lat": -6.1084333,
+  "lon": 106.9040161
+},
+{
+  "type": "node",
+  "id": 4756695670,
+  "lat": -6.1086987,
+  "lon": 106.9077444
+},
+{
+  "type": "node",
+  "id": 4756695671,
+  "lat": -6.1088133,
+  "lon": 106.9081213
+},
+{
+  "type": "node",
+  "id": 4756695672,
+  "lat": -6.1085947,
+  "lon": 106.9060868
+},
+{
+  "type": "node",
+  "id": 4756695673,
+  "lat": -6.1087387,
+  "lon": 106.9064341
+},
+{
+  "type": "node",
+  "id": 7702064214,
+  "lat": -6.1087267,
+  "lon": 106.9085075
+},
+{
+  "type": "node",
+  "id": 11329214992,
+  "lat": -6.1084922,
+  "lon": 106.9044337
+},
+{
+  "type": "node",
+  "id": 11329214993,
+  "lat": -6.1085750,
+  "lon": 106.9049744
+},
+{
+  "type": "node",
+  "id": 11329214994,
+  "lat": -6.1087310,
+  "lon": 106.9063576
+},
+{
+  "type": "node",
+  "id": 2407634697,
+  "lat": -6.1085526,
+  "lon": 106.9136755
+},
+{
+  "type": "node",
+  "id": 2407634735,
+  "lat": -6.1084352,
+  "lon": 106.9136397
+},
+{
+  "type": "node",
+  "id": 2407635605,
+  "lat": -6.1088454,
+  "lon": 106.9091217
+},
+{
+  "type": "node",
+  "id": 2407635618,
+  "lat": -6.1087360,
+  "lon": 106.9090976
+},
+{
+  "type": "node",
+  "id": 4031342314,
+  "lat": -6.1088133,
+  "lon": 106.9105299
+},
+{
+  "type": "node",
+  "id": 4031342551,
+  "lat": -6.1087040,
+  "lon": 106.9104709
+},
+{
+  "type": "node",
+  "id": 5466001542,
+  "lat": -6.1086147,
+  "lon": 106.9117261
+},
+{
+  "type": "node",
+  "id": 7702064215,
+  "lat": -6.1087253,
+  "lon": 106.9117396
+},
+{
+  "type": "node",
+  "id": 2407634675,
+  "lat": -6.1173792,
+  "lon": 106.9250924
+},
+{
+  "type": "node",
+  "id": 2407634720,
+  "lat": -6.1173146,
+  "lon": 106.9252187
+},
+{
+  "type": "node",
+  "id": 4031341649,
+  "lat": -6.1137443,
+  "lon": 106.9242748
+},
+{
+  "type": "node",
+  "id": 4031341650,
+  "lat": -6.1137540,
+  "lon": 106.9241425
+},
+{
+  "type": "node",
+  "id": 4031342563,
+  "lat": -6.1122792,
+  "lon": 106.9237984
+},
+{
+  "type": "node",
+  "id": 4031342564,
+  "lat": -6.1123014,
+  "lon": 106.9236803
+},
+{
+  "type": "node",
+  "id": 4488583007,
+  "lat": -6.1151209,
+  "lon": 106.9245195
+},
+{
+  "type": "node",
+  "id": 4488583008,
+  "lat": -6.1150906,
+  "lon": 106.9246288
+},
+{
+  "type": "node",
+  "id": 6334959835,
+  "lat": -6.1130858,
+  "lon": 106.9240603
+},
+{
+  "type": "node",
+  "id": 6334959836,
+  "lat": -6.1130818,
+  "lon": 106.9239154
+},
+{
+  "type": "node",
+  "id": 2407634685,
+  "lat": -6.1083283,
+  "lon": 106.9164656
+},
+{
+  "type": "node",
+  "id": 2407634718,
+  "lat": -6.1082466,
+  "lon": 106.9163021
+},
+{
+  "type": "node",
+  "id": 2407634724,
+  "lat": -6.1078688,
+  "lon": 106.9217840
+},
+{
+  "type": "node",
+  "id": 2407635616,
+  "lat": -6.1078494,
+  "lon": 106.9177870
+},
+{
+  "type": "node",
+  "id": 2407635622,
+  "lat": -6.1075481,
+  "lon": 106.9211664
+},
+{
+  "type": "node",
+  "id": 3647036093,
+  "lat": -6.1074607,
+  "lon": 106.9187841
+},
+{
+  "type": "node",
+  "id": 3647036094,
+  "lat": -6.1072420,
+  "lon": 106.9204005
+},
+{
+  "type": "node",
+  "id": 3647036095,
+  "lat": -6.1074631,
+  "lon": 106.9212896
+},
+{
+  "type": "node",
+  "id": 3647036098,
+  "lat": -6.1074287,
+  "lon": 106.9193124
+},
+{
+  "type": "node",
+  "id": 3647036100,
+  "lat": -6.1073102,
+  "lon": 106.9193581
+},
+{
+  "type": "node",
+  "id": 3647036101,
+  "lat": -6.1072400,
+  "lon": 106.9198277
+},
+{
+  "type": "node",
+  "id": 3647036102,
+  "lat": -6.1077605,
+  "lon": 106.9218519
+},
+{
+  "type": "node",
+  "id": 3647036103,
+  "lat": -6.1079530,
+  "lon": 106.9178194
+},
+{
+  "type": "node",
+  "id": 3647036104,
+  "lat": -6.1073548,
+  "lon": 106.9203562
+},
+{
+  "type": "node",
+  "id": 4031342527,
+  "lat": -6.1073444,
+  "lon": 106.9198318
+},
+{
+  "type": "node",
+  "id": 4756695665,
+  "lat": -6.1074317,
+  "lon": 106.9208358
+},
+{
+  "type": "node",
+  "id": 4756695666,
+  "lat": -6.1073345,
+  "lon": 106.9208845
+},
+{
+  "type": "node",
+  "id": 4756695667,
+  "lat": -6.1075784,
+  "lon": 106.9188027
+},
+{
+  "type": "node",
+  "id": 4756695669,
+  "lat": -6.1083315,
+  "lon": 106.9155451
+},
+{
+  "type": "node",
+  "id": 5665665548,
+  "lat": -6.1079756,
+  "lon": 106.9174043
+},
+{
+  "type": "node",
+  "id": 5671903483,
+  "lat": -6.1084589,
+  "lon": 106.9155533
+},
+{
+  "type": "node",
+  "id": 7115209923,
+  "lat": -6.1081719,
+  "lon": 106.9171241
+},
+{
+  "type": "node",
+  "id": 7115209924,
+  "lat": -6.1081391,
+  "lon": 106.9168349
+},
+{
+  "type": "node",
+  "id": 13323211857,
+  "lat": -6.1080206,
+  "lon": 106.9172475
+},
+{
+  "type": "node",
+  "id": 2407635612,
+  "lat": -6.1089088,
+  "lon": 106.9229064
+},
+{
+  "type": "node",
+  "id": 2407635614,
+  "lat": -6.1089184,
+  "lon": 106.9227695
+},
+{
+  "type": "node",
+  "id": 3647036097,
+  "lat": -6.1081301,
+  "lon": 106.9223711
+},
+{
+  "type": "node",
+  "id": 3647036099,
+  "lat": -6.1082523,
+  "lon": 106.9222745
+},
+{
+  "type": "node",
+  "id": 4756695659,
+  "lat": -6.1107335,
+  "lon": 106.9234188
+},
+{
+  "type": "node",
+  "id": 4756695660,
+  "lat": -6.1107952,
+  "lon": 106.9233017
+},
+{
+  "type": "node",
+  "id": 4756695661,
+  "lat": -6.1097840,
+  "lon": 106.9230996
+},
+{
+  "type": "node",
+  "id": 4756695662,
+  "lat": -6.1097549,
+  "lon": 106.9232437
+},
+{
+  "type": "node",
+  "id": 4756695663,
+  "lat": -6.1084918,
+  "lon": 106.9226743
+},
+{
+  "type": "node",
+  "id": 4756695664,
+  "lat": -6.1085892,
+  "lon": 106.9225470
+},
+{
+  "type": "node",
+  "id": 5665665546,
+  "lat": -6.1092867,
+  "lon": 106.9230715
+},
+{
+  "type": "node",
+  "id": 6334959837,
+  "lat": -6.1093441,
+  "lon": 106.9229633
+}
+
+  ]
+}

@@ -86,5 +86,14 @@ const report = {
 };
 
 const output = `${JSON.stringify(report, null, 2)}\n`;
-if (values.out) await writeFile(values.out, output);
-process.stdout.write(output);
+if (values.out) {
+  await writeFile(values.out, output);
+  process.stdout.write(
+    `Checked ${report.summary.uniqueStreams} unique playlists: ` +
+      `${report.summary.safariNativeCandidates} Safari candidates, ` +
+      `${report.summary.hlsJsCandidates} HLS.js candidates.\n` +
+      `Saved ${values.out}\n`,
+  );
+} else {
+  process.stdout.write(output);
+}

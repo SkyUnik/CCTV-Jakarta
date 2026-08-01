@@ -123,6 +123,28 @@ export function verifiedCameras(cameras, highwayId, side) {
     .sort((a, b) => a.roadPositionM - b.roadPositionM);
 }
 
+export function publicCameras(cameras, highwayId, side) {
+  const sorted = cameras
+    .filter((camera) =>
+      camera.highwayId === highwayId &&
+      typeof camera.streamUrl === "string" &&
+      camera.streamUrl.length > 0 &&
+      (camera.side === null || camera.side === side)
+    )
+    .sort((a, b) => {
+      const kilometerA = Number.isFinite(a.km) ? a.km : Number.POSITIVE_INFINITY;
+      const kilometerB = Number.isFinite(b.km) ? b.km : Number.POSITIVE_INFINITY;
+      return kilometerA - kilometerB || a.name.localeCompare(b.name, "id");
+    });
+  const seen = new Set();
+  return sorted.filter((camera) => {
+    const key = `${camera.streamUrl}\n${camera.name}\n${camera.side ?? ""}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
 export function initialCamera(cameras, direction, progressM) {
   if (direction === "A") {
     return cameras.find((camera) => camera.roadPositionM >= progressM) ?? null;

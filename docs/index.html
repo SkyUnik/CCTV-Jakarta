@@ -25,7 +25,7 @@
 
     <main>
       <section class="intro" aria-labelledby="page-title">
-        <p class="eyebrow">Cawang → Pluit</p>
+        <p class="eyebrow">Ruas tol Jakarta • GPS lokal</p>
         <h1 id="page-title">Lihat kondisi jalan di depan.</h1>
         <p class="intro-copy">
           Deteksi ruas tol dari lokasi Anda, pilih arah perjalanan, lalu CCTV akan
@@ -69,11 +69,11 @@
             <div class="direction-grid" role="group" aria-label="Arah perjalanan">
               <button class="direction-button" id="direction-a" type="button" aria-pressed="false">
                 <span class="direction-code">A</span>
-                <span><strong>Menjauh</strong><small>dari KM 0 Cawang</small></span>
+                <span><strong>Menjauh</strong><small>mengikuti arah KM bertambah</small></span>
               </button>
               <button class="direction-button" id="direction-b" type="button" aria-pressed="false">
                 <span class="direction-code">B</span>
-                <span><strong>Mendekat</strong><small>ke KM 0 Cawang</small></span>
+                <span><strong>Mendekat</strong><small>mengikuti arah KM berkurang</small></span>
               </button>
             </div>
           </div>
@@ -112,6 +112,17 @@
 
           <div class="journey-status" id="journey-status" role="status" aria-live="polite">
             Mulai pelacakan atau pilih ruas secara manual.
+          </div>
+
+          <div class="manual-camera-picker" id="manual-camera-picker" hidden>
+            <label for="manual-camera-select">Pilih kamera publik secara manual</label>
+            <div>
+              <select id="manual-camera-select" aria-label="Kamera publik"></select>
+              <button class="button button-small" id="manual-camera-button" type="button">
+                Muat kamera
+              </button>
+            </div>
+            <small>Kamera yang belum memiliki koordinat tetap dapat ditonton, tetapi tidak mengganti otomatis berdasarkan GPS.</small>
           </div>
 
           <div class="launch-player">
@@ -161,7 +172,7 @@
         <h2 id="how-title">Sederhana, tanpa mengirim lokasi.</h2>
         <ol>
           <li><span>01</span><div><strong>Deteksi ruas</strong><p>GPS dicocokkan dengan kurva jalan tol yang tersimpan di situs.</p></div></li>
-          <li><span>02</span><div><strong>Pilih A atau B</strong><p>A menjauh dari KM 0 Cawang, B menuju KM 0 Cawang.</p></div></li>
+          <li><span>02</span><div><strong>Pilih A atau B</strong><p>A mengikuti KM bertambah; B mengikuti KM berkurang menuju KM 0 ruas.</p></div></li>
           <li><span>03</span><div><strong>Ikuti perjalanan</strong><p>Kamera berikutnya aktif setelah dua posisi GPS memastikan kamera sudah terlewati.</p></div></li>
         </ol>
       </section>
@@ -174,6 +185,6 @@
 
     <noscript>Situs ini memerlukan JavaScript untuk mencocokkan lokasi dan memutar HLS.</noscript>
     <script src="./vendor/hls.min.js"></script>
-    <script type="module" src="./js/app.mjs?v=20260801-gps5"></script>
+    <script type="module" src="./js/app.mjs?v=20260801-roads1"></script>
   </body>
 </html>

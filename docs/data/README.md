@@ -1,7 +1,8 @@
 # CCTV data review
 
-`cameras.scraped.json` is public provider metadata collected from the Bina Marga
-Tol Dalam Kota page. It is not ready for automatic playback.
+`cameras.scraped.json` is aggregate public provider metadata collected from the
+four configured Bina Marga road pages. It is not automatically trusted for GPS
+switching.
 
 Before copying a record into the reviewed `cameras.json` dataset:
 
@@ -20,6 +21,11 @@ Provider-controlled fields are `providerCameraId`, `name`, `streamUrl`,
 
 Repeated labels are expected. Records are identified by the provider's numeric
 camera/video ID, not by label or stream URL.
+
+Unverified records remain available to a visitor through the manual camera
+picker. They cannot enter GPS-driven ordering or switching until the explicit
+verification step sets reviewed coordinates, `roadPositionM`, direction,
+`enabled: true`, and `curationStatus: "verified"`.
 
 For a public camera that is not collected from Bina Marga, use
 `npm run camera:add -- --help`. This avoids JSON syntax mistakes and prevents

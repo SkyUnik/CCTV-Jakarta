@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "highways": [
+    {
+      "id": "dalam-kota",
+      "input": "data-source/osm-relation-5385689-full.json",
+      "sourceType": "relation",
+      "relationId": 5385689,
+      "startNodeId": 309137378,
+      "endNodeId": 1757817871,
+      "properties": {
+        "name": "Tol Dalam Kota (Cawang–Pluit)",
+        "zeroKmLabel": "Simpang Susun Cawang",
+        "terminalLabel": "Simpang Susun Pluit",
+        "directionA": "Menjauh dari KM 0 Cawang",
+        "directionB": "Menuju KM 0 Cawang",
+        "matchRadiusM": 60,
+        "maxAccuracyM": 100,
+        "maxMatchRadiusM": 150,
+        "passHysteresisM": 75,
+        "passConfirmationFixes": 2,
+        "osmSource": "https://www.openstreetmap.org/relation/5385689",
+        "osmSnapshotSource": "https://api.openstreetmap.org/api/0.6/relation/5385689/full.json",
+        "attribution": "© OpenStreetMap contributors",
+        "license": "https://opendatacommons.org/licenses/odbl/1-0/",
+        "reviewStatus": "canonical_path_selected"
+      }
+    },
+    {
+      "id": "6-tol-dalam-kota-kelapa-gading-pulo-gebang",
+      "input": "data-source/osm-motorways-jakarta-north.json",
+      "sourceType": "namedWays",
+      "wayNames": ["Jalan Tol Sunter–Pulo Gebang"],
+      "startNodeId": 8869531829,
+      "endNodeId": 5492926343,
+      "properties": {
+        "name": "6 Tol Dalam Kota (Kelapa Gading–Pulo Gebang)",
+        "zeroKmLabel": "Kelapa Gading / arah KM 0",
+        "terminalLabel": "Pulo Gebang",
+        "directionA": "Menjauh dari KM 0 menuju Pulo Gebang",
+        "directionB": "Menuju KM 0 dan Kelapa Gading",
+        "matchRadiusM": 60,
+        "maxAccuracyM": 100,
+        "maxMatchRadiusM": 150,
+        "passHysteresisM": 75,
+        "passConfirmationFixes": 2,
+        "osmSource": "https://www.openstreetmap.org/",
+        "osmSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "attribution": "© OpenStreetMap contributors",
+        "license": "https://opendatacommons.org/licenses/odbl/1-0/",
+        "reviewStatus": "canonical_path_selected"
+      }
+    },
+    {
+      "id": "akses-tanjung-priok",
+      "input": "data-source/osm-motorways-jakarta-north.json",
+      "sourceType": "namedWays",
+      "wayNames": ["Jalan Tol Akses Tanjung Priok"],
+      "startNodeId": 403994155,
+      "endNodeId": 6322167590,
+      "properties": {
+        "name": "Tol Akses Tanjung Priok",
+        "zeroKmLabel": "Semper / arah KM 0",
+        "terminalLabel": "Kebon Bawang",
+        "directionA": "Menjauh dari KM 0 menuju Kebon Bawang",
+        "directionB": "Menuju KM 0 dan Semper",
+        "matchRadiusM": 60,
+        "maxAccuracyM": 100,
+        "maxMatchRadiusM": 150,
+        "passHysteresisM": 75,
+        "passConfirmationFixes": 2,
+        "osmSource": "https://www.openstreetmap.org/",
+        "osmSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "attribution": "© OpenStreetMap contributors",
+        "license": "https://opendatacommons.org/licenses/odbl/1-0/",
+        "reviewStatus": "canonical_path_selected"
+      }
+    },
+    {
+      "id": "jakarta-bogor-ciawi",
+      "input": "data-source/osm-motorways-jagorawi.json",
+      "sourceType": "namedWays",
+      "wayNames": ["Jalan Tol Jakarta–Bogor–Ciawi", "Jalan Tol Jagorawi"],
+      "startNodeId": 309137881,
+      "endNodeId": 202772567,
+      "properties": {
+        "name": "Tol Jakarta–Bogor–Ciawi (Jagorawi)",
+        "zeroKmLabel": "Cawang",
+        "terminalLabel": "Ciawi",
+        "directionA": "Menjauh dari KM 0 Cawang menuju Ciawi",
+        "directionB": "Menuju KM 0 Cawang",
+        "matchRadiusM": 60,
+        "maxAccuracyM": 100,
+        "maxMatchRadiusM": 150,
+        "passHysteresisM": 75,
+        "passConfirmationFixes": 2,
+        "osmSource": "https://www.openstreetmap.org/",
+        "osmSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "attribution": "© OpenStreetMap contributors",
+        "license": "https://opendatacommons.org/licenses/odbl/1-0/",
+        "reviewStatus": "canonical_path_selected"
+      }
+    }
+  ]
+}

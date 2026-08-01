@@ -4,6 +4,7 @@ import {
   initialCamera,
   matchHighways,
   projectPointToLine,
+  publicCameras,
   verifiedCameras,
 } from "./geo.mjs";
 import {
@@ -38,6 +39,9 @@ const elements = {
   gpsDebug: document.querySelector("#gps-debug-link"),
   highwayList: document.querySelector("#highway-list"),
   journeyStatus: document.querySelector("#journey-status"),
+  manualCameraButton: document.querySelector("#manual-camera-button"),
+  manualCameraPicker: document.querySelector("#manual-camera-picker"),
+  manualCameraSelect: document.querySelector("#manual-camera-select"),
   next: document.querySelector("#next-button"),
   openPlayer: document.querySelector("#open-player-button"),
   playerCard: document.querySelector(".player-card"),
@@ -67,6 +71,8 @@ const state = {
   loadTimer: null,
   lastPosition: null,
   locationAttempt: 0,
+  manualCameras: [],
+  manualMode: false,
   playIntent: false,
   playbackBlocked: false,
   playerReady: false,
@@ -85,6 +91,10 @@ function setJourneyStatus(message) {
 
 function selectedHighwayId() {
   return state.highway?.properties?.id ?? state.highway?.id ?? null;
+}
+
+function activeCameraList() {
+  return state.manualMode ? state.manualCameras : state.usableCameras;
 }
 
 function formatKm(km) {
@@ -156,7 +166,9 @@ async function playCamera(camera, options = {}) {
   elements.sourceLink.href = camera.streamUrl;
   elements.sourceLink.hidden = false;
   updateControls();
-  setJourneyStatus("Kamera aktif. Sistem menunggu posisi terkonfirmasi setelah kamera ini.");
+  setJourneyStatus(state.manualMode
+    ? "Kamera manual aktif. Pergantian otomatis berbasis GPS tidak digunakan untuk kamera ini."
+    : "Kamera aktif. Sistem menunggu posisi terkonfirmasi setelah kamera ini.");
 
   const onReady = () => {
     if (generation !== state.loadGeneration || state.playerReady) return;
@@ -274,23 +286,47 @@ function scheduleStallStatus() {
 }
 
 function updateControls() {
-  if (!state.currentCamera || state.usableCameras.length === 0) {
+  const cameras = activeCameraList();
+  if (!state.currentCamera || cameras.length === 0) {
     elements.previous.disabled = true;
     elements.next.disabled = true;
     return;
   }
   elements.previous.disabled = !adjacentCamera(
-    state.usableCameras,
+    cameras,
     state.currentCamera.id,
     state.direction,
     -1,
   );
   elements.next.disabled = !adjacentCamera(
-    state.usableCameras,
+    cameras,
     state.currentCamera.id,
     state.direction,
     1,
   );
+}
+
+function updateManualCameraPicker() {
+  if (!state.highway || !state.direction) {
+    state.manualCameras = [];
+    elements.manualCameraPicker.hidden = true;
+    return;
+  }
+  state.manualCameras = publicCameras(
+    state.cameras,
+    selectedHighwayId(),
+    state.direction,
+  );
+  elements.manualCameraSelect.replaceChildren();
+  for (const camera of state.manualCameras) {
+    const option = document.createElement("option");
+    option.value = camera.id;
+    const side = camera.side ? ` • ${camera.side}` : "";
+    option.textContent = `${formatKm(camera.km)}${side} — ${camera.name}`;
+    elements.manualCameraSelect.append(option);
+  }
+  elements.manualCameraButton.disabled = state.manualCameras.length === 0;
+  elements.manualCameraPicker.hidden = state.manualCameras.length === 0;
 }
 
 function updateUsableCameras() {
@@ -305,7 +341,8 @@ function updateUsableCameras() {
       state.direction,
     );
   }
-  elements.download.disabled = state.usableCameras.length === 0;
+  updateManualCameraPicker();
+  elements.download.disabled = state.usableCameras.length === 0 && state.manualCameras.length === 0;
   if (state.usableCameras.length === 0) {
     destroyPlayer();
     state.currentCamera = null;
@@ -323,6 +360,7 @@ function updateUsableCameras() {
 
 function selectDirection(direction) {
   state.direction = direction;
+  state.manualMode = false;
   state.currentCamera = null;
   state.playIntent = false;
   state.routeEnded = false;
@@ -347,7 +385,13 @@ function selectHighway(feature) {
   state.playIntent = false;
   state.currentProjection = null;
   state.routeEnded = false;
+  state.manualMode = false;
   elements.directionSection.hidden = false;
+  const properties = feature.properties ?? {};
+  elements.directionA.querySelector("small").textContent =
+    properties.directionA ?? "Mengikuti arah KM bertambah";
+  elements.directionB.querySelector("small").textContent =
+    properties.directionB ?? "Mengikuti arah KM berkurang";
   elements.highwayList.querySelectorAll("button").forEach((button) => {
     button.setAttribute("aria-pressed", String(button.dataset.highwayId === selectedHighwayId()));
   });
@@ -376,7 +420,10 @@ function renderHighways(candidates = null) {
     const name = document.createElement("strong");
     const description = document.createElement("small");
     name.textContent = feature.properties?.name ?? id;
-    description.textContent = "A menjauh • B menuju Cawang";
+    const properties = feature.properties ?? {};
+    description.textContent =
+      `A → ${properties.terminalLabel ?? "KM bertambah"} • ` +
+      `B → ${properties.zeroKmLabel ?? "KM berkurang"}`;
     label.append(name, description);
     button.append(label);
     if (candidate) {
@@ -437,6 +484,7 @@ function handlePosition(position) {
 
 function evaluatePassing() {
   if (
+    state.manualMode ||
     !state.currentCamera ||
     !state.currentProjection ||
     state.playbackBlocked ||
@@ -550,7 +598,7 @@ function stopTracking() {
 function moveCamera(step) {
   if (!state.currentCamera) return;
   const target = adjacentCamera(
-    state.usableCameras,
+    activeCameraList(),
     state.currentCamera.id,
     state.direction,
     step,
@@ -559,9 +607,10 @@ function moveCamera(step) {
 }
 
 function downloadM3u() {
-  if (state.usableCameras.length === 0) return;
+  const cameras = activeCameraList().length > 0 ? activeCameraList() : state.manualCameras;
+  if (cameras.length === 0) return;
   const lines = ["#EXTM3U"];
-  for (const camera of state.usableCameras) {
+  for (const camera of cameras) {
     lines.push(
       `#EXTINF:-1 tvg-id="${camera.id}" group-title="${state.highway.properties.name} ${state.direction}",${camera.name}`,
       camera.streamUrl,
@@ -574,6 +623,15 @@ function downloadM3u() {
   anchor.download = `${selectedHighwayId()}-${state.direction.toLowerCase()}-cctv.m3u8`;
   anchor.click();
   URL.revokeObjectURL(url);
+}
+
+function loadManualCamera() {
+  const camera = state.manualCameras.find(
+    (candidate) => candidate.id === elements.manualCameraSelect.value,
+  );
+  if (!camera) return;
+  state.manualMode = true;
+  playCamera(camera);
 }
 
 function demoCameras(direction) {
@@ -639,6 +697,7 @@ async function loadData() {
 
 elements.start.addEventListener("click", startTracking);
 elements.stop.addEventListener("click", stopTracking);
+elements.manualCameraButton.addEventListener("click", loadManualCamera);
 elements.directionA.addEventListener("click", () => selectDirection("A"));
 elements.directionB.addEventListener("click", () => selectDirection("B"));
 elements.previous.addEventListener("click", () => moveCamera(-1));

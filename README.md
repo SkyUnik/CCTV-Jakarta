@@ -4,10 +4,17 @@ A privacy-first, location-aware CCTV player for Jakarta toll roads. The website
 will run entirely in the browser and will be deployable as a static GitHub Pages
 site from the `docs/` directory.
 
-The first supported corridor is **Tol Dalam Kota**. Its direction convention is:
+The committed dataset supports four corridors:
 
-- **A** — travelling away from KM 0 at Cawang
-- **B** — travelling toward KM 0 at Cawang
+- Tol Dalam Kota (Cawang–Pluit)
+- 6 Tol Dalam Kota (Kelapa Gading–Pulo Gebang)
+- Akses Tanjung Priok
+- Jakarta–Bogor–Ciawi (Jagorawi)
+
+Every corridor uses the same direction convention:
+
+- **A** — travelling with increasing stationing, away from the corridor's KM 0
+- **B** — travelling with decreasing stationing, toward the corridor's KM 0
 
 ## Project layout
 
@@ -43,13 +50,17 @@ editorial fields when `--merge` is used.
 Highway definitions will live in `docs/data/highways.geojson`. Coordinates use
 GeoJSON order: `[longitude, latitude]`.
 
-The committed Tol Dalam Kota geometry is a directed 19.6 km OSM path from the
-pinned Cawang junction node to the pinned Pluit junction node. Rebuild it from
-the saved public source snapshot with:
+Highway definitions are configured in `data-source/highways.config.json`. Each
+entry pins its reviewed OSM source, directed start/end nodes, labels, and GPS
+thresholds. The browser receives only the generated static GeoJSON and never
+queries OSM. Rebuild every configured corridor from the committed snapshots:
 
 ```sh
 npm run highway:build
 ```
+
+The current canonical paths are approximately 19.6 km Cawang–Pluit, 7.3 km
+Kelapa Gading–Pulo Gebang, 11.1 km Akses Tanjung Priok, and 46.7 km Jagorawi.
 
 The browser projects each GPS fix onto every segment of this curved LineString.
 It rejects accuracy worse than 100 m and accepts a road only inside a threshold
@@ -77,6 +88,20 @@ npm run scrape -- \
 The collector makes exactly one request per invocation, only to the public Bina
 Marga `cctv_tol` page selected by `--road`. It does not request playlists,
 video segments, administrative endpoints, or other hosts.
+
+The same command accepts the other committed Bina Marga slugs:
+
+```sh
+npm run scrape -- --road 6-tol-dalam-kota-kelapa-gading-pulo-gebang --out docs/data/cameras.json --merge docs/data/cameras.json
+npm run scrape -- --road akses-tanjung-priok --out docs/data/cameras.json --merge docs/data/cameras.json
+npm run scrape -- --road jakarta-bogor-ciawi --out docs/data/cameras.json --merge docs/data/cameras.json
+```
+
+The current aggregate contains 94 provider records: 26 Cawang–Pluit, 9 Kelapa
+Gading–Pulo Gebang, 31 Akses Tanjung Priok, and 28 Jagorawi. Records lacking
+reviewed coordinates remain disabled for automatic GPS switching. They are
+still available through the site's manual camera picker after choosing a road
+and direction.
 
 ### Append another public HLS camera
 
@@ -229,7 +254,9 @@ returns permission error 1 without showing a prompt:
    **Ask** or **Allow** under Website Settings.
 3. In **Settings → Apps → Safari → Location**, select **Ask** or **Allow**.
 4. Confirm **Settings → Privacy & Security → Location Services** is enabled.
-5. Reload the page before pressing **Mulai CCTV** again.
+5. Open **Safari Websites** there, select **While Using the App**, and enable
+   **Precise Location**.
+6. Reload the page before pressing **Mulai CCTV** again.
 
 The page cannot reopen an iOS prompt after Safari has stored a site-level Deny;
 that decision must be changed in Safari's settings first.

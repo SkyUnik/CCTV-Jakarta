@@ -7,6 +7,7 @@ import {
   initialCamera,
   matchHighways,
   projectPointToLine,
+  publicCameras,
   verifiedCameras,
 } from "../docs/js/geo.mjs";
 
@@ -33,6 +34,18 @@ test("projects onto the curved polyline rather than its endpoint chord", () => {
   assert.ok(projection.distanceM < 20);
   assert.ok(projection.progressM > 1_500);
   assert.ok(projection.totalLengthM > 2_100);
+});
+
+test("manual camera lists include matching and unknown sides without enabling automation", () => {
+  const cameras = [
+    { id: "a", highwayId: "road", side: "A", km: 2, name: "A", streamUrl: "https://example/a.m3u8" },
+    { id: "b", highwayId: "road", side: "B", km: 1, name: "B", streamUrl: "https://example/b.m3u8" },
+    { id: "u", highwayId: "road", side: null, km: 3, name: "Unknown", streamUrl: "https://example/u.m3u8" },
+    { id: "u-duplicate", highwayId: "road", side: null, km: 3, name: "Unknown", streamUrl: "https://example/u.m3u8" },
+  ];
+  assert.deepEqual(publicCameras(cameras, "road", "A").map((camera) => camera.id), ["a", "u"]);
+  assert.deepEqual(publicCameras(cameras, "road", "B").map((camera) => camera.id), ["b", "u"]);
+  assert.equal(verifiedCameras(cameras, "road", "A").length, 0);
 });
 
 test("matches within the dynamic threshold and rejects poor accuracy", () => {

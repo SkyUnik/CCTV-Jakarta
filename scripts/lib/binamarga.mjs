@@ -61,14 +61,18 @@ function extractName(card) {
 }
 
 export function parseKilometer(name) {
-  const match = cleanText(name).match(/\bKM\s*0*(\d+)\s*\+\s*(\d{1,3})\b/i);
+  const match = cleanText(name).match(/(?:\bKM\s*)?0*(\d{1,3})\s*\+\s*(\d{1,3})(?!\d)/i);
   if (!match) return null;
   return Number(match[1]) + Number(match[2].padEnd(3, "0")) / 1000;
 }
 
 export function parseSide(name) {
-  const match = cleanText(name).match(/(?:^|\s)([AB])\s*$/i);
-  return match ? match[1].toUpperCase() : null;
+  const text = cleanText(name);
+  const trailing = text.match(/\|\s*([AB])\s*$/i);
+  if (trailing) return trailing[1].toUpperCase();
+
+  const stationSuffix = text.match(/\+\s*\d{1,3}\s*([AB])(?=\s*(?:\||$))/i);
+  return stationSuffix ? stationSuffix[1].toUpperCase() : null;
 }
 
 export function parseCameraPage(html, options) {
@@ -137,16 +141,27 @@ export function mergeCameraData(scrapedCameras, existingData) {
   return [...mergedScraped, ...existingOnly];
 }
 
-export function buildCameraDocument(cameras, options) {
+export function buildCameraDocument(cameras, options, existingData = null) {
   const { road, sourcePage, scrapedAt } = options;
+  const source = {
+    provider: "Direktorat Jenderal Bina Marga",
+    road,
+    sourcePage,
+    scrapedAt,
+  };
+  const existingSources = Array.isArray(existingData?.sources)
+    ? existingData.sources
+    : existingData?.source
+      ? [existingData.source]
+      : [];
+  const sources = [
+    ...existingSources.filter((entry) => entry.road !== road),
+    source,
+  ];
   return {
     schemaVersion: 1,
-    source: {
-      provider: "Direktorat Jenderal Bina Marga",
-      road,
-      sourcePage,
-      scrapedAt,
-    },
+    source,
+    sources,
     cameras,
   };
 }

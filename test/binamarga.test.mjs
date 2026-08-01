@@ -3,6 +3,7 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 import {
+  buildCameraDocument,
   cameraPageUrl,
   mergeCameraData,
   parseCameraPage,
@@ -21,6 +22,31 @@ test("parses kilometer stationing and explicit suffixes", () => {
   assert.equal(parseSide("JTC KM 05+400 B"), "B");
   assert.equal(parseSide("JTC KM 05+400 A"), "A");
   assert.equal(parseSide("JTC KM 00+400 | HALIM"), null);
+});
+
+test("camera documents retain source metadata for multiple roads", () => {
+  const existing = {
+    source: { provider: "Direktorat Jenderal Bina Marga", road: "dalam-kota" },
+  };
+  const document = buildCameraDocument([], {
+    road: "akses-tanjung-priok",
+    sourcePage: "https://binamarga.example/atp",
+    scrapedAt,
+  }, existing);
+  assert.deepEqual(document.sources.map((source) => source.road), [
+    "dalam-kota",
+    "akses-tanjung-priok",
+  ]);
+});
+
+test("parses provider station-only labels and suffixes without spaces", () => {
+  assert.equal(parseKilometer("28+600"), 28.6);
+  assert.equal(parseKilometer("ON RAMP BEKASI (28+150)"), 28.15);
+  assert.equal(parseSide("ATP KM 60+000A"), "A");
+  assert.equal(parseSide("JAGORAWI KM 45+000B"), "B");
+  assert.equal(parseSide("JAGORAWI KM 24+000B | SS GUNUNG PUTRI"), "B");
+  assert.equal(parseKilometer("JAGORAWI KM 45+000B"), 45);
+  assert.equal(parseSide("ATP GT KB BAWANG"), null);
 });
 
 test("extracts public cards, preserves duplicate labels, and skips missing streams", async () => {
