@@ -29,7 +29,7 @@ test("static page exposes the required accessible controls with relative assets"
   assert.equal($("#camera-video").attr("x-webkit-airplay"), "allow");
   assert.equal($("script[src^='http']").length, 0);
   assert.equal($("link[rel='stylesheet']").attr("href"), "./styles.css");
-  assert.equal($("script[type='module']").attr("src"), "./js/app.mjs");
+  assert.match($("script[type='module']").attr("src"), /^\.\/js\/app\.mjs\?v=/);
 });
 
 test("vendored HLS player and license are committed for offline site loading", async () => {

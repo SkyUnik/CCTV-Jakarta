@@ -218,6 +218,22 @@ testing. Browser geolocation is a secure-context feature, so real GPS testing
 must use the published HTTPS GitHub Pages URL (or another trusted HTTPS local
 setup).
 
+### iPhone GPS permission troubleshooting
+
+The Start button first calls `getCurrentPosition()` directly from the tap, then
+starts `watchPosition()` only after Safari returns an initial fix. If Safari
+returns permission error 1 without showing a prompt:
+
+1. Open the published HTTPS page in a normal (non-private) Safari tab.
+2. Open Safari's page menu (…) and set the site's **Location** permission to
+   **Ask** or **Allow** under Website Settings.
+3. In **Settings → Apps → Safari → Location**, select **Ask** or **Allow**.
+4. Confirm **Settings → Privacy & Security → Location Services** is enabled.
+5. Reload the page before pressing **Mulai CCTV** again.
+
+The page cannot reopen an iOS prompt after Safari has stored a site-level Deny;
+that decision must be changed in Safari's settings first.
+
 ## Data attribution
 
 - CCTV names and public stream URLs: Direktorat Jenderal Bina Marga, Kementerian

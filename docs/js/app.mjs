@@ -7,6 +7,11 @@ import {
   verifiedCameras,
 } from "./geo.mjs";
 import {
+  geolocationFailure,
+  INITIAL_LOCATION_OPTIONS,
+  TRACKING_LOCATION_OPTIONS,
+} from "./geolocation.mjs";
+import {
   enterVideoFullscreen,
   fullscreenMethod,
   nativeMediaErrorMessage,
@@ -59,6 +64,7 @@ const state = {
   loadGeneration: 0,
   loadTimer: null,
   lastPosition: null,
+  locationAttempt: 0,
   playIntent: false,
   playbackBlocked: false,
   playerReady: false,
@@ -459,36 +465,70 @@ function evaluatePassing() {
   }
 }
 
-function geolocationError(error) {
+function geolocationError(error, attempt = state.locationAttempt) {
+  if (attempt !== state.locationAttempt) return;
   if (state.watchId !== null) navigator.geolocation.clearWatch(state.watchId);
   state.watchId = null;
   elements.start.disabled = false;
   elements.stop.hidden = true;
-  elements.gpsStatus.textContent = "GPS tidak tersedia";
-  elements.routeHelper.textContent = error.code === 1
-    ? "Izin lokasi ditolak. Pilih ruas dan arah secara manual."
-    : "Lokasi belum dapat dibaca. Pilih ruas dan arah secara manual.";
+  const failure = geolocationFailure(error, {
+    available: "geolocation" in navigator,
+    secureContext: window.isSecureContext,
+  });
+  elements.gpsStatus.textContent = failure.status;
+  elements.routeHelper.textContent = failure.helper;
   setJourneyStatus("Mode manual aktif. Pergantian otomatis menunggu GPS yang andal.");
   renderHighways();
 }
 
+function trackingLocationError(error, attempt) {
+  if (attempt !== state.locationAttempt) return;
+  if (error.code === 1) {
+    geolocationError(error, attempt);
+    return;
+  }
+  const failure = geolocationFailure(error, {
+    available: true,
+    secureContext: window.isSecureContext,
+  });
+  elements.gpsStatus.textContent = failure.status;
+  elements.routeHelper.textContent = `${failure.helper} Pelacakan tetap aktif.`;
+}
+
 function startTracking() {
-  if (!("geolocation" in navigator)) {
-    geolocationError({ code: 0 });
+  const attempt = ++state.locationAttempt;
+  if (!window.isSecureContext || !("geolocation" in navigator)) {
+    geolocationError({ code: 0 }, attempt);
     return;
   }
   elements.start.disabled = true;
   elements.stop.hidden = false;
-  elements.gpsStatus.textContent = "Mencari GPS…";
-  elements.routeHelper.textContent = "Menunggu posisi yang cukup akurat.";
-  state.watchId = navigator.geolocation.watchPosition(
-    handlePosition,
-    geolocationError,
-    { enableHighAccuracy: true, maximumAge: 5_000, timeout: 15_000 },
+  elements.gpsStatus.textContent = "Meminta izin GPS…";
+  elements.routeHelper.textContent = "Safari mungkin menampilkan permintaan izin lokasi untuk situs ini.";
+
+  // Ask for one fix directly from the button tap before registering a watch.
+  // This produces the most reliable permission prompt on iOS Safari.
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      if (attempt !== state.locationAttempt) return;
+      handlePosition(position);
+      const watchId = navigator.geolocation.watchPosition(
+        (nextPosition) => {
+          if (attempt === state.locationAttempt) handlePosition(nextPosition);
+        },
+        (error) => trackingLocationError(error, attempt),
+        TRACKING_LOCATION_OPTIONS,
+      );
+      if (attempt === state.locationAttempt) state.watchId = watchId;
+      else navigator.geolocation.clearWatch(watchId);
+    },
+    (error) => geolocationError(error, attempt),
+    INITIAL_LOCATION_OPTIONS,
   );
 }
 
 function stopTracking() {
+  state.locationAttempt += 1;
   if (state.watchId !== null) navigator.geolocation.clearWatch(state.watchId);
   state.watchId = null;
   elements.start.disabled = false;
