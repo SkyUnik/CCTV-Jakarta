@@ -10,6 +10,16 @@ export const TRACKING_LOCATION_OPTIONS = Object.freeze({
   timeout: 20_000,
 });
 
+export async function geolocationPermissionState(permissions) {
+  if (!permissions?.query) return "unavailable";
+  try {
+    const status = await permissions.query({ name: "geolocation" });
+    return status?.state ?? "unavailable";
+  } catch {
+    return "unavailable";
+  }
+}
+
 export function geolocationFailure(error, environment = {}) {
   if (environment.secureContext === false) {
     return {
@@ -24,6 +34,12 @@ export function geolocationFailure(error, environment = {}) {
     };
   }
   if (error?.code === 1) {
+    if (environment.permissionState === "granted") {
+      return {
+        status: "GPS diblokir iOS",
+        helper: "Izin situs sudah Allow, tetapi iOS tetap menolak lokasi. Buka Settings → Privacy & Security → Location Services → Safari Websites → While Using the App, lalu aktifkan Precise Location. Jika sudah aktif, hapus skyunik.github.io lewat Settings → Apps → Safari → Location → Edit, pilih Ask untuk Other Websites, buka ulang Safari, lalu coba lagi.",
+      };
+    }
     return {
       status: "Izin GPS ditolak Safari",
       helper: "Safari menolak permintaan lokasi. Buka menu halaman (…) → Pengaturan Situs Web → Lokasi → Tanya atau Izinkan, muat ulang halaman, lalu coba lagi.",

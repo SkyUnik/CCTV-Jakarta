@@ -101,7 +101,10 @@
           async (error) => {
             const after = await permissionState(fields.after);
             fields.result.classList.add("error");
-            fields.result.textContent = `GAGAL\nError code: ${error.code}\nError message: ${error.message || "(kosong)"}\nPermission API: ${after}`;
+            const recovery = error.code === 1 && after === "granted"
+              ? "\n\nIzin situs dan iOS tidak sinkron. Periksa:\nSettings → Privacy & Security → Location Services → Safari Websites → While Using the App\nAktifkan Precise Location, lalu buka ulang Safari."
+              : "";
+            fields.result.textContent = `GAGAL\nError code: ${error.code}\nError message: ${error.message || "(kosong)"}\nPermission API: ${after}${recovery}`;
             fields.button.disabled = false;
           },
           { enableHighAccuracy: true, maximumAge: 0, timeout: 20_000 },

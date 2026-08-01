@@ -8,6 +8,7 @@ import {
 } from "./geo.mjs";
 import {
   geolocationFailure,
+  geolocationPermissionState,
   INITIAL_LOCATION_OPTIONS,
   TRACKING_LOCATION_OPTIONS,
 } from "./geolocation.mjs";
@@ -467,14 +468,19 @@ function evaluatePassing() {
   }
 }
 
-function geolocationError(error, attempt = state.locationAttempt) {
+async function geolocationError(error, attempt = state.locationAttempt) {
   if (attempt !== state.locationAttempt) return;
   if (state.watchId !== null) navigator.geolocation.clearWatch(state.watchId);
   state.watchId = null;
   elements.start.disabled = false;
   elements.stop.hidden = true;
+  const permissionState = error?.code === 1
+    ? await geolocationPermissionState(navigator.permissions)
+    : "unavailable";
+  if (attempt !== state.locationAttempt) return;
   const failure = geolocationFailure(error, {
     available: "geolocation" in navigator,
+    permissionState,
     secureContext: window.isSecureContext,
   });
   elements.gpsStatus.textContent = failure.status;
@@ -484,10 +490,10 @@ function geolocationError(error, attempt = state.locationAttempt) {
   renderHighways();
 }
 
-function trackingLocationError(error, attempt) {
+async function trackingLocationError(error, attempt) {
   if (attempt !== state.locationAttempt) return;
   if (error.code === 1) {
-    geolocationError(error, attempt);
+    await geolocationError(error, attempt);
     return;
   }
   const failure = geolocationFailure(error, {
@@ -526,7 +532,7 @@ function startTracking() {
       if (attempt === state.locationAttempt) state.watchId = watchId;
       else navigator.geolocation.clearWatch(watchId);
     },
-    (error) => geolocationError(error, attempt),
+    (error) => void geolocationError(error, attempt),
     INITIAL_LOCATION_OPTIONS,
   );
 }

@@ -3,6 +3,7 @@ import test from "node:test";
 
 import {
   geolocationFailure,
+  geolocationPermissionState,
   INITIAL_LOCATION_OPTIONS,
   TRACKING_LOCATION_OPTIONS,
 } from "../docs/js/geolocation.mjs";
@@ -18,6 +19,26 @@ test("gives iOS Safari website-setting instructions for permission denial", () =
   assert.match(result.status, /ditolak Safari/);
   assert.match(result.helper, /Pengaturan Situs Web/);
   assert.match(result.helper, /muat ulang/);
+});
+
+test("distinguishes iOS system denial from a website permission denial", () => {
+  const result = geolocationFailure(
+    { code: 1 },
+    { available: true, permissionState: "granted", secureContext: true },
+  );
+  assert.match(result.status, /diblokir iOS/);
+  assert.match(result.helper, /Privacy & Security/);
+  assert.match(result.helper, /Safari Websites/);
+  assert.match(result.helper, /Precise Location/);
+});
+
+test("reads geolocation permission state without failing unsupported browsers", async () => {
+  assert.equal(await geolocationPermissionState(undefined), "unavailable");
+  assert.equal(await geolocationPermissionState({ query: async () => ({ state: "granted" }) }), "granted");
+  assert.equal(
+    await geolocationPermissionState({ query: async () => { throw new Error("unsupported"); } }),
+    "unavailable",
+  );
 });
 
 test("distinguishes unavailable positions and timeouts", () => {
