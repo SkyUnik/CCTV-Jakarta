@@ -44,7 +44,7 @@ test("static page exposes the required accessible controls with relative assets"
   assert.equal($("script[src^='http']").length, 0);
   assert.equal($("#map-toggle").is("[checked]"), true);
   assert.match($("#route-map-svg").attr("aria-label"), /skematik/i);
-  assert.equal($("link[rel='stylesheet']").attr("href"), "./styles.css");
+  assert.match($("link[rel='stylesheet']").attr("href"), /^\.\/styles\.css\?v=/);
   assert.match($("script[type='module']").attr("src"), /^\.\/js\/app\.mjs\?v=/);
   assert.equal($("#route-shortcut").is("button"), true);
   assert.match($("#route-shortcut").attr("aria-label"), /Langkah 1/i);
@@ -52,7 +52,7 @@ test("static page exposes the required accessible controls with relative assets"
   assert.equal($("#restart-button").is("[disabled]"), true);
   assert.match($("#tracking-indicator").text(), /Pelacakan kamera via GPS/i);
   assert.equal($("#tracking-indicator").attr("data-state"), "off");
-  assert.equal($(".telemetry + #tracking-indicator").length, 1);
+  assert.equal($(".telemetry + .tracking-indicator-slot #tracking-indicator").length, 1);
 });
 
 test("start and floating shortcut smoothly reveal step one without delaying GPS", async () => {

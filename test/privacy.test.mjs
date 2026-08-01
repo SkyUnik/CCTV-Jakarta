@@ -25,7 +25,8 @@ test("mobile CSS retains full-width launch controls and compact breakpoints", as
   assert.match(css, /\.floating-actions\s*{[^}]*position:\s*fixed[^}]*right:[^}]*z-index:\s*1000/s);
   assert.match(css, /\.floating-action\s*{[^}]*border-radius:\s*50%/s);
   assert.match(css, /env\(safe-area-inset-bottom\)/);
-  assert.match(css, /\.tracking-indicator\s*{[^}]*margin:\s*20px 0 0/s);
+  assert.match(css, /\.tracking-indicator-slot\s*{[^}]*padding-top:\s*20px/s);
+  assert.match(css, /\.tracking-indicator\s*{[^}]*margin:\s*0/s);
 });
 
 test("compatibility report contains playlist checks only", async () => {

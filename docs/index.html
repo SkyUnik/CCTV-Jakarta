@@ -9,7 +9,7 @@
       content="Pemutar CCTV jalan tol Jakarta berbasis lokasi yang menjaga data lokasi tetap di perangkat Anda."
     >
     <title>Jalur CCTV — Tol Jakarta</title>
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./styles.css?v=20260801-gap2">
   </head>
   <body>
     <header class="site-header">
@@ -120,15 +120,17 @@
             <div><dt>Posisi ruas</dt><dd id="position-value">—</dd></div>
           </dl>
 
-          <div
-            class="tracking-indicator"
-            id="tracking-indicator"
-            data-state="off"
-            role="status"
-            aria-live="polite"
-          >
-            <span aria-hidden="true"></span>
-            <strong>Pelacakan kamera via GPS: tidak aktif</strong>
+          <div class="tracking-indicator-slot">
+            <div
+              class="tracking-indicator"
+              id="tracking-indicator"
+              data-state="off"
+              role="status"
+              aria-live="polite"
+            >
+              <span aria-hidden="true"></span>
+              <strong>Pelacakan kamera via GPS: tidak aktif</strong>
+            </div>
           </div>
         </aside>
 
