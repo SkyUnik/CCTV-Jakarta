@@ -44,7 +44,7 @@
         </div>
         <p class="privacy-note">
           <span aria-hidden="true">●</span>
-          Koordinat GPS tidak dikirim atau disimpan oleh aplikasi. Peta online memuat tile OpenStreetMap sesuai area yang ditampilkan.
+          Koordinat GPS tidak dikirim atau disimpan oleh aplikasi. Peta online memuat tile OpenStreetMap, dan provider Koja Timur dapat menerima permintaan playlist/metadata saat halaman dibuka. GPS tetap tidak pernah dikirim.
         </p>
       </section>
 
@@ -280,6 +280,15 @@
 
     <div class="floating-actions" aria-label="Navigasi cepat">
       <button
+        class="floating-action floating-action-wide"
+        id="koja-quick-button"
+        type="button"
+        aria-label="Kamera cepat Koja Timur layar penuh"
+        title="Koja Timur"
+      >
+        <span>Koja Timur</span>
+      </button>
+      <button
         class="floating-action"
         id="restart-button"
         type="button"
@@ -299,6 +308,27 @@
         <span aria-hidden="true">#1</span>
       </button>
     </div>
+
+    <section class="quick-camera-overlay" id="quick-camera-overlay" role="dialog" aria-modal="true" aria-labelledby="quick-camera-title" hidden>
+      <div class="quick-camera-card">
+        <div class="quick-camera-header">
+          <div>
+            <span class="step-label">Aksi Cepat</span>
+            <h2 id="quick-camera-title">ATP GT KOJA TIMUR</h2>
+          </div>
+          <button class="button button-small button-quiet" id="quick-camera-close" type="button">Tutup</button>
+        </div>
+        <div class="quick-camera-media">
+          <video id="quick-camera-video" controls muted x-webkit-airplay="allow" aria-label="Siaran cepat Koja Timur"></video>
+          <div class="quick-camera-status" id="quick-camera-status" hidden></div>
+        </div>
+        <div class="quick-camera-actions">
+          <button class="button button-primary" id="quick-camera-play" type="button">Koja Timur</button>
+          <button class="button button-small" id="quick-camera-fullscreen" type="button">Layar Penuh</button>
+          <button class="button button-small button-quiet" id="quick-camera-retry" type="button">Coba Lagi</button>
+        </div>
+      </div>
+    </section>
 
     <footer>
       <p>CCTV berasal dari layanan publik Bina Marga dan operator jalan tol.</p>

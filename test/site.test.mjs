@@ -36,6 +36,14 @@ test("static page exposes the required accessible controls with relative assets"
     "map-gps-button",
     "map-camera-card",
     "map-camera-list",
+    "koja-quick-button",
+    "quick-camera-overlay",
+    "quick-camera-close",
+    "quick-camera-video",
+    "quick-camera-status",
+    "quick-camera-play",
+    "quick-camera-fullscreen",
+    "quick-camera-retry",
   ]) {
     assert.equal($(`#${id}`).length, 1, `Missing unique #${id}`);
   }

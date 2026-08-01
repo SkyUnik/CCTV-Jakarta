@@ -22,6 +22,7 @@ import {
   prefersNativeHls,
   supportsNativeHls,
 } from "./player.mjs";
+import { createQuickActionManager } from "./quick-actions.mjs";
 
 const elements = {
   accuracy: document.querySelector("#accuracy-value"),
@@ -41,6 +42,7 @@ const elements = {
   gpsDebug: document.querySelector("#gps-debug-link"),
   highwayList: document.querySelector("#highway-list"),
   journeyStatus: document.querySelector("#journey-status"),
+  kojaQuick: document.querySelector("#koja-quick-button"),
   manualCameraButton: document.querySelector("#manual-camera-button"),
   manualCameraPicker: document.querySelector("#manual-camera-picker"),
   manualCameraSelect: document.querySelector("#manual-camera-select"),
@@ -61,6 +63,13 @@ const elements = {
   playerHelper: document.querySelector("#player-helper"),
   position: document.querySelector("#position-value"),
   previous: document.querySelector("#previous-button"),
+  quickClose: document.querySelector("#quick-camera-close"),
+  quickFullscreen: document.querySelector("#quick-camera-fullscreen"),
+  quickOverlay: document.querySelector("#quick-camera-overlay"),
+  quickPlay: document.querySelector("#quick-camera-play"),
+  quickRetry: document.querySelector("#quick-camera-retry"),
+  quickStatus: document.querySelector("#quick-camera-status"),
+  quickVideo: document.querySelector("#quick-camera-video"),
   restart: document.querySelector("#restart-button"),
   retry: document.querySelector("#retry-button"),
   routePanel: document.querySelector("#route-panel"),
@@ -952,6 +961,22 @@ async function loadData() {
     });
     state.routeMap.setData(state.highways, state.cameras);
     renderHighways();
+    state.quickActionManager = createQuickActionManager({
+      elements: {
+        launcher: elements.kojaQuick,
+        overlay: elements.quickOverlay,
+        close: elements.quickClose,
+        video: elements.quickVideo,
+        status: elements.quickStatus,
+        play: elements.quickPlay,
+        fullscreen: elements.quickFullscreen,
+        retry: elements.quickRetry,
+      },
+      cameras: state.cameras,
+      hlsClass: typeof window !== "undefined" ? window.Hls : null,
+    });
+    state.quickActionManager.bindEvents();
+    void state.quickActionManager.init();
     if (state.simulator) {
       document.body.classList.add("is-simulator");
       document.title = "Simulator GPS — Jalur CCTV";
