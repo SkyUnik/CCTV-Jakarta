@@ -74,6 +74,111 @@ test("video controller switches while PiP is active without clearing the element
   assert.equal(plays, 1);
 });
 
+test("destroy with preservePip then load keeps PiP video playing", () => {
+  let pauseCalls = 0;
+  let removeCalls = 0;
+  let loadCalls = 0;
+  let plays = 0;
+  const video = {
+    paused: false,
+    src: "https://media.example/cam-a.m3u8",
+    webkitPresentationMode: "picture-in-picture",
+    canPlayType: () => "probably",
+    load: () => { loadCalls += 1; },
+    pause: () => { pauseCalls += 1; },
+    play: async () => { plays += 1; },
+    removeAttribute: () => { removeCalls += 1; },
+  };
+  const controller = createVideoController({ video, hlsClass: { isSupported: () => false } });
+  // Simulate playCamera's destroyPlayer + load sequence
+  controller.destroy({ preservePip: true, clearSource: false });
+  assert.equal(pauseCalls, 0, "should not pause during PiP");
+  assert.equal(removeCalls, 0, "should not remove src during PiP");
+  assert.equal(loadCalls, 0, "should not call video.load during PiP");
+  assert.equal(video.src, "https://media.example/cam-a.m3u8", "src preserved after destroy");
+
+  const loaded = controller.load(
+    { streamUrl: "https://media.example/cam-b.m3u8" },
+    { continuePlaying: true },
+  );
+  assert.equal(loaded, true);
+  assert.equal(video.src, "https://media.example/cam-b.m3u8");
+  assert.equal(plays, 1, "auto-plays after PiP switch");
+  assert.equal(removeCalls, 0, "src never removed during entire sequence");
+});
+
+test("HLS.js PiP switch destroys old instance and attaches new without clearing src", () => {
+  let hlsDestroys = 0;
+  let hlsAttaches = 0;
+  let hlsSources = [];
+  let removeCalls = 0;
+  let videoLoadCalls = 0;
+  const video = {
+    paused: false,
+    src: "",
+    webkitPresentationMode: "picture-in-picture",
+    canPlayType: () => "",
+    load: () => { videoLoadCalls += 1; },
+    pause: () => {},
+    play: async () => {},
+    removeAttribute: () => { removeCalls += 1; },
+  };
+  const FakeHls = {
+    isSupported: () => true,
+    Events: { MANIFEST_PARSED: "mp", ERROR: "err" },
+  };
+  // Track HLS.js instance lifecycle
+  let instanceCount = 0;
+  const originalHlsClass = function () {
+    instanceCount += 1;
+    this._listeners = {};
+    this.on = (event, fn) => { this._listeners[event] = fn; };
+    this.attachMedia = () => { hlsAttaches += 1; };
+    this.loadSource = (url) => { hlsSources.push(url); };
+    this.destroy = () => { hlsDestroys += 1; };
+  };
+  originalHlsClass.isSupported = FakeHls.isSupported;
+  originalHlsClass.Events = FakeHls.Events;
+
+  const controller = createVideoController({ video, hlsClass: originalHlsClass });
+
+  // First load
+  controller.load({ streamUrl: "https://media.example/cam-1.m3u8" });
+  assert.equal(instanceCount, 1);
+  assert.equal(hlsAttaches, 1);
+  assert.deepEqual(hlsSources, ["https://media.example/cam-1.m3u8"]);
+
+  // Switch during PiP — simulate auto-switch
+  controller.destroy({ preservePip: true, clearSource: false });
+  assert.equal(hlsDestroys, 1, "old HLS.js instance destroyed");
+  assert.equal(removeCalls, 0, "no src removal during PiP");
+
+  controller.load({ streamUrl: "https://media.example/cam-2.m3u8" });
+  assert.equal(instanceCount, 2, "new HLS.js instance created");
+  assert.equal(hlsAttaches, 2, "new instance attached to same video");
+  assert.deepEqual(hlsSources, [
+    "https://media.example/cam-1.m3u8",
+    "https://media.example/cam-2.m3u8",
+  ]);
+  assert.equal(videoLoadCalls, 0, "video.load() never called during PiP");
+  assert.equal(removeCalls, 0, "src never cleared");
+});
+
+test("play and enterFullscreen are synchronously callable from one gesture", async () => {
+  let playOrder = [];
+  const video = {
+    webkitEnterFullscreen() { playOrder.push("fullscreen"); },
+    play: async () => { playOrder.push("play"); },
+  };
+  const controller = createVideoController({ video, hlsClass: { isSupported: () => false } });
+  // Simulate openVideoPlayer: both calls start synchronously
+  const playPromise = controller.play();
+  const fsPromise = controller.enterFullscreen();
+  assert.deepEqual(playOrder, ["play", "fullscreen"], "both initiated in same microtask");
+  await playPromise;
+  await fsPromise;
+});
+
 test("uses the standards full-screen API outside iOS Safari", async () => {
   let options;
   const video = {
