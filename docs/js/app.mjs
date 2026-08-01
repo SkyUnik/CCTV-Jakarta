@@ -1,0 +1,632 @@
+import {
+  adjacentCamera,
+  createPassTracker,
+  initialCamera,
+  matchHighways,
+  projectPointToLine,
+  verifiedCameras,
+} from "./geo.mjs";
+import {
+  enterVideoFullscreen,
+  fullscreenMethod,
+  nativeMediaErrorMessage,
+  prefersNativeHls,
+  supportsNativeHls,
+} from "./player.mjs";
+
+const elements = {
+  accuracy: document.querySelector("#accuracy-value"),
+  cameraHighway: document.querySelector("#camera-highway"),
+  cameraKm: document.querySelector("#camera-km"),
+  cameraLive: document.querySelector("#camera-live"),
+  cameraTitle: document.querySelector("#camera-title"),
+  demoAdvance: document.querySelector("#demo-advance"),
+  demoPanel: document.querySelector("#demo-panel"),
+  directionA: document.querySelector("#direction-a"),
+  directionB: document.querySelector("#direction-b"),
+  directionSection: document.querySelector("#direction-section"),
+  download: document.querySelector("#download-button"),
+  errorMessage: document.querySelector("#error-message"),
+  errorPanel: document.querySelector("#error-panel"),
+  gpsStatus: document.querySelector("#gps-status"),
+  highwayList: document.querySelector("#highway-list"),
+  journeyStatus: document.querySelector("#journey-status"),
+  next: document.querySelector("#next-button"),
+  openPlayer: document.querySelector("#open-player-button"),
+  playerCard: document.querySelector(".player-card"),
+  playerHelper: document.querySelector("#player-helper"),
+  position: document.querySelector("#position-value"),
+  previous: document.querySelector("#previous-button"),
+  retry: document.querySelector("#retry-button"),
+  routeHelper: document.querySelector("#route-helper"),
+  skip: document.querySelector("#skip-button"),
+  sourceLink: document.querySelector("#source-link"),
+  start: document.querySelector("#start-button"),
+  stop: document.querySelector("#stop-button"),
+  video: document.querySelector("#camera-video"),
+  videoPlaceholder: document.querySelector("#video-placeholder"),
+};
+
+const state = {
+  cameras: [],
+  currentCamera: null,
+  currentProjection: null,
+  demo: new URLSearchParams(location.search).get("demo") === "1",
+  direction: null,
+  highway: null,
+  highways: [],
+  hls: null,
+  loadGeneration: 0,
+  loadTimer: null,
+  lastPosition: null,
+  playIntent: false,
+  playbackBlocked: false,
+  playerReady: false,
+  routeEnded: false,
+  sourceChanging: false,
+  stallTimer: null,
+  usableCameras: [],
+  watchId: null,
+};
+
+let passTracker = createPassTracker();
+
+function setJourneyStatus(message) {
+  elements.journeyStatus.textContent = message;
+}
+
+function selectedHighwayId() {
+  return state.highway?.properties?.id ?? state.highway?.id ?? null;
+}
+
+function formatKm(km) {
+  if (!Number.isFinite(km)) return "KM —";
+  const whole = Math.floor(km);
+  const meters = Math.round((km - whole) * 1_000);
+  return `KM ${String(whole).padStart(2, "0")}+${String(meters).padStart(3, "0")}`;
+}
+
+function destroyPlayer() {
+  state.loadGeneration += 1;
+  clearTimeout(state.loadTimer);
+  state.loadTimer = null;
+  clearTimeout(state.stallTimer);
+  state.stallTimer = null;
+  if (state.hls) {
+    state.hls.destroy();
+    state.hls = null;
+  }
+  elements.video.pause();
+  elements.video.onloadedmetadata = null;
+  elements.video.oncanplay = null;
+  elements.video.onerror = null;
+  elements.video.removeAttribute("src");
+  elements.video.load();
+}
+
+function setPlayerReady(ready) {
+  state.playerReady = ready;
+  elements.openPlayer.disabled = !ready || !state.currentCamera;
+}
+
+function showPlaybackError(message) {
+  clearTimeout(state.loadTimer);
+  state.loadTimer = null;
+  state.sourceChanging = false;
+  state.hls?.stopLoad();
+  setPlayerReady(false);
+  state.playbackBlocked = true;
+  elements.errorMessage.textContent = message;
+  elements.errorPanel.hidden = false;
+  setJourneyStatus("Pilih Coba lagi atau Kamera berikutnya. Pergantian otomatis dijeda.");
+}
+
+function clearPlaybackError() {
+  state.playbackBlocked = false;
+  elements.errorPanel.hidden = true;
+}
+
+async function playCamera(camera, options = {}) {
+  if (!camera) return;
+  const continuePlaying = options.forcePlay || state.playIntent;
+  const muted = elements.video.muted;
+  state.sourceChanging = true;
+  destroyPlayer();
+  const generation = state.loadGeneration;
+  setPlayerReady(false);
+  clearPlaybackError();
+  state.currentCamera = camera;
+  state.routeEnded = false;
+  passTracker.reset();
+
+  elements.video.muted = muted;
+  elements.videoPlaceholder.hidden = true;
+  elements.cameraLive.hidden = false;
+  elements.cameraTitle.textContent = camera.name;
+  elements.cameraHighway.textContent = state.highway?.properties?.name ?? "Tol Jakarta";
+  elements.cameraKm.textContent = formatKm(camera.km);
+  elements.sourceLink.href = camera.streamUrl;
+  elements.sourceLink.hidden = false;
+  updateControls();
+  setJourneyStatus("Kamera aktif. Sistem menunggu posisi terkonfirmasi setelah kamera ini.");
+
+  const onReady = () => {
+    if (generation !== state.loadGeneration || state.playerReady) return;
+    clearTimeout(state.loadTimer);
+    state.loadTimer = null;
+    state.sourceChanging = false;
+    setPlayerReady(true);
+    elements.playerHelper.textContent = fullscreenMethod(elements.video)
+      ? "Siap dibuka dengan pemutar layar penuh perangkat."
+      : "Tekan tombol untuk memutar; gunakan kontrol layar penuh pada video bila tersedia.";
+    if (continuePlaying) {
+      elements.video.play().catch(() => {
+        state.playIntent = false;
+        setJourneyStatus("Kamera siap. Buka pemutar video untuk melanjutkan.");
+      });
+    } else {
+      setJourneyStatus("Kamera siap. Buka pemutar video layar penuh untuk menonton.");
+    }
+  };
+
+  state.loadTimer = setTimeout(() => {
+    if (generation !== state.loadGeneration) return;
+    showPlaybackError("Stream tidak merespons dalam 20 detik. Kamera mungkin offline atau jaringan sedang lambat.");
+  }, 20_000);
+
+  const attachHlsJs = () => {
+    if (generation !== state.loadGeneration || !globalThis.Hls?.isSupported()) return false;
+    elements.video.onloadedmetadata = null;
+    elements.video.oncanplay = null;
+    elements.video.onerror = null;
+    elements.video.removeAttribute("src");
+    elements.video.load();
+    state.hls = new globalThis.Hls({
+      enableWorker: true,
+      lowLatencyMode: true,
+      backBufferLength: 30,
+      liveSyncDurationCount: 3,
+      liveMaxLatencyDurationCount: 8,
+      manifestLoadingMaxRetry: 2,
+      levelLoadingMaxRetry: 2,
+      fragLoadingMaxRetry: 2,
+    });
+    state.hls.on(globalThis.Hls.Events.MANIFEST_PARSED, onReady);
+    state.hls.on(globalThis.Hls.Events.ERROR, (_, data) => {
+      if (generation !== state.loadGeneration || !data.fatal) return;
+      showPlaybackError(
+        data.type === globalThis.Hls.ErrorTypes.NETWORK_ERROR
+          ? "Stream tidak dapat diambil. Kamera mungkin offline atau dibatasi oleh CORS."
+          : "Browser tidak dapat memproses stream kamera ini.",
+      );
+    });
+    state.hls.loadSource(camera.streamUrl);
+    state.hls.attachMedia(elements.video);
+    return true;
+  };
+
+  const attachNative = () => {
+    elements.video.src = camera.streamUrl;
+    elements.video.onloadedmetadata = onReady;
+    elements.video.oncanplay = onReady;
+    elements.video.onerror = () => {
+      if (generation !== state.loadGeneration) return;
+      if (attachHlsJs()) {
+        setJourneyStatus("Pemutar bawaan menolak sumber; mencoba mode kompatibilitas…");
+        return;
+      }
+      showPlaybackError(nativeMediaErrorMessage(elements.video.error));
+    };
+    elements.video.load();
+  };
+
+  if (prefersNativeHls(elements.video, globalThis.Hls)) {
+    attachNative();
+  } else if (!attachHlsJs() && supportsNativeHls(elements.video)) {
+    attachNative();
+  } else if (!state.hls) {
+    showPlaybackError("Browser ini tidak mendukung pemutaran HLS.");
+  }
+}
+
+async function openVideoPlayer() {
+  if (!state.currentCamera || !state.playerReady) return;
+  state.playIntent = true;
+  clearPlaybackError();
+
+  // Both calls start synchronously inside the tap handler. This is important on
+  // iOS, where playback and full-screen entry require a direct user gesture.
+  const playPromise = elements.video.play();
+  let method = null;
+  try {
+    method = await enterVideoFullscreen(elements.video);
+    setJourneyStatus(method
+      ? "Pemutar video layar penuh dibuka. Menunggu siaran kamera…"
+      : "Video diputar. Gunakan kontrol layar penuh bawaan perangkat.");
+  } catch {
+    setJourneyStatus("Safari memblokir pembukaan otomatis. Tekan tombol putar pada video.");
+  }
+  playPromise.catch(() => {
+    state.playIntent = false;
+    setJourneyStatus(method
+      ? "Pemutar terbuka, tetapi siaran belum mulai. Tekan Putar pada kontrol video."
+      : "Safari belum memulai siaran. Tekan tombol putar pada video.");
+  });
+}
+
+function scheduleStallStatus() {
+  clearTimeout(state.stallTimer);
+  state.stallTimer = setTimeout(() => {
+    if (
+      state.playIntent &&
+      !state.playbackBlocked &&
+      elements.video.readyState < HTMLMediaElement.HAVE_FUTURE_DATA
+    ) setJourneyStatus("Siaran masih menunggu data. Coba lagi jika gambar belum muncul.");
+  }, 6_000);
+}
+
+function updateControls() {
+  if (!state.currentCamera || state.usableCameras.length === 0) {
+    elements.previous.disabled = true;
+    elements.next.disabled = true;
+    return;
+  }
+  elements.previous.disabled = !adjacentCamera(
+    state.usableCameras,
+    state.currentCamera.id,
+    state.direction,
+    -1,
+  );
+  elements.next.disabled = !adjacentCamera(
+    state.usableCameras,
+    state.currentCamera.id,
+    state.direction,
+    1,
+  );
+}
+
+function updateUsableCameras() {
+  if (!state.highway || !state.direction) {
+    state.usableCameras = [];
+  } else if (state.demo) {
+    state.usableCameras = demoCameras(state.direction);
+  } else {
+    state.usableCameras = verifiedCameras(
+      state.cameras,
+      selectedHighwayId(),
+      state.direction,
+    );
+  }
+  elements.download.disabled = state.usableCameras.length === 0;
+  if (state.usableCameras.length === 0) {
+    destroyPlayer();
+    state.currentCamera = null;
+    state.playIntent = false;
+    elements.cameraLive.hidden = true;
+    elements.videoPlaceholder.hidden = false;
+    elements.cameraTitle.textContent = "Belum ada kamera terverifikasi";
+    elements.cameraHighway.textContent = state.highway?.properties?.name ?? "Tol Jakarta";
+    elements.cameraKm.textContent = "KM —";
+    elements.sourceLink.hidden = true;
+    setJourneyStatus("Data stream tersedia, tetapi koordinat kamera belum diverifikasi untuk pergantian otomatis.");
+  }
+  updateControls();
+}
+
+function selectDirection(direction) {
+  state.direction = direction;
+  state.currentCamera = null;
+  state.playIntent = false;
+  state.routeEnded = false;
+  passTracker.reset();
+  elements.directionA.setAttribute("aria-pressed", String(direction === "A"));
+  elements.directionB.setAttribute("aria-pressed", String(direction === "B"));
+  updateUsableCameras();
+  if (state.usableCameras.length === 0) return;
+  const progressM = state.currentProjection?.progressM ??
+    (direction === "A" ? 0 : state.highway.properties.canonicalLengthM);
+  const camera = initialCamera(state.usableCameras, direction, progressM);
+  if (camera) playCamera(camera);
+  else {
+    state.routeEnded = true;
+    setJourneyStatus("Tidak ada kamera berikutnya pada arah perjalanan ini.");
+  }
+}
+
+function selectHighway(feature) {
+  state.highway = feature;
+  state.currentCamera = null;
+  state.playIntent = false;
+  state.currentProjection = null;
+  state.routeEnded = false;
+  elements.directionSection.hidden = false;
+  elements.highwayList.querySelectorAll("button").forEach((button) => {
+    button.setAttribute("aria-pressed", String(button.dataset.highwayId === selectedHighwayId()));
+  });
+  if (state.lastPosition) updateProjectionForSelectedRoad(state.lastPosition);
+  if (state.direction) updateUsableCameras();
+}
+
+function renderHighways(candidates = null) {
+  const candidateById = new Map(
+    (candidates ?? []).map((candidate) => [candidate.highwayId, candidate]),
+  );
+  const features = candidates?.length
+    ? candidates.map((candidate) => candidate.feature)
+    : state.highways;
+  elements.highwayList.replaceChildren();
+  for (const feature of features) {
+    const id = feature.properties?.id ?? feature.id;
+    const candidate = candidateById.get(id);
+    const item = document.createElement("li");
+    const button = document.createElement("button");
+    button.className = "highway-button";
+    button.type = "button";
+    button.dataset.highwayId = id;
+    button.setAttribute("aria-pressed", String(id === selectedHighwayId()));
+    const label = document.createElement("span");
+    const name = document.createElement("strong");
+    const description = document.createElement("small");
+    name.textContent = feature.properties?.name ?? id;
+    description.textContent = "A menjauh • B menuju Cawang";
+    label.append(name, description);
+    button.append(label);
+    if (candidate) {
+      const distance = document.createElement("span");
+      distance.className = "highway-distance";
+      distance.textContent = `${Math.round(candidate.distanceM)} m`;
+      button.append(distance);
+    }
+    button.addEventListener("click", () => selectHighway(feature));
+    item.append(button);
+    elements.highwayList.append(item);
+  }
+}
+
+function updateProjectionForSelectedRoad(position) {
+  if (!state.highway) return;
+  state.currentProjection = projectPointToLine(
+    [position.longitude, position.latitude],
+    state.highway.geometry.coordinates,
+  );
+  elements.position.textContent = `${(state.currentProjection.progressM / 1_000).toFixed(1)} km`;
+}
+
+function handlePosition(position) {
+  const fix = {
+    latitude: position.coords.latitude,
+    longitude: position.coords.longitude,
+    accuracy: position.coords.accuracy,
+  };
+  state.lastPosition = fix;
+  elements.accuracy.textContent = `±${Math.round(fix.accuracy)} m`;
+  const result = matchHighways(fix, state.highways);
+  if (!result.accepted) {
+    elements.gpsStatus.textContent = result.reason === "accuracy_too_low" ? "GPS kurang akurat" : "Ruas tidak ditemukan";
+    elements.routeHelper.textContent = result.reason === "accuracy_too_low"
+      ? "Tunggu akurasi GPS membaik, atau pilih ruas secara manual."
+      : "Tidak ada ruas terverifikasi di dekat posisi. Pilih ruas secara manual.";
+    renderHighways();
+    if (state.highway) updateProjectionForSelectedRoad(fix);
+    return;
+  }
+
+  elements.gpsStatus.textContent = "GPS aktif";
+  elements.routeHelper.textContent = result.candidates.length > 1
+    ? "Beberapa ruas terdeteksi. Pilih ruas yang sedang digunakan."
+    : "Ruas terdekat terdeteksi dari posisi saat ini.";
+  renderHighways(result.candidates);
+  if (!state.highway && result.candidates.length === 1) selectHighway(result.candidates[0].feature);
+  const selectedCandidate = result.candidates.find(
+    (candidate) => candidate.highwayId === selectedHighwayId(),
+  );
+  if (state.highway && selectedCandidate) {
+    updateProjectionForSelectedRoad(fix);
+    evaluatePassing();
+  }
+}
+
+function evaluatePassing() {
+  if (
+    !state.currentCamera ||
+    !state.currentProjection ||
+    state.playbackBlocked ||
+    state.routeEnded
+  ) return;
+  const result = passTracker.update({
+    cameraId: state.currentCamera.id,
+    cameraPositionM: state.currentCamera.roadPositionM,
+    direction: state.direction,
+    progressM: state.currentProjection.progressM,
+  });
+  if (!result.passed) {
+    setJourneyStatus(
+      `Melacak posisi • konfirmasi lewat kamera ${result.consecutiveFixes}/${result.requiredFixes}`,
+    );
+    return;
+  }
+  const next = adjacentCamera(
+    state.usableCameras,
+    state.currentCamera.id,
+    state.direction,
+    1,
+  );
+  if (next) playCamera(next);
+  else {
+    state.routeEnded = true;
+    setJourneyStatus("Akhir daftar kamera untuk arah ini. Kamera terakhir tetap ditampilkan.");
+    updateControls();
+  }
+}
+
+function geolocationError(error) {
+  if (state.watchId !== null) navigator.geolocation.clearWatch(state.watchId);
+  state.watchId = null;
+  elements.start.disabled = false;
+  elements.stop.hidden = true;
+  elements.gpsStatus.textContent = "GPS tidak tersedia";
+  elements.routeHelper.textContent = error.code === 1
+    ? "Izin lokasi ditolak. Pilih ruas dan arah secara manual."
+    : "Lokasi belum dapat dibaca. Pilih ruas dan arah secara manual.";
+  setJourneyStatus("Mode manual aktif. Pergantian otomatis menunggu GPS yang andal.");
+  renderHighways();
+}
+
+function startTracking() {
+  if (!("geolocation" in navigator)) {
+    geolocationError({ code: 0 });
+    return;
+  }
+  elements.start.disabled = true;
+  elements.stop.hidden = false;
+  elements.gpsStatus.textContent = "Mencari GPS…";
+  elements.routeHelper.textContent = "Menunggu posisi yang cukup akurat.";
+  state.watchId = navigator.geolocation.watchPosition(
+    handlePosition,
+    geolocationError,
+    { enableHighAccuracy: true, maximumAge: 5_000, timeout: 15_000 },
+  );
+}
+
+function stopTracking() {
+  if (state.watchId !== null) navigator.geolocation.clearWatch(state.watchId);
+  state.watchId = null;
+  elements.start.disabled = false;
+  elements.stop.hidden = true;
+  elements.gpsStatus.textContent = "Dihentikan";
+  setJourneyStatus("Pelacakan dihentikan. Kamera dapat dipilih secara manual.");
+}
+
+function moveCamera(step) {
+  if (!state.currentCamera) return;
+  const target = adjacentCamera(
+    state.usableCameras,
+    state.currentCamera.id,
+    state.direction,
+    step,
+  );
+  if (target) playCamera(target);
+}
+
+function downloadM3u() {
+  if (state.usableCameras.length === 0) return;
+  const lines = ["#EXTM3U"];
+  for (const camera of state.usableCameras) {
+    lines.push(
+      `#EXTINF:-1 tvg-id="${camera.id}" group-title="${state.highway.properties.name} ${state.direction}",${camera.name}`,
+      camera.streamUrl,
+    );
+  }
+  const blob = new Blob([`${lines.join("\n")}\n`], { type: "audio/x-mpegurl" });
+  const url = URL.createObjectURL(blob);
+  const anchor = document.createElement("a");
+  anchor.href = url;
+  anchor.download = `${selectedHighwayId()}-${state.direction.toLowerCase()}-cctv.m3u8`;
+  anchor.click();
+  URL.revokeObjectURL(url);
+}
+
+function demoCameras(direction) {
+  const unique = [];
+  const seenUrls = new Set();
+  const sorted = state.cameras
+    .filter((camera) => Number.isFinite(camera.km) && camera.streamUrl)
+    .sort((a, b) => a.km - b.km);
+  for (const camera of sorted) {
+    if (seenUrls.has(camera.streamUrl)) continue;
+    seenUrls.add(camera.streamUrl);
+    unique.push({
+      ...camera,
+      id: `demo-${camera.id}`,
+      side: direction,
+      coordinates: state.highway.geometry.coordinates[0],
+      roadPositionM: Math.round(camera.km * 1_000),
+      enabled: true,
+      curationStatus: "verified",
+    });
+    if (unique.length === 5) break;
+  }
+  return unique;
+}
+
+function advanceDemo() {
+  if (!state.currentCamera) return;
+  const offset = state.direction === "A" ? 100 : -100;
+  state.currentProjection = {
+    progressM: state.currentCamera.roadPositionM + offset,
+  };
+  elements.position.textContent = `${(state.currentProjection.progressM / 1_000).toFixed(1)} km demo`;
+  evaluatePassing();
+  evaluatePassing();
+}
+
+async function loadData() {
+  try {
+    const [cameraResponse, highwayResponse] = await Promise.all([
+      fetch("./data/cameras.json"),
+      fetch("./data/highways.geojson"),
+    ]);
+    if (!cameraResponse.ok || !highwayResponse.ok) throw new Error("Data file unavailable");
+    const cameraData = await cameraResponse.json();
+    const highwayData = await highwayResponse.json();
+    state.cameras = cameraData.cameras ?? [];
+    state.highways = highwayData.features ?? [];
+    renderHighways();
+    if (state.demo) {
+      elements.demoPanel.hidden = false;
+      selectHighway(state.highways[0]);
+      selectDirection("A");
+      elements.gpsStatus.textContent = "Mode demo";
+      elements.routeHelper.textContent = "Pratinjau memakai posisi kamera sintetis dan tidak meminta lokasi.";
+    }
+  } catch {
+    elements.start.disabled = true;
+    elements.gpsStatus.textContent = "Data gagal dimuat";
+    elements.routeHelper.textContent = "Jalankan situs melalui server HTTP, bukan langsung dari file lokal.";
+    setJourneyStatus("Berkas data tidak dapat dibaca.");
+  }
+}
+
+elements.start.addEventListener("click", startTracking);
+elements.stop.addEventListener("click", stopTracking);
+elements.directionA.addEventListener("click", () => selectDirection("A"));
+elements.directionB.addEventListener("click", () => selectDirection("B"));
+elements.previous.addEventListener("click", () => moveCamera(-1));
+elements.next.addEventListener("click", () => moveCamera(1));
+elements.openPlayer.addEventListener("click", openVideoPlayer);
+elements.retry.addEventListener("click", () => playCamera(state.currentCamera));
+elements.skip.addEventListener("click", () => moveCamera(1));
+elements.download.addEventListener("click", downloadM3u);
+elements.demoAdvance.addEventListener("click", advanceDemo);
+
+elements.video.addEventListener("play", () => {
+  state.playIntent = true;
+});
+elements.video.addEventListener("pause", () => {
+  if (!state.sourceChanging && !elements.video.ended) state.playIntent = false;
+});
+elements.video.addEventListener("playing", () => {
+  clearTimeout(state.stallTimer);
+  state.stallTimer = null;
+  clearPlaybackError();
+  setJourneyStatus("Siaran CCTV sedang diputar.");
+});
+elements.video.addEventListener("waiting", () => {
+  if (!state.playbackBlocked) scheduleStallStatus();
+});
+elements.video.addEventListener("stalled", () => {
+  if (!state.playbackBlocked) scheduleStallStatus();
+});
+elements.video.addEventListener("webkitbeginfullscreen", () => {
+  setJourneyStatus("Pemutar video layar penuh aktif.");
+});
+elements.video.addEventListener("webkitendfullscreen", () => {
+  setJourneyStatus("Pemutar layar penuh ditutup. Pelacakan kamera tetap aktif.");
+});
+
+window.addEventListener("beforeunload", () => {
+  if (state.watchId !== null) navigator.geolocation.clearWatch(state.watchId);
+  if (state.hls) state.hls.destroy();
+});
+
+loadData();

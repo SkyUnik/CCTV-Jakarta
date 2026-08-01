@@ -1,0 +1,24 @@
+{
+  "name": "jakarta-toll-cctv-player",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Privacy-first Jakarta toll CCTV player and safe public metadata collector",
+  "scripts": {
+    "camera:add": "node scripts/add-camera.mjs",
+    "camera:verify": "node scripts/verify-camera.mjs",
+    "highway:build": "node scripts/build-highway.mjs",
+    "scrape": "node scripts/scrape-binamarga.mjs",
+    "serve": "node scripts/serve.mjs",
+    "serve:lan": "PREVIEW_HOST=0.0.0.0 BASE_PATH=/CCTV-Jakarta PORT=4174 node scripts/serve.mjs",
+    "streams:check": "node scripts/check-streams.mjs",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "cheerio": "1.2.0",
+    "hls.js": "1.6.16"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

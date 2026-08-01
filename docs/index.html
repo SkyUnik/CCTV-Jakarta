@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#10251f">
+    <meta
+      name="description"
+      content="Pemutar CCTV jalan tol Jakarta berbasis lokasi yang menjaga data lokasi tetap di perangkat Anda."
+    >
+    <title>Jalur CCTV — Tol Jakarta</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="Jalur CCTV beranda">
+        <span class="brand-mark" aria-hidden="true">JC</span>
+        <span>
+          <strong>Jalur CCTV</strong>
+          <small>Tol Jakarta</small>
+        </span>
+      </a>
+      <span class="live-pill"><span aria-hidden="true"></span> Data publik</span>
+    </header>
+
+    <main>
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">Cawang → Pluit</p>
+        <h1 id="page-title">Lihat kondisi jalan di depan.</h1>
+        <p class="intro-copy">
+          Deteksi ruas tol dari lokasi Anda, pilih arah perjalanan, lalu CCTV akan
+          berganti setelah kendaraan melewati kamera aktif.
+        </p>
+        <div class="intro-actions">
+          <button class="button button-primary" id="start-button" type="button">
+            Mulai CCTV
+          </button>
+          <button class="button button-quiet" id="stop-button" type="button" hidden>
+            Hentikan pelacakan
+          </button>
+        </div>
+        <p class="privacy-note">
+          <span aria-hidden="true">●</span>
+          Lokasi diproses di perangkat ini dan tidak pernah dikirim atau disimpan.
+        </p>
+      </section>
+
+      <section class="workspace" aria-label="Pemutar CCTV">
+        <aside class="route-panel" aria-labelledby="route-title">
+          <div class="section-heading">
+            <div>
+              <p class="step-label">Langkah 1</p>
+              <h2 id="route-title">Pilih ruas tol</h2>
+            </div>
+            <span class="status-dot" id="gps-status">Belum aktif</span>
+          </div>
+
+          <p class="helper" id="route-helper">
+            Tekan Mulai CCTV untuk mendeteksi ruas, atau pilih secara manual.
+          </p>
+          <ul class="highway-list" id="highway-list" data-testid="highway-list"></ul>
+
+          <div class="direction-section" id="direction-section" hidden>
+            <p class="step-label">Langkah 2</p>
+            <h3>Pilih arah perjalanan</h3>
+            <div class="direction-grid" role="group" aria-label="Arah perjalanan">
+              <button class="direction-button" id="direction-a" type="button" aria-pressed="false">
+                <span class="direction-code">A</span>
+                <span><strong>Menjauh</strong><small>dari KM 0 Cawang</small></span>
+              </button>
+              <button class="direction-button" id="direction-b" type="button" aria-pressed="false">
+                <span class="direction-code">B</span>
+                <span><strong>Mendekat</strong><small>ke KM 0 Cawang</small></span>
+              </button>
+            </div>
+          </div>
+
+          <dl class="telemetry">
+            <div><dt>Akurasi GPS</dt><dd id="accuracy-value">—</dd></div>
+            <div><dt>Posisi ruas</dt><dd id="position-value">—</dd></div>
+          </dl>
+        </aside>
+
+        <section class="player-card" aria-labelledby="camera-title">
+          <div class="video-shell">
+            <video
+              id="camera-video"
+              controls
+              muted
+              preload="metadata"
+              x-webkit-airplay="allow"
+              aria-label="Siaran CCTV jalan tol"
+            ></video>
+            <div class="video-placeholder" id="video-placeholder">
+              <span class="placeholder-mark" aria-hidden="true">JC</span>
+              <strong>Siap mendeteksi perjalanan</strong>
+              <span>Pilih ruas dan arah untuk memulai CCTV.</span>
+            </div>
+            <span class="camera-live" id="camera-live" hidden>LIVE</span>
+          </div>
+
+          <div class="camera-info">
+            <div>
+              <p class="step-label" id="camera-highway">Belum ada ruas</p>
+              <h2 id="camera-title">Menunggu kamera</h2>
+            </div>
+            <span class="km-chip" id="camera-km">KM —</span>
+          </div>
+
+          <div class="journey-status" id="journey-status" role="status" aria-live="polite">
+            Mulai pelacakan atau pilih ruas secara manual.
+          </div>
+
+          <div class="launch-player">
+            <button class="button button-primary" id="open-player-button" type="button" disabled>
+              Buka pemutar video layar penuh
+            </button>
+            <p id="player-helper">Di iPhone, tombol ini membuka pemutar video bawaan Safari.</p>
+          </div>
+
+          <div class="error-panel" id="error-panel" role="alert" hidden>
+            <div>
+              <strong>Stream tidak dapat diputar</strong>
+              <span id="error-message">Kamera publik mungkin sedang offline.</span>
+            </div>
+            <div class="error-actions">
+              <button class="button button-small" id="retry-button" type="button">Coba lagi</button>
+              <button class="button button-small button-quiet" id="skip-button" type="button">Kamera berikutnya</button>
+            </div>
+          </div>
+
+          <div class="player-controls">
+            <button class="control-button" id="previous-button" type="button" disabled>
+              <span aria-hidden="true">←</span> Sebelumnya
+            </button>
+            <button class="control-button" id="next-button" type="button" disabled>
+              Berikutnya <span aria-hidden="true">→</span>
+            </button>
+          </div>
+
+          <div class="secondary-actions">
+            <a id="source-link" href="#" target="_blank" rel="noreferrer" hidden>Buka stream langsung</a>
+            <button class="text-button" id="download-button" type="button" disabled>
+              Unduh daftar M3U
+            </button>
+          </div>
+
+          <div class="demo-panel" id="demo-panel" hidden>
+            <strong>Mode pratinjau</strong>
+            <span>Posisi kamera bersifat simulasi dan tidak boleh digunakan saat berkendara.</span>
+            <button class="button button-small" id="demo-advance" type="button">Lewati kamera simulasi</button>
+          </div>
+        </section>
+      </section>
+
+      <section class="how-it-works" aria-labelledby="how-title">
+        <p class="eyebrow">Cara kerja</p>
+        <h2 id="how-title">Sederhana, tanpa mengirim lokasi.</h2>
+        <ol>
+          <li><span>01</span><div><strong>Deteksi ruas</strong><p>GPS dicocokkan dengan kurva jalan tol yang tersimpan di situs.</p></div></li>
+          <li><span>02</span><div><strong>Pilih A atau B</strong><p>A menjauh dari KM 0 Cawang, B menuju KM 0 Cawang.</p></div></li>
+          <li><span>03</span><div><strong>Ikuti perjalanan</strong><p>Kamera berikutnya aktif setelah dua posisi GPS memastikan kamera sudah terlewati.</p></div></li>
+        </ol>
+      </section>
+    </main>
+
+    <footer>
+      <p>CCTV berasal dari layanan publik Bina Marga dan operator jalan tol.</p>
+      <p>Data jalan © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap contributors</a>.</p>
+    </footer>
+
+    <noscript>Situs ini memerlukan JavaScript untuk mencocokkan lokasi dan memutar HLS.</noscript>
+    <script src="./vendor/hls.min.js"></script>
+    <script type="module" src="./js/app.mjs"></script>
+  </body>
+</html>
