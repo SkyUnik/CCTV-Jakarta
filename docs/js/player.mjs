@@ -28,7 +28,51 @@ export function fullscreenMethod(video) {
   return null;
 }
 
+export function preventPictureInPicture(video) {
+  if (!video) return;
+  try {
+    video.disablePictureInPicture = true;
+  } catch {
+    // Some Safari builds expose the property as readonly; the attribute still helps.
+  }
+  video.setAttribute?.("disablepictureinpicture", "");
+}
+
+export function isPictureInPictureActive(video, ownerDocument = globalThis.document) {
+  return Boolean(
+    video &&
+    (
+      video.webkitPresentationMode === "picture-in-picture" ||
+      ownerDocument?.pictureInPictureElement === video
+    )
+  );
+}
+
+export async function exitPictureInPicture(video, ownerDocument = globalThis.document) {
+  if (!isPictureInPictureActive(video, ownerDocument)) return false;
+  if (
+    ownerDocument?.pictureInPictureElement === video &&
+    typeof ownerDocument.exitPictureInPicture === "function"
+  ) {
+    await ownerDocument.exitPictureInPicture();
+    return true;
+  }
+  if (
+    video.webkitPresentationMode === "picture-in-picture" &&
+    typeof video.webkitSetPresentationMode === "function" &&
+    (typeof video.webkitSupportsPresentationMode !== "function" ||
+      video.webkitSupportsPresentationMode("inline"))
+  ) {
+    video.webkitSetPresentationMode("inline");
+    return true;
+  }
+  return false;
+}
+
 export async function enterVideoFullscreen(video) {
+  if (isPictureInPictureActive(video)) {
+    await exitPictureInPicture(video);
+  }
   const method = fullscreenMethod(video);
   if (method === "webkit") {
     video.webkitEnterFullscreen();

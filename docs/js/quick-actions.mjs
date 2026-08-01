@@ -1,6 +1,8 @@
 import {
   enterVideoFullscreen,
+  exitPictureInPicture,
   nativeMediaErrorMessage,
+  preventPictureInPicture,
   prefersNativeHls,
 } from "./player.mjs";
 
@@ -38,6 +40,8 @@ export function createQuickActionManager({
   let actions = DEFAULT_QUICK_ACTIONS;
   let preloadedMetadata = false;
   let hlsInstance = null;
+
+  preventPictureInPicture(elements.video);
 
   function findActiveCamera() {
     const targetId = actions[0]?.cameraIds?.[0] || KOJA_TIMUR_DEFAULT_CAMERA.id;
@@ -133,14 +137,6 @@ export function createQuickActionManager({
     }
   }
 
-  function isPipActive() {
-    return Boolean(
-      elements.video &&
-      (elements.video.webkitPresentationMode === "picture-in-picture" ||
-       (typeof document !== "undefined" && document.pictureInPictureElement === elements.video))
-    );
-  }
-
   function triggerOneTap() {
     if (!elements.overlay) return;
     elements.overlay.hidden = false;
@@ -151,9 +147,7 @@ export function createQuickActionManager({
   }
 
   function close() {
-    if (!isPipActive()) {
-      destroyQuickPlayer();
-    }
+    void exitPictureInPicture(elements.video).finally(() => destroyQuickPlayer());
     if (elements.overlay) {
       elements.overlay.hidden = true;
     }
@@ -182,6 +176,16 @@ export function createQuickActionManager({
     if (elements.fullscreen && elements.video) {
       elements.fullscreen.addEventListener("click", () => {
         void enterVideoFullscreen(elements.video);
+      });
+    }
+    if (elements.video) {
+      elements.video.addEventListener?.("enterpictureinpicture", () => {
+        void exitPictureInPicture(elements.video);
+      });
+      elements.video.addEventListener?.("webkitpresentationmodechanged", () => {
+        if (elements.video.webkitPresentationMode === "picture-in-picture") {
+          void exitPictureInPicture(elements.video);
+        }
       });
     }
     if (elements.retry) {

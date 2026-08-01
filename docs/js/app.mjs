@@ -17,7 +17,9 @@ import { createOnlineMap } from "./online-map.mjs";
 import { advanceRoutePosition, positionOnHighway } from "./simulator.mjs";
 import {
   enterVideoFullscreen,
+  exitPictureInPicture,
   fullscreenMethod,
+  preventPictureInPicture,
   nativeMediaErrorMessage,
   prefersNativeHls,
   supportsNativeHls,
@@ -124,6 +126,9 @@ const state = {
 };
 
 let passTracker = createPassTracker();
+
+preventPictureInPicture(elements.video);
+preventPictureInPicture(elements.quickVideo);
 
 function setJourneyStatus(message) {
   elements.journeyStatus.textContent = message;
@@ -233,6 +238,7 @@ async function playCamera(camera, options = {}) {
   const continuePlaying = options.forcePlay || state.playIntent;
   const muted = elements.video.muted;
   state.sourceChanging = true;
+  await exitPictureInPicture(elements.video);
   destroyPlayer({ reuseSource: true });
   const generation = state.loadGeneration;
   setPlayerReady(false);
@@ -1089,12 +1095,17 @@ elements.video.addEventListener("webkitendfullscreen", () => {
 });
 elements.video.addEventListener("webkitpresentationmodechanged", () => {
   if (elements.video.webkitPresentationMode === "picture-in-picture") {
-    setJourneyStatus("Pemutar Picture-in-Picture (PiP) aktif.");
+    void exitPictureInPicture(elements.video);
+    setJourneyStatus("Picture-in-Picture dimatikan. Gunakan pemutar layar penuh agar tampilan tidak terbelah.");
   } else if (elements.video.webkitPresentationMode === "fullscreen") {
     setJourneyStatus("Pemutar video layar penuh aktif.");
   } else if (elements.video.webkitPresentationMode === "inline") {
     setJourneyStatus("Siaran CCTV sedang diputar.");
   }
+});
+elements.video.addEventListener("enterpictureinpicture", () => {
+  void exitPictureInPicture(elements.video);
+  setJourneyStatus("Picture-in-Picture dimatikan. Gunakan pemutar layar penuh agar tampilan tidak terbelah.");
 });
 
 window.addEventListener("beforeunload", () => {

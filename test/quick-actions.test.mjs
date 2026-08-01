@@ -48,9 +48,11 @@ test("quick action manager preloads metadata and triggers one-tap fullscreen wit
     close: { addEventListener: () => {} },
     video: {
       muted: false,
+      disablePictureInPicture: false,
       src: "",
       canPlayType: (type) => (type.includes("mpegurl") ? "probably" : ""),
       addEventListener: () => {},
+      setAttribute: () => {},
       play: async () => { plays += 1; },
       pause: () => {},
       load: () => {},
@@ -124,9 +126,10 @@ test("quick action manager closes overlay when clicking outside card backdrop", 
   assert.equal(overlayHidden, true);
 });
 
-test("quick action manager preserves video playback when closing overlay during active PiP", async () => {
+test("quick action manager exits PiP and stops playback when closing overlay", async () => {
   let overlayHidden = false;
   let pauseCount = 0;
+  let mode = "picture-in-picture";
 
   const elements = {
     overlay: {
@@ -134,7 +137,10 @@ test("quick action manager preserves video playback when closing overlay during 
       set hidden(val) { overlayHidden = val; },
     },
     video: {
-      webkitPresentationMode: "picture-in-picture",
+      get webkitPresentationMode() { return mode; },
+      setAttribute: () => {},
+      webkitSetPresentationMode: (value) => { mode = value; },
+      webkitSupportsPresentationMode: (value) => value === "inline",
       pause: () => { pauseCount += 1; },
       removeAttribute: () => {},
       load: () => {},
@@ -143,7 +149,9 @@ test("quick action manager preserves video playback when closing overlay during 
 
   const manager = createQuickActionManager({ elements, cameras: [] });
   manager.close();
+  await Promise.resolve();
 
   assert.equal(overlayHidden, true);
-  assert.equal(pauseCount, 0);
+  assert.equal(mode, "inline");
+  assert.equal(pauseCount, 1);
 });

@@ -3,8 +3,11 @@ import test from "node:test";
 
 import {
   enterVideoFullscreen,
+  exitPictureInPicture,
   fullscreenMethod,
+  isPictureInPictureActive,
   nativeMediaErrorMessage,
+  preventPictureInPicture,
   prefersNativeHls,
   supportsNativeHls,
 } from "../docs/js/player.mjs";
@@ -37,6 +40,38 @@ test("prefers the iPhone video full-screen API", async () => {
   assert.equal(await enterVideoFullscreen(video), "webkit");
   assert.equal(webkitCalls, 1);
   assert.equal(standardCalls, 0);
+});
+
+test("prevents and exits Picture-in-Picture before fullscreen", async () => {
+  let mode = "picture-in-picture";
+  let fullscreenCalls = 0;
+  const attributes = new Map();
+  const video = {
+    get webkitPresentationMode() { return mode; },
+    disablePictureInPicture: false,
+    setAttribute: (name, value) => attributes.set(name, value),
+    webkitEnterFullscreen() { fullscreenCalls += 1; },
+    webkitSetPresentationMode(value) { mode = value; },
+    webkitSupportsPresentationMode: (value) => value === "inline",
+  };
+  preventPictureInPicture(video);
+  assert.equal(video.disablePictureInPicture, true);
+  assert.equal(attributes.has("disablepictureinpicture"), true);
+  assert.equal(isPictureInPictureActive(video), true);
+  assert.equal(await enterVideoFullscreen(video), "webkit");
+  assert.equal(mode, "inline");
+  assert.equal(fullscreenCalls, 1);
+});
+
+test("exits standards Picture-in-Picture when available", async () => {
+  let exited = false;
+  const video = {};
+  const ownerDocument = {
+    pictureInPictureElement: video,
+    exitPictureInPicture: async () => { exited = true; },
+  };
+  assert.equal(await exitPictureInPicture(video, ownerDocument), true);
+  assert.equal(exited, true);
 });
 
 test("uses the standards full-screen API outside iOS Safari", async () => {
