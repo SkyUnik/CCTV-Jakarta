@@ -4,6 +4,12 @@ import {
   prefersNativeHls,
 } from "./player.mjs";
 
+export const KOJA_TIMUR_DEFAULT_CAMERA = Object.freeze({
+  id: "binamarga-akses-tanjung-priok-742",
+  name: "ATP GT KOJA TIMUR",
+  streamUrl: "https://pub2.hk-opt.com/LiveApp/streams/610831844814460955304790.m3u8",
+});
+
 export const DEFAULT_QUICK_ACTIONS = Object.freeze([
   {
     id: "koja-timur-quick",
@@ -30,12 +36,12 @@ export function createQuickActionManager({
   hlsClass = typeof window !== "undefined" ? window.Hls : null,
 }) {
   let actions = DEFAULT_QUICK_ACTIONS;
-  let activeCamera = null;
   let preloadedMetadata = false;
   let hlsInstance = null;
 
-  function findCamera(cameraId) {
-    return cameras.find((c) => c.id === cameraId) || null;
+  function findActiveCamera() {
+    const targetId = actions[0]?.cameraIds?.[0] || KOJA_TIMUR_DEFAULT_CAMERA.id;
+    return cameras.find((c) => c.id === targetId) || KOJA_TIMUR_DEFAULT_CAMERA;
   }
 
   function destroyQuickPlayer(options = {}) {
@@ -76,22 +82,20 @@ export function createQuickActionManager({
 
   async function init() {
     actions = await fetchQuickActions();
-    const primaryAction = actions[0];
-    if (primaryAction?.cameraIds?.[0]) {
-      activeCamera = findCamera(primaryAction.cameraIds[0]);
-    }
+    const activeCamera = findActiveCamera();
     if (activeCamera) {
       void preloadMetadata(activeCamera);
     }
   }
 
   function playStream() {
-    if (!activeCamera || !elements.video) return;
+    if (!elements.video) return;
+    const camera = findActiveCamera();
     destroyQuickPlayer({ reuseSource: true });
-    setStatus(null);
+    setStatus("Memuat stream Koja Timur…");
     elements.video.muted = true;
 
-    const streamUrl = activeCamera.streamUrl;
+    const streamUrl = camera.streamUrl;
     const useNative = prefersNativeHls(elements.video, hlsClass);
 
     if (useNative) {
