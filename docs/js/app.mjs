@@ -185,7 +185,7 @@ function formatKm(km) {
   return `KM ${String(whole).padStart(2, "0")}+${String(meters).padStart(3, "0")}`;
 }
 
-function destroyPlayer() {
+function destroyPlayer(options = {}) {
   state.loadGeneration += 1;
   clearTimeout(state.loadTimer);
   state.loadTimer = null;
@@ -199,8 +199,10 @@ function destroyPlayer() {
   elements.video.onloadedmetadata = null;
   elements.video.oncanplay = null;
   elements.video.onerror = null;
-  elements.video.removeAttribute("src");
-  elements.video.load();
+  if (!options.reuseSource) {
+    elements.video.removeAttribute("src");
+    elements.video.load();
+  }
 }
 
 function setPlayerReady(ready) {
@@ -231,7 +233,7 @@ async function playCamera(camera, options = {}) {
   const continuePlaying = options.forcePlay || state.playIntent;
   const muted = elements.video.muted;
   state.sourceChanging = true;
-  destroyPlayer();
+  destroyPlayer({ reuseSource: true });
   const generation = state.loadGeneration;
   setPlayerReady(false);
   clearPlaybackError();

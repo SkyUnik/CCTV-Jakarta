@@ -38,7 +38,7 @@ export function createQuickActionManager({
     return cameras.find((c) => c.id === cameraId) || null;
   }
 
-  function destroyQuickPlayer() {
+  function destroyQuickPlayer(options = {}) {
     if (hlsInstance) {
       hlsInstance.destroy();
       hlsInstance = null;
@@ -47,8 +47,10 @@ export function createQuickActionManager({
       elements.video.pause();
       elements.video.onloadedmetadata = null;
       elements.video.onerror = null;
-      elements.video.removeAttribute("src");
-      elements.video.load();
+      if (!options.reuseSource) {
+        elements.video.removeAttribute("src");
+        elements.video.load();
+      }
     }
   }
 
@@ -85,7 +87,7 @@ export function createQuickActionManager({
 
   function playStream() {
     if (!activeCamera || !elements.video) return;
-    destroyQuickPlayer();
+    destroyQuickPlayer({ reuseSource: true });
     setStatus("Memuat stream Koja Timur…");
     elements.video.muted = true;
 
