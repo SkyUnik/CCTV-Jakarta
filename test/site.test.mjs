@@ -11,6 +11,7 @@ test("static page exposes the required accessible controls with relative assets"
     "start-button",
     "stop-button",
     "highway-list",
+    "gps-debug-link",
     "direction-a",
     "direction-b",
     "camera-video",
@@ -30,6 +31,15 @@ test("static page exposes the required accessible controls with relative assets"
   assert.equal($("script[src^='http']").length, 0);
   assert.equal($("link[rel='stylesheet']").attr("href"), "./styles.css");
   assert.match($("script[type='module']").attr("src"), /^\.\/js\/app\.mjs\?v=/);
+});
+
+test("standalone GPS diagnostic has no external dependencies or network code", async () => {
+  const html = await readFile(new URL("../docs/gps-test.html", import.meta.url), "utf8");
+  const $ = cheerio.load(html);
+  assert.equal($("#test-button").length, 1);
+  assert.match(html, /getCurrentPosition/);
+  assert.match(html, /navigator\.permissions\.query/);
+  assert.doesNotMatch(html, /fetch\(|XMLHttpRequest|sendBeacon|<script\s+src=/);
 });
 
 test("vendored HLS player and license are committed for offline site loading", async () => {

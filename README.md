@@ -234,6 +234,12 @@ returns permission error 1 without showing a prompt:
 The page cannot reopen an iOS prompt after Safari has stored a site-level Deny;
 that decision must be changed in Safari's settings first.
 
+For an isolated test, open `docs/gps-test.html` through the deployed site. It
+calls the browser Geolocation API directly with no application modules or
+network requests and reports the secure-context flag, Permissions API state,
+error code, and browser error message. The main interface links to this test
+automatically after a GPS failure.
+
 ## Data attribution
 
 - CCTV names and public stream URLs: Direktorat Jenderal Bina Marga, Kementerian

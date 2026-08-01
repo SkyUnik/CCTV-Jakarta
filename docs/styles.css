@@ -120,6 +120,8 @@ h1 { font-size: clamp(2.8rem, 8vw, 5.8rem); line-height: .94; letter-spacing: -.
 .section-heading, .camera-info { display: flex; justify-content: space-between; align-items: flex-start; gap: 14px; }
 .section-heading h2, .camera-info h2 { margin-bottom: 0; font-size: 1.35rem; letter-spacing: -.025em; }
 .helper { color: var(--muted); font-size: .85rem; line-height: 1.55; margin: 14px 0; }
+.gps-debug-link { display: inline-block; margin: -4px 0 14px; color: var(--green-2); font-size: .8rem; font-weight: 800; }
+.gps-debug-link[hidden] { display: none; }
 .highway-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
 .highway-button {
   width: 100%;

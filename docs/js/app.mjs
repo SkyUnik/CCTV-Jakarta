@@ -34,6 +34,7 @@ const elements = {
   errorMessage: document.querySelector("#error-message"),
   errorPanel: document.querySelector("#error-panel"),
   gpsStatus: document.querySelector("#gps-status"),
+  gpsDebug: document.querySelector("#gps-debug-link"),
   highwayList: document.querySelector("#highway-list"),
   journeyStatus: document.querySelector("#journey-status"),
   next: document.querySelector("#next-button"),
@@ -399,6 +400,7 @@ function updateProjectionForSelectedRoad(position) {
 }
 
 function handlePosition(position) {
+  elements.gpsDebug.hidden = true;
   const fix = {
     latitude: position.coords.latitude,
     longitude: position.coords.longitude,
@@ -477,6 +479,7 @@ function geolocationError(error, attempt = state.locationAttempt) {
   });
   elements.gpsStatus.textContent = failure.status;
   elements.routeHelper.textContent = failure.helper;
+  elements.gpsDebug.hidden = false;
   setJourneyStatus("Mode manual aktif. Pergantian otomatis menunggu GPS yang andal.");
   renderHighways();
 }
@@ -505,6 +508,7 @@ function startTracking() {
   elements.stop.hidden = false;
   elements.gpsStatus.textContent = "Meminta izin GPS…";
   elements.routeHelper.textContent = "Safari mungkin menampilkan permintaan izin lokasi untuk situs ini.";
+  elements.gpsDebug.hidden = true;
 
   // Ask for one fix directly from the button tap before registering a watch.
   // This produces the most reliable permission prompt on iOS Safari.

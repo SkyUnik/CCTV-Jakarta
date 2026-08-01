@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#10251f">
+    <title>Tes GPS Safari — Jalur CCTV</title>
+    <style>
+      :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #14201d; background: #f4f2eb; }
+      * { box-sizing: border-box; }
+      body { margin: 0; padding: 24px; min-width: 320px; }
+      main { width: min(620px, 100%); margin: 0 auto; }
+      a { color: #22614f; font-weight: 700; }
+      h1 { margin: 34px 0 12px; font-size: clamp(2rem, 10vw, 3.6rem); line-height: .95; letter-spacing: -.05em; }
+      .intro { color: #65736f; line-height: 1.55; }
+      button { width: 100%; min-height: 56px; margin: 18px 0; border: 0; border-radius: 14px; background: #153f34; color: white; font: inherit; font-weight: 850; }
+      button:disabled { opacity: .55; }
+      .card { background: #fffefa; border: 1px solid #d9ddd7; border-radius: 18px; padding: 18px; }
+      dl { display: grid; gap: 12px; margin: 0; }
+      dl div { display: grid; grid-template-columns: minmax(130px, .8fr) 1.2fr; gap: 12px; border-bottom: 1px solid #e4e6e1; padding-bottom: 12px; }
+      dt { color: #65736f; }
+      dd { margin: 0; font-weight: 750; overflow-wrap: anywhere; }
+      .result { margin-top: 16px; padding: 14px; border-left: 4px solid #d9f36a; background: #f7f7f0; line-height: 1.5; white-space: pre-wrap; }
+      .result.error { border-color: #d94237; background: #fff0ed; }
+      small { color: #65736f; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <a href="./">← Kembali ke Jalur CCTV</a>
+      <h1>Tes izin GPS Safari</h1>
+      <p class="intro">Halaman ini menguji Safari secara langsung tanpa pemutar video, data jalan, atau pustaka lain. Tidak ada hasil yang dikirim atau disimpan.</p>
+
+      <div class="card">
+        <dl>
+          <div><dt>Versi tes</dt><dd>gps2-20260801</dd></div>
+          <div><dt>HTTPS aman</dt><dd id="secure">—</dd></div>
+          <div><dt>API GPS</dt><dd id="available">—</dd></div>
+          <div><dt>Izin sebelum tes</dt><dd id="permission-before">Belum diperiksa</dd></div>
+          <div><dt>Izin setelah tes</dt><dd id="permission-after">Belum diperiksa</dd></div>
+          <div><dt>Origin</dt><dd id="origin">—</dd></div>
+        </dl>
+
+        <button id="test-button" type="button">Minta lokasi sekarang</button>
+        <div class="result" id="result" role="status" aria-live="polite">Tekan tombol satu kali dan tunggu hingga 20 detik.</div>
+      </div>
+
+      <p><small>Jika hasilnya error 1 meskipun izin tercatat “granted”, masalah berada pada kebijakan/bug Safari atau Location Services perangkat, bukan aplikasi Jalur CCTV.</small></p>
+    </main>
+
+    <script>
+      const fields = {
+        available: document.querySelector("#available"),
+        before: document.querySelector("#permission-before"),
+        after: document.querySelector("#permission-after"),
+        button: document.querySelector("#test-button"),
+        origin: document.querySelector("#origin"),
+        result: document.querySelector("#result"),
+        secure: document.querySelector("#secure"),
+      };
+
+      fields.secure.textContent = window.isSecureContext ? "Ya" : "Tidak";
+      fields.available.textContent = "geolocation" in navigator ? "Tersedia" : "Tidak tersedia";
+      fields.origin.textContent = location.origin;
+
+      async function permissionState(target) {
+        if (!navigator.permissions?.query) {
+          target.textContent = "Permissions API tidak tersedia";
+          return "unavailable";
+        }
+        try {
+          const status = await navigator.permissions.query({ name: "geolocation" });
+          target.textContent = status.state;
+          return status.state;
+        } catch (error) {
+          target.textContent = `Tidak dapat dibaca (${error.name})`;
+          return "unavailable";
+        }
+      }
+
+      permissionState(fields.before);
+
+      fields.button.addEventListener("click", () => {
+        fields.button.disabled = true;
+        fields.result.classList.remove("error");
+        fields.result.textContent = "Permintaan dikirim langsung dari ketukan tombol. Menunggu Safari…";
+
+        if (!window.isSecureContext || !("geolocation" in navigator)) {
+          fields.result.classList.add("error");
+          fields.result.textContent = `GAGAL sebelum meminta lokasi\nsecureContext=${window.isSecureContext}\ngeolocation=${"geolocation" in navigator}`;
+          fields.button.disabled = false;
+          return;
+        }
+
+        navigator.geolocation.getCurrentPosition(
+          async (position) => {
+            const after = await permissionState(fields.after);
+            fields.result.textContent = `BERHASIL\nAkurasi: ±${Math.round(position.coords.accuracy)} m\nPermission API: ${after}`;
+            fields.button.disabled = false;
+          },
+          async (error) => {
+            const after = await permissionState(fields.after);
+            fields.result.classList.add("error");
+            fields.result.textContent = `GAGAL\nError code: ${error.code}\nError message: ${error.message || "(kosong)"}\nPermission API: ${after}`;
+            fields.button.disabled = false;
+          },
+          { enableHighAccuracy: true, maximumAge: 0, timeout: 20_000 },
+        );
+      });
+    </script>
+  </body>
+</html>
