@@ -47,7 +47,7 @@ test("static page exposes the required accessible controls with relative assets"
   ]) {
     assert.equal($(`#${id}`).length, 1, `Missing unique #${id}`);
   }
-  assert.equal($("#camera-video").attr("playsinline"), undefined);
+  assert.equal($("#camera-video").is("[playsinline]"), true);
   assert.equal($("#camera-video").is("[muted]"), true);
   assert.equal($("#camera-video").is("[controls]"), true);
   assert.equal($("#camera-video").attr("preload"), "metadata");

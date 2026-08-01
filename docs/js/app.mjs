@@ -1087,6 +1087,15 @@ elements.video.addEventListener("webkitbeginfullscreen", () => {
 elements.video.addEventListener("webkitendfullscreen", () => {
   setJourneyStatus("Pemutar layar penuh ditutup. Pelacakan kamera tetap aktif.");
 });
+elements.video.addEventListener("webkitpresentationmodechanged", () => {
+  if (elements.video.webkitPresentationMode === "picture-in-picture") {
+    setJourneyStatus("Pemutar Picture-in-Picture (PiP) aktif.");
+  } else if (elements.video.webkitPresentationMode === "fullscreen") {
+    setJourneyStatus("Pemutar video layar penuh aktif.");
+  } else if (elements.video.webkitPresentationMode === "inline") {
+    setJourneyStatus("Siaran CCTV sedang diputar.");
+  }
+});
 
 window.addEventListener("beforeunload", () => {
   if (state.simulatorTimer !== null) clearInterval(state.simulatorTimer);
