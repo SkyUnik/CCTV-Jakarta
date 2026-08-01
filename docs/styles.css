@@ -386,16 +386,15 @@ footer a { color: inherit; }
   object-fit: contain;
 }
 .quick-camera-status {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
-  text-align: center;
-  background: rgb(6 17 14 / 85%);
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: #1b352d;
   color: #e2e8f0;
-  font-size: .95rem;
+  font-size: .88rem;
+  text-align: center;
+}
+.quick-camera-status[hidden] {
+  display: none;
 }
 .quick-camera-actions {
   display: flex;

@@ -88,7 +88,7 @@ export function createQuickActionManager({
   function playStream() {
     if (!activeCamera || !elements.video) return;
     destroyQuickPlayer({ reuseSource: true });
-    setStatus("Memuat stream Koja Timur…");
+    setStatus(null);
     elements.video.muted = true;
 
     const streamUrl = activeCamera.streamUrl;
