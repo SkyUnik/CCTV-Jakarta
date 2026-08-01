@@ -90,6 +90,8 @@ test("the shared simulator mode exposes road, position, direction, and speed con
   assert.match(html, /<option value="240">240 km\/jam<\/option>/);
   assert.match(source, /if \(state\.simulator\) startSimulatorTracking\(\)/);
   assert.match(source, /setInterval\(tickSimulator, 250\)/);
+  const css = await readFile(new URL("../docs/styles.css", import.meta.url), "utf8");
+  assert.match(css, /\.simulator-link-card \.button\s*\{[^}]*display:\s*inline-flex;[^}]*align-items:\s*center;[^}]*justify-content:\s*center;/);
 });
 
 test("standalone GPS diagnostic has no external dependencies or network code", async () => {

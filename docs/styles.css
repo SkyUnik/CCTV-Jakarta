@@ -335,6 +335,7 @@ footer a { color: inherit; }
 .simulator-link-card { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin: 0 auto 72px; padding: 22px; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); }
 .simulator-link-card div { display: grid; gap: 5px; }
 .simulator-link-card span { color: var(--muted); }
+.simulator-link-card .button { display: inline-flex; align-items: center; justify-content: center; text-align: center; text-decoration: none; }
 body.is-simulator .privacy-note { color: #305f50; }
 
 @media (max-width: 620px) {
