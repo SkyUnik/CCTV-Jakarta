@@ -15,6 +15,19 @@
         "maxMatchRadiusM": 150,
         "passHysteresisM": 75,
         "passConfirmationFixes": 2,
+        "cameraStationing": {
+          "quality": "estimated_stationing",
+          "anchors": [
+            {
+              "km": 0,
+              "roadPositionM": 0
+            },
+            {
+              "km": 19.647,
+              "roadPositionM": 19647
+            }
+          ]
+        },
         "osmSource": "https://www.openstreetmap.org/relation/5385689",
         "osmSnapshotSource": "https://api.openstreetmap.org/api/0.6/relation/5385689/full.json",
         "attribution": "© OpenStreetMap contributors",
@@ -1356,6 +1369,19 @@
         "maxMatchRadiusM": 150,
         "passHysteresisM": 75,
         "passConfirmationFixes": 2,
+        "cameraStationing": {
+          "quality": "estimated_stationing",
+          "anchors": [
+            {
+              "km": 22.67,
+              "roadPositionM": 0
+            },
+            {
+              "km": 28.6,
+              "roadPositionM": 7287
+            }
+          ]
+        },
         "osmSource": "https://www.openstreetmap.org/",
         "osmSnapshotSource": "https://overpass-api.de/api/interpreter",
         "attribution": "© OpenStreetMap contributors",
@@ -2235,6 +2261,19 @@
         "maxMatchRadiusM": 150,
         "passHysteresisM": 75,
         "passConfirmationFixes": 2,
+        "cameraStationing": {
+          "quality": "estimated_stationing",
+          "anchors": [
+            {
+              "km": 58.4,
+              "roadPositionM": 0
+            },
+            {
+              "km": 67.2,
+              "roadPositionM": 11113
+            }
+          ]
+        },
         "osmSource": "https://www.openstreetmap.org/",
         "osmSnapshotSource": "https://overpass-api.de/api/interpreter",
         "attribution": "© OpenStreetMap contributors",
@@ -2883,6 +2922,19 @@
         "maxMatchRadiusM": 150,
         "passHysteresisM": 75,
         "passConfirmationFixes": 2,
+        "cameraStationing": {
+          "quality": "estimated_stationing",
+          "anchors": [
+            {
+              "km": 0,
+              "roadPositionM": 0
+            },
+            {
+              "km": 46.705,
+              "roadPositionM": 46705
+            }
+          ]
+        },
         "osmSource": "https://www.openstreetmap.org/",
         "osmSnapshotSource": "https://overpass-api.de/api/interpreter",
         "attribution": "© OpenStreetMap contributors",

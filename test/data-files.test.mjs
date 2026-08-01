@@ -47,7 +47,21 @@ test("committed multi-road geometries are directed, curved, and uniquely identif
     assert.ok(feature.properties.canonicalLengthM <= maximum);
     assert.match(feature.properties.directionA, /KM 0/);
     assert.match(feature.properties.directionB, /KM 0/);
+    assert.equal(feature.properties.cameraStationing.quality, "estimated_stationing");
+    assert.equal(feature.properties.cameraStationing.anchors.length, 2);
   }
+});
+
+test("all current kilometer cameras can be mapped without becoming verified", async () => {
+  const highways = await readJson("../docs/data/highways.geojson");
+  const cameras = await readJson("../docs/data/cameras.json");
+  const { groupEstimatedCameraMarkers } = await import("../docs/js/offline-map.mjs");
+  const result = groupEstimatedCameraMarkers(cameras.cameras, highways.features);
+  assert.equal(result.groups.reduce((total, group) => total + group.cameras.length, 0), 86);
+  assert.equal(result.unlocated.length, 8);
+  assert.ok(result.groups.every((group) => group.quality === "estimated_stationing"));
+  assert.ok(cameras.cameras.every((camera) => camera.coordinates === null));
+  assert.ok(cameras.cameras.every((camera) => camera.roadPositionM === null));
 });
 
 test("unreviewed provider cameras cannot enter automatic playback", async () => {

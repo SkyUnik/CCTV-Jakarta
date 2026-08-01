@@ -61,6 +61,43 @@
           <a class="gps-debug-link" id="gps-debug-link" href="./gps-test.html" hidden>
             Jalankan tes izin GPS Safari
           </a>
+
+          <section class="route-map" aria-labelledby="map-title">
+            <div class="map-heading">
+              <div>
+                <strong id="map-title">Gambaran ruas dan CCTV</strong>
+                <span id="map-summary">Memuat geometri lokal…</span>
+              </div>
+              <label class="map-toggle">
+                <input id="map-toggle" type="checkbox" checked>
+                <span>Tampilkan peta</span>
+              </label>
+            </div>
+            <div id="map-body">
+              <div class="map-canvas">
+                <svg
+                  id="route-map-svg"
+                  role="img"
+                  aria-label="Peta skematik ruas tol dan perkiraan posisi CCTV"
+                  preserveAspectRatio="xMidYMid meet"
+                ></svg>
+                <button class="map-gps-button" id="map-gps-button" type="button" disabled>
+                  Kembali ke lokasi saya
+                </button>
+              </div>
+              <div class="map-camera-card" id="map-camera-card" hidden>
+                <div class="map-camera-status">
+                  <strong>Lokasi perkiraan berdasarkan KM</strong>
+                  <span>Bukan koordinat kamera terverifikasi.</span>
+                </div>
+                <div id="map-camera-list"></div>
+              </div>
+              <p class="map-disclaimer">
+                Peta skematik offline dari data OpenStreetMap—bukan navigasi seperti Waze atau Google Maps.
+              </p>
+            </div>
+          </section>
+
           <ul class="highway-list" id="highway-list" data-testid="highway-list"></ul>
 
           <div class="direction-section" id="direction-section" hidden>
@@ -185,6 +222,6 @@
 
     <noscript>Situs ini memerlukan JavaScript untuk mencocokkan lokasi dan memutar HLS.</noscript>
     <script src="./vendor/hls.min.js"></script>
-    <script type="module" src="./js/app.mjs?v=20260801-roads1"></script>
+    <script type="module" src="./js/app.mjs?v=20260801-map1"></script>
   </body>
 </html>

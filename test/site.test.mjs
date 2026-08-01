@@ -23,6 +23,12 @@ test("static page exposes the required accessible controls with relative assets"
     "manual-camera-picker",
     "manual-camera-select",
     "manual-camera-button",
+    "map-toggle",
+    "map-body",
+    "route-map-svg",
+    "map-gps-button",
+    "map-camera-card",
+    "map-camera-list",
   ]) {
     assert.equal($(`#${id}`).length, 1, `Missing unique #${id}`);
   }
@@ -32,6 +38,8 @@ test("static page exposes the required accessible controls with relative assets"
   assert.equal($("#camera-video").attr("preload"), "metadata");
   assert.equal($("#camera-video").attr("x-webkit-airplay"), "allow");
   assert.equal($("script[src^='http']").length, 0);
+  assert.equal($("#map-toggle").is("[checked]"), true);
+  assert.match($("#route-map-svg").attr("aria-label"), /skematik/i);
   assert.equal($("link[rel='stylesheet']").attr("href"), "./styles.css");
   assert.match($("script[type='module']").attr("src"), /^\.\/js\/app\.mjs\?v=/);
 });

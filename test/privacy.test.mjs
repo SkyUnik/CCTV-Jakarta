@@ -4,7 +4,9 @@ import test from "node:test";
 
 test("browser code neither stores nor transmits geolocation", async () => {
   const app = await readFile(new URL("../docs/js/app.mjs", import.meta.url), "utf8");
+  const map = await readFile(new URL("../docs/js/offline-map.mjs", import.meta.url), "utf8");
   assert.doesNotMatch(app, /localStorage|sessionStorage|indexedDB|sendBeacon|XMLHttpRequest|WebSocket/);
+  assert.doesNotMatch(map, /fetch\(|localStorage|sessionStorage|indexedDB|sendBeacon|XMLHttpRequest|WebSocket/);
   const fetchTargets = [...app.matchAll(/fetch\((['"])(.*?)\1/g)].map((match) => match[2]);
   assert.deepEqual(fetchTargets.sort(), ["./data/cameras.json", "./data/highways.geojson"]);
 });
@@ -14,6 +16,9 @@ test("mobile CSS retains full-width launch controls and compact breakpoints", as
   assert.match(css, /\.launch-player \.button\s*{\s*width:\s*100%/);
   assert.match(css, /@media \(max-width: 520px\)/);
   assert.match(css, /min-width:\s*320px/);
+  assert.match(css, /\.map-canvas\s*{[^}]*min-height:\s*230px/s);
+  assert.match(css, /\.map-route-line/);
+  assert.match(css, /\.map-marker-target/);
 });
 
 test("compatibility report contains playlist checks only", async () => {
