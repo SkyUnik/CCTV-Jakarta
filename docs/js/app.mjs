@@ -329,7 +329,6 @@ async function playCamera(camera, options = {}) {
       }
       showPlaybackError(nativeMediaErrorMessage(elements.video.error));
     };
-    elements.video.load();
   };
 
   if (prefersNativeHls(elements.video, globalThis.Hls)) {
@@ -673,6 +672,11 @@ function handlePosition(position) {
   updateTrackingIndicator();
   state.routeMap?.updatePosition(fix);
   elements.accuracy.textContent = `±${Math.round(fix.accuracy)} m`;
+  if (state.highway) {
+    updateProjectionForSelectedRoad(fix);
+    if (state.direction) evaluatePassing();
+  }
+
   const result = matchHighways(fix, state.highways);
   if (!result.accepted) {
     elements.gpsStatus.textContent = result.reason === "accuracy_too_low" ? "GPS kurang akurat" : "Ruas tidak ditemukan";
@@ -680,7 +684,6 @@ function handlePosition(position) {
       ? "Tunggu akurasi GPS membaik, atau pilih ruas secara manual."
       : "Tidak ada ruas terverifikasi di dekat posisi. Pilih ruas secara manual.";
     renderHighways();
-    if (state.highway) updateProjectionForSelectedRoad(fix);
     return;
   }
 
@@ -690,13 +693,6 @@ function handlePosition(position) {
     : "Ruas terdekat terdeteksi dari posisi saat ini.";
   renderHighways(result.candidates);
   if (!state.highway && result.candidates.length === 1) selectHighway(result.candidates[0].feature);
-  const selectedCandidate = result.candidates.find(
-    (candidate) => candidate.highwayId === selectedHighwayId(),
-  );
-  if (state.highway && selectedCandidate) {
-    updateProjectionForSelectedRoad(fix);
-    evaluatePassing();
-  }
 }
 
 function evaluatePassing() {
