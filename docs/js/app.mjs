@@ -13,7 +13,7 @@ import {
   INITIAL_LOCATION_OPTIONS,
   TRACKING_LOCATION_OPTIONS,
 } from "./geolocation.mjs";
-import { createOfflineMap } from "./offline-map.mjs";
+import { createOnlineMap } from "./online-map.mjs";
 import {
   enterVideoFullscreen,
   fullscreenMethod,
@@ -46,9 +46,13 @@ const elements = {
   mapBody: document.querySelector("#map-body"),
   mapCameraCard: document.querySelector("#map-camera-card"),
   mapCameraList: document.querySelector("#map-camera-list"),
+  mapCloseButton: document.querySelector("#map-close-button"),
+  mapExpandButton: document.querySelector("#map-expand-button"),
   mapGpsButton: document.querySelector("#map-gps-button"),
+  mapSection: document.querySelector(".route-map"),
   mapSummary: document.querySelector("#map-summary"),
-  mapSvg: document.querySelector("#route-map-svg"),
+  mapElement: document.querySelector("#route-map"),
+  mapTileStatus: document.querySelector("#map-tile-status"),
   mapToggle: document.querySelector("#map-toggle"),
   next: document.querySelector("#next-button"),
   openPlayer: document.querySelector("#open-player-button"),
@@ -70,11 +74,13 @@ const elements = {
   videoPlaceholder: document.querySelector("#video-placeholder"),
 };
 
+const query = new URLSearchParams(location.search);
+
 const state = {
   cameras: [],
   currentCamera: null,
   currentProjection: null,
-  demo: new URLSearchParams(location.search).get("demo") === "1",
+  demo: query.get("demo") === "1",
   direction: null,
   highway: null,
   highways: [],
@@ -85,7 +91,7 @@ const state = {
   locationAttempt: 0,
   manualCameras: [],
   manualMode: false,
-  offlineMap: null,
+  routeMap: null,
   pendingMapCamera: null,
   playIntent: false,
   playbackBlocked: false,
@@ -450,7 +456,7 @@ function selectDirection(direction) {
 function selectHighway(feature) {
   const nextId = feature.properties?.id ?? feature.id;
   if (nextId === selectedHighwayId()) {
-    state.offlineMap?.selectHighway(nextId);
+    state.routeMap?.selectHighway(nextId);
     return;
   }
   state.highway = feature;
@@ -461,7 +467,7 @@ function selectHighway(feature) {
   state.manualMode = false;
   state.pendingMapCamera = null;
   updateTrackingIndicator();
-  state.offlineMap?.selectHighway(nextId);
+  state.routeMap?.selectHighway(nextId);
   elements.directionSection.hidden = false;
   const properties = feature.properties ?? {};
   elements.directionA.querySelector("small").textContent =
@@ -555,7 +561,7 @@ function handlePosition(position) {
   };
   state.lastPosition = fix;
   updateTrackingIndicator();
-  state.offlineMap?.updatePosition(fix);
+  state.routeMap?.updatePosition(fix);
   elements.accuracy.textContent = `±${Math.round(fix.accuracy)} m`;
   const result = matchHighways(fix, state.highways);
   if (!result.accepted) {
@@ -699,7 +705,7 @@ function stopTracking() {
   elements.stop.hidden = true;
   elements.gpsStatus.textContent = "Dihentikan";
   updateTrackingIndicator();
-  state.offlineMap?.updatePosition(null);
+  state.routeMap?.updatePosition(null);
   setJourneyStatus("Pelacakan dihentikan. Kamera dapat dipilih secara manual.");
 }
 
@@ -757,7 +763,7 @@ function restartSavedSelection() {
   state.direction = savedSelection.direction;
   state.currentCamera = savedSelection.camera;
   state.manualMode = savedSelection.manualMode;
-  state.offlineMap?.selectHighway(selectedHighwayId());
+  state.routeMap?.selectHighway(selectedHighwayId());
   elements.highwayList.querySelectorAll("button").forEach((button) => {
     button.setAttribute("aria-pressed", String(button.dataset.highwayId === selectedHighwayId()));
   });
@@ -816,18 +822,25 @@ async function loadData() {
     const highwayData = await highwayResponse.json();
     state.cameras = cameraData.cameras ?? [];
     state.highways = highwayData.features ?? [];
-    state.offlineMap = createOfflineMap({
+    state.routeMap = createOnlineMap({
       body: elements.mapBody,
       cameraCard: elements.mapCameraCard,
       cameraList: elements.mapCameraList,
+      closeButton: elements.mapCloseButton,
+      expandButton: elements.mapExpandButton,
       gpsButton: elements.mapGpsButton,
+      mapElement: elements.mapElement,
+      mapSection: elements.mapSection,
       onSelectHighway: selectHighwayFromMap,
       onWatchCamera: watchCameraFromMap,
       summary: elements.mapSummary,
-      svg: elements.mapSvg,
+      tileUrl: query.get("tileFail") === "1"
+        ? "./__tile-fallback-test__/{z}/{x}/{y}.png"
+        : undefined,
+      tileStatus: elements.mapTileStatus,
       toggle: elements.mapToggle,
     });
-    state.offlineMap.setData(state.highways, state.cameras);
+    state.routeMap.setData(state.highways, state.cameras);
     renderHighways();
     if (state.demo) {
       elements.demoPanel.hidden = false;
@@ -839,7 +852,7 @@ async function loadData() {
   } catch {
     elements.start.disabled = true;
     elements.gpsStatus.textContent = "Data gagal dimuat";
-    elements.routeHelper.textContent = "Jalankan situs melalui server HTTP, bukan langsung dari file lokal.";
+    elements.routeHelper.textContent = "Peta atau berkas data gagal dimuat. Muat ulang halaman, lalu coba lagi.";
     setJourneyStatus("Berkas data tidak dapat dibaca.");
   }
 }
@@ -900,6 +913,7 @@ elements.video.addEventListener("webkitendfullscreen", () => {
 
 window.addEventListener("beforeunload", () => {
   if (state.watchId !== null) navigator.geolocation.clearWatch(state.watchId);
+  state.routeMap?.destroy();
   if (state.hls) state.hls.destroy();
 });
 

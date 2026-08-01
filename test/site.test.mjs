@@ -29,7 +29,10 @@ test("static page exposes the required accessible controls with relative assets"
     "manual-camera-button",
     "map-toggle",
     "map-body",
-    "route-map-svg",
+    "route-map",
+    "map-expand-button",
+    "map-close-button",
+    "map-tile-status",
     "map-gps-button",
     "map-camera-card",
     "map-camera-list",
@@ -43,9 +46,14 @@ test("static page exposes the required accessible controls with relative assets"
   assert.equal($("#camera-video").attr("x-webkit-airplay"), "allow");
   assert.equal($("script[src^='http']").length, 0);
   assert.equal($("#map-toggle").is("[checked]"), true);
-  assert.match($("#route-map-svg").attr("aria-label"), /skematik/i);
-  assert.match($("link[rel='stylesheet']").attr("href"), /^\.\/styles\.css\?v=/);
+  assert.match($("#route-map").attr("aria-label"), /OpenStreetMap/i);
+  assert.equal($("link[href^='http']").length, 0);
+  assert.equal($("link[href='./vendor/leaflet/leaflet.css']").length, 1);
+  assert.equal($("link[href='./vendor/leaflet-markercluster/MarkerCluster.css']").length, 1);
+  assert.match($("link[href^='./styles.css']").attr("href"), /^\.\/styles\.css\?v=/);
   assert.match($("script[type='module']").attr("src"), /^\.\/js\/app\.mjs\?v=/);
+  assert.equal($("script[src='./vendor/leaflet/leaflet.js']").length, 1);
+  assert.equal($("script[src='./vendor/leaflet-markercluster/leaflet.markercluster.js']").length, 1);
   assert.equal($("#route-shortcut").is("button"), true);
   assert.match($("#route-shortcut").attr("aria-label"), /Langkah 1/i);
   assert.equal($("#route-shortcut").text().trim(), "#1");
@@ -82,6 +90,31 @@ test("vendored HLS player and license are committed for offline site loading", a
   );
   assert.ok(player.size > 100_000);
   assert.match(license, /Apache License/);
+});
+
+test("vendored map libraries and licenses are committed without CDN loading", async () => {
+  const leaflet = await stat(new URL("../docs/vendor/leaflet/leaflet.js", import.meta.url));
+  const leafletMap = await stat(new URL("../docs/vendor/leaflet/leaflet.js.map", import.meta.url));
+  const cluster = await stat(new URL("../docs/vendor/leaflet-markercluster/leaflet.markercluster.js", import.meta.url));
+  const clusterMap = await stat(new URL("../docs/vendor/leaflet-markercluster/leaflet.markercluster.js.map", import.meta.url));
+  const leafletLicense = await readFile(new URL("../docs/vendor/leaflet/LICENSE.txt", import.meta.url), "utf8");
+  const clusterLicense = await readFile(new URL("../docs/vendor/leaflet-markercluster/LICENSE.txt", import.meta.url), "utf8");
+  assert.ok(leaflet.size > 100_000);
+  assert.ok(leafletMap.size > 100_000);
+  assert.ok(cluster.size > 20_000);
+  assert.ok(clusterMap.size > 20_000);
+  assert.match(leafletLicense, /BSD 2-Clause License/);
+  assert.match(clusterLicense, /MIT License|Permission is hereby granted/);
+  for (const asset of [
+    "layers.png",
+    "layers-2x.png",
+    "marker-icon.png",
+    "marker-icon-2x.png",
+    "marker-shadow.png",
+  ]) {
+    const file = await stat(new URL(`../docs/vendor/leaflet/images/${asset}`, import.meta.url));
+    assert.ok(file.size > 100, `${asset} must be vendored`);
+  }
 });
 
 test("automatic switching data is either verified or explicitly provisional", async () => {

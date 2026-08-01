@@ -9,7 +9,10 @@
       content="Pemutar CCTV jalan tol Jakarta berbasis lokasi yang menjaga data lokasi tetap di perangkat Anda."
     >
     <title>Jalur CCTV — Tol Jakarta</title>
-    <link rel="stylesheet" href="./styles.css?v=20260801-gap2">
+    <link rel="stylesheet" href="./vendor/leaflet/leaflet.css">
+    <link rel="stylesheet" href="./vendor/leaflet-markercluster/MarkerCluster.css">
+    <link rel="stylesheet" href="./vendor/leaflet-markercluster/MarkerCluster.Default.css">
+    <link rel="stylesheet" href="./styles.css?v=20260801-map1">
   </head>
   <body>
     <header class="site-header">
@@ -41,7 +44,7 @@
         </div>
         <p class="privacy-note">
           <span aria-hidden="true">●</span>
-          Lokasi diproses di perangkat ini dan tidak pernah dikirim atau disimpan.
+          Koordinat GPS tidak dikirim atau disimpan oleh aplikasi. Peta online memuat tile OpenStreetMap sesuai area yang ditampilkan.
         </p>
       </section>
 
@@ -66,24 +69,38 @@
             <div class="map-heading">
               <div>
                 <strong id="map-title">Gambaran ruas dan CCTV</strong>
-                <span id="map-summary">Memuat geometri lokal…</span>
+                <span id="map-summary">Memuat peta OpenStreetMap…</span>
               </div>
-              <label class="map-toggle">
-                <input id="map-toggle" type="checkbox" checked>
-                <span>Tampilkan peta</span>
-              </label>
+              <div class="map-heading-actions">
+                <label class="map-toggle">
+                  <input id="map-toggle" type="checkbox" checked>
+                  <span>Tampilkan peta</span>
+                </label>
+                <button class="map-close-button" id="map-close-button" type="button" hidden>
+                  Tutup peta
+                </button>
+              </div>
             </div>
             <div id="map-body">
               <div class="map-canvas">
-                <svg
-                  id="route-map-svg"
-                  role="img"
-                  aria-label="Peta skematik ruas tol dan perkiraan posisi CCTV"
-                  preserveAspectRatio="xMidYMid meet"
-                ></svg>
+                <div
+                  id="route-map"
+                  role="application"
+                  aria-label="Peta OpenStreetMap ruas tol, CCTV, dan lokasi GPS"
+                ></div>
                 <button class="map-gps-button" id="map-gps-button" type="button" disabled>
                   Kembali ke lokasi saya
                 </button>
+                <button
+                  class="map-expand-button"
+                  id="map-expand-button"
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls="route-map"
+                >
+                  Perbesar peta
+                </button>
+                <div class="map-tile-status" id="map-tile-status" role="status" hidden></div>
               </div>
               <div class="map-camera-card" id="map-camera-card" hidden>
                 <div class="map-camera-status">
@@ -93,7 +110,7 @@
                 <div id="map-camera-list"></div>
               </div>
               <p class="map-disclaimer">
-                Peta skematik offline dari data OpenStreetMap—bukan navigasi seperti Waze atau Google Maps.
+                Peta online OpenStreetMap—bukan navigasi. Gunakan saat berhenti atau oleh penumpang. Tile mengikuti area yang ditampilkan.
               </p>
             </div>
           </section>
@@ -256,7 +273,9 @@
     </footer>
 
     <noscript>Situs ini memerlukan JavaScript untuk mencocokkan lokasi dan memutar HLS.</noscript>
+    <script src="./vendor/leaflet/leaflet.js"></script>
+    <script src="./vendor/leaflet-markercluster/leaflet.markercluster.js"></script>
     <script src="./vendor/hls.min.js"></script>
-    <script type="module" src="./js/app.mjs?v=20260801-ux2"></script>
+    <script type="module" src="./js/app.mjs?v=20260801-map1"></script>
   </body>
 </html>

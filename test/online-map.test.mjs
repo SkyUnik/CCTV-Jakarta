@@ -1,12 +1,13 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 import {
   coordinateAtRoadPosition,
-  createSchematicProjection,
+  createGpsCenterTracker,
   estimateCameraOnHighway,
   groupEstimatedCameraMarkers,
-} from "../docs/js/offline-map.mjs";
+} from "../docs/js/online-map.mjs";
 
 const feature = {
   type: "Feature",
@@ -68,11 +69,34 @@ test("refuses cameras outside calibration and groups colocated records", () => {
   assert.deepEqual(result.unlocated.map((camera) => camera.id), ["outside", "missing"]);
 });
 
-test("creates stable finite SVG views for all and selected roads", () => {
-  const projection = createSchematicProjection([feature]);
-  const selected = projection.viewBoxForFeature(feature);
-  assert.deepEqual(projection.allViewBox, { x: 0, y: 0, width: 1_000, height: 620 });
-  assert.ok(Object.values(selected).every(Number.isFinite));
-  assert.ok(selected.width > 0);
-  assert.ok(selected.height > 0);
+test("centers on only the first GPS fix until tracking is reset", () => {
+  const tracker = createGpsCenterTracker();
+  assert.equal(tracker.shouldCenter({ latitude: -6.2, longitude: 106.8 }), true);
+  assert.equal(tracker.shouldCenter({ latitude: -6.19, longitude: 106.81 }), false);
+  tracker.reset();
+  assert.equal(tracker.shouldCenter({ latitude: -6.18, longitude: 106.82 }), true);
+});
+
+test("online map preserves overlays on tile failure and resizes after reveal", async () => {
+  const source = await readFile(
+    new URL("../docs/js/online-map.mjs", import.meta.url),
+    "utf8",
+  );
+  assert.match(source, /tileLayer\.on\("tileerror"/);
+  assert.match(source, /routeLayer\s*=\s*leaflet\.featureGroup\(\)\.addTo\(map\)/);
+  assert.match(source, /markerLayer\s*=\s*leaflet\.markerClusterGroup\(/);
+  assert.match(source, /if \(toggle\.checked\) requestAnimationFrame\(\(\) => map\.invalidateSize/);
+  assert.match(source, /zoomToBoundsOnClick:\s*true/);
+  assert.match(source, /tileUrl\s*=\s*OSM_TILE_URL/);
+});
+
+test("expanded map manages stacking, Escape, and focus restoration", async () => {
+  const source = await readFile(
+    new URL("../docs/js/online-map.mjs", import.meta.url),
+    "utf8",
+  );
+  assert.match(source, /routePanel\?\.classList\.add\("has-expanded-map"\)/);
+  assert.match(source, /routePanel\?\.classList\.remove\("has-expanded-map"\)/);
+  assert.match(source, /if \(expanded && escapeKey\(event\)\) closeExpandedMap\(\)/);
+  assert.match(source, /expandButton\.focus\(\{ preventScroll: true \}\)/);
 });

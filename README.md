@@ -28,13 +28,17 @@ test/         Automated tests and saved public-page fixtures
 
 ## Safety and privacy boundaries
 
-- Browser location stays on the user's device. It is not stored, logged, or sent
-  to this project or to a map service.
+- Coordinates from the Geolocation API stay in browser memory and are never
+  stored, logged, or uploaded by this project. The online map requests standard
+  OpenStreetMap tiles for the visible viewport, so the requested tile area can
+  reveal an approximate location to the OpenStreetMap Foundation.
 - The data collector may read only public Bina Marga CCTV web pages. It must not
   probe hidden endpoints, bypass access controls, scan ports, or download video
   segments.
-- Visitors never query OpenStreetMap or Overpass at runtime. Reviewed road
-  geometry is committed as static GeoJSON.
+- Reviewed road geometry remains committed as static GeoJSON; visitors never
+  query Overpass, Nominatim, or the OSM editing API. The interactive basemap
+  loads only the tiles currently visible from `tile.openstreetmap.org`, with no
+  prefetch, bulk download, offline cache, proxy, or API key.
 - The project has no backend, proxy, database, analytics, or API keys.
 - Automatic playback accepts either surveyed/reviewed coordinates or an
   explicitly audited `provisional_stationing` record. Provisional records must
@@ -183,6 +187,13 @@ The normal preview uses only cameras marked `enabled: true` and
 are curated, open `http://127.0.0.1:4173/?demo=1`. Demo mode clearly identifies
 itself, uses synthetic road positions, and must not be used for navigation or
 driving decisions.
+
+The map uses locally vendored Leaflet code and loads only the visible raster
+tiles from `tile.openstreetmap.org`. Road lines and estimated CCTV positions
+come from the committed local data. To review the no-basemap fallback locally,
+open `http://127.0.0.1:4173/?tileFail=1`; the road, CCTV, and GPS overlays remain
+available over a plain background. Combine it with demo mode using
+`http://127.0.0.1:4173/?demo=1&tileFail=1`.
 
 ### iPhone Safari player
 

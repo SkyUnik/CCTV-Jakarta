@@ -55,7 +55,7 @@ test("committed multi-road geometries are directed, curved, and uniquely identif
 test("all current kilometer cameras can be mapped while provisional records remain distinct", async () => {
   const highways = await readJson("../docs/data/highways.geojson");
   const cameras = await readJson("../docs/data/cameras.json");
-  const { groupEstimatedCameraMarkers } = await import("../docs/js/offline-map.mjs");
+  const { groupEstimatedCameraMarkers } = await import("../docs/js/online-map.mjs");
   const result = groupEstimatedCameraMarkers(cameras.cameras, highways.features);
   assert.equal(result.groups.reduce((total, group) => total + group.cameras.length, 0), 86);
   assert.equal(result.unlocated.length, 8);
