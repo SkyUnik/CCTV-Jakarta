@@ -58,16 +58,6 @@
           <p class="helper" id="route-helper">
             Tekan Mulai CCTV untuk mendeteksi ruas, atau pilih secara manual.
           </p>
-          <div
-            class="tracking-indicator"
-            id="tracking-indicator"
-            data-state="off"
-            role="status"
-            aria-live="polite"
-          >
-            <span aria-hidden="true"></span>
-            <strong>Pelacakan kamera via GPS: tidak aktif</strong>
-          </div>
           <a class="gps-debug-link" id="gps-debug-link" href="./gps-test.html" hidden>
             Jalankan tes izin GPS Safari
           </a>
@@ -129,6 +119,17 @@
             <div><dt>Akurasi GPS</dt><dd id="accuracy-value">—</dd></div>
             <div><dt>Posisi ruas</dt><dd id="position-value">—</dd></div>
           </dl>
+
+          <div
+            class="tracking-indicator"
+            id="tracking-indicator"
+            data-state="off"
+            role="status"
+            aria-live="polite"
+          >
+            <span aria-hidden="true"></span>
+            <strong>Pelacakan kamera via GPS: tidak aktif</strong>
+          </div>
         </aside>
 
         <section class="player-card" aria-labelledby="camera-title">

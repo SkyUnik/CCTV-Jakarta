@@ -52,6 +52,7 @@ test("static page exposes the required accessible controls with relative assets"
   assert.equal($("#restart-button").is("[disabled]"), true);
   assert.match($("#tracking-indicator").text(), /Pelacakan kamera via GPS/i);
   assert.equal($("#tracking-indicator").attr("data-state"), "off");
+  assert.equal($(".telemetry + #tracking-indicator").length, 1);
 });
 
 test("start and floating shortcut smoothly reveal step one without delaying GPS", async () => {
