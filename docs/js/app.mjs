@@ -57,7 +57,9 @@ const elements = {
   position: document.querySelector("#position-value"),
   previous: document.querySelector("#previous-button"),
   retry: document.querySelector("#retry-button"),
+  routePanel: document.querySelector("#route-panel"),
   routeHelper: document.querySelector("#route-helper"),
+  routeShortcut: document.querySelector("#route-shortcut"),
   skip: document.querySelector("#skip-button"),
   sourceLink: document.querySelector("#source-link"),
   start: document.querySelector("#start-button"),
@@ -766,7 +768,20 @@ async function loadData() {
   }
 }
 
-elements.start.addEventListener("click", startTracking);
+function scrollToRoutePanel() {
+  const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+  elements.routePanel.scrollIntoView({
+    behavior: reduceMotion ? "auto" : "smooth",
+    block: "start",
+  });
+}
+
+elements.start.addEventListener("click", () => {
+  // Keep the GPS request synchronous with the tap for iOS Safari permissions.
+  startTracking();
+  scrollToRoutePanel();
+});
+elements.routeShortcut.addEventListener("click", scrollToRoutePanel);
 elements.stop.addEventListener("click", stopTracking);
 elements.manualCameraButton.addEventListener("click", loadManualCamera);
 elements.directionA.addEventListener("click", () => selectDirection("A"));

@@ -19,6 +19,10 @@ test("mobile CSS retains full-width launch controls and compact breakpoints", as
   assert.match(css, /\.map-canvas\s*{[^}]*min-height:\s*230px/s);
   assert.match(css, /\.map-route-line/);
   assert.match(css, /\.map-marker-target/);
+  assert.match(css, /#start-button\s*{[^}]*min-height:\s*64px/s);
+  assert.match(css, /\.manual-camera-picker select\s*{[^}]*min-height:\s*56px/s);
+  assert.match(css, /\.floating-route-button\s*{[^}]*position:\s*fixed[^}]*z-index:\s*1000/s);
+  assert.match(css, /env\(safe-area-inset-bottom\)/);
 });
 
 test("compatibility report contains playlist checks only", async () => {

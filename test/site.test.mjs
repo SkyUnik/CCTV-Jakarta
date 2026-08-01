@@ -9,6 +9,8 @@ test("static page exposes the required accessible controls with relative assets"
   const $ = cheerio.load(html);
   for (const id of [
     "start-button",
+    "route-panel",
+    "route-shortcut",
     "stop-button",
     "highway-list",
     "gps-debug-link",
@@ -42,6 +44,15 @@ test("static page exposes the required accessible controls with relative assets"
   assert.match($("#route-map-svg").attr("aria-label"), /skematik/i);
   assert.equal($("link[rel='stylesheet']").attr("href"), "./styles.css");
   assert.match($("script[type='module']").attr("src"), /^\.\/js\/app\.mjs\?v=/);
+  assert.equal($("#route-shortcut").is("button"), true);
+  assert.match($("#route-shortcut").attr("aria-label"), /Langkah 1/i);
+});
+
+test("start and floating shortcut smoothly reveal step one without delaying GPS", async () => {
+  const app = await readFile(new URL("../docs/js/app.mjs", import.meta.url), "utf8");
+  assert.match(app, /scrollIntoView\(\{[\s\S]*behavior:\s*reduceMotion\s*\?\s*"auto"\s*:\s*"smooth"/);
+  assert.match(app, /elements\.start\.addEventListener\("click",\s*\(\)\s*=>\s*\{\s*\/\/[^\n]*\n\s*startTracking\(\);\s*scrollToRoutePanel\(\);/);
+  assert.match(app, /elements\.routeShortcut\.addEventListener\("click",\s*scrollToRoutePanel\)/);
 });
 
 test("standalone GPS diagnostic has no external dependencies or network code", async () => {

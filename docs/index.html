@@ -46,7 +46,7 @@
       </section>
 
       <section class="workspace" aria-label="Pemutar CCTV">
-        <aside class="route-panel" aria-labelledby="route-title">
+        <aside class="route-panel" id="route-panel" aria-labelledby="route-title">
           <div class="section-heading">
             <div>
               <p class="step-label">Langkah 1</p>
@@ -215,6 +215,16 @@
       </section>
     </main>
 
+    <button
+      class="floating-route-button"
+      id="route-shortcut"
+      type="button"
+      aria-label="Ke Langkah 1 untuk memilih ruas tol"
+    >
+      <span aria-hidden="true">↑</span>
+      Langkah 1
+    </button>
+
     <footer>
       <p>CCTV berasal dari layanan publik Bina Marga dan operator jalan tol.</p>
       <p>Data jalan © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap contributors</a>.</p>
@@ -222,6 +232,6 @@
 
     <noscript>Situs ini memerlukan JavaScript untuk mencocokkan lokasi dan memutar HLS.</noscript>
     <script src="./vendor/hls.min.js"></script>
-    <script type="module" src="./js/app.mjs?v=20260801-auto1"></script>
+    <script type="module" src="./js/app.mjs?v=20260801-ux1"></script>
   </body>
 </html>
