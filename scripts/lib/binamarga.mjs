@@ -7,6 +7,8 @@ export const CAMERA_PAGE_PATH = "/contents/cctv_tol/";
 
 const EDITORIAL_FIELDS = [
   "side",
+  "directions",
+  "cameraType",
   "coordinates",
   "roadPositionM",
   "enabled",

@@ -73,6 +73,12 @@ test("start and floating shortcut smoothly reveal step one without delaying GPS"
   assert.match(app, /message = "Pelacakan kamera via GPS: aktif"/);
 });
 
+test("manual camera selection and playback synchronize the map marker", async () => {
+  const source = await readFile(new URL("../docs/js/app.mjs", import.meta.url), "utf8");
+  assert.match(source, /state\.routeMap\?\.selectCamera\(camera\.id\)/);
+  assert.match(source, /manualCameraSelect\.addEventListener\("change", previewManualCameraOnMap\)/);
+});
+
 test("standalone GPS diagnostic has no external dependencies or network code", async () => {
   const html = await readFile(new URL("../docs/gps-test.html", import.meta.url), "utf8");
   const $ = cheerio.load(html);
@@ -123,10 +129,13 @@ test("automatic switching data is either verified or explicitly provisional", as
   );
   assert.ok(data.cameras.length > 0);
   const enabled = data.cameras.filter((camera) => camera.enabled);
-  assert.equal(enabled.length, 46);
+  assert.equal(enabled.length, 53);
   assert.ok(enabled.every((camera) =>
     camera.curationStatus === "verified" ||
     (camera.curationStatus === "provisional_stationing" &&
+      camera.locationReview?.status === "provisional") ||
+    (camera.curationStatus === "provisional_landmark" &&
+      camera.cameraType === "toll_gate" &&
       camera.locationReview?.status === "provisional")
   ));
 });

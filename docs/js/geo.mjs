@@ -123,6 +123,13 @@ export function verifiedCameras(cameras, highwayId, side) {
     .sort((a, b) => a.roadPositionM - b.roadPositionM);
 }
 
+export function cameraSupportsDirection(camera, side) {
+  if (camera.side === side) return true;
+  return camera.cameraType === "toll_gate" &&
+    Array.isArray(camera.directions) &&
+    camera.directions.includes(side);
+}
+
 export function automaticCameras(cameras, highwayId, side) {
   const eligible = cameras
     .filter((camera) => {
@@ -130,10 +137,14 @@ export function automaticCameras(cameras, highwayId, side) {
       const provisional =
         camera.curationStatus === "provisional_stationing" &&
         camera.locationReview?.method === "osm_route_stationing_interpolation";
+      const landmark =
+        camera.cameraType === "toll_gate" &&
+        camera.curationStatus === "provisional_landmark" &&
+        camera.locationReview?.method === "osm_toll_booth_projection";
       return camera.highwayId === highwayId &&
-        camera.side === side &&
+        cameraSupportsDirection(camera, side) &&
         camera.enabled === true &&
-        (reviewed || provisional) &&
+        (reviewed || provisional || landmark) &&
         Array.isArray(camera.coordinates) &&
         Number.isFinite(camera.roadPositionM);
     })

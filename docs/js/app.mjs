@@ -212,6 +212,7 @@ async function playCamera(camera, options = {}) {
   state.routeEnded = false;
   passTracker.reset();
   updateTrackingIndicator();
+  state.routeMap?.selectCamera(camera.id);
 
   elements.video.muted = muted;
   elements.videoPlaceholder.hidden = true;
@@ -383,7 +384,9 @@ function updateManualCameraPicker() {
   for (const camera of state.manualCameras) {
     const option = document.createElement("option");
     option.value = camera.id;
-    const side = camera.side ? ` • ${camera.side}` : "";
+    const directionLabel = camera.side ??
+      (Array.isArray(camera.directions) ? camera.directions.join("/") : null);
+    const side = directionLabel ? ` • ${directionLabel}` : "";
     option.textContent = `${formatKm(camera.km)}${side} — ${camera.name}`;
     elements.manualCameraSelect.append(option);
   }
@@ -499,7 +502,10 @@ function watchCameraFromMap(camera) {
     selectDirection(camera.side);
     return;
   }
-  setJourneyStatus("Pilih arah A atau B untuk menonton kamera ini. Lokasi marker masih berupa perkiraan berdasarkan KM.");
+  const locationNote = camera.cameraType === "toll_gate"
+    ? "Lokasi gerbang bersifat provisional dari landmark publik."
+    : "Lokasi marker masih berupa perkiraan berdasarkan KM.";
+  setJourneyStatus(`Pilih arah A atau B untuk menonton kamera ini. ${locationNote}`);
   elements.directionSection.hidden = false;
   elements.directionA.focus({ preventScroll: true });
 }
@@ -749,6 +755,13 @@ function loadManualCamera() {
   playCamera(camera);
 }
 
+function previewManualCameraOnMap() {
+  const camera = state.manualCameras.find(
+    (candidate) => candidate.id === elements.manualCameraSelect.value,
+  );
+  if (camera) state.routeMap?.selectCamera(camera.id);
+}
+
 function restartSavedSelection() {
   if (elements.restart.disabled) return;
   const savedSelection = {
@@ -874,6 +887,7 @@ elements.routeShortcut.addEventListener("click", scrollToRoutePanel);
 elements.restart.addEventListener("click", restartSavedSelection);
 elements.stop.addEventListener("click", stopTracking);
 elements.manualCameraButton.addEventListener("click", loadManualCamera);
+elements.manualCameraSelect.addEventListener("change", previewManualCameraOnMap);
 elements.directionA.addEventListener("click", () => selectDirection("A"));
 elements.directionB.addEventListener("click", () => selectDirection("B"));
 elements.previous.addEventListener("click", () => moveCamera(-1));

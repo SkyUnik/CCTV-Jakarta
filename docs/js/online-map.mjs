@@ -43,6 +43,22 @@ export function coordinateAtRoadPosition(coordinates, requestedPositionM) {
 }
 
 export function estimateCameraOnHighway(camera, feature) {
+  if (
+    Array.isArray(camera?.coordinates) &&
+    camera.coordinates.length === 2 &&
+    camera.coordinates.every(Number.isFinite) &&
+    Number.isFinite(camera.roadPositionM)
+  ) {
+    return {
+      camera,
+      coordinate: [...camera.coordinates],
+      highwayId: feature?.properties?.id ?? feature?.id,
+      quality: camera.curationStatus === "provisional_landmark"
+        ? "provisional_landmark"
+        : "verified_coordinate",
+      roadPositionM: camera.roadPositionM,
+    };
+  }
   if (!Number.isFinite(camera?.km)) return null;
   const anchors = feature?.properties?.cameraStationing?.anchors;
   if (!Array.isArray(anchors) || anchors.length !== 2) return null;
@@ -99,6 +115,12 @@ export function groupEstimatedCameraMarkers(cameras, features) {
     groups.set(key, group);
   }
   return { groups: [...groups.values()], unlocated };
+}
+
+export function findCameraMarkerGroup(groups, cameraId) {
+  return groups.find((group) =>
+    group.cameras.some((camera) => camera.id === cameraId)
+  ) ?? null;
 }
 
 export function createGpsCenterTracker() {
@@ -199,6 +221,7 @@ export function createOnlineMap(options) {
   let gpsAccuracyLayer = null;
   let gpsFix = null;
   let gpsMarker = null;
+  let markerGroups = [];
   let selectedHighwayId = null;
   let tileFailed = false;
 
@@ -236,7 +259,9 @@ export function createOnlineMap(options) {
       const name = document.createElement("strong");
       const metadata = document.createElement("span");
       name.textContent = camera.name;
-      metadata.textContent = `${Number.isFinite(camera.km) ? `KM ${camera.km.toFixed(3)}` : "KM —"}${camera.side ? ` • ${camera.side}` : " • arah belum pasti"}`;
+      const direction = camera.side ??
+        (Array.isArray(camera.directions) ? camera.directions.join("/") : null);
+      metadata.textContent = `${Number.isFinite(camera.km) ? `KM ${camera.km.toFixed(3)}` : "KM —"}${direction ? ` • ${direction}` : " • arah belum pasti"}`;
       description.append(name, metadata);
       const watch = document.createElement("button");
       watch.className = "button button-small";
@@ -250,7 +275,9 @@ export function createOnlineMap(options) {
     cameraCard.hidden = false;
     cameraCard.querySelector("strong").textContent = group.cameras.length > 1
       ? `${group.cameras.length} kamera di titik ini`
-      : "Lokasi perkiraan berdasarkan KM";
+      : group.quality === "provisional_landmark"
+        ? "Lokasi gerbang provisional dari OpenStreetMap"
+        : "Lokasi perkiraan berdasarkan KM";
   }
 
   function cameraIcon(count, muted) {
@@ -365,6 +392,24 @@ export function createOnlineMap(options) {
       const entry = routeEntries.get(highwayId);
       if (entry) fit(entry.line.getBounds(), 15);
     },
+    selectCamera(cameraId) {
+      const group = findCameraMarkerGroup(markerGroups, cameraId);
+      if (!group) return false;
+      const entry = markerEntries.find((candidate) => candidate.group === group);
+      if (!entry) return false;
+      selectedHighwayId = group.highwayId;
+      updateSelectionStyles();
+      const reveal = () => showCameraGroup(group);
+      map.setView(toLatLng(group.coordinate), Math.max(map.getZoom(), 16), {
+        animate: true,
+      });
+      if (typeof markerLayer.zoomToShowLayer === "function") {
+        markerLayer.zoomToShowLayer(entry.marker, reveal);
+      } else {
+        reveal();
+      }
+      return true;
+    },
     setData(nextFeatures, nextCameras) {
       features = nextFeatures;
       routeLayer.clearLayers();
@@ -395,10 +440,14 @@ export function createOnlineMap(options) {
       }
 
       const markerData = groupEstimatedCameraMarkers(nextCameras, features);
+      markerGroups = markerData.groups;
       for (const group of markerData.groups) {
         const feature = features.find((candidate) => featureId(candidate) === group.highwayId);
         const kilometer = group.cameras[0]?.km;
-        const label = `${group.cameras.length} kamera ${feature?.properties?.name ?? group.highwayId}, ${Number.isFinite(kilometer) ? `KM ${kilometer.toFixed(3)}` : "KM belum tersedia"}, lokasi perkiraan`;
+        const locationLabel = group.quality === "provisional_landmark"
+          ? "koordinat gerbang provisional"
+          : "lokasi perkiraan";
+        const label = `${group.cameras.length} kamera ${feature?.properties?.name ?? group.highwayId}, ${Number.isFinite(kilometer) ? `KM ${kilometer.toFixed(3)}` : "KM belum tersedia"}, ${locationLabel}`;
         const marker = leaflet.marker(toLatLng(group.coordinate), {
           alt: label,
           icon: cameraIcon(group.cameras.length, false),
@@ -421,7 +470,10 @@ export function createOnlineMap(options) {
       }
 
       allBounds = routeLayer.getBounds();
-      summary.textContent = `${markerData.groups.reduce((total, group) => total + group.cameras.length, 0)} kamera dipetakan secara perkiraan • ${markerData.unlocated.length} tanpa lokasi`;
+      const landmarkCount = markerData.groups.reduce((total, group) =>
+        total + (group.quality === "provisional_landmark" ? group.cameras.length : 0), 0);
+      const mappedCount = markerData.groups.reduce((total, group) => total + group.cameras.length, 0);
+      summary.textContent = `${mappedCount} kamera dipetakan • ${landmarkCount} gerbang provisional • ${markerData.unlocated.length} tanpa lokasi`;
       selectedHighwayId = null;
       updateSelectionStyles();
       fit(allBounds, 12);

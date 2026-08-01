@@ -4,6 +4,7 @@ import test from "node:test";
 import {
   adjacentCamera,
   automaticCameras,
+  cameraSupportsDirection,
   createPassTracker,
   initialCamera,
   matchHighways,
@@ -71,6 +72,27 @@ test("allows audited provisional stationing and deduplicates one side at one pos
     ["duplicate", "next"],
   );
   assert.equal(verifiedCameras(cameras, "road", "A").length, 0);
+});
+
+test("allows an explicitly sourced toll gate in both A and B, but not generic unknown-side cameras", () => {
+  const gate = {
+    id: "gate",
+    highwayId: "road",
+    side: null,
+    directions: ["A", "B"],
+    cameraType: "toll_gate",
+    roadPositionM: 1_000,
+    coordinates: [106.8, -6.2],
+    enabled: true,
+    curationStatus: "provisional_landmark",
+    locationReview: { method: "osm_toll_booth_projection" },
+  };
+  const unsafe = { ...gate, id: "unsafe", cameraType: undefined };
+  assert.equal(cameraSupportsDirection(gate, "A"), true);
+  assert.equal(cameraSupportsDirection(gate, "B"), true);
+  assert.equal(cameraSupportsDirection(unsafe, "A"), false);
+  assert.deepEqual(automaticCameras([gate, unsafe], "road", "A").map(({ id }) => id), ["gate"]);
+  assert.deepEqual(automaticCameras([gate, unsafe], "road", "B").map(({ id }) => id), ["gate"]);
 });
 
 test("matches within the dynamic threshold and rejects poor accuracy", () => {

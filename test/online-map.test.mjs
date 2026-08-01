@@ -6,6 +6,7 @@ import {
   coordinateAtRoadPosition,
   createGpsCenterTracker,
   estimateCameraOnHighway,
+  findCameraMarkerGroup,
   groupEstimatedCameraMarkers,
 } from "../docs/js/online-map.mjs";
 
@@ -55,6 +56,21 @@ test("calibrates a provider kilometer without creating verified coordinates", ()
   assert.equal(camera.enabled, false);
 });
 
+test("uses an explicit provisional gate coordinate before KM interpolation", () => {
+  const camera = {
+    id: "gate",
+    highwayId: "road",
+    km: 11,
+    coordinates: [106.805, -6.201],
+    roadPositionM: 777,
+    curationStatus: "provisional_landmark",
+  };
+  const estimate = estimateCameraOnHighway(camera, feature);
+  assert.deepEqual(estimate.coordinate, camera.coordinates);
+  assert.equal(estimate.roadPositionM, 777);
+  assert.equal(estimate.quality, "provisional_landmark");
+});
+
 test("refuses cameras outside calibration and groups colocated records", () => {
   const cameras = [
     { id: "a", highwayId: "road", km: 11 },
@@ -67,6 +83,15 @@ test("refuses cameras outside calibration and groups colocated records", () => {
   assert.equal(result.groups.length, 1);
   assert.deepEqual(result.groups[0].cameras.map((camera) => camera.id), ["a", "b"]);
   assert.deepEqual(result.unlocated.map((camera) => camera.id), ["outside", "missing"]);
+});
+
+test("finds the grouped map marker for a manually selected camera", () => {
+  const result = groupEstimatedCameraMarkers([
+    { id: "camera-a", highwayId: "road", km: 11 },
+    { id: "camera-b", highwayId: "road", km: 11 },
+  ], [feature]);
+  assert.equal(findCameraMarkerGroup(result.groups, "camera-b"), result.groups[0]);
+  assert.equal(findCameraMarkerGroup(result.groups, "missing"), null);
 });
 
 test("centers on only the first GPS fix until tracking is reset", () => {
@@ -88,6 +113,8 @@ test("online map preserves overlays on tile failure and resizes after reveal", a
   assert.match(source, /if \(toggle\.checked\) requestAnimationFrame\(\(\) => map\.invalidateSize/);
   assert.match(source, /zoomToBoundsOnClick:\s*true/);
   assert.match(source, /tileUrl\s*=\s*OSM_TILE_URL/);
+  assert.match(source, /selectCamera\(cameraId\)/);
+  assert.match(source, /markerLayer\.zoomToShowLayer\(entry\.marker, reveal\)/);
 });
 
 test("expanded map manages stacking, Escape, and focus restoration", async () => {

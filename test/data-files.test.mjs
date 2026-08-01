@@ -57,9 +57,10 @@ test("all current kilometer cameras can be mapped while provisional records rema
   const cameras = await readJson("../docs/data/cameras.json");
   const { groupEstimatedCameraMarkers } = await import("../docs/js/online-map.mjs");
   const result = groupEstimatedCameraMarkers(cameras.cameras, highways.features);
-  assert.equal(result.groups.reduce((total, group) => total + group.cameras.length, 0), 86);
-  assert.equal(result.unlocated.length, 8);
-  assert.ok(result.groups.every((group) => group.quality === "estimated_stationing"));
+  assert.equal(result.groups.reduce((total, group) => total + group.cameras.length, 0), 93);
+  assert.equal(result.unlocated.length, 1);
+  assert.equal(result.groups.filter((group) => group.quality === "provisional_landmark")
+    .reduce((total, group) => total + group.cameras.length, 0), 7);
   assert.equal(cameras.cameras.filter((camera) => camera.curationStatus === "verified").length, 0);
   assert.ok(cameras.cameras.filter((camera) => camera.curationStatus === "provisional_stationing").every((camera) =>
     camera.locationReview?.warning.includes("not a surveyed camera coordinate")
@@ -77,20 +78,44 @@ test("only explicitly directed provisional records enter automatic playback", as
   assert.equal(data.cameras.filter((camera) => camera.highwayId === "jakarta-bogor-ciawi").length, 28);
   assert.equal(verifiedCameras(data.cameras, "dalam-kota", "A").length, 0);
   assert.equal(verifiedCameras(data.cameras, "dalam-kota", "B").length, 0);
-  assert.equal(data.cameras.filter((camera) => camera.enabled).length, 46);
+  assert.equal(data.cameras.filter((camera) => camera.enabled).length, 53);
   assert.equal(data.cameras.filter((camera) => camera.curationStatus === "provisional_stationing").length, 46);
-  assert.equal(data.cameras.filter((camera) => camera.curationStatus === "needs_review").length, 48);
+  assert.equal(data.cameras.filter((camera) => camera.curationStatus === "provisional_landmark").length, 7);
+  assert.equal(data.cameras.filter((camera) => camera.curationStatus === "needs_review").length, 41);
   assert.equal(automaticCameras(data.cameras, "dalam-kota", "A").length, 2);
   assert.equal(automaticCameras(data.cameras, "dalam-kota", "B").length, 2);
-  assert.equal(automaticCameras(data.cameras, "akses-tanjung-priok", "A").length, 13);
-  assert.equal(automaticCameras(data.cameras, "akses-tanjung-priok", "B").length, 11);
+  assert.equal(automaticCameras(data.cameras, "akses-tanjung-priok", "A").length, 19);
+  assert.equal(automaticCameras(data.cameras, "akses-tanjung-priok", "B").length, 17);
   assert.equal(automaticCameras(data.cameras, "jakarta-bogor-ciawi", "A").length, 1);
   assert.equal(automaticCameras(data.cameras, "jakarta-bogor-ciawi", "B").length, 15);
-  assert.equal(automaticCameras(data.cameras, "6-tol-dalam-kota-kelapa-gading-pulo-gebang", "A").length, 0);
+  assert.equal(automaticCameras(data.cameras, "6-tol-dalam-kota-kelapa-gading-pulo-gebang", "A").length, 1);
+  assert.equal(automaticCameras(data.cameras, "6-tol-dalam-kota-kelapa-gading-pulo-gebang", "B").length, 1);
   assert.ok(data.cameras.filter((camera) => camera.enabled).every((camera) =>
-    (camera.side === "A" || camera.side === "B") &&
+    ((camera.side === "A" || camera.side === "B") ||
+      (camera.cameraType === "toll_gate" && camera.side === null &&
+        camera.directions?.join("") === "AB")) &&
     Array.isArray(camera.coordinates) &&
     Number.isFinite(camera.roadPositionM) &&
-    camera.locationReview?.method === "osm_route_stationing_interpolation"
+    ["osm_route_stationing_interpolation", "osm_toll_booth_projection"]
+      .includes(camera.locationReview?.method)
   ));
+
+  const expectedGates = new Map([
+    ["binamarga-akses-tanjung-priok-1514", ["3723687947", 8_473]],
+    ["binamarga-akses-tanjung-priok-1176", ["5630170832", 6_503]],
+    ["binamarga-akses-tanjung-priok-1175", ["4919847409", 6_177]],
+    ["binamarga-akses-tanjung-priok-1174", ["5671841190", 2_797]],
+    ["binamarga-akses-tanjung-priok-742", ["5665426814", 5_065]],
+    ["binamarga-akses-tanjung-priok-743", ["10738919923", 494]],
+    ["binamarga-6-tol-dalam-kota-kelapa-gading-pulo-gebang-1438", ["8956339735", 6_558]],
+  ]);
+  const gates = data.cameras.filter((camera) => camera.cameraType === "toll_gate");
+  assert.equal(gates.length, expectedGates.size);
+  for (const camera of gates) {
+    const expected = expectedGates.get(camera.id);
+    assert.ok(expected, `unexpected gate ${camera.id}`);
+    assert.equal(camera.locationReview.osmElementId, expected[0]);
+    assert.equal(camera.roadPositionM, expected[1]);
+    assert.deepEqual(camera.directions, ["A", "B"]);
+  }
 });

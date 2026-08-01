@@ -92,6 +92,8 @@ test("merge updates scraped fields but preserves editorial review", () => {
       name: "Old provider label",
       streamUrl: "https://media.example/old.m3u8",
       side: "A",
+      directions: ["A", "B"],
+      cameraType: "toll_gate",
       coordinates: [106.87, -6.24],
       roadPositionM: 10_600,
       enabled: true,
@@ -104,6 +106,8 @@ test("merge updates scraped fields but preserves editorial review", () => {
   assert.equal(merged.name, "Updated provider label");
   assert.equal(merged.streamUrl, "https://media.example/new.m3u8");
   assert.equal(merged.side, "A");
+  assert.deepEqual(merged.directions, ["A", "B"]);
+  assert.equal(merged.cameraType, "toll_gate");
   assert.deepEqual(merged.coordinates, [106.87, -6.24]);
   assert.equal(merged.enabled, true);
   assert.equal(merged.curationStatus, "verified");
