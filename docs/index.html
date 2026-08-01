@@ -58,6 +58,16 @@
           <p class="helper" id="route-helper">
             Tekan Mulai CCTV untuk mendeteksi ruas, atau pilih secara manual.
           </p>
+          <div
+            class="tracking-indicator"
+            id="tracking-indicator"
+            data-state="off"
+            role="status"
+            aria-live="polite"
+          >
+            <span aria-hidden="true"></span>
+            <strong>Pelacakan kamera via GPS: tidak aktif</strong>
+          </div>
           <a class="gps-debug-link" id="gps-debug-link" href="./gps-test.html" hidden>
             Jalankan tes izin GPS Safari
           </a>
@@ -215,15 +225,27 @@
       </section>
     </main>
 
-    <button
-      class="floating-route-button"
-      id="route-shortcut"
-      type="button"
-      aria-label="Ke Langkah 1 untuk memilih ruas tol"
-    >
-      <span aria-hidden="true">↑</span>
-      Langkah 1
-    </button>
+    <div class="floating-actions" aria-label="Navigasi cepat">
+      <button
+        class="floating-action"
+        id="restart-button"
+        type="button"
+        aria-label="Mulai ulang pilihan dan buka pemutar layar penuh"
+        title="Mulai ulang pilihan dan buka pemutar"
+        disabled
+      >
+        <span aria-hidden="true">↻</span>
+      </button>
+      <button
+        class="floating-action"
+        id="route-shortcut"
+        type="button"
+        aria-label="Ke Langkah 1 untuk memilih ruas tol"
+        title="Ke Langkah 1"
+      >
+        <span aria-hidden="true">#1</span>
+      </button>
+    </div>
 
     <footer>
       <p>CCTV berasal dari layanan publik Bina Marga dan operator jalan tol.</p>
@@ -232,6 +254,6 @@
 
     <noscript>Situs ini memerlukan JavaScript untuk mencocokkan lokasi dan memutar HLS.</noscript>
     <script src="./vendor/hls.min.js"></script>
-    <script type="module" src="./js/app.mjs?v=20260801-ux1"></script>
+    <script type="module" src="./js/app.mjs?v=20260801-ux2"></script>
   </body>
 </html>

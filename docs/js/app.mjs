@@ -56,6 +56,7 @@ const elements = {
   playerHelper: document.querySelector("#player-helper"),
   position: document.querySelector("#position-value"),
   previous: document.querySelector("#previous-button"),
+  restart: document.querySelector("#restart-button"),
   retry: document.querySelector("#retry-button"),
   routePanel: document.querySelector("#route-panel"),
   routeHelper: document.querySelector("#route-helper"),
@@ -64,6 +65,7 @@ const elements = {
   sourceLink: document.querySelector("#source-link"),
   start: document.querySelector("#start-button"),
   stop: document.querySelector("#stop-button"),
+  trackingIndicator: document.querySelector("#tracking-indicator"),
   video: document.querySelector("#camera-video"),
   videoPlaceholder: document.querySelector("#video-placeholder"),
 };
@@ -99,6 +101,40 @@ let passTracker = createPassTracker();
 
 function setJourneyStatus(message) {
   elements.journeyStatus.textContent = message;
+}
+
+function updateTrackingIndicator() {
+  let indicatorState = "off";
+  let message = "Pelacakan kamera via GPS: tidak aktif";
+  if (elements.start.disabled && state.watchId === null) {
+    indicatorState = "standby";
+    message = "Pelacakan kamera via GPS: menunggu lokasi";
+  } else if (state.watchId !== null && state.manualMode) {
+    indicatorState = "standby";
+    message = "GPS aktif, tetapi pergantian kamera manual";
+  } else if (
+    state.watchId !== null &&
+    state.highway &&
+    state.direction &&
+    state.currentCamera
+  ) {
+    indicatorState = "active";
+    message = "Pelacakan kamera via GPS: aktif";
+  } else if (state.watchId !== null) {
+    indicatorState = "standby";
+    message = "GPS aktif • pilih ruas dan arah";
+  }
+  elements.trackingIndicator.dataset.state = indicatorState;
+  elements.trackingIndicator.querySelector("strong").textContent = message;
+}
+
+function updateRestartButton() {
+  elements.restart.disabled = !(
+    state.highway &&
+    state.direction &&
+    state.currentCamera &&
+    state.playerReady
+  );
 }
 
 function selectedHighwayId() {
@@ -137,6 +173,7 @@ function destroyPlayer() {
 function setPlayerReady(ready) {
   state.playerReady = ready;
   elements.openPlayer.disabled = !ready || !state.currentCamera;
+  updateRestartButton();
 }
 
 function showPlaybackError(message) {
@@ -168,6 +205,7 @@ async function playCamera(camera, options = {}) {
   state.currentCamera = camera;
   state.routeEnded = false;
   passTracker.reset();
+  updateTrackingIndicator();
 
   elements.video.muted = muted;
   elements.videoPlaceholder.hidden = true;
@@ -384,6 +422,7 @@ function selectDirection(direction) {
   state.playIntent = false;
   state.routeEnded = false;
   passTracker.reset();
+  updateTrackingIndicator();
   elements.directionA.setAttribute("aria-pressed", String(direction === "A"));
   elements.directionB.setAttribute("aria-pressed", String(direction === "B"));
   updateUsableCameras();
@@ -421,6 +460,7 @@ function selectHighway(feature) {
   state.routeEnded = false;
   state.manualMode = false;
   state.pendingMapCamera = null;
+  updateTrackingIndicator();
   state.offlineMap?.selectHighway(nextId);
   elements.directionSection.hidden = false;
   const properties = feature.properties ?? {};
@@ -514,6 +554,7 @@ function handlePosition(position) {
     accuracy: position.coords.accuracy,
   };
   state.lastPosition = fix;
+  updateTrackingIndicator();
   state.offlineMap?.updatePosition(fix);
   elements.accuracy.textContent = `±${Math.round(fix.accuracy)} m`;
   const result = matchHighways(fix, state.highways);
@@ -582,6 +623,7 @@ async function geolocationError(error, attempt = state.locationAttempt) {
   state.watchId = null;
   elements.start.disabled = false;
   elements.stop.hidden = true;
+  updateTrackingIndicator();
   const permissionState = error?.code === 1
     ? await geolocationPermissionState(navigator.permissions)
     : "unavailable";
@@ -623,6 +665,7 @@ function startTracking() {
   elements.gpsStatus.textContent = "Meminta izin GPS…";
   elements.routeHelper.textContent = "Safari mungkin menampilkan permintaan izin lokasi untuk situs ini.";
   elements.gpsDebug.hidden = true;
+  updateTrackingIndicator();
 
   // Ask for one fix directly from the button tap before registering a watch.
   // This produces the most reliable permission prompt on iOS Safari.
@@ -637,7 +680,10 @@ function startTracking() {
         (error) => trackingLocationError(error, attempt),
         TRACKING_LOCATION_OPTIONS,
       );
-      if (attempt === state.locationAttempt) state.watchId = watchId;
+      if (attempt === state.locationAttempt) {
+        state.watchId = watchId;
+        updateTrackingIndicator();
+      }
       else navigator.geolocation.clearWatch(watchId);
     },
     (error) => void geolocationError(error, attempt),
@@ -652,6 +698,7 @@ function stopTracking() {
   elements.start.disabled = false;
   elements.stop.hidden = true;
   elements.gpsStatus.textContent = "Dihentikan";
+  updateTrackingIndicator();
   state.offlineMap?.updatePosition(null);
   setJourneyStatus("Pelacakan dihentikan. Kamera dapat dipilih secara manual.");
 }
@@ -692,7 +739,36 @@ function loadManualCamera() {
   );
   if (!camera) return;
   state.manualMode = true;
+  updateTrackingIndicator();
   playCamera(camera);
+}
+
+function restartSavedSelection() {
+  if (elements.restart.disabled) return;
+  const savedSelection = {
+    camera: state.currentCamera,
+    direction: state.direction,
+    highway: state.highway,
+    manualMode: state.manualMode,
+  };
+
+  stopTracking();
+  state.highway = savedSelection.highway;
+  state.direction = savedSelection.direction;
+  state.currentCamera = savedSelection.camera;
+  state.manualMode = savedSelection.manualMode;
+  state.offlineMap?.selectHighway(selectedHighwayId());
+  elements.highwayList.querySelectorAll("button").forEach((button) => {
+    button.setAttribute("aria-pressed", String(button.dataset.highwayId === selectedHighwayId()));
+  });
+  elements.directionA.setAttribute("aria-pressed", String(state.direction === "A"));
+  elements.directionB.setAttribute("aria-pressed", String(state.direction === "B"));
+  updateControls();
+  updateTrackingIndicator();
+
+  // Start fullscreen first so iOS keeps it attached to this direct tap.
+  void openVideoPlayer();
+  if (!state.demo) startTracking();
 }
 
 function demoCameras(direction) {
@@ -782,6 +858,7 @@ elements.start.addEventListener("click", () => {
   scrollToRoutePanel();
 });
 elements.routeShortcut.addEventListener("click", scrollToRoutePanel);
+elements.restart.addEventListener("click", restartSavedSelection);
 elements.stop.addEventListener("click", stopTracking);
 elements.manualCameraButton.addEventListener("click", loadManualCamera);
 elements.directionA.addEventListener("click", () => selectDirection("A"));

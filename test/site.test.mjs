@@ -11,6 +11,8 @@ test("static page exposes the required accessible controls with relative assets"
     "start-button",
     "route-panel",
     "route-shortcut",
+    "restart-button",
+    "tracking-indicator",
     "stop-button",
     "highway-list",
     "gps-debug-link",
@@ -46,6 +48,10 @@ test("static page exposes the required accessible controls with relative assets"
   assert.match($("script[type='module']").attr("src"), /^\.\/js\/app\.mjs\?v=/);
   assert.equal($("#route-shortcut").is("button"), true);
   assert.match($("#route-shortcut").attr("aria-label"), /Langkah 1/i);
+  assert.equal($("#route-shortcut").text().trim(), "#1");
+  assert.equal($("#restart-button").is("[disabled]"), true);
+  assert.match($("#tracking-indicator").text(), /Pelacakan kamera via GPS/i);
+  assert.equal($("#tracking-indicator").attr("data-state"), "off");
 });
 
 test("start and floating shortcut smoothly reveal step one without delaying GPS", async () => {
@@ -53,6 +59,9 @@ test("start and floating shortcut smoothly reveal step one without delaying GPS"
   assert.match(app, /scrollIntoView\(\{[\s\S]*behavior:\s*reduceMotion\s*\?\s*"auto"\s*:\s*"smooth"/);
   assert.match(app, /elements\.start\.addEventListener\("click",\s*\(\)\s*=>\s*\{\s*\/\/[^\n]*\n\s*startTracking\(\);\s*scrollToRoutePanel\(\);/);
   assert.match(app, /elements\.routeShortcut\.addEventListener\("click",\s*scrollToRoutePanel\)/);
+  assert.match(app, /elements\.restart\.addEventListener\("click",\s*restartSavedSelection\)/);
+  assert.match(app, /function restartSavedSelection\(\)[\s\S]*const savedSelection[\s\S]*stopTracking\(\);[\s\S]*void openVideoPlayer\(\);\s*if \(!state\.demo\) startTracking\(\);/);
+  assert.match(app, /message = "Pelacakan kamera via GPS: aktif"/);
 });
 
 test("standalone GPS diagnostic has no external dependencies or network code", async () => {

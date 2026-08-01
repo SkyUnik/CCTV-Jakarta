@@ -20,8 +20,10 @@ test("mobile CSS retains full-width launch controls and compact breakpoints", as
   assert.match(css, /\.map-route-line/);
   assert.match(css, /\.map-marker-target/);
   assert.match(css, /#start-button\s*{[^}]*min-height:\s*64px/s);
-  assert.match(css, /\.manual-camera-picker select\s*{[^}]*min-height:\s*56px/s);
-  assert.match(css, /\.floating-route-button\s*{[^}]*position:\s*fixed[^}]*z-index:\s*1000/s);
+  assert.match(css, /\.manual-camera-picker select\s*{[^}]*min-height:\s*68px/s);
+  assert.match(css, /\.manual-camera-picker \.button\s*{[^}]*min-height:\s*60px/s);
+  assert.match(css, /\.floating-actions\s*{[^}]*position:\s*fixed[^}]*right:[^}]*z-index:\s*1000/s);
+  assert.match(css, /\.floating-action\s*{[^}]*border-radius:\s*50%/s);
   assert.match(css, /env\(safe-area-inset-bottom\)/);
 });
 
