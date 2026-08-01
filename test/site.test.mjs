@@ -66,10 +66,10 @@ test("static page exposes the required accessible controls with relative assets"
 test("start and floating shortcut smoothly reveal step one without delaying GPS", async () => {
   const app = await readFile(new URL("../docs/js/app.mjs", import.meta.url), "utf8");
   assert.match(app, /scrollIntoView\(\{[\s\S]*behavior:\s*reduceMotion\s*\?\s*"auto"\s*:\s*"smooth"/);
-  assert.match(app, /elements\.start\.addEventListener\("click",\s*\(\)\s*=>\s*\{\s*\/\/[^\n]*\n\s*startTracking\(\);\s*scrollToRoutePanel\(\);/);
+  assert.match(app, /elements\.start\.addEventListener\("click",\s*\(\)\s*=>\s*\{[\s\S]*if \(state\.simulator\) startSimulatorTracking\(\);\s*else startTracking\(\);\s*scrollToRoutePanel\(\);/);
   assert.match(app, /elements\.routeShortcut\.addEventListener\("click",\s*scrollToRoutePanel\)/);
   assert.match(app, /elements\.restart\.addEventListener\("click",\s*restartSavedSelection\)/);
-  assert.match(app, /function restartSavedSelection\(\)[\s\S]*const savedSelection[\s\S]*stopTracking\(\);[\s\S]*void openVideoPlayer\(\);\s*if \(!state\.demo\) startTracking\(\);/);
+  assert.match(app, /function restartSavedSelection\(\)[\s\S]*const savedSelection[\s\S]*stopTracking\(\);[\s\S]*void openVideoPlayer\(\);\s*if \(state\.simulator\) startSimulatorTracking\(\);\s*else if \(!state\.demo\) startTracking\(\);/);
   assert.match(app, /message = "Pelacakan kamera via GPS: aktif"/);
 });
 
@@ -77,6 +77,19 @@ test("manual camera selection and playback synchronize the map marker", async ()
   const source = await readFile(new URL("../docs/js/app.mjs", import.meta.url), "utf8");
   assert.match(source, /state\.routeMap\?\.selectCamera\(camera\.id\)/);
   assert.match(source, /manualCameraSelect\.addEventListener\("change", previewManualCameraOnMap\)/);
+});
+
+test("the shared simulator mode exposes road, position, direction, and speed controls", async () => {
+  const html = await readFile(new URL("../docs/index.html", import.meta.url), "utf8");
+  const source = await readFile(new URL("../docs/js/app.mjs", import.meta.url), "utf8");
+  assert.match(html, /href="\.\/\?simulator=1"/);
+  assert.match(html, /id="simulator-highway"/);
+  assert.match(html, /id="simulator-position"[^>]+type="range"/);
+  assert.match(html, /<option value="60">60 km\/jam<\/option>/);
+  assert.match(html, /<option value="120">120 km\/jam<\/option>/);
+  assert.match(html, /<option value="240">240 km\/jam<\/option>/);
+  assert.match(source, /if \(state\.simulator\) startSimulatorTracking\(\)/);
+  assert.match(source, /setInterval\(tickSimulator, 250\)/);
 });
 
 test("standalone GPS diagnostic has no external dependencies or network code", async () => {

@@ -324,6 +324,24 @@ footer a { color: inherit; }
   .map-toggle span { max-width: 58px; line-height: 1.15; }
 }
 
+.simulator-panel { display: grid; gap: 14px; margin: 18px 0 22px; padding: 18px; border: 1px solid var(--line); border-radius: 16px; background: #eef4df; }
+.simulator-panel[hidden] { display: none; }
+.simulator-panel h3, .simulator-panel p { margin: 0; }
+.simulator-panel label { display: grid; gap: 7px; color: var(--muted); font-weight: 700; }
+.simulator-panel select { width: 100%; min-height: 52px; padding: 0 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--ink); font: inherit; }
+.simulator-panel input[type="range"] { width: 100%; min-height: 36px; accent-color: var(--green-2); }
+.simulator-panel output { float: right; color: var(--ink); }
+.simulator-note { color: var(--muted); font-size: .9rem; }
+.simulator-link-card { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin: 0 auto 72px; padding: 22px; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); }
+.simulator-link-card div { display: grid; gap: 5px; }
+.simulator-link-card span { color: var(--muted); }
+body.is-simulator .privacy-note { color: #305f50; }
+
+@media (max-width: 620px) {
+  .simulator-link-card { align-items: stretch; flex-direction: column; }
+  .simulator-link-card .button { width: 100%; }
+}
+
 @media (max-width: 520px) {
   .site-header, main, footer { width: min(100% - 24px, 1180px); }
   .site-header { padding-top: 14px; }

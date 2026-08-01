@@ -14,6 +14,7 @@ import {
   TRACKING_LOCATION_OPTIONS,
 } from "./geolocation.mjs";
 import { createOnlineMap } from "./online-map.mjs";
+import { advanceRoutePosition, positionOnHighway } from "./simulator.mjs";
 import {
   enterVideoFullscreen,
   fullscreenMethod,
@@ -66,6 +67,11 @@ const elements = {
   routeHelper: document.querySelector("#route-helper"),
   routeShortcut: document.querySelector("#route-shortcut"),
   skip: document.querySelector("#skip-button"),
+  simulatorHighway: document.querySelector("#simulator-highway"),
+  simulatorPanel: document.querySelector("#simulator-panel"),
+  simulatorPosition: document.querySelector("#simulator-position"),
+  simulatorPositionOutput: document.querySelector("#simulator-position-output"),
+  simulatorSpeed: document.querySelector("#simulator-speed"),
   sourceLink: document.querySelector("#source-link"),
   start: document.querySelector("#start-button"),
   stop: document.querySelector("#stop-button"),
@@ -97,6 +103,11 @@ const state = {
   playbackBlocked: false,
   playerReady: false,
   routeEnded: false,
+  simulator: query.get("simulator") === "1",
+  simulatorLastTick: null,
+  simulatorPositionM: 0,
+  simulatorTimer: null,
+  simulatorSpeedKmh: 60,
   sourceChanging: false,
   stallTimer: null,
   usableCameras: [],
@@ -112,21 +123,28 @@ function setJourneyStatus(message) {
 function updateTrackingIndicator() {
   let indicatorState = "off";
   let message = "Pelacakan kamera via GPS: tidak aktif";
-  if (elements.start.disabled && state.watchId === null) {
+  const trackingActive = state.watchId !== null || state.simulatorTimer !== null;
+  if (state.simulatorTimer !== null && state.manualMode) {
+    indicatorState = "standby";
+    message = "Simulasi GPS aktif, tetapi pergantian kamera manual";
+  } else if (state.simulatorTimer !== null && state.highway && state.direction && state.currentCamera) {
+    indicatorState = "active";
+    message = "Simulasi pelacakan kamera: aktif";
+  } else if (elements.start.disabled && !trackingActive) {
     indicatorState = "standby";
     message = "Pelacakan kamera via GPS: menunggu lokasi";
-  } else if (state.watchId !== null && state.manualMode) {
+  } else if (trackingActive && state.manualMode) {
     indicatorState = "standby";
     message = "GPS aktif, tetapi pergantian kamera manual";
   } else if (
-    state.watchId !== null &&
+    trackingActive &&
     state.highway &&
     state.direction &&
     state.currentCamera
   ) {
     indicatorState = "active";
     message = "Pelacakan kamera via GPS: aktif";
-  } else if (state.watchId !== null) {
+  } else if (trackingActive) {
     indicatorState = "standby";
     message = "GPS aktif • pilih ruas dan arah";
   }
@@ -425,12 +443,24 @@ function updateUsableCameras() {
 
 function selectDirection(direction) {
   const pendingMapCamera = state.pendingMapCamera;
+  const previousDirection = state.direction;
   state.direction = direction;
   state.manualMode = false;
   state.currentCamera = null;
   state.playIntent = false;
   state.routeEnded = false;
   passTracker.reset();
+  if (
+    state.simulator &&
+    state.simulatorTimer === null &&
+    state.highway &&
+    previousDirection !== direction
+  ) {
+    state.simulatorPositionM = direction === "B"
+      ? state.highway.properties.canonicalLengthM
+      : 0;
+    updateSimulatorPositionControl();
+  }
   updateTrackingIndicator();
   elements.directionA.setAttribute("aria-pressed", String(direction === "A"));
   elements.directionB.setAttribute("aria-pressed", String(direction === "B"));
@@ -471,6 +501,7 @@ function selectHighway(feature) {
   state.pendingMapCamera = null;
   updateTrackingIndicator();
   state.routeMap?.selectHighway(nextId);
+  updateSimulatorPositionControl();
   elements.directionSection.hidden = false;
   const properties = feature.properties ?? {};
   elements.directionA.querySelector("small").textContent =
@@ -558,6 +589,68 @@ function updateProjectionForSelectedRoad(position) {
   elements.position.textContent = `${(state.currentProjection.progressM / 1_000).toFixed(1)} km`;
 }
 
+function updateSimulatorPositionControl() {
+  if (!state.simulator || !state.highway) return;
+  const totalLengthM = Math.round(state.highway.properties?.canonicalLengthM ?? 0);
+  state.simulatorPositionM = Math.min(totalLengthM, Math.max(0, state.simulatorPositionM));
+  elements.simulatorPosition.max = String(totalLengthM);
+  elements.simulatorPosition.value = String(Math.round(state.simulatorPositionM));
+  elements.simulatorPositionOutput.textContent =
+    `${(state.simulatorPositionM / 1_000).toFixed(1).replace(".", ",")} km`;
+  elements.simulatorHighway.value = selectedHighwayId() ?? "";
+}
+
+function emitSimulatorPosition() {
+  const position = positionOnHighway(state.highway, state.simulatorPositionM);
+  if (!position) return;
+  handlePosition(position);
+  elements.gpsStatus.textContent = state.simulatorTimer === null
+    ? "Simulasi siap"
+    : "GPS simulasi aktif";
+}
+
+function finishSimulatorRoute() {
+  clearInterval(state.simulatorTimer);
+  state.simulatorTimer = null;
+  state.simulatorLastTick = null;
+  elements.start.disabled = false;
+  elements.stop.hidden = true;
+  updateTrackingIndicator();
+  setJourneyStatus("Simulasi mencapai ujung ruas. Atur posisi atau arah, lalu mulai kembali.");
+}
+
+function tickSimulator() {
+  if (!state.highway || !state.direction) return;
+  const now = performance.now();
+  const elapsedMs = Math.min(1_000, Math.max(0, now - state.simulatorLastTick));
+  state.simulatorLastTick = now;
+  const next = advanceRoutePosition({
+    direction: state.direction,
+    elapsedMs,
+    positionM: state.simulatorPositionM,
+    speedKmh: state.simulatorSpeedKmh,
+    totalLengthM: state.highway.properties.canonicalLengthM,
+  });
+  state.simulatorPositionM = next.positionM;
+  updateSimulatorPositionControl();
+  emitSimulatorPosition();
+  if (next.ended) finishSimulatorRoute();
+}
+
+function startSimulatorTracking() {
+  if (!state.highway) selectHighway(state.highways[0]);
+  if (!state.direction) selectDirection("A");
+  clearInterval(state.simulatorTimer);
+  state.simulatorSpeedKmh = Number(elements.simulatorSpeed.value);
+  state.simulatorLastTick = performance.now();
+  state.simulatorTimer = setInterval(tickSimulator, 250);
+  elements.start.disabled = true;
+  elements.stop.hidden = false;
+  elements.routeHelper.textContent = "Posisi tiruan bergerak tepat di sepanjang geometri ruas lokal.";
+  emitSimulatorPosition();
+  updateTrackingIndicator();
+}
+
 function handlePosition(position) {
   elements.gpsDebug.hidden = true;
   const fix = {
@@ -580,7 +673,7 @@ function handlePosition(position) {
     return;
   }
 
-  elements.gpsStatus.textContent = "GPS aktif";
+  elements.gpsStatus.textContent = state.simulator ? "GPS simulasi aktif" : "GPS aktif";
   elements.routeHelper.textContent = result.candidates.length > 1
     ? "Beberapa ruas terdeteksi. Pilih ruas yang sedang digunakan."
     : "Ruas terdekat terdeteksi dari posisi saat ini.";
@@ -705,11 +798,14 @@ function startTracking() {
 
 function stopTracking() {
   state.locationAttempt += 1;
+  if (state.simulatorTimer !== null) clearInterval(state.simulatorTimer);
+  state.simulatorTimer = null;
+  state.simulatorLastTick = null;
   if (state.watchId !== null) navigator.geolocation.clearWatch(state.watchId);
   state.watchId = null;
   elements.start.disabled = false;
   elements.stop.hidden = true;
-  elements.gpsStatus.textContent = "Dihentikan";
+  elements.gpsStatus.textContent = state.simulator ? "Simulasi dihentikan" : "Dihentikan";
   updateTrackingIndicator();
   state.routeMap?.updatePosition(null);
   setJourneyStatus("Pelacakan dihentikan. Kamera dapat dipilih secara manual.");
@@ -787,7 +883,8 @@ function restartSavedSelection() {
 
   // Start fullscreen first so iOS keeps it attached to this direct tap.
   void openVideoPlayer();
-  if (!state.demo) startTracking();
+  if (state.simulator) startSimulatorTracking();
+  else if (!state.demo) startTracking();
 }
 
 function demoCameras(direction) {
@@ -855,6 +952,23 @@ async function loadData() {
     });
     state.routeMap.setData(state.highways, state.cameras);
     renderHighways();
+    if (state.simulator) {
+      document.body.classList.add("is-simulator");
+      document.title = "Simulator GPS — Jalur CCTV";
+      elements.simulatorPanel.hidden = false;
+      elements.start.textContent = "Mulai simulasi";
+      elements.routeHelper.textContent = "Pilih ruas, arah, posisi awal, dan kecepatan simulasi.";
+      elements.gpsStatus.textContent = "Mode simulasi";
+      elements.simulatorHighway.replaceChildren(...state.highways.map((feature) => {
+        const option = document.createElement("option");
+        option.value = feature.properties?.id ?? feature.id;
+        option.textContent = feature.properties?.name ?? option.value;
+        return option;
+      }));
+      selectHighway(state.highways[0]);
+      selectDirection("A");
+      updateSimulatorPositionControl();
+    }
     if (state.demo) {
       elements.demoPanel.hidden = false;
       selectHighway(state.highways[0]);
@@ -880,7 +994,8 @@ function scrollToRoutePanel() {
 
 elements.start.addEventListener("click", () => {
   // Keep the GPS request synchronous with the tap for iOS Safari permissions.
-  startTracking();
+  if (state.simulator) startSimulatorTracking();
+  else startTracking();
   scrollToRoutePanel();
 });
 elements.routeShortcut.addEventListener("click", scrollToRoutePanel);
@@ -897,6 +1012,31 @@ elements.retry.addEventListener("click", () => playCamera(state.currentCamera));
 elements.skip.addEventListener("click", () => moveCamera(1));
 elements.download.addEventListener("click", downloadM3u);
 elements.demoAdvance.addEventListener("click", advanceDemo);
+elements.simulatorHighway.addEventListener("change", () => {
+  const feature = state.highways.find((candidate) =>
+    (candidate.properties?.id ?? candidate.id) === elements.simulatorHighway.value
+  );
+  if (!feature) return;
+  state.simulatorPositionM = state.direction === "B"
+    ? feature.properties.canonicalLengthM
+    : 0;
+  selectHighway(feature);
+  selectDirection(state.direction ?? "A");
+  updateSimulatorPositionControl();
+  emitSimulatorPosition();
+});
+elements.simulatorPosition.addEventListener("input", () => {
+  state.simulatorPositionM = Number(elements.simulatorPosition.value);
+  state.simulatorLastTick = performance.now();
+  updateSimulatorPositionControl();
+  emitSimulatorPosition();
+});
+elements.simulatorPosition.addEventListener("change", () => {
+  if (state.direction) selectDirection(state.direction);
+});
+elements.simulatorSpeed.addEventListener("change", () => {
+  state.simulatorSpeedKmh = Number(elements.simulatorSpeed.value);
+});
 
 elements.video.addEventListener("play", () => {
   state.playIntent = true;
@@ -926,6 +1066,7 @@ elements.video.addEventListener("webkitendfullscreen", () => {
 });
 
 window.addEventListener("beforeunload", () => {
+  if (state.simulatorTimer !== null) clearInterval(state.simulatorTimer);
   if (state.watchId !== null) navigator.geolocation.clearWatch(state.watchId);
   state.routeMap?.destroy();
   if (state.hls) state.hls.destroy();

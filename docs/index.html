@@ -65,6 +65,31 @@
             Jalankan tes izin GPS Safari
           </a>
 
+          <section class="simulator-panel" id="simulator-panel" aria-labelledby="simulator-title" hidden>
+            <div>
+              <p class="step-label">Mode pengujian</p>
+              <h3 id="simulator-title">GPS terkunci pada ruas</h3>
+              <p>Posisi bergerak lokal di sepanjang kurva jalan. Tidak meminta GPS perangkat.</p>
+            </div>
+            <label>
+              Ruas simulasi
+              <select id="simulator-highway"></select>
+            </label>
+            <label>
+              Posisi awal <output id="simulator-position-output">0,0 km</output>
+              <input id="simulator-position" type="range" min="0" max="1000" step="25" value="0">
+            </label>
+            <label>
+              Kecepatan kendaraan
+              <select id="simulator-speed">
+                <option value="60">60 km/jam</option>
+                <option value="120">120 km/jam</option>
+                <option value="240">240 km/jam</option>
+              </select>
+            </label>
+            <p class="simulator-note">Pilih arah A atau B pada Langkah 2, lalu tekan Mulai simulasi.</p>
+          </section>
+
           <section class="route-map" aria-labelledby="map-title">
             <div class="map-heading">
               <div>
@@ -242,6 +267,14 @@
           <li><span>02</span><div><strong>Pilih A atau B</strong><p>A mengikuti KM bertambah; B mengikuti KM berkurang menuju KM 0 ruas.</p></div></li>
           <li><span>03</span><div><strong>Ikuti perjalanan</strong><p>Kamera berikutnya aktif setelah dua posisi GPS memastikan kamera sudah terlewati.</p></div></li>
         </ol>
+      </section>
+
+      <section class="simulator-link-card" aria-label="Pengujian GPS">
+        <div>
+          <strong>Uji perpindahan CCTV tanpa berkendara</strong>
+          <span>Jalankan posisi GPS tiruan yang tetap mengikuti geometri ruas.</span>
+        </div>
+        <a class="button button-quiet" href="./?simulator=1">Buka simulator GPS</a>
       </section>
     </main>
 
