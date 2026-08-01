@@ -7,6 +7,7 @@
   "scripts": {
     "camera:add": "node scripts/add-camera.mjs",
     "camera:verify": "node scripts/verify-camera.mjs",
+    "camera:provision": "node scripts/provision-cameras.mjs",
     "highway:build": "node scripts/build-highway.mjs",
     "scrape": "node scripts/scrape-binamarga.mjs",
     "serve": "node scripts/serve.mjs",

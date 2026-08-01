@@ -36,8 +36,10 @@ test/         Automated tests and saved public-page fixtures
 - Visitors never query OpenStreetMap or Overpass at runtime. Reviewed road
   geometry is committed as static GeoJSON.
 - The project has no backend, proxy, database, analytics, or API keys.
-- A camera cannot be used for automatic playback until its direction and
-  coordinates have been manually verified.
+- Automatic playback accepts either surveyed/reviewed coordinates or an
+  explicitly audited `provisional_stationing` record. Provisional records must
+  have an A/B suffix from the provider and retain a warning that their
+  coordinate was interpolated from KM stationing rather than surveyed.
 
 ## Data editing
 
@@ -99,9 +101,28 @@ npm run scrape -- --road jakarta-bogor-ciawi --out docs/data/cameras.json --merg
 
 The current aggregate contains 94 provider records: 26 Cawang–Pluit, 9 Kelapa
 Gading–Pulo Gebang, 31 Akses Tanjung Priok, and 28 Jagorawi. Records lacking
-reviewed coordinates remain disabled for automatic GPS switching. They are
-still available through the site's manual camera picker after choosing a road
-and direction.
+an explicit provider A/B direction remain disabled for automatic GPS switching.
+They are still available through the site's manual camera picker after choosing
+a road and direction.
+
+### Provisional automatic cameras
+
+The public Bina Marga pages expose camera labels, KM stationing, A/B suffixes,
+and streams, but not surveyed camera coordinates. With explicit project-owner
+approval, `camera:provision` interpolates only explicitly directed A/B records
+along the committed OSM road geometry:
+
+```sh
+npm run camera:provision
+```
+
+The command records both the public camera-label source and OSM geometry source
+inside `locationReview`, uses `curationStatus: "provisional_stationing"`, and
+does not call the result `verified`. Records without KM or A/B stay disabled.
+The current data has 46 eligible provider records representing 44 distinct
+automatic road/side positions; same-side duplicates at one station are skipped
+during automatic ordering. A later manual coordinate review supersedes the
+provisional record through `camera:verify`.
 
 ### Append another public HLS camera
 
@@ -121,8 +142,8 @@ npm run camera:add -- \
 
 The command accepts only HTTPS URLs whose path ends in `.m3u8`, refuses
 duplicate IDs and stream URLs, and always appends the record disabled with
-`needs_review`. Coordinates and direction must still be verified before the
-camera can be used automatically.
+`needs_review`. It remains manual unless it receives either a surveyed review
+or an explicitly audited provisional stationing record.
 
 After checking a camera location against its provider or another authoritative
 source, record that review and calculate its curved-road position with:

@@ -3,6 +3,7 @@ import test from "node:test";
 
 import {
   adjacentCamera,
+  automaticCameras,
   createPassTracker,
   initialCamera,
   matchHighways,
@@ -45,6 +46,30 @@ test("manual camera lists include matching and unknown sides without enabling au
   ];
   assert.deepEqual(publicCameras(cameras, "road", "A").map((camera) => camera.id), ["a", "u"]);
   assert.deepEqual(publicCameras(cameras, "road", "B").map((camera) => camera.id), ["b", "u"]);
+  assert.equal(verifiedCameras(cameras, "road", "A").length, 0);
+  assert.equal(automaticCameras(cameras, "road", "A").length, 0);
+});
+
+test("allows audited provisional stationing and deduplicates one side at one position", () => {
+  const base = {
+    highwayId: "road",
+    side: "A",
+    roadPositionM: 1_000,
+    coordinates: [106.8, -6.2],
+    enabled: true,
+    curationStatus: "provisional_stationing",
+    locationReview: { method: "osm_route_stationing_interpolation" },
+  };
+  const cameras = [
+    { ...base, id: "first" },
+    { ...base, id: "duplicate" },
+    { ...base, id: "next", roadPositionM: 2_000 },
+    { ...base, id: "unsafe", roadPositionM: 3_000, locationReview: null },
+  ];
+  assert.deepEqual(
+    automaticCameras(cameras, "road", "A").map((camera) => camera.id),
+    ["duplicate", "next"],
+  );
   assert.equal(verifiedCameras(cameras, "road", "A").length, 0);
 });
 

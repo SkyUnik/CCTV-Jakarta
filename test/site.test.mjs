@@ -63,10 +63,16 @@ test("vendored HLS player and license are committed for offline site loading", a
   assert.match(license, /Apache License/);
 });
 
-test("normal camera data cannot enter automatic switching before verification", async () => {
+test("automatic switching data is either verified or explicitly provisional", async () => {
   const data = JSON.parse(
     await readFile(new URL("../docs/data/cameras.json", import.meta.url), "utf8"),
   );
   assert.ok(data.cameras.length > 0);
-  assert.equal(data.cameras.filter((camera) => camera.enabled).length, 0);
+  const enabled = data.cameras.filter((camera) => camera.enabled);
+  assert.equal(enabled.length, 46);
+  assert.ok(enabled.every((camera) =>
+    camera.curationStatus === "verified" ||
+    (camera.curationStatus === "provisional_stationing" &&
+      camera.locationReview?.status === "provisional")
+  ));
 });

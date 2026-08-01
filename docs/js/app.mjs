@@ -1,11 +1,11 @@
 import {
   adjacentCamera,
+  automaticCameras,
   createPassTracker,
   initialCamera,
   matchHighways,
   projectPointToLine,
   publicCameras,
-  verifiedCameras,
 } from "./geo.mjs";
 import {
   geolocationFailure,
@@ -178,7 +178,9 @@ async function playCamera(camera, options = {}) {
   updateControls();
   setJourneyStatus(state.manualMode
     ? "Kamera manual aktif. Pergantian otomatis berbasis GPS tidak digunakan untuk kamera ini."
-    : "Kamera aktif. Sistem menunggu posisi terkonfirmasi setelah kamera ini.");
+    : camera.curationStatus === "provisional_stationing"
+      ? "Kamera provisional aktif berdasarkan KM dan geometri OSM. Sistem menunggu posisi GPS melewati titik perkiraan."
+      : "Kamera aktif. Sistem menunggu posisi terkonfirmasi setelah kamera ini.");
 
   const onReady = () => {
     if (generation !== state.loadGeneration || state.playerReady) return;
@@ -192,10 +194,14 @@ async function playCamera(camera, options = {}) {
     if (continuePlaying) {
       elements.video.play().catch(() => {
         state.playIntent = false;
-        setJourneyStatus("Kamera siap. Buka pemutar video untuk melanjutkan.");
+        setJourneyStatus(camera.curationStatus === "provisional_stationing"
+          ? "Kamera provisional siap berdasarkan KM. Buka pemutar video untuk melanjutkan."
+          : "Kamera siap. Buka pemutar video untuk melanjutkan.");
       });
     } else {
-      setJourneyStatus("Kamera siap. Buka pemutar video layar penuh untuk menonton.");
+      setJourneyStatus(camera.curationStatus === "provisional_stationing"
+        ? "Kamera provisional siap berdasarkan KM dan geometri OSM. Buka pemutar video layar penuh untuk menonton."
+        : "Kamera siap. Buka pemutar video layar penuh untuk menonton.");
     }
   };
 
@@ -345,7 +351,7 @@ function updateUsableCameras() {
   } else if (state.demo) {
     state.usableCameras = demoCameras(state.direction);
   } else {
-    state.usableCameras = verifiedCameras(
+    state.usableCameras = automaticCameras(
       state.cameras,
       selectedHighwayId(),
       state.direction,
@@ -359,11 +365,11 @@ function updateUsableCameras() {
     state.playIntent = false;
     elements.cameraLive.hidden = true;
     elements.videoPlaceholder.hidden = false;
-    elements.cameraTitle.textContent = "Belum ada kamera terverifikasi";
+    elements.cameraTitle.textContent = "Belum ada kamera otomatis";
     elements.cameraHighway.textContent = state.highway?.properties?.name ?? "Tol Jakarta";
     elements.cameraKm.textContent = "KM —";
     elements.sourceLink.hidden = true;
-    setJourneyStatus("Data stream tersedia, tetapi koordinat kamera belum diverifikasi untuk pergantian otomatis.");
+    setJourneyStatus("Data stream tersedia, tetapi ruas ini belum memiliki kamera dengan arah dan posisi yang cukup untuk pergantian otomatis.");
   }
   updateControls();
 }
@@ -550,7 +556,7 @@ function evaluatePassing() {
   });
   if (!result.passed) {
     setJourneyStatus(
-      `Melacak posisi • konfirmasi lewat kamera ${result.consecutiveFixes}/${result.requiredFixes}`,
+      `${state.currentCamera.curationStatus === "provisional_stationing" ? "Titik KM provisional • " : ""}Melacak posisi • konfirmasi lewat kamera ${result.consecutiveFixes}/${result.requiredFixes}`,
     );
     return;
   }
@@ -783,7 +789,9 @@ elements.video.addEventListener("playing", () => {
   clearTimeout(state.stallTimer);
   state.stallTimer = null;
   clearPlaybackError();
-  setJourneyStatus("Siaran CCTV sedang diputar.");
+  setJourneyStatus(state.currentCamera?.curationStatus === "provisional_stationing"
+    ? "Siaran CCTV sedang diputar • posisi pergantian otomatis masih provisional berdasarkan KM."
+    : "Siaran CCTV sedang diputar.");
 });
 elements.video.addEventListener("waiting", () => {
   if (!state.playbackBlocked) scheduleStallStatus();

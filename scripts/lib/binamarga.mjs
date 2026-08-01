@@ -12,6 +12,7 @@ const EDITORIAL_FIELDS = [
   "enabled",
   "curationStatus",
   "notes",
+  "locationReview",
 ];
 
 function cleanText(value) {

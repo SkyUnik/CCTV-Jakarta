@@ -58,12 +58,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=jakarta-bogor-ciawi",
       "km": 15.5,
       "side": "B",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.8959491,
+        -6.3855472
+      ],
+      "roadPositionM": 15500,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:36.645Z"
+      "scrapedAt": "2026-08-01T03:28:36.645Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 15.5,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=jakarta-bogor-ciawi",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-jakarta-bogor-ciawi-27",
@@ -74,12 +88,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=jakarta-bogor-ciawi",
       "km": 45,
       "side": "B",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.8420114,
+        -6.6356436
+      ],
+      "roadPositionM": 45000,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:36.645Z"
+      "scrapedAt": "2026-08-01T03:28:36.645Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 45,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=jakarta-bogor-ciawi",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-jakarta-bogor-ciawi-26",
@@ -106,12 +134,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=jakarta-bogor-ciawi",
       "km": 38.4,
       "side": "B",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.8383088,
+        -6.5795604
+      ],
+      "roadPositionM": 38400,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:36.645Z"
+      "scrapedAt": "2026-08-01T03:28:36.645Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 38.4,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=jakarta-bogor-ciawi",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-jakarta-bogor-ciawi-24",
@@ -122,12 +164,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=jakarta-bogor-ciawi",
       "km": 30.4,
       "side": "B",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.8625525,
+        -6.5122072
+      ],
+      "roadPositionM": 30400,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:36.645Z"
+      "scrapedAt": "2026-08-01T03:28:36.645Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 30.4,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=jakarta-bogor-ciawi",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-jakarta-bogor-ciawi-23",
@@ -138,12 +194,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=jakarta-bogor-ciawi",
       "km": 24,
       "side": "B",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.8857845,
+        -6.4596114
+      ],
+      "roadPositionM": 24000,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:36.645Z"
+      "scrapedAt": "2026-08-01T03:28:36.645Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 24,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=jakarta-bogor-ciawi",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-jakarta-bogor-ciawi-22",
@@ -154,12 +224,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=jakarta-bogor-ciawi",
       "km": 19.6,
       "side": "B",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.8971798,
+        -6.422057
+      ],
+      "roadPositionM": 19600,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:36.645Z"
+      "scrapedAt": "2026-08-01T03:28:36.645Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 19.6,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=jakarta-bogor-ciawi",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-jakarta-bogor-ciawi-21",
@@ -170,12 +254,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=jakarta-bogor-ciawi",
       "km": 19.6,
       "side": "B",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.8971798,
+        -6.422057
+      ],
+      "roadPositionM": 19600,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:36.645Z"
+      "scrapedAt": "2026-08-01T03:28:36.645Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 19.6,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=jakarta-bogor-ciawi",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-jakarta-bogor-ciawi-20",
@@ -266,12 +364,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=jakarta-bogor-ciawi",
       "km": 4.5,
       "side": "B",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.8786579,
+        -6.2888276
+      ],
+      "roadPositionM": 4500,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:36.645Z"
+      "scrapedAt": "2026-08-01T03:28:36.645Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 4.5,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=jakarta-bogor-ciawi",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-jakarta-bogor-ciawi-14",
@@ -282,12 +394,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=jakarta-bogor-ciawi",
       "km": 15,
       "side": "A",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.8962499,
+        -6.3810606
+      ],
+      "roadPositionM": 15000,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:36.645Z"
+      "scrapedAt": "2026-08-01T03:28:36.645Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 15,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=jakarta-bogor-ciawi",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-jakarta-bogor-ciawi-13",
@@ -298,12 +424,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=jakarta-bogor-ciawi",
       "km": 14.5,
       "side": "B",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.896489,
+        -6.3765723
+      ],
+      "roadPositionM": 14500,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:36.645Z"
+      "scrapedAt": "2026-08-01T03:28:36.645Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 14.5,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=jakarta-bogor-ciawi",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-jakarta-bogor-ciawi-12",
@@ -330,12 +470,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=jakarta-bogor-ciawi",
       "km": 13.15,
       "side": "B",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.8945453,
+        -6.3645958
+      ],
+      "roadPositionM": 13150,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:36.645Z"
+      "scrapedAt": "2026-08-01T03:28:36.645Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 13.15,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=jakarta-bogor-ciawi",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-jakarta-bogor-ciawi-10",
@@ -362,12 +516,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=jakarta-bogor-ciawi",
       "km": 10.35,
       "side": "B",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.8890527,
+        -6.3400375
+      ],
+      "roadPositionM": 10350,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:36.645Z"
+      "scrapedAt": "2026-08-01T03:28:36.645Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 10.35,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=jakarta-bogor-ciawi",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-jakarta-bogor-ciawi-8",
@@ -378,12 +546,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=jakarta-bogor-ciawi",
       "km": 9.2,
       "side": "B",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.8872791,
+        -6.3298512
+      ],
+      "roadPositionM": 9200,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:36.645Z"
+      "scrapedAt": "2026-08-01T03:28:36.645Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 9.2,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=jakarta-bogor-ciawi",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-jakarta-bogor-ciawi-7",
@@ -394,12 +576,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=jakarta-bogor-ciawi",
       "km": 8,
       "side": "B",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.8870051,
+        -6.3190639
+      ],
+      "roadPositionM": 8000,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:36.645Z"
+      "scrapedAt": "2026-08-01T03:28:36.645Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 8,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=jakarta-bogor-ciawi",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-jakarta-bogor-ciawi-6",
@@ -410,12 +606,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=jakarta-bogor-ciawi",
       "km": 7,
       "side": "B",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.885288,
+        -6.3102421
+      ],
+      "roadPositionM": 7000,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:36.645Z"
+      "scrapedAt": "2026-08-01T03:28:36.645Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 7,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=jakarta-bogor-ciawi",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-jakarta-bogor-ciawi-5",
@@ -442,12 +652,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=jakarta-bogor-ciawi",
       "km": 5.5,
       "side": "B",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.8821089,
+        -6.2971404
+      ],
+      "roadPositionM": 5500,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:36.645Z"
+      "scrapedAt": "2026-08-01T03:28:36.645Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 5.5,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=jakarta-bogor-ciawi",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-jakarta-bogor-ciawi-3",
@@ -458,12 +682,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=jakarta-bogor-ciawi",
       "km": 5,
       "side": "B",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.8803759,
+        -6.292987
+      ],
+      "roadPositionM": 5000,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:36.645Z"
+      "scrapedAt": "2026-08-01T03:28:36.645Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 5,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=jakarta-bogor-ciawi",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-jakarta-bogor-ciawi-2",
@@ -474,12 +712,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=jakarta-bogor-ciawi",
       "km": 5,
       "side": "B",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.8803759,
+        -6.292987
+      ],
+      "roadPositionM": 5000,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:36.645Z"
+      "scrapedAt": "2026-08-01T03:28:36.645Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 5,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=jakarta-bogor-ciawi",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-akses-tanjung-priok-757",
@@ -490,12 +742,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
       "km": 63,
       "side": "B",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.9057836,
+        -6.1086688
+      ],
+      "roadPositionM": 5809,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:36.115Z"
+      "scrapedAt": "2026-08-01T03:28:36.115Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 63,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-akses-tanjung-priok-1514",
@@ -570,12 +836,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
       "km": 60,
       "side": "A",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.9275809,
+        -6.1245894
+      ],
+      "roadPositionM": 2021,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:36.115Z"
+      "scrapedAt": "2026-08-01T03:28:36.115Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 60,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-akses-tanjung-priok-767",
@@ -586,12 +866,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
       "km": 67.2,
       "side": "B",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.8908077,
+        -6.1428391
+      ],
+      "roadPositionM": 11113,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:36.115Z"
+      "scrapedAt": "2026-08-01T03:28:36.115Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 67.2,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-akses-tanjung-priok-766",
@@ -602,12 +896,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
       "km": 67.2,
       "side": "A",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.8908077,
+        -6.1428391
+      ],
+      "roadPositionM": 11113,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:36.115Z"
+      "scrapedAt": "2026-08-01T03:28:36.115Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 67.2,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-akses-tanjung-priok-765",
@@ -618,12 +926,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
       "km": 66.5,
       "side": "A",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.8925594,
+        -6.1350885
+      ],
+      "roadPositionM": 10229,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:36.115Z"
+      "scrapedAt": "2026-08-01T03:28:36.115Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 66.5,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-akses-tanjung-priok-764",
@@ -650,12 +972,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
       "km": 65.8,
       "side": "A",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.893718,
+        -6.1273541
+      ],
+      "roadPositionM": 9345,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:36.115Z"
+      "scrapedAt": "2026-08-01T03:28:36.115Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 65.8,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-akses-tanjung-priok-762",
@@ -666,12 +1002,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
       "km": 63,
       "side": "A",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.9057836,
+        -6.1086688
+      ],
+      "roadPositionM": 5809,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:36.115Z"
+      "scrapedAt": "2026-08-01T03:28:36.115Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 63,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-akses-tanjung-priok-761",
@@ -682,12 +1032,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
       "km": 65,
       "side": "B",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.8933052,
+        -6.1182786
+      ],
+      "roadPositionM": 8335,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:36.115Z"
+      "scrapedAt": "2026-08-01T03:28:36.115Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 65,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-akses-tanjung-priok-760",
@@ -698,12 +1062,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
       "km": 65,
       "side": "A",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.8933052,
+        -6.1182786
+      ],
+      "roadPositionM": 8335,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:36.115Z"
+      "scrapedAt": "2026-08-01T03:28:36.115Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 65,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-akses-tanjung-priok-759",
@@ -714,12 +1092,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
       "km": 64.1,
       "side": "B",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.8934023,
+        -6.1080986
+      ],
+      "roadPositionM": 7198,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:36.115Z"
+      "scrapedAt": "2026-08-01T03:28:36.115Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 64.1,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-akses-tanjung-priok-758",
@@ -730,12 +1122,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
       "km": 64.1,
       "side": "A",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.8934023,
+        -6.1080986
+      ],
+      "roadPositionM": 7198,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:36.115Z"
+      "scrapedAt": "2026-08-01T03:28:36.115Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 64.1,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-akses-tanjung-priok-742",
@@ -762,12 +1168,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
       "km": 62.45,
       "side": "B",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.9120548,
+        -6.1086972
+      ],
+      "roadPositionM": 5115,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:36.115Z"
+      "scrapedAt": "2026-08-01T03:28:36.115Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 62.45,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-akses-tanjung-priok-755",
@@ -778,12 +1198,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
       "km": 62.45,
       "side": "A",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.9120548,
+        -6.1086972
+      ],
+      "roadPositionM": 5115,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:36.115Z"
+      "scrapedAt": "2026-08-01T03:28:36.115Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 62.45,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-akses-tanjung-priok-754",
@@ -794,12 +1228,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
       "km": 61.4,
       "side": "B",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.9229814,
+        -6.1094024
+      ],
+      "roadPositionM": 3789,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:36.115Z"
+      "scrapedAt": "2026-08-01T03:28:36.115Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 61.4,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-akses-tanjung-priok-753",
@@ -810,12 +1258,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
       "km": 61.4,
       "side": "A",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.9229814,
+        -6.1094024
+      ],
+      "roadPositionM": 3789,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:36.115Z"
+      "scrapedAt": "2026-08-01T03:28:36.115Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 61.4,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-akses-tanjung-priok-752",
@@ -826,12 +1288,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
       "km": 60.8,
       "side": "B",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.9247385,
+        -6.1159841
+      ],
+      "roadPositionM": 3031,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:36.115Z"
+      "scrapedAt": "2026-08-01T03:28:36.115Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 60.8,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-akses-tanjung-priok-751",
@@ -842,12 +1318,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
       "km": 60.8,
       "side": "A",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.9247385,
+        -6.1159841
+      ],
+      "roadPositionM": 3031,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:36.115Z"
+      "scrapedAt": "2026-08-01T03:28:36.115Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 60.8,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-akses-tanjung-priok-750",
@@ -858,12 +1348,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
       "km": 60,
       "side": "B",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.9275809,
+        -6.1245894
+      ],
+      "roadPositionM": 2021,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:36.115Z"
+      "scrapedAt": "2026-08-01T03:28:36.115Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 60,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-akses-tanjung-priok-749",
@@ -874,12 +1378,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
       "km": 59.4,
       "side": "B",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.9314969,
+        -6.1301812
+      ],
+      "roadPositionM": 1263,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:36.115Z"
+      "scrapedAt": "2026-08-01T03:28:36.115Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 59.4,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-akses-tanjung-priok-748",
@@ -890,12 +1408,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
       "km": 59.4,
       "side": "A",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.9314969,
+        -6.1301812
+      ],
+      "roadPositionM": 1263,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:36.115Z"
+      "scrapedAt": "2026-08-01T03:28:36.115Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 59.4,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-akses-tanjung-priok-747",
@@ -906,12 +1438,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
       "km": 59,
       "side": "B",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.9341525,
+        -6.1338778
+      ],
+      "roadPositionM": 758,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:36.115Z"
+      "scrapedAt": "2026-08-01T03:28:36.115Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 59,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-akses-tanjung-priok-746",
@@ -922,12 +1468,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
       "km": 59,
       "side": "A",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.9341525,
+        -6.1338778
+      ],
+      "roadPositionM": 758,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:36.115Z"
+      "scrapedAt": "2026-08-01T03:28:36.115Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 59,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-akses-tanjung-priok-745",
@@ -938,12 +1498,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
       "km": 58.4,
       "side": "B",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.9381472,
+        -6.1394147
+      ],
+      "roadPositionM": 0,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:36.115Z"
+      "scrapedAt": "2026-08-01T03:28:36.115Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 58.4,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-akses-tanjung-priok-744",
@@ -954,12 +1528,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
       "km": 58.4,
       "side": "A",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.9381472,
+        -6.1394147
+      ],
+      "roadPositionM": 0,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:36.115Z"
+      "scrapedAt": "2026-08-01T03:28:36.115Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 58.4,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-akses-tanjung-priok-743",
@@ -1418,12 +2006,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=dalam-kota",
       "km": 5.4,
       "side": "B",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.8358744,
+        -6.2412575
+      ],
+      "roadPositionM": 5400,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:34.903Z"
+      "scrapedAt": "2026-08-01T03:28:34.903Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 5.4,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=dalam-kota",
+        "roadGeometrySource": "https://www.openstreetmap.org/relation/5385689",
+        "roadSnapshotSource": "https://api.openstreetmap.org/api/0.6/relation/5385689/full.json",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-dalam-kota-35",
@@ -1434,12 +2036,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=dalam-kota",
       "km": 5.4,
       "side": "A",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.8358744,
+        -6.2412575
+      ],
+      "roadPositionM": 5400,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:34.903Z"
+      "scrapedAt": "2026-08-01T03:28:34.903Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 5.4,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=dalam-kota",
+        "roadGeometrySource": "https://www.openstreetmap.org/relation/5385689",
+        "roadSnapshotSource": "https://api.openstreetmap.org/api/0.6/relation/5385689/full.json",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-dalam-kota-34",
@@ -1498,12 +2114,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=dalam-kota",
       "km": 0.4,
       "side": "A",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.8786261,
+        -6.2466969
+      ],
+      "roadPositionM": 400,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:34.903Z"
+      "scrapedAt": "2026-08-01T03:28:34.903Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 0.4,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=dalam-kota",
+        "roadGeometrySource": "https://www.openstreetmap.org/relation/5385689",
+        "roadSnapshotSource": "https://api.openstreetmap.org/api/0.6/relation/5385689/full.json",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-dalam-kota-30",
@@ -1514,12 +2144,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=dalam-kota",
       "km": 0.4,
       "side": "B",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.8786261,
+        -6.2466969
+      ],
+      "roadPositionM": 400,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-01T03:28:34.903Z"
+      "scrapedAt": "2026-08-01T03:28:34.903Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 0.4,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=dalam-kota",
+        "roadGeometrySource": "https://www.openstreetmap.org/relation/5385689",
+        "roadSnapshotSource": "https://api.openstreetmap.org/api/0.6/relation/5385689/full.json",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-dalam-kota-29",

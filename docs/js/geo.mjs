@@ -123,6 +123,30 @@ export function verifiedCameras(cameras, highwayId, side) {
     .sort((a, b) => a.roadPositionM - b.roadPositionM);
 }
 
+export function automaticCameras(cameras, highwayId, side) {
+  const eligible = cameras
+    .filter((camera) => {
+      const reviewed = camera.curationStatus === "verified";
+      const provisional =
+        camera.curationStatus === "provisional_stationing" &&
+        camera.locationReview?.method === "osm_route_stationing_interpolation";
+      return camera.highwayId === highwayId &&
+        camera.side === side &&
+        camera.enabled === true &&
+        (reviewed || provisional) &&
+        Array.isArray(camera.coordinates) &&
+        Number.isFinite(camera.roadPositionM);
+    })
+    .sort((a, b) => a.roadPositionM - b.roadPositionM || a.id.localeCompare(b.id));
+  const seenPositions = new Set();
+  return eligible.filter((camera) => {
+    const key = Math.round(camera.roadPositionM);
+    if (seenPositions.has(key)) return false;
+    seenPositions.add(key);
+    return true;
+  });
+}
+
 export function publicCameras(cameras, highwayId, side) {
   const sorted = cameras
     .filter((camera) =>

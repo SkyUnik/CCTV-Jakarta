@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-import { projectPointToLine, verifiedCameras } from "../docs/js/geo.mjs";
+import { automaticCameras, projectPointToLine, verifiedCameras } from "../docs/js/geo.mjs";
 
 async function readJson(relativePath) {
   return JSON.parse(await readFile(new URL(relativePath, import.meta.url), "utf8"));
@@ -52,7 +52,7 @@ test("committed multi-road geometries are directed, curved, and uniquely identif
   }
 });
 
-test("all current kilometer cameras can be mapped without becoming verified", async () => {
+test("all current kilometer cameras can be mapped while provisional records remain distinct", async () => {
   const highways = await readJson("../docs/data/highways.geojson");
   const cameras = await readJson("../docs/data/cameras.json");
   const { groupEstimatedCameraMarkers } = await import("../docs/js/offline-map.mjs");
@@ -60,11 +60,13 @@ test("all current kilometer cameras can be mapped without becoming verified", as
   assert.equal(result.groups.reduce((total, group) => total + group.cameras.length, 0), 86);
   assert.equal(result.unlocated.length, 8);
   assert.ok(result.groups.every((group) => group.quality === "estimated_stationing"));
-  assert.ok(cameras.cameras.every((camera) => camera.coordinates === null));
-  assert.ok(cameras.cameras.every((camera) => camera.roadPositionM === null));
+  assert.equal(cameras.cameras.filter((camera) => camera.curationStatus === "verified").length, 0);
+  assert.ok(cameras.cameras.filter((camera) => camera.curationStatus === "provisional_stationing").every((camera) =>
+    camera.locationReview?.warning.includes("not a surveyed camera coordinate")
+  ));
 });
 
-test("unreviewed provider cameras cannot enter automatic playback", async () => {
+test("only explicitly directed provisional records enter automatic playback", async () => {
   const data = await readJson("../docs/data/cameras.json");
   assert.equal(data.sources.length, 4);
   assert.equal(new Set(data.sources.map((source) => source.road)).size, 4);
@@ -75,6 +77,20 @@ test("unreviewed provider cameras cannot enter automatic playback", async () => 
   assert.equal(data.cameras.filter((camera) => camera.highwayId === "jakarta-bogor-ciawi").length, 28);
   assert.equal(verifiedCameras(data.cameras, "dalam-kota", "A").length, 0);
   assert.equal(verifiedCameras(data.cameras, "dalam-kota", "B").length, 0);
-  assert.ok(data.cameras.every((camera) => camera.enabled === false));
-  assert.ok(data.cameras.every((camera) => camera.curationStatus === "needs_review"));
+  assert.equal(data.cameras.filter((camera) => camera.enabled).length, 46);
+  assert.equal(data.cameras.filter((camera) => camera.curationStatus === "provisional_stationing").length, 46);
+  assert.equal(data.cameras.filter((camera) => camera.curationStatus === "needs_review").length, 48);
+  assert.equal(automaticCameras(data.cameras, "dalam-kota", "A").length, 2);
+  assert.equal(automaticCameras(data.cameras, "dalam-kota", "B").length, 2);
+  assert.equal(automaticCameras(data.cameras, "akses-tanjung-priok", "A").length, 13);
+  assert.equal(automaticCameras(data.cameras, "akses-tanjung-priok", "B").length, 11);
+  assert.equal(automaticCameras(data.cameras, "jakarta-bogor-ciawi", "A").length, 1);
+  assert.equal(automaticCameras(data.cameras, "jakarta-bogor-ciawi", "B").length, 15);
+  assert.equal(automaticCameras(data.cameras, "6-tol-dalam-kota-kelapa-gading-pulo-gebang", "A").length, 0);
+  assert.ok(data.cameras.filter((camera) => camera.enabled).every((camera) =>
+    (camera.side === "A" || camera.side === "B") &&
+    Array.isArray(camera.coordinates) &&
+    Number.isFinite(camera.roadPositionM) &&
+    camera.locationReview?.method === "osm_route_stationing_interpolation"
+  ));
 });
