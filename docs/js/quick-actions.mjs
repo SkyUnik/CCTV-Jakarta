@@ -127,17 +127,33 @@ export function createQuickActionManager({
     }
   }
 
+  function isPipActive() {
+    return Boolean(
+      elements.video &&
+      (elements.video.webkitPresentationMode === "picture-in-picture" ||
+       (typeof document !== "undefined" && document.pictureInPictureElement === elements.video))
+    );
+  }
+
   function triggerOneTap() {
     if (!elements.overlay) return;
     elements.overlay.hidden = false;
     playStream();
     if (elements.video) {
-      void enterVideoFullscreen(elements.video);
+      const requestFs = () => {
+        void enterVideoFullscreen(elements.video);
+      };
+      requestFs();
+      if (elements.video.readyState < 1) {
+        elements.video.addEventListener("loadedmetadata", requestFs, { once: true });
+      }
     }
   }
 
   function close() {
-    destroyQuickPlayer();
+    if (!isPipActive()) {
+      destroyQuickPlayer();
+    }
     if (elements.overlay) {
       elements.overlay.hidden = true;
     }

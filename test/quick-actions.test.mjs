@@ -123,3 +123,27 @@ test("quick action manager closes overlay when clicking outside card backdrop", 
   clickHandler({ target: overlayObj });
   assert.equal(overlayHidden, true);
 });
+
+test("quick action manager preserves video playback when closing overlay during active PiP", async () => {
+  let overlayHidden = false;
+  let pauseCount = 0;
+
+  const elements = {
+    overlay: {
+      get hidden() { return overlayHidden; },
+      set hidden(val) { overlayHidden = val; },
+    },
+    video: {
+      webkitPresentationMode: "picture-in-picture",
+      pause: () => { pauseCount += 1; },
+      removeAttribute: () => {},
+      load: () => {},
+    },
+  };
+
+  const manager = createQuickActionManager({ elements, cameras: [] });
+  manager.close();
+
+  assert.equal(overlayHidden, true);
+  assert.equal(pauseCount, 0);
+});
