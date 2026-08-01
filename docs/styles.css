@@ -282,10 +282,13 @@ footer a { color: inherit; }
   z-index: 1000;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
   gap: 10px;
 }
 .floating-action {
+  appearance: none;
+  -webkit-appearance: none;
+  box-sizing: border-box;
   display: grid;
   place-items: center;
   width: 52px;
@@ -293,6 +296,7 @@ footer a { color: inherit; }
   border: 1px solid rgb(255 255 255 / 42%);
   border-radius: 50%;
   padding: 0;
+  margin: 0;
   background: var(--green);
   color: white;
   box-shadow: 0 10px 30px rgb(8 35 28 / 28%);
@@ -304,24 +308,24 @@ footer a { color: inherit; }
 .floating-action:hover:not(:disabled) { background: #0d3027; }
 .floating-action:focus-visible { outline: 3px solid #b5d441; outline-offset: 3px; }
 .floating-action-wide {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   width: auto;
-  min-width: 90px;
+  min-width: 104px;
   height: 52px;
-  padding: 0 16px;
+  padding: 0 18px;
   border-radius: 26px;
   white-space: nowrap;
   text-align: center;
 }
 .floating-action-wide span {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
+  width: 100%;
   text-align: center;
   line-height: 1;
   margin: 0;
+  padding: 0;
 }
 #restart-button span { font-size: 1.45rem; line-height: 1; }
 
@@ -335,6 +339,8 @@ footer a { color: inherit; }
   background: rgb(8 23 18 / 85%);
   backdrop-filter: blur(6px);
   overflow-y: auto;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 .quick-camera-overlay[hidden] {
   display: none;
@@ -351,6 +357,7 @@ footer a { color: inherit; }
   display: flex;
   flex-direction: column;
   gap: 16px;
+  cursor: default;
 }
 .quick-camera-header {
   display: flex;

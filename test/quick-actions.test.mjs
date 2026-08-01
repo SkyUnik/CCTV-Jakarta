@@ -85,9 +85,15 @@ test("quick action manager closes overlay when clicking outside card backdrop", 
   let overlayHidden = false;
   let clickHandler = null;
 
+  const cardObj = {
+    contains: (target) => target === cardObj || target === innerChildObj,
+  };
+  const innerChildObj = {};
+
   const overlayObj = {
     get hidden() { return overlayHidden; },
     set hidden(val) { overlayHidden = val; },
+    querySelector: (selector) => (selector === ".quick-camera-card" ? cardObj : null),
     addEventListener: (type, listener) => {
       if (type === "click") clickHandler = listener;
     },
@@ -106,11 +112,14 @@ test("quick action manager closes overlay when clicking outside card backdrop", 
   manager.bindEvents();
 
   assert.equal(typeof clickHandler, "function");
-  // Click on card element (should not close)
-  clickHandler({ target: {} });
+  // Click inside card (should not close)
+  clickHandler({ target: cardObj });
   assert.equal(overlayHidden, false);
 
-  // Click on overlay backdrop (should close)
+  clickHandler({ target: innerChildObj });
+  assert.equal(overlayHidden, false);
+
+  // Click outside card (on overlay backdrop) (should close)
   clickHandler({ target: overlayObj });
   assert.equal(overlayHidden, true);
 });

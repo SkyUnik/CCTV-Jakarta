@@ -146,7 +146,10 @@ export function createQuickActionManager({
     }
     if (elements.overlay) {
       elements.overlay.addEventListener("click", (event) => {
-        if (event.target === elements.overlay) {
+        const card = typeof elements.overlay.querySelector === "function"
+          ? elements.overlay.querySelector(".quick-camera-card")
+          : null;
+        if (card ? !card.contains(event.target) : event.target === elements.overlay) {
           close();
         }
       });
