@@ -80,3 +80,37 @@ test("quick action manager preloads metadata and triggers one-tap fullscreen wit
   manager.close();
   assert.equal(overlayHidden, true);
 });
+
+test("quick action manager closes overlay when clicking outside card backdrop", async () => {
+  let overlayHidden = false;
+  let clickHandler = null;
+
+  const overlayObj = {
+    get hidden() { return overlayHidden; },
+    set hidden(val) { overlayHidden = val; },
+    addEventListener: (type, listener) => {
+      if (type === "click") clickHandler = listener;
+    },
+  };
+
+  const elements = {
+    overlay: overlayObj,
+    video: {
+      pause: () => {},
+      removeAttribute: () => {},
+      load: () => {},
+    },
+  };
+
+  const manager = createQuickActionManager({ elements, cameras: [] });
+  manager.bindEvents();
+
+  assert.equal(typeof clickHandler, "function");
+  // Click on card element (should not close)
+  clickHandler({ target: {} });
+  assert.equal(overlayHidden, false);
+
+  // Click on overlay backdrop (should close)
+  clickHandler({ target: overlayObj });
+  assert.equal(overlayHidden, true);
+});

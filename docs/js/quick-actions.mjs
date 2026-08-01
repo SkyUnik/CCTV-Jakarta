@@ -144,6 +144,13 @@ export function createQuickActionManager({
     if (elements.close) {
       elements.close.addEventListener("click", close);
     }
+    if (elements.overlay) {
+      elements.overlay.addEventListener("click", (event) => {
+        if (event.target === elements.overlay) {
+          close();
+        }
+      });
+    }
     if (elements.play) {
       elements.play.addEventListener("click", playStream);
     }
