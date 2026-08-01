@@ -36,8 +36,8 @@ export function geolocationFailure(error, environment = {}) {
   if (error?.code === 1) {
     if (environment.permissionState === "granted") {
       return {
-        status: "Izin Safari tidak sinkron",
-        helper: "Safari menampilkan Allow tetapi tetap menolak GPS. Buka Settings → Apps → Safari → Location → Edit, hapus skyunik.github.io, lalu pilih Ask untuk Other Websites. Tutup Safari sepenuhnya, buka situs ini lagi, tekan Mulai CCTV, dan pilih Allow saat diminta.",
+        status: "Location Services Safari belum aktif",
+        helper: "Izin situs sudah Allow, tetapi akses lokasi Safari belum aktif di iOS. Buka Settings → Privacy & Security → Location Services → Safari Websites → While Using the App, lalu aktifkan Precise Location. Jika Safari Websites tidak tampil atau masalah berlanjut, reset skyunik.github.io lewat Settings → Apps → Safari → Location → Edit.",
       };
     }
     return {
