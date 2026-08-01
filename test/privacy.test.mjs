@@ -5,8 +5,10 @@ import test from "node:test";
 test("browser code does not store or directly upload geolocation", async () => {
   const app = await readFile(new URL("../docs/js/app.mjs", import.meta.url), "utf8");
   const map = await readFile(new URL("../docs/js/online-map.mjs", import.meta.url), "utf8");
+  const quick = await readFile(new URL("../docs/js/quick-actions.mjs", import.meta.url), "utf8");
   assert.doesNotMatch(app, /localStorage|sessionStorage|indexedDB|sendBeacon|XMLHttpRequest|WebSocket/);
   assert.doesNotMatch(map, /fetch\(|localStorage|sessionStorage|indexedDB|sendBeacon|XMLHttpRequest|WebSocket/);
+  assert.doesNotMatch(quick, /localStorage|sessionStorage|indexedDB|sendBeacon|XMLHttpRequest|WebSocket/);
   assert.match(map, /https:\/\/tile\.openstreetmap\.org\/\{z\}\/\{x\}\/\{y\}\.png/);
   assert.match(app, /query\.get\("tileFail"\) === "1"/);
   assert.doesNotMatch(map, /nominatim|overpass|prefetch|serviceWorker/i);
