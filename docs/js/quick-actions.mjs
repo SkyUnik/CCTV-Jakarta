@@ -99,8 +99,14 @@ export function createQuickActionManager({
     const useNative = prefersNativeHls(elements.video, hlsClass);
 
     if (useNative) {
-      elements.video.src = streamUrl;
-      elements.video.onloadedmetadata = () => setStatus(null);
+      if (elements.video.src !== streamUrl) {
+        elements.video.src = streamUrl;
+      }
+      if (elements.video.readyState >= 1) {
+        setStatus(null);
+      } else {
+        elements.video.onloadedmetadata = () => setStatus(null);
+      }
       elements.video.onerror = () => {
         setStatus(nativeMediaErrorMessage(elements.video.error));
       };
@@ -140,13 +146,7 @@ export function createQuickActionManager({
     elements.overlay.hidden = false;
     playStream();
     if (elements.video) {
-      const requestFs = () => {
-        void enterVideoFullscreen(elements.video);
-      };
-      requestFs();
-      if (elements.video.readyState < 1) {
-        elements.video.addEventListener("loadedmetadata", requestFs, { once: true });
-      }
+      void enterVideoFullscreen(elements.video);
     }
   }
 
