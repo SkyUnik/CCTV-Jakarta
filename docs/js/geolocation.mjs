@@ -36,8 +36,8 @@ export function geolocationFailure(error, environment = {}) {
   if (error?.code === 1) {
     if (environment.permissionState === "granted") {
       return {
-        status: "GPS diblokir iOS",
-        helper: "Izin situs sudah Allow, tetapi iOS tetap menolak lokasi. Buka Settings → Privacy & Security → Location Services → Safari Websites → While Using the App, lalu aktifkan Precise Location. Jika sudah aktif, hapus skyunik.github.io lewat Settings → Apps → Safari → Location → Edit, pilih Ask untuk Other Websites, buka ulang Safari, lalu coba lagi.",
+        status: "Izin Safari tidak sinkron",
+        helper: "Safari menampilkan Allow tetapi tetap menolak GPS. Buka Settings → Apps → Safari → Location → Edit, hapus skyunik.github.io, lalu pilih Ask untuk Other Websites. Tutup Safari sepenuhnya, buka situs ini lagi, tekan Mulai CCTV, dan pilih Allow saat diminta.",
       };
     }
     return {
