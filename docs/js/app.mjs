@@ -16,13 +16,9 @@ import {
 import { createOnlineMap } from "./online-map.mjs";
 import { advanceRoutePosition, positionOnHighway } from "./simulator.mjs";
 import {
-  enterVideoFullscreen,
-  exitPictureInPicture,
+  createVideoController,
   fullscreenMethod,
-  preventPictureInPicture,
   nativeMediaErrorMessage,
-  prefersNativeHls,
-  supportsNativeHls,
 } from "./player.mjs";
 import { createQuickActionManager } from "./quick-actions.mjs";
 
@@ -101,7 +97,6 @@ const state = {
   direction: null,
   highway: null,
   highways: [],
-  hls: null,
   loadGeneration: 0,
   loadTimer: null,
   lastPosition: null,
@@ -122,13 +117,16 @@ const state = {
   sourceChanging: false,
   stallTimer: null,
   usableCameras: [],
+  videoController: null,
   watchId: null,
 };
 
 let passTracker = createPassTracker();
 
-preventPictureInPicture(elements.video);
-preventPictureInPicture(elements.quickVideo);
+state.videoController = createVideoController({
+  hlsClass: typeof window !== "undefined" ? window.Hls : null,
+  video: elements.video,
+});
 
 function setJourneyStatus(message) {
   elements.journeyStatus.textContent = message;
@@ -196,18 +194,10 @@ function destroyPlayer(options = {}) {
   state.loadTimer = null;
   clearTimeout(state.stallTimer);
   state.stallTimer = null;
-  if (state.hls) {
-    state.hls.destroy();
-    state.hls = null;
-  }
-  elements.video.pause();
-  elements.video.onloadedmetadata = null;
-  elements.video.oncanplay = null;
-  elements.video.onerror = null;
-  if (!options.reuseSource) {
-    elements.video.removeAttribute("src");
-    elements.video.load();
-  }
+  state.videoController?.destroy({
+    clearSource: !options.reuseSource,
+    preservePip: options.preservePip,
+  });
 }
 
 function setPlayerReady(ready) {
@@ -220,7 +210,6 @@ function showPlaybackError(message) {
   clearTimeout(state.loadTimer);
   state.loadTimer = null;
   state.sourceChanging = false;
-  state.hls?.stopLoad();
   setPlayerReady(false);
   state.playbackBlocked = true;
   elements.errorMessage.textContent = message;
@@ -238,8 +227,10 @@ async function playCamera(camera, options = {}) {
   const continuePlaying = options.forcePlay || state.playIntent;
   const muted = elements.video.muted;
   state.sourceChanging = true;
-  await exitPictureInPicture(elements.video);
-  destroyPlayer({ reuseSource: true });
+  destroyPlayer({
+    preservePip: state.videoController?.isPipActive(),
+    reuseSource: true,
+  });
   const generation = state.loadGeneration;
   setPlayerReady(false);
   clearPlaybackError();
@@ -292,56 +283,20 @@ async function playCamera(camera, options = {}) {
     showPlaybackError("Stream tidak merespons dalam 20 detik. Kamera mungkin offline atau jaringan sedang lambat.");
   }, 20_000);
 
-  const attachHlsJs = () => {
-    if (generation !== state.loadGeneration || !globalThis.Hls?.isSupported()) return false;
-    elements.video.onloadedmetadata = null;
-    elements.video.oncanplay = null;
-    elements.video.onerror = null;
-    elements.video.removeAttribute("src");
-    elements.video.load();
-    state.hls = new globalThis.Hls({
-      enableWorker: true,
-      lowLatencyMode: true,
-      backBufferLength: 30,
-      liveSyncDurationCount: 3,
-      liveMaxLatencyDurationCount: 8,
-      manifestLoadingMaxRetry: 2,
-      levelLoadingMaxRetry: 2,
-      fragLoadingMaxRetry: 2,
-    });
-    state.hls.on(globalThis.Hls.Events.MANIFEST_PARSED, onReady);
-    state.hls.on(globalThis.Hls.Events.ERROR, (_, data) => {
-      if (generation !== state.loadGeneration || !data.fatal) return;
+  const onError = (error, context = {}) => {
+    if (generation !== state.loadGeneration) return;
+    if (context.mode === "hls") {
       showPlaybackError(
-        data.type === globalThis.Hls.ErrorTypes.NETWORK_ERROR
+        error?.type === globalThis.Hls?.ErrorTypes?.NETWORK_ERROR
           ? "Stream tidak dapat diambil. Kamera mungkin offline atau dibatasi oleh CORS."
           : "Browser tidak dapat memproses stream kamera ini.",
       );
-    });
-    state.hls.loadSource(camera.streamUrl);
-    state.hls.attachMedia(elements.video);
-    return true;
+      return;
+    }
+    showPlaybackError(nativeMediaErrorMessage(elements.video.error));
   };
 
-  const attachNative = () => {
-    elements.video.src = camera.streamUrl;
-    elements.video.onloadedmetadata = onReady;
-    elements.video.oncanplay = onReady;
-    elements.video.onerror = () => {
-      if (generation !== state.loadGeneration) return;
-      if (attachHlsJs()) {
-        setJourneyStatus("Pemutar bawaan menolak sumber; mencoba mode kompatibilitas…");
-        return;
-      }
-      showPlaybackError(nativeMediaErrorMessage(elements.video.error));
-    };
-  };
-
-  if (prefersNativeHls(elements.video, globalThis.Hls)) {
-    attachNative();
-  } else if (!attachHlsJs() && supportsNativeHls(elements.video)) {
-    attachNative();
-  } else if (!state.hls) {
+  if (!state.videoController.load(camera, { continuePlaying, onError, onReady })) {
     showPlaybackError("Browser ini tidak mendukung pemutaran HLS.");
   }
 }
@@ -353,10 +308,10 @@ async function openVideoPlayer() {
 
   // Both calls start synchronously inside the tap handler. This is important on
   // iOS, where playback and full-screen entry require a direct user gesture.
-  const playPromise = elements.video.play();
+  const playPromise = state.videoController.play();
   let method = null;
   try {
-    method = await enterVideoFullscreen(elements.video);
+    method = await state.videoController.enterFullscreen();
     setJourneyStatus(method
       ? "Pemutar video layar penuh dibuka. Menunggu siaran kamera…"
       : "Video diputar. Gunakan kontrol layar penuh bawaan perangkat.");
@@ -1095,8 +1050,7 @@ elements.video.addEventListener("webkitendfullscreen", () => {
 });
 elements.video.addEventListener("webkitpresentationmodechanged", () => {
   if (elements.video.webkitPresentationMode === "picture-in-picture") {
-    void exitPictureInPicture(elements.video);
-    setJourneyStatus("Picture-in-Picture dimatikan. Gunakan pemutar layar penuh agar tampilan tidak terbelah.");
+    setJourneyStatus("Picture-in-Picture aktif. Kamera tetap berganti otomatis saat melewati titik berikutnya.");
   } else if (elements.video.webkitPresentationMode === "fullscreen") {
     setJourneyStatus("Pemutar video layar penuh aktif.");
   } else if (elements.video.webkitPresentationMode === "inline") {
@@ -1104,15 +1058,14 @@ elements.video.addEventListener("webkitpresentationmodechanged", () => {
   }
 });
 elements.video.addEventListener("enterpictureinpicture", () => {
-  void exitPictureInPicture(elements.video);
-  setJourneyStatus("Picture-in-Picture dimatikan. Gunakan pemutar layar penuh agar tampilan tidak terbelah.");
+  setJourneyStatus("Picture-in-Picture aktif. Kamera tetap berganti otomatis saat melewati titik berikutnya.");
 });
 
 window.addEventListener("beforeunload", () => {
   if (state.simulatorTimer !== null) clearInterval(state.simulatorTimer);
   if (state.watchId !== null) navigator.geolocation.clearWatch(state.watchId);
   state.routeMap?.destroy();
-  if (state.hls) state.hls.destroy();
+  state.videoController?.destroy();
 });
 
 loadData();

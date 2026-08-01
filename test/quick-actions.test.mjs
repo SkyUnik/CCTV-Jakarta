@@ -126,10 +126,9 @@ test("quick action manager closes overlay when clicking outside card backdrop", 
   assert.equal(overlayHidden, true);
 });
 
-test("quick action manager exits PiP and stops playback when closing overlay", async () => {
+test("quick action manager preserves video playback when closing overlay during active PiP", async () => {
   let overlayHidden = false;
   let pauseCount = 0;
-  let mode = "picture-in-picture";
 
   const elements = {
     overlay: {
@@ -137,10 +136,7 @@ test("quick action manager exits PiP and stops playback when closing overlay", a
       set hidden(val) { overlayHidden = val; },
     },
     video: {
-      get webkitPresentationMode() { return mode; },
-      setAttribute: () => {},
-      webkitSetPresentationMode: (value) => { mode = value; },
-      webkitSupportsPresentationMode: (value) => value === "inline",
+      webkitPresentationMode: "picture-in-picture",
       pause: () => { pauseCount += 1; },
       removeAttribute: () => {},
       load: () => {},
@@ -152,6 +148,5 @@ test("quick action manager exits PiP and stops playback when closing overlay", a
   await Promise.resolve();
 
   assert.equal(overlayHidden, true);
-  assert.equal(mode, "inline");
-  assert.equal(pauseCount, 1);
+  assert.equal(pauseCount, 0);
 });

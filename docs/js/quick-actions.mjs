@@ -1,9 +1,6 @@
 import {
-  enterVideoFullscreen,
-  exitPictureInPicture,
+  createVideoController,
   nativeMediaErrorMessage,
-  preventPictureInPicture,
-  prefersNativeHls,
 } from "./player.mjs";
 
 export const KOJA_TIMUR_DEFAULT_CAMERA = Object.freeze({
@@ -39,9 +36,16 @@ export function createQuickActionManager({
 }) {
   let actions = DEFAULT_QUICK_ACTIONS;
   let preloadedMetadata = false;
-  let hlsInstance = null;
-
-  preventPictureInPicture(elements.video);
+  const controller = createVideoController({
+    hlsClass,
+    video: elements.video,
+    onReady: () => setStatus(null),
+    onError: (error) => {
+      setStatus(error?.details
+        ? "Kamera publik Koja Timur tidak dapat diputar."
+        : nativeMediaErrorMessage(elements.video?.error));
+    },
+  });
 
   function findActiveCamera() {
     const targetId = actions[0]?.cameraIds?.[0] || KOJA_TIMUR_DEFAULT_CAMERA.id;
@@ -49,19 +53,10 @@ export function createQuickActionManager({
   }
 
   function destroyQuickPlayer(options = {}) {
-    if (hlsInstance) {
-      hlsInstance.destroy();
-      hlsInstance = null;
-    }
-    if (elements.video) {
-      elements.video.pause();
-      elements.video.onloadedmetadata = null;
-      elements.video.onerror = null;
-      if (!options.reuseSource) {
-        elements.video.removeAttribute("src");
-        elements.video.load();
-      }
-    }
+    controller.destroy({
+      clearSource: !options.reuseSource,
+      preservePip: options.preservePip,
+    });
   }
 
   function setStatus(message) {
@@ -95,44 +90,9 @@ export function createQuickActionManager({
   function playStream() {
     if (!elements.video) return;
     const camera = findActiveCamera();
-    destroyQuickPlayer({ reuseSource: true });
     setStatus("Memuat stream Koja Timur…");
     elements.video.muted = true;
-
-    const streamUrl = camera.streamUrl;
-    const useNative = prefersNativeHls(elements.video, hlsClass);
-
-    if (useNative) {
-      if (elements.video.src !== streamUrl) {
-        elements.video.src = streamUrl;
-      }
-      if (elements.video.readyState >= 1) {
-        setStatus(null);
-      } else {
-        elements.video.onloadedmetadata = () => setStatus(null);
-      }
-      elements.video.onerror = () => {
-        setStatus(nativeMediaErrorMessage(elements.video.error));
-      };
-      elements.video.play().catch(() => {
-        setStatus("Gagal memulai pemutaran stream.");
-      });
-    } else if (hlsClass?.isSupported?.()) {
-      hlsInstance = new hlsClass({ autoStartLoad: true });
-      hlsInstance.loadSource(streamUrl);
-      hlsInstance.attachMedia(elements.video);
-      hlsInstance.on(hlsClass.Events.MANIFEST_PARSED, () => {
-        setStatus(null);
-        elements.video.play().catch(() => {
-          setStatus("Gagal memulai pemutaran stream.");
-        });
-      });
-      hlsInstance.on(hlsClass.Events.ERROR, (_, data) => {
-        if (data?.fatal) {
-          setStatus("Kamera publik Koja Timur tidak dapat diputar.");
-        }
-      });
-    } else {
+    if (!controller.load(camera, { continuePlaying: true })) {
       setStatus("Browser tidak mendukung format pemutaran video ini.");
     }
   }
@@ -142,12 +102,12 @@ export function createQuickActionManager({
     elements.overlay.hidden = false;
     playStream();
     if (elements.video) {
-      void enterVideoFullscreen(elements.video);
+      void controller.enterFullscreen();
     }
   }
 
   function close() {
-    void exitPictureInPicture(elements.video).finally(() => destroyQuickPlayer());
+    if (!controller.isPipActive()) destroyQuickPlayer();
     if (elements.overlay) {
       elements.overlay.hidden = true;
     }
@@ -175,17 +135,7 @@ export function createQuickActionManager({
     }
     if (elements.fullscreen && elements.video) {
       elements.fullscreen.addEventListener("click", () => {
-        void enterVideoFullscreen(elements.video);
-      });
-    }
-    if (elements.video) {
-      elements.video.addEventListener?.("enterpictureinpicture", () => {
-        void exitPictureInPicture(elements.video);
-      });
-      elements.video.addEventListener?.("webkitpresentationmodechanged", () => {
-        if (elements.video.webkitPresentationMode === "picture-in-picture") {
-          void exitPictureInPicture(elements.video);
-        }
+        void controller.enterFullscreen();
       });
     }
     if (elements.retry) {
@@ -200,5 +150,6 @@ export function createQuickActionManager({
     close,
     destroyQuickPlayer,
     getPreloadedMetadata: () => preloadedMetadata,
+    isPipActive: controller.isPipActive,
   };
 }

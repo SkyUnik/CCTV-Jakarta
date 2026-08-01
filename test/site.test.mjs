@@ -48,12 +48,12 @@ test("static page exposes the required accessible controls with relative assets"
     assert.equal($(`#${id}`).length, 1, `Missing unique #${id}`);
   }
   assert.equal($("#camera-video").is("[playsinline]"), true);
-  assert.equal($("#camera-video").is("[disablepictureinpicture]"), true);
+  assert.equal($("#camera-video").is("[disablepictureinpicture]"), false);
   assert.equal($("#camera-video").is("[muted]"), true);
   assert.equal($("#camera-video").is("[controls]"), true);
   assert.equal($("#camera-video").attr("preload"), "metadata");
   assert.equal($("#camera-video").attr("x-webkit-airplay"), "allow");
-  assert.equal($("#quick-camera-video").is("[disablepictureinpicture]"), true);
+  assert.equal($("#quick-camera-video").is("[disablepictureinpicture]"), false);
   assert.equal($("script[src^='http']").length, 0);
   assert.equal($("#map-toggle").is("[checked]"), true);
   assert.match($("#route-map").attr("aria-label"), /OpenStreetMap/i);
