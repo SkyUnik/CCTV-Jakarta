@@ -22,8 +22,14 @@
         "cameraStationing": {
           "quality": "estimated_stationing",
           "anchors": [
-            { "km": 0, "roadPositionM": 0 },
-            { "km": 19.647, "roadPositionM": 19647 }
+            {
+              "km": 0,
+              "roadPositionM": 0
+            },
+            {
+              "km": 19.647,
+              "roadPositionM": 19647
+            }
           ]
         },
         "osmSource": "https://www.openstreetmap.org/relation/5385689",
@@ -37,7 +43,9 @@
       "id": "6-tol-dalam-kota-kelapa-gading-pulo-gebang",
       "input": "data-source/osm-motorways-jakarta-north.json",
       "sourceType": "namedWays",
-      "wayNames": ["Jalan Tol Sunter–Pulo Gebang"],
+      "wayNames": [
+        "Jalan Tol Sunter–Pulo Gebang"
+      ],
       "startNodeId": 8869531829,
       "endNodeId": 5492926343,
       "properties": {
@@ -54,8 +62,14 @@
         "cameraStationing": {
           "quality": "estimated_stationing",
           "anchors": [
-            { "km": 22.67, "roadPositionM": 0 },
-            { "km": 28.6, "roadPositionM": 7287 }
+            {
+              "km": 22.67,
+              "roadPositionM": 0
+            },
+            {
+              "km": 28.6,
+              "roadPositionM": 7287
+            }
           ]
         },
         "osmSource": "https://www.openstreetmap.org/",
@@ -69,7 +83,9 @@
       "id": "akses-tanjung-priok",
       "input": "data-source/osm-motorways-jakarta-north.json",
       "sourceType": "namedWays",
-      "wayNames": ["Jalan Tol Akses Tanjung Priok"],
+      "wayNames": [
+        "Jalan Tol Akses Tanjung Priok"
+      ],
       "startNodeId": 403994155,
       "endNodeId": 6322167590,
       "properties": {
@@ -86,8 +102,14 @@
         "cameraStationing": {
           "quality": "estimated_stationing",
           "anchors": [
-            { "km": 58.4, "roadPositionM": 0 },
-            { "km": 67.2, "roadPositionM": 11113 }
+            {
+              "km": 58.4,
+              "roadPositionM": 0
+            },
+            {
+              "km": 67.2,
+              "roadPositionM": 11113
+            }
           ]
         },
         "osmSource": "https://www.openstreetmap.org/",
@@ -101,7 +123,10 @@
       "id": "jakarta-bogor-ciawi",
       "input": "data-source/osm-motorways-jagorawi.json",
       "sourceType": "namedWays",
-      "wayNames": ["Jalan Tol Jakarta–Bogor–Ciawi", "Jalan Tol Jagorawi"],
+      "wayNames": [
+        "Jalan Tol Jakarta–Bogor–Ciawi",
+        "Jalan Tol Jagorawi"
+      ],
       "startNodeId": 309137881,
       "endNodeId": 202772567,
       "properties": {
@@ -118,8 +143,14 @@
         "cameraStationing": {
           "quality": "estimated_stationing",
           "anchors": [
-            { "km": 0, "roadPositionM": 0 },
-            { "km": 46.705, "roadPositionM": 46705 }
+            {
+              "km": 0,
+              "roadPositionM": 0
+            },
+            {
+              "km": 46.705,
+              "roadPositionM": 46705
+            }
           ]
         },
         "osmSource": "https://www.openstreetmap.org/",
@@ -150,8 +181,14 @@
         "cameraStationing": {
           "quality": "estimated_stationing",
           "anchors": [
-            { "km": 0.4, "roadPositionM": 400 },
-            { "km": 24.8, "roadPositionM": 24800 }
+            {
+              "km": 0.4,
+              "roadPositionM": 400
+            },
+            {
+              "km": 24.8,
+              "roadPositionM": 24800
+            }
           ]
         },
         "osmSource": "https://www.openstreetmap.org/relation/5385689",
@@ -184,8 +221,498 @@
         "cameraStationing": {
           "quality": "estimated_stationing",
           "anchors": [
-            { "km": 2.0, "roadPositionM": 0 },
-            { "km": 15.0, "roadPositionM": 13000 }
+            {
+              "km": 2,
+              "roadPositionM": 0
+            },
+            {
+              "km": 15,
+              "roadPositionM": 13000
+            }
+          ]
+        },
+        "osmSource": "https://www.openstreetmap.org/",
+        "osmSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "attribution": "© OpenStreetMap contributors",
+        "license": "https://opendatacommons.org/licenses/odbl/1-0/",
+        "reviewStatus": "canonical_path_selected"
+      }
+    },
+    {
+      "id": "depok-antasari",
+      "input": "data-source/osm-motorways-depok-antasari.json",
+      "sourceType": "namedWays",
+      "wayNames": [
+        "Jalan Tol Depok–Antasari",
+        "Jalan Tol Antasari–Depok"
+      ],
+      "startNodeId": 4314587204,
+      "endNodeId": 6997538230,
+      "properties": {
+        "name": "Tol Depok–Antasari (Desari)",
+        "zeroKmLabel": "Simpang Susun Antasari",
+        "terminalLabel": "Sawangan / Depok",
+        "directionA": "Menjauh dari Antasari (ke arah Sawangan/Depok)",
+        "directionB": "Menuju Antasari",
+        "matchRadiusM": 60,
+        "maxAccuracyM": 100,
+        "maxMatchRadiusM": 150,
+        "passHysteresisM": 75,
+        "passConfirmationFixes": 2,
+        "cameraStationing": {
+          "quality": "estimated_stationing",
+          "anchors": [
+            {
+              "km": 0,
+              "roadPositionM": 0
+            },
+            {
+              "km": 21,
+              "roadPositionM": 21000
+            }
+          ]
+        },
+        "osmSource": "https://www.openstreetmap.org/",
+        "osmSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "attribution": "© OpenStreetMap contributors",
+        "license": "https://opendatacommons.org/licenses/odbl/1-0/",
+        "reviewStatus": "canonical_path_selected"
+      }
+    },
+    {
+      "id": "jakarta-tangerang",
+      "input": "data-source/osm-motorways-jakarta-tangerang.json",
+      "sourceType": "namedWays",
+      "wayNames": [
+        "Jalan Tol Jakarta–Merak",
+        "Jalan Tol Jakarta–Tangerang"
+      ],
+      "startNodeId": 1757800682,
+      "endNodeId": 316224177,
+      "properties": {
+        "name": "Tol Jakarta–Tangerang",
+        "zeroKmLabel": "Tomang / Jakarta",
+        "terminalLabel": "Tangerang / Bitung",
+        "directionA": "Menjauh dari Jakarta (ke arah Tangerang)",
+        "directionB": "Menuju Jakarta (Tomang)",
+        "matchRadiusM": 60,
+        "maxAccuracyM": 100,
+        "maxMatchRadiusM": 150,
+        "passHysteresisM": 75,
+        "passConfirmationFixes": 2,
+        "cameraStationing": {
+          "quality": "estimated_stationing",
+          "anchors": [
+            {
+              "km": 0,
+              "roadPositionM": 0
+            },
+            {
+              "km": 26,
+              "roadPositionM": 26000
+            }
+          ]
+        },
+        "osmSource": "https://www.openstreetmap.org/",
+        "osmSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "attribution": "© OpenStreetMap contributors",
+        "license": "https://opendatacommons.org/licenses/odbl/1-0/",
+        "reviewStatus": "canonical_path_selected"
+      }
+    },
+    {
+      "id": "jorr-2-kunciran-cengkareng",
+      "input": "data-source/osm-motorways-jorr2.json",
+      "sourceType": "namedWays",
+      "wayNames": [
+        "Jalan Tol Cengkareng–Batuceper–Kunciran"
+      ],
+      "startNodeId": 5028161882,
+      "endNodeId": 5251290684,
+      "properties": {
+        "name": "JORR 2 (Kunciran–Cengkareng)",
+        "zeroKmLabel": "Simpang Susun Kunciran",
+        "terminalLabel": "Bandara Soekarno-Hatta / Cengkareng",
+        "directionA": "Menjauh dari Kunciran (ke arah Cengkareng)",
+        "directionB": "Menuju Kunciran",
+        "matchRadiusM": 60,
+        "maxAccuracyM": 100,
+        "maxMatchRadiusM": 150,
+        "passHysteresisM": 75,
+        "passConfirmationFixes": 2,
+        "cameraStationing": {
+          "quality": "estimated_stationing",
+          "anchors": [
+            {
+              "km": 0,
+              "roadPositionM": 0
+            },
+            {
+              "km": 14,
+              "roadPositionM": 14000
+            }
+          ]
+        },
+        "osmSource": "https://www.openstreetmap.org/",
+        "osmSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "attribution": "© OpenStreetMap contributors",
+        "license": "https://opendatacommons.org/licenses/odbl/1-0/",
+        "reviewStatus": "canonical_path_selected"
+      }
+    },
+    {
+      "id": "jorr-2-serpong-cinere",
+      "input": "data-source/osm-motorways-jorr2.json",
+      "sourceType": "namedWays",
+      "wayNames": [
+        "Jalan Tol Serpong–Cinere",
+        "Jalan Tol Serpong Cinere",
+        "Jalan Tol Serpong-Cinere"
+      ],
+      "startNodeId": 5028161850,
+      "endNodeId": 9573075653,
+      "properties": {
+        "name": "JORR 2 (Serpong–Cinere)",
+        "zeroKmLabel": "Serpong",
+        "terminalLabel": "Cinere",
+        "directionA": "Menjauh dari Serpong (ke arah Cinere)",
+        "directionB": "Menuju Serpong",
+        "matchRadiusM": 60,
+        "maxAccuracyM": 100,
+        "maxMatchRadiusM": 150,
+        "passHysteresisM": 75,
+        "passConfirmationFixes": 2,
+        "cameraStationing": {
+          "quality": "estimated_stationing",
+          "anchors": [
+            {
+              "km": 0,
+              "roadPositionM": 0
+            },
+            {
+              "km": 10,
+              "roadPositionM": 10000
+            }
+          ]
+        },
+        "osmSource": "https://www.openstreetmap.org/",
+        "osmSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "attribution": "© OpenStreetMap contributors",
+        "license": "https://opendatacommons.org/licenses/odbl/1-0/",
+        "reviewStatus": "canonical_path_selected"
+      }
+    },
+    {
+      "id": "jorr-2-serpong-kunciran",
+      "input": "data-source/osm-motorways-jorr2.json",
+      "sourceType": "namedWays",
+      "wayNames": [
+        "Jalan Tol Kunciran–Serpong"
+      ],
+      "startNodeId": 5028161882,
+      "endNodeId": 5950065464,
+      "properties": {
+        "name": "JORR 2 (Serpong–Kunciran)",
+        "zeroKmLabel": "Serpong",
+        "terminalLabel": "Kunciran",
+        "directionA": "Menjauh dari Serpong (ke arah Kunciran)",
+        "directionB": "Menuju Serpong",
+        "matchRadiusM": 60,
+        "maxAccuracyM": 100,
+        "maxMatchRadiusM": 150,
+        "passHysteresisM": 75,
+        "passConfirmationFixes": 2,
+        "cameraStationing": {
+          "quality": "estimated_stationing",
+          "anchors": [
+            {
+              "km": 0,
+              "roadPositionM": 0
+            },
+            {
+              "km": 11,
+              "roadPositionM": 11000
+            }
+          ]
+        },
+        "osmSource": "https://www.openstreetmap.org/",
+        "osmSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "attribution": "© OpenStreetMap contributors",
+        "license": "https://opendatacommons.org/licenses/odbl/1-0/",
+        "reviewStatus": "canonical_path_selected"
+      }
+    },
+    {
+      "id": "jorr-e-bambu-apus-rorotan",
+      "input": "data-source/osm-motorways-jorr-east.json",
+      "sourceType": "namedWays",
+      "wayNames": [
+        "Jalan Tol Lingkar Luar Jakarta"
+      ],
+      "startNodeId": 11017094793,
+      "endNodeId": 275843206,
+      "properties": {
+        "name": "JORR E (Bambu Apus–Rorotan)",
+        "zeroKmLabel": "Cikunir / Bambu Apus",
+        "terminalLabel": "Rorotan",
+        "directionA": "Menjauh dari Bambu Apus (ke arah Rorotan)",
+        "directionB": "Menuju Bambu Apus / Cikunir",
+        "matchRadiusM": 60,
+        "maxAccuracyM": 100,
+        "maxMatchRadiusM": 150,
+        "passHysteresisM": 75,
+        "passConfirmationFixes": 2,
+        "cameraStationing": {
+          "quality": "estimated_stationing",
+          "anchors": [
+            {
+              "km": 0,
+              "roadPositionM": 0
+            },
+            {
+              "km": 25,
+              "roadPositionM": 25000
+            }
+          ]
+        },
+        "osmSource": "https://www.openstreetmap.org/",
+        "osmSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "attribution": "© OpenStreetMap contributors",
+        "license": "https://opendatacommons.org/licenses/odbl/1-0/",
+        "reviewStatus": "canonical_path_selected"
+      }
+    },
+    {
+      "id": "jorr-s",
+      "input": "data-source/osm-motorways-jorr-south.json",
+      "sourceType": "namedWays",
+      "wayNames": [
+        "Jalan Tol Lingkar Luar Jakarta"
+      ],
+      "startNodeId": 309355852,
+      "endNodeId": 5006777314,
+      "properties": {
+        "name": "JORR S",
+        "zeroKmLabel": "Pondok Pinang / Ulujami",
+        "terminalLabel": "TMII / Cikunir",
+        "directionA": "Menjauh dari Pondok Pinang (ke arah Cikunir)",
+        "directionB": "Menuju Pondok Pinang",
+        "matchRadiusM": 60,
+        "maxAccuracyM": 100,
+        "maxMatchRadiusM": 150,
+        "passHysteresisM": 75,
+        "passConfirmationFixes": 2,
+        "cameraStationing": {
+          "quality": "estimated_stationing",
+          "anchors": [
+            {
+              "km": 0,
+              "roadPositionM": 0
+            },
+            {
+              "km": 14,
+              "roadPositionM": 14000
+            }
+          ]
+        },
+        "osmSource": "https://www.openstreetmap.org/",
+        "osmSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "attribution": "© OpenStreetMap contributors",
+        "license": "https://opendatacommons.org/licenses/odbl/1-0/",
+        "reviewStatus": "canonical_path_selected"
+      }
+    },
+    {
+      "id": "jorr-w1",
+      "input": "data-source/osm-motorways-jakarta-tangerang.json",
+      "sourceType": "namedWays",
+      "wayNames": [
+        "Jalan Tol Lingkar Luar Jakarta"
+      ],
+      "startNodeId": 2408629042,
+      "endNodeId": 5507072354,
+      "properties": {
+        "name": "JORR W1",
+        "zeroKmLabel": "Penjaringan",
+        "terminalLabel": "Kembangan",
+        "directionA": "Menjauh dari Penjaringan (ke arah Kembangan)",
+        "directionB": "Menuju Penjaringan",
+        "matchRadiusM": 60,
+        "maxAccuracyM": 100,
+        "maxMatchRadiusM": 150,
+        "passHysteresisM": 75,
+        "passConfirmationFixes": 2,
+        "cameraStationing": {
+          "quality": "estimated_stationing",
+          "anchors": [
+            {
+              "km": 0,
+              "roadPositionM": 0
+            },
+            {
+              "km": 10,
+              "roadPositionM": 10000
+            }
+          ]
+        },
+        "osmSource": "https://www.openstreetmap.org/",
+        "osmSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "attribution": "© OpenStreetMap contributors",
+        "license": "https://opendatacommons.org/licenses/odbl/1-0/",
+        "reviewStatus": "canonical_path_selected"
+      }
+    },
+    {
+      "id": "jorr-w2-utara-kebon-jeruk-ulujami",
+      "input": "data-source/osm-motorways-jakarta-tangerang.json",
+      "sourceType": "namedWays",
+      "wayNames": [
+        "Jalan Tol Lingkar Luar Jakarta"
+      ],
+      "startNodeId": 2408629042,
+      "endNodeId": 5507072354,
+      "properties": {
+        "name": "JORR W2 Utara (Kebon Jeruk–Ulujami)",
+        "zeroKmLabel": "Kebon Jeruk",
+        "terminalLabel": "Ulujami",
+        "directionA": "Menjauh dari Kebon Jeruk (ke arah Ulujami)",
+        "directionB": "Menuju Kebon Jeruk",
+        "matchRadiusM": 60,
+        "maxAccuracyM": 100,
+        "maxMatchRadiusM": 150,
+        "passHysteresisM": 75,
+        "passConfirmationFixes": 2,
+        "cameraStationing": {
+          "quality": "estimated_stationing",
+          "anchors": [
+            {
+              "km": 0,
+              "roadPositionM": 0
+            },
+            {
+              "km": 8,
+              "roadPositionM": 8000
+            }
+          ]
+        },
+        "osmSource": "https://www.openstreetmap.org/",
+        "osmSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "attribution": "© OpenStreetMap contributors",
+        "license": "https://opendatacommons.org/licenses/odbl/1-0/",
+        "reviewStatus": "canonical_path_selected"
+      }
+    },
+    {
+      "id": "jorr-w2s-pondok-ranji-ulujami-pondok-pinang",
+      "input": "data-source/osm-motorways-jorr2.json",
+      "sourceType": "namedWays",
+      "wayNames": [
+        "Jalan Tol Ulujami–Serpong"
+      ],
+      "startNodeId": 2358064723,
+      "endNodeId": 312254031,
+      "properties": {
+        "name": "JORR W2S (Pondok Ranji–Ulujami–Pondok Pinang)",
+        "zeroKmLabel": "Pondok Ranji",
+        "terminalLabel": "Pondok Pinang",
+        "directionA": "Menjauh dari Pondok Ranji (ke arah Pondok Pinang)",
+        "directionB": "Menuju Pondok Ranji",
+        "matchRadiusM": 60,
+        "maxAccuracyM": 100,
+        "maxMatchRadiusM": 150,
+        "passHysteresisM": 75,
+        "passConfirmationFixes": 2,
+        "cameraStationing": {
+          "quality": "estimated_stationing",
+          "anchors": [
+            {
+              "km": 0,
+              "roadPositionM": 0
+            },
+            {
+              "km": 6,
+              "roadPositionM": 6000
+            }
+          ]
+        },
+        "osmSource": "https://www.openstreetmap.org/",
+        "osmSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "attribution": "© OpenStreetMap contributors",
+        "license": "https://opendatacommons.org/licenses/odbl/1-0/",
+        "reviewStatus": "canonical_path_selected"
+      }
+    },
+    {
+      "id": "jorr-w2u-ulujami-kembangan",
+      "input": "data-source/osm-motorways-jakarta-tangerang.json",
+      "sourceType": "namedWays",
+      "wayNames": [
+        "Jalan Tol Lingkar Luar Jakarta"
+      ],
+      "startNodeId": 2408629042,
+      "endNodeId": 5507072354,
+      "properties": {
+        "name": "JORR W2U (Ulujami–Kembangan)",
+        "zeroKmLabel": "Ulujami",
+        "terminalLabel": "Kembangan",
+        "directionA": "Menjauh dari Ulujami (ke arah Kembangan)",
+        "directionB": "Menuju Ulujami",
+        "matchRadiusM": 60,
+        "maxAccuracyM": 100,
+        "maxMatchRadiusM": 150,
+        "passHysteresisM": 75,
+        "passConfirmationFixes": 2,
+        "cameraStationing": {
+          "quality": "estimated_stationing",
+          "anchors": [
+            {
+              "km": 0,
+              "roadPositionM": 0
+            },
+            {
+              "km": 8,
+              "roadPositionM": 8000
+            }
+          ]
+        },
+        "osmSource": "https://www.openstreetmap.org/",
+        "osmSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "attribution": "© OpenStreetMap contributors",
+        "license": "https://opendatacommons.org/licenses/odbl/1-0/",
+        "reviewStatus": "canonical_path_selected"
+      }
+    },
+    {
+      "id": "kanci-pejagan",
+      "input": "data-source/osm-motorways-kanci-pejagan.json",
+      "sourceType": "namedWays",
+      "wayNames": [
+        "Jalan Tol Kanci–Pejagan"
+      ],
+      "startNodeId": 1780645534,
+      "endNodeId": 1780645275,
+      "properties": {
+        "name": "Tol Kanci–Pejagan",
+        "zeroKmLabel": "Kanci",
+        "terminalLabel": "Pejagan",
+        "directionA": "Menjauh dari Kanci (ke arah Pejagan)",
+        "directionB": "Menuju Kanci",
+        "matchRadiusM": 60,
+        "maxAccuracyM": 100,
+        "maxMatchRadiusM": 150,
+        "passHysteresisM": 75,
+        "passConfirmationFixes": 2,
+        "cameraStationing": {
+          "quality": "estimated_stationing",
+          "anchors": [
+            {
+              "km": 0,
+              "roadPositionM": 0
+            },
+            {
+              "km": 35,
+              "roadPositionM": 35000
+            }
           ]
         },
         "osmSource": "https://www.openstreetmap.org/",

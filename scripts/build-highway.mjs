@@ -54,9 +54,7 @@ function buildGraph(ways, nodes) {
       if (!nodes.has(from) || !nodes.has(to)) continue;
       const weight = distanceMeters(nodes.get(from), nodes.get(to));
       addEdge(graph, from, { to, weight, wayId: way.id });
-      if (way.tags?.oneway !== "yes") {
-        addEdge(graph, to, { to: from, weight, wayId: way.id });
-      }
+      addEdge(graph, to, { to: from, weight, wayId: way.id });
     }
   }
   return graph;

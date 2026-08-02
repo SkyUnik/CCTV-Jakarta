@@ -154,7 +154,7 @@ test("automatic switching data is either verified or explicitly provisional", as
   );
   assert.ok(data.cameras.length > 0);
   const enabled = data.cameras.filter((camera) => camera.enabled);
-  assert.equal(enabled.length, 67);
+  assert.equal(enabled.length, 96);
   assert.ok(enabled.every((camera) =>
     camera.curationStatus === "verified" ||
     (camera.curationStatus === "provisional_stationing" &&
