@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "source": {
     "provider": "Direktorat Jenderal Bina Marga",
-    "road": "jakarta-bogor-ciawi",
-    "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=jakarta-bogor-ciawi",
-    "scrapedAt": "2026-08-01T03:28:36.645Z"
+    "road": "cawang-tj-priok-ancol-timur-jembatan-tigapluit",
+    "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=cawang-tj-priok-ancol-timur-jembatan-tigapluit",
+    "scrapedAt": "2026-08-02T06:42:18.200Z"
   },
   "sources": [
     {
@@ -30,9 +30,63 @@
       "road": "jakarta-bogor-ciawi",
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=jakarta-bogor-ciawi",
       "scrapedAt": "2026-08-01T03:28:36.645Z"
+    },
+    {
+      "provider": "Direktorat Jenderal Bina Marga",
+      "road": "cawang-tj-priok-ancol-timur-jembatan-tigapluit",
+      "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=cawang-tj-priok-ancol-timur-jembatan-tigapluit",
+      "scrapedAt": "2026-08-02T06:42:18.200Z"
     }
   ],
   "cameras": [
+    {
+      "id": "binamarga-cawang-tj-priok-ancol-timur-jembatan-tigapluit-796",
+      "providerCameraId": "796",
+      "highwayId": "cawang-tj-priok-ancol-timur-jembatan-tigapluit",
+      "name": "Interchange Pluit KM 24+800",
+      "streamUrl": "https://cctv.citramarga.com/hls/cam3-interchange-pluit/stream.m3u8",
+      "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=cawang-tj-priok-ancol-timur-jembatan-tigapluit",
+      "km": 24.8,
+      "side": null,
+      "coordinates": null,
+      "roadPositionM": null,
+      "enabled": false,
+      "curationStatus": "needs_review",
+      "notes": "",
+      "scrapedAt": "2026-08-02T06:42:18.200Z"
+    },
+    {
+      "id": "binamarga-cawang-tj-priok-ancol-timur-jembatan-tigapluit-841",
+      "providerCameraId": "841",
+      "highwayId": "cawang-tj-priok-ancol-timur-jembatan-tigapluit",
+      "name": "Interchange Priok KM 13+200",
+      "streamUrl": "https://cctv.citramarga.com/hls/cam2-interchange-priok/stream.m3u8",
+      "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=cawang-tj-priok-ancol-timur-jembatan-tigapluit",
+      "km": 13.2,
+      "side": null,
+      "coordinates": null,
+      "roadPositionM": null,
+      "enabled": false,
+      "curationStatus": "needs_review",
+      "notes": "",
+      "scrapedAt": "2026-08-02T06:42:18.200Z"
+    },
+    {
+      "id": "binamarga-cawang-tj-priok-ancol-timur-jembatan-tigapluit-854",
+      "providerCameraId": "854",
+      "highwayId": "cawang-tj-priok-ancol-timur-jembatan-tigapluit",
+      "name": "Interchange Cawang KM 00+400",
+      "streamUrl": "https://cctv.citramarga.com/hls/cam1-interchange-cawang/stream.m3u8",
+      "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=cawang-tj-priok-ancol-timur-jembatan-tigapluit",
+      "km": 0.4,
+      "side": null,
+      "coordinates": null,
+      "roadPositionM": null,
+      "enabled": false,
+      "curationStatus": "needs_review",
+      "notes": "",
+      "scrapedAt": "2026-08-02T06:42:18.200Z"
+    },
     {
       "id": "binamarga-jakarta-bogor-ciawi-15",
       "providerCameraId": "15",
@@ -772,14 +826,33 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
       "km": null,
       "side": null,
-      "directions": ["A", "B"],
+      "directions": [
+        "A",
+        "B"
+      ],
       "cameraType": "toll_gate",
-      "coordinates": [106.8932535, -6.1195249],
+      "coordinates": [
+        106.8932535,
+        -6.1195249
+      ],
       "roadPositionM": 8473,
       "enabled": true,
       "curationStatus": "provisional_landmark",
       "notes": "Gerbang publik diproyeksikan ke urutan ruas untuk arah A/B; bukan koordinat kamera hasil survei.",
-      "locationReview": {"status": "provisional", "method": "osm_toll_booth_projection", "sourceUrl": "https://www.openstreetmap.org/node/3723687947", "osmElementType": "node", "osmElementId": "3723687947", "sourceCoordinates": [106.8932535, -6.1195249], "projectionDistanceM": 14, "reviewedAt": "2026-08-01", "warning": "Landmark gerbang tol publik diproyeksikan ke geometri ruas; bukan koordinat kamera hasil survei."},
+      "locationReview": {
+        "status": "provisional",
+        "method": "osm_toll_booth_projection",
+        "sourceUrl": "https://www.openstreetmap.org/node/3723687947",
+        "osmElementType": "node",
+        "osmElementId": "3723687947",
+        "sourceCoordinates": [
+          106.8932535,
+          -6.1195249
+        ],
+        "projectionDistanceM": 14,
+        "reviewedAt": "2026-08-01",
+        "warning": "Landmark gerbang tol publik diproyeksikan ke geometri ruas; bukan koordinat kamera hasil survei."
+      },
       "scrapedAt": "2026-08-01T03:28:36.115Z"
     },
     {
@@ -791,14 +864,33 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
       "km": null,
       "side": null,
-      "directions": ["A", "B"],
+      "directions": [
+        "A",
+        "B"
+      ],
       "cameraType": "toll_gate",
-      "coordinates": [106.8999917, -6.104068],
+      "coordinates": [
+        106.8999917,
+        -6.104068
+      ],
       "roadPositionM": 6503,
       "enabled": true,
       "curationStatus": "provisional_landmark",
       "notes": "Gerbang publik diproyeksikan ke urutan ruas untuk arah A/B; bukan koordinat kamera hasil survei.",
-      "locationReview": {"status": "provisional", "method": "osm_toll_booth_projection", "sourceUrl": "https://www.openstreetmap.org/node/5630170832", "osmElementType": "node", "osmElementId": "5630170832", "sourceCoordinates": [106.8999917, -6.104068], "projectionDistanceM": 431, "reviewedAt": "2026-08-01", "warning": "Proyeksi jauh 431 m dari geometri kanonis. Diaktifkan secara provisional atas persetujuan eksplisit; bukan koordinat kamera hasil survei."},
+      "locationReview": {
+        "status": "provisional",
+        "method": "osm_toll_booth_projection",
+        "sourceUrl": "https://www.openstreetmap.org/node/5630170832",
+        "osmElementType": "node",
+        "osmElementId": "5630170832",
+        "sourceCoordinates": [
+          106.8999917,
+          -6.104068
+        ],
+        "projectionDistanceM": 431,
+        "reviewedAt": "2026-08-01",
+        "warning": "Proyeksi jauh 431 m dari geometri kanonis. Diaktifkan secara provisional atas persetujuan eksplisit; bukan koordinat kamera hasil survei."
+      },
       "scrapedAt": "2026-08-01T03:28:36.115Z"
     },
     {
@@ -810,14 +902,33 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
       "km": null,
       "side": null,
-      "directions": ["A", "B"],
+      "directions": [
+        "A",
+        "B"
+      ],
       "cameraType": "toll_gate",
-      "coordinates": [106.9024648, -6.1084307],
+      "coordinates": [
+        106.9024648,
+        -6.1084307
+      ],
       "roadPositionM": 6177,
       "enabled": true,
       "curationStatus": "provisional_landmark",
       "notes": "Gerbang publik diproyeksikan ke urutan ruas untuk arah A/B; bukan koordinat kamera hasil survei.",
-      "locationReview": {"status": "provisional", "method": "osm_toll_booth_projection", "sourceUrl": "https://www.openstreetmap.org/node/4919847409", "osmElementType": "node", "osmElementId": "4919847409", "sourceCoordinates": [106.9024648, -6.1084307], "projectionDistanceM": 20, "reviewedAt": "2026-08-01", "warning": "Landmark gerbang tol publik diproyeksikan ke geometri ruas; bukan koordinat kamera hasil survei."},
+      "locationReview": {
+        "status": "provisional",
+        "method": "osm_toll_booth_projection",
+        "sourceUrl": "https://www.openstreetmap.org/node/4919847409",
+        "osmElementType": "node",
+        "osmElementId": "4919847409",
+        "sourceCoordinates": [
+          106.9024648,
+          -6.1084307
+        ],
+        "projectionDistanceM": 20,
+        "reviewedAt": "2026-08-01",
+        "warning": "Landmark gerbang tol publik diproyeksikan ke geometri ruas; bukan koordinat kamera hasil survei."
+      },
       "scrapedAt": "2026-08-01T03:28:36.115Z"
     },
     {
@@ -829,14 +940,33 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
       "km": null,
       "side": null,
-      "directions": ["A", "B"],
+      "directions": [
+        "A",
+        "B"
+      ],
       "cameraType": "toll_gate",
-      "coordinates": [106.9255329, -6.117941],
+      "coordinates": [
+        106.9255329,
+        -6.117941
+      ],
       "roadPositionM": 2797,
       "enabled": true,
       "curationStatus": "provisional_landmark",
       "notes": "Gerbang publik diproyeksikan ke urutan ruas untuk arah A/B; bukan koordinat kamera hasil survei.",
-      "locationReview": {"status": "provisional", "method": "osm_toll_booth_projection", "sourceUrl": "https://www.openstreetmap.org/node/5671841190", "osmElementType": "node", "osmElementId": "5671841190", "sourceCoordinates": [106.9255329, -6.117941], "projectionDistanceM": 30, "reviewedAt": "2026-08-01", "warning": "Landmark gerbang tol publik diproyeksikan ke geometri ruas; bukan koordinat kamera hasil survei."},
+      "locationReview": {
+        "status": "provisional",
+        "method": "osm_toll_booth_projection",
+        "sourceUrl": "https://www.openstreetmap.org/node/5671841190",
+        "osmElementType": "node",
+        "osmElementId": "5671841190",
+        "sourceCoordinates": [
+          106.9255329,
+          -6.117941
+        ],
+        "projectionDistanceM": 30,
+        "reviewedAt": "2026-08-01",
+        "warning": "Landmark gerbang tol publik diproyeksikan ke geometri ruas; bukan koordinat kamera hasil survei."
+      },
       "scrapedAt": "2026-08-01T03:28:36.115Z"
     },
     {
@@ -1164,14 +1294,33 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
       "km": null,
       "side": null,
-      "directions": ["A", "B"],
+      "directions": [
+        "A",
+        "B"
+      ],
       "cameraType": "toll_gate",
-      "coordinates": [106.9124679, -6.1083346],
+      "coordinates": [
+        106.9124679,
+        -6.1083346
+      ],
       "roadPositionM": 5065,
       "enabled": true,
       "curationStatus": "provisional_landmark",
       "notes": "Gerbang publik diproyeksikan ke urutan ruas untuk arah A/B; bukan koordinat kamera hasil survei.",
-      "locationReview": {"status": "provisional", "method": "osm_toll_booth_projection", "sourceUrl": "https://www.openstreetmap.org/node/5665426814", "osmElementType": "node", "osmElementId": "5665426814", "sourceCoordinates": [106.9124679, -6.1083346], "projectionDistanceM": 36, "reviewedAt": "2026-08-01", "warning": "Landmark gerbang tol publik diproyeksikan ke geometri ruas; bukan koordinat kamera hasil survei."},
+      "locationReview": {
+        "status": "provisional",
+        "method": "osm_toll_booth_projection",
+        "sourceUrl": "https://www.openstreetmap.org/node/5665426814",
+        "osmElementType": "node",
+        "osmElementId": "5665426814",
+        "sourceCoordinates": [
+          106.9124679,
+          -6.1083346
+        ],
+        "projectionDistanceM": 36,
+        "reviewedAt": "2026-08-01",
+        "warning": "Landmark gerbang tol publik diproyeksikan ke geometri ruas; bukan koordinat kamera hasil survei."
+      },
       "scrapedAt": "2026-08-01T03:28:36.115Z"
     },
     {
@@ -1573,14 +1722,33 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=akses-tanjung-priok",
       "km": null,
       "side": null,
-      "directions": ["A", "B"],
+      "directions": [
+        "A",
+        "B"
+      ],
       "cameraType": "toll_gate",
-      "coordinates": [106.9371327, -6.1346789],
+      "coordinates": [
+        106.9371327,
+        -6.1346789
+      ],
       "roadPositionM": 494,
       "enabled": true,
       "curationStatus": "provisional_landmark",
       "notes": "Gerbang publik diproyeksikan ke urutan ruas untuk arah A/B; bukan koordinat kamera hasil survei.",
-      "locationReview": {"status": "provisional", "method": "osm_toll_booth_projection", "sourceUrl": "https://www.openstreetmap.org/node/10738919923", "osmElementType": "node", "osmElementId": "10738919923", "sourceCoordinates": [106.9371327, -6.1346789], "projectionDistanceM": 217, "reviewedAt": "2026-08-01", "warning": "Proyeksi jauh 217 m dari geometri kanonis. Diaktifkan secara provisional atas persetujuan eksplisit; bukan koordinat kamera hasil survei."},
+      "locationReview": {
+        "status": "provisional",
+        "method": "osm_toll_booth_projection",
+        "sourceUrl": "https://www.openstreetmap.org/node/10738919923",
+        "osmElementType": "node",
+        "osmElementId": "10738919923",
+        "sourceCoordinates": [
+          106.9371327,
+          -6.1346789
+        ],
+        "projectionDistanceM": 217,
+        "reviewedAt": "2026-08-01",
+        "warning": "Proyeksi jauh 217 m dari geometri kanonis. Diaktifkan secara provisional atas persetujuan eksplisit; bukan koordinat kamera hasil survei."
+      },
       "scrapedAt": "2026-08-01T03:28:36.115Z"
     },
     {
@@ -1688,14 +1856,33 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=6-tol-dalam-kota-kelapa-gading-pulo-gebang",
       "km": null,
       "side": null,
-      "directions": ["A", "B"],
+      "directions": [
+        "A",
+        "B"
+      ],
       "cameraType": "toll_gate",
-      "coordinates": [106.9376617, -6.1839898],
+      "coordinates": [
+        106.9376617,
+        -6.1839898
+      ],
       "roadPositionM": 6558,
       "enabled": true,
       "curationStatus": "provisional_landmark",
       "notes": "Gerbang publik diproyeksikan ke urutan ruas untuk arah A/B; bukan koordinat kamera hasil survei.",
-      "locationReview": {"status": "provisional", "method": "osm_toll_booth_projection", "sourceUrl": "https://www.openstreetmap.org/node/8956339735", "osmElementType": "node", "osmElementId": "8956339735", "sourceCoordinates": [106.9376617, -6.1839898], "projectionDistanceM": 0, "reviewedAt": "2026-08-01", "warning": "Landmark gerbang tol publik diproyeksikan ke geometri ruas; bukan koordinat kamera hasil survei."},
+      "locationReview": {
+        "status": "provisional",
+        "method": "osm_toll_booth_projection",
+        "sourceUrl": "https://www.openstreetmap.org/node/8956339735",
+        "osmElementType": "node",
+        "osmElementId": "8956339735",
+        "sourceCoordinates": [
+          106.9376617,
+          -6.1839898
+        ],
+        "projectionDistanceM": 0,
+        "reviewedAt": "2026-08-01",
+        "warning": "Landmark gerbang tol publik diproyeksikan ke geometri ruas; bukan koordinat kamera hasil survei."
+      },
       "scrapedAt": "2026-08-01T03:28:35.416Z"
     },
     {
