@@ -3,7 +3,7 @@
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
-import { estimateCameraOnHighway } from "../docs/js/offline-map.mjs";
+import { estimateCameraOnHighway } from "../docs/js/online-map.mjs";
 
 const DIRECTION_SOURCE = "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/";
 

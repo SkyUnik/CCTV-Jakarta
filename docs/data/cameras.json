@@ -102,12 +102,34 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=bekasi-cawang-kampung-melayu",
       "km": null,
       "side": null,
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.9053,
+        -6.2215
+      ],
+      "roadPositionM": 2451,
+      "enabled": true,
+      "curationStatus": "provisional_landmark",
       "notes": "",
-      "scrapedAt": "2026-08-02T06:52:46.054Z"
+      "scrapedAt": "2026-08-02T06:52:46.054Z",
+      "directions": [
+        "A",
+        "B"
+      ],
+      "cameraType": "toll_gate",
+      "locationReview": {
+        "status": "provisional",
+        "method": "osm_toll_booth_projection",
+        "sourceUrl": "https://www.openstreetmap.org/node/5010909815",
+        "sourceCoordinates": [
+          106.9053,
+          -6.2215
+        ],
+        "projectionDistanceM": 4,
+        "reviewedAt": "2026-08-02",
+        "warning": "Public toll-gate landmark projected onto the canonical route; not a surveyed camera coordinate.",
+        "osmElementType": "node",
+        "osmElementId": "5010909815"
+      }
     },
     {
       "id": "binamarga-bekasi-cawang-kampung-melayu-1305",
@@ -118,12 +140,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=bekasi-cawang-kampung-melayu",
       "km": 2,
       "side": "A",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.8837332,
+        -6.2163953
+      ],
+      "roadPositionM": 0,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-02T06:52:46.054Z"
+      "scrapedAt": "2026-08-02T06:52:46.054Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 2,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=bekasi-cawang-kampung-melayu",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-bekasi-cawang-kampung-melayu-1306",
@@ -134,12 +170,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=bekasi-cawang-kampung-melayu",
       "km": 3,
       "side": "A",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.8925272,
+        -6.2185028
+      ],
+      "roadPositionM": 1000,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-02T06:52:46.054Z"
+      "scrapedAt": "2026-08-02T06:52:46.054Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 3,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=bekasi-cawang-kampung-melayu",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-bekasi-cawang-kampung-melayu-1309",
@@ -150,12 +200,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=bekasi-cawang-kampung-melayu",
       "km": 14,
       "side": "A",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.9064245,
+        -6.2218
+      ],
+      "roadPositionM": 12000,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-02T06:52:46.054Z"
+      "scrapedAt": "2026-08-02T06:52:46.054Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 14,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=bekasi-cawang-kampung-melayu",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-bekasi-cawang-kampung-melayu-1310",
@@ -166,12 +230,26 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=bekasi-cawang-kampung-melayu",
       "km": 15,
       "side": "A",
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.9064245,
+        -6.2218
+      ],
+      "roadPositionM": 13000,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-02T06:52:46.054Z"
+      "scrapedAt": "2026-08-02T06:52:46.054Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 15,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=bekasi-cawang-kampung-melayu",
+        "roadGeometrySource": "https://www.openstreetmap.org/",
+        "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-bekasi-cawang-kampung-melayu-1311",
@@ -198,12 +276,34 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=bekasi-cawang-kampung-melayu",
       "km": null,
       "side": null,
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.9064,
+        -6.2218
+      ],
+      "roadPositionM": 2577,
+      "enabled": true,
+      "curationStatus": "provisional_landmark",
       "notes": "",
-      "scrapedAt": "2026-08-02T06:52:46.054Z"
+      "scrapedAt": "2026-08-02T06:52:46.054Z",
+      "directions": [
+        "A",
+        "B"
+      ],
+      "cameraType": "toll_gate",
+      "locationReview": {
+        "status": "provisional",
+        "method": "osm_toll_booth_projection",
+        "sourceUrl": "https://www.openstreetmap.org/node/5010909815",
+        "sourceCoordinates": [
+          106.9064,
+          -6.2218
+        ],
+        "projectionDistanceM": 1,
+        "reviewedAt": "2026-08-02",
+        "warning": "Public toll-gate landmark projected onto the canonical route; not a surveyed camera coordinate.",
+        "osmElementType": "node",
+        "osmElementId": "5010909815"
+      }
     },
     {
       "id": "binamarga-bekasi-cawang-kampung-melayu-1323",
@@ -214,12 +314,34 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=bekasi-cawang-kampung-melayu",
       "km": null,
       "side": null,
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.9022,
+        -6.2208
+      ],
+      "roadPositionM": 2099,
+      "enabled": true,
+      "curationStatus": "provisional_landmark",
       "notes": "",
-      "scrapedAt": "2026-08-02T06:52:46.054Z"
+      "scrapedAt": "2026-08-02T06:52:46.054Z",
+      "directions": [
+        "A",
+        "B"
+      ],
+      "cameraType": "toll_gate",
+      "locationReview": {
+        "status": "provisional",
+        "method": "osm_toll_booth_projection",
+        "sourceUrl": "https://www.openstreetmap.org/node/12479742654",
+        "sourceCoordinates": [
+          106.9022,
+          -6.2208
+        ],
+        "projectionDistanceM": 0,
+        "reviewedAt": "2026-08-02",
+        "warning": "Public toll-gate landmark projected onto the canonical route; not a surveyed camera coordinate.",
+        "osmElementType": "node",
+        "osmElementId": "12479742654"
+      }
     },
     {
       "id": "binamarga-bekasi-cawang-kampung-melayu-1324",
@@ -230,12 +352,34 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=bekasi-cawang-kampung-melayu",
       "km": null,
       "side": null,
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.9009,
+        -6.2205
+      ],
+      "roadPositionM": 1952,
+      "enabled": true,
+      "curationStatus": "provisional_landmark",
       "notes": "",
-      "scrapedAt": "2026-08-02T06:52:46.054Z"
+      "scrapedAt": "2026-08-02T06:52:46.054Z",
+      "directions": [
+        "A",
+        "B"
+      ],
+      "cameraType": "toll_gate",
+      "locationReview": {
+        "status": "provisional",
+        "method": "osm_toll_booth_projection",
+        "sourceUrl": "https://www.openstreetmap.org/node/5212536956",
+        "sourceCoordinates": [
+          106.9009,
+          -6.2205
+        ],
+        "projectionDistanceM": 1,
+        "reviewedAt": "2026-08-02",
+        "warning": "Public toll-gate landmark projected onto the canonical route; not a surveyed camera coordinate.",
+        "osmElementType": "node",
+        "osmElementId": "5212536956"
+      }
     },
     {
       "id": "binamarga-bekasi-cawang-kampung-melayu-1325",
@@ -246,12 +390,34 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=bekasi-cawang-kampung-melayu",
       "km": null,
       "side": null,
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.8955,
+        -6.2192
+      ],
+      "roadPositionM": 1338,
+      "enabled": true,
+      "curationStatus": "provisional_landmark",
       "notes": "",
-      "scrapedAt": "2026-08-02T06:52:46.054Z"
+      "scrapedAt": "2026-08-02T06:52:46.054Z",
+      "directions": [
+        "A",
+        "B"
+      ],
+      "cameraType": "toll_gate",
+      "locationReview": {
+        "status": "provisional",
+        "method": "osm_toll_booth_projection",
+        "sourceUrl": "https://www.openstreetmap.org/node/4768696948",
+        "sourceCoordinates": [
+          106.8955,
+          -6.2192
+        ],
+        "projectionDistanceM": 1,
+        "reviewedAt": "2026-08-02",
+        "warning": "Public toll-gate landmark projected onto the canonical route; not a surveyed camera coordinate.",
+        "osmElementType": "node",
+        "osmElementId": "4768696948"
+      }
     },
     {
       "id": "binamarga-bekasi-cawang-kampung-melayu-1326",
@@ -262,12 +428,34 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=bekasi-cawang-kampung-melayu",
       "km": null,
       "side": null,
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.8953,
+        -6.2191
+      ],
+      "roadPositionM": 1314,
+      "enabled": true,
+      "curationStatus": "provisional_landmark",
       "notes": "",
-      "scrapedAt": "2026-08-02T06:52:46.054Z"
+      "scrapedAt": "2026-08-02T06:52:46.054Z",
+      "directions": [
+        "A",
+        "B"
+      ],
+      "cameraType": "toll_gate",
+      "locationReview": {
+        "status": "provisional",
+        "method": "osm_toll_booth_projection",
+        "sourceUrl": "https://www.openstreetmap.org/node/12479742678",
+        "sourceCoordinates": [
+          106.8953,
+          -6.2191
+        ],
+        "projectionDistanceM": 7,
+        "reviewedAt": "2026-08-02",
+        "warning": "Public toll-gate landmark projected onto the canonical route; not a surveyed camera coordinate.",
+        "osmElementType": "node",
+        "osmElementId": "12479742678"
+      }
     },
     {
       "id": "binamarga-bekasi-cawang-kampung-melayu-1327",
@@ -278,12 +466,34 @@
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=bekasi-cawang-kampung-melayu",
       "km": null,
       "side": null,
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "coordinates": [
+        106.885,
+        -6.2167
+      ],
+      "roadPositionM": 144,
+      "enabled": true,
+      "curationStatus": "provisional_landmark",
       "notes": "",
-      "scrapedAt": "2026-08-02T06:52:46.054Z"
+      "scrapedAt": "2026-08-02T06:52:46.054Z",
+      "directions": [
+        "A",
+        "B"
+      ],
+      "cameraType": "toll_gate",
+      "locationReview": {
+        "status": "provisional",
+        "method": "osm_toll_booth_projection",
+        "sourceUrl": "https://www.openstreetmap.org/node/4768696951",
+        "sourceCoordinates": [
+          106.885,
+          -6.2167
+        ],
+        "projectionDistanceM": 2,
+        "reviewedAt": "2026-08-02",
+        "warning": "Public toll-gate landmark projected onto the canonical route; not a surveyed camera coordinate.",
+        "osmElementType": "node",
+        "osmElementId": "4768696951"
+      }
     },
     {
       "id": "binamarga-cawang-tj-priok-ancol-timur-jembatan-tigapluit-796",
@@ -293,13 +503,27 @@
       "streamUrl": "https://cctv.citramarga.com/hls/cam3-interchange-pluit/stream.m3u8",
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=cawang-tj-priok-ancol-timur-jembatan-tigapluit",
       "km": 24.8,
-      "side": null,
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "side": "A",
+      "coordinates": [
+        106.7855362,
+        -6.1348951
+      ],
+      "roadPositionM": 24800,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-02T06:42:18.200Z"
+      "scrapedAt": "2026-08-02T06:42:18.200Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 24.8,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=cawang-tj-priok-ancol-timur-jembatan-tigapluit",
+        "roadGeometrySource": "https://www.openstreetmap.org/relation/5385689",
+        "roadSnapshotSource": "https://api.openstreetmap.org/api/0.6/relation/5385689/full.json",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-cawang-tj-priok-ancol-timur-jembatan-tigapluit-841",
@@ -309,13 +533,27 @@
       "streamUrl": "https://cctv.citramarga.com/hls/cam2-interchange-priok/stream.m3u8",
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=cawang-tj-priok-ancol-timur-jembatan-tigapluit",
       "km": 13.2,
-      "side": null,
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "side": "A",
+      "coordinates": [
+        106.7969426,
+        -6.1867929
+      ],
+      "roadPositionM": 13200,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-02T06:42:18.200Z"
+      "scrapedAt": "2026-08-02T06:42:18.200Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 13.2,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=cawang-tj-priok-ancol-timur-jembatan-tigapluit",
+        "roadGeometrySource": "https://www.openstreetmap.org/relation/5385689",
+        "roadSnapshotSource": "https://api.openstreetmap.org/api/0.6/relation/5385689/full.json",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-cawang-tj-priok-ancol-timur-jembatan-tigapluit-854",
@@ -325,13 +563,27 @@
       "streamUrl": "https://cctv.citramarga.com/hls/cam1-interchange-cawang/stream.m3u8",
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=cawang-tj-priok-ancol-timur-jembatan-tigapluit",
       "km": 0.4,
-      "side": null,
-      "coordinates": null,
-      "roadPositionM": null,
-      "enabled": false,
-      "curationStatus": "needs_review",
+      "side": "A",
+      "coordinates": [
+        106.8786261,
+        -6.2466969
+      ],
+      "roadPositionM": 400,
+      "enabled": true,
+      "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-08-02T06:42:18.200Z"
+      "scrapedAt": "2026-08-02T06:42:18.200Z",
+      "locationReview": {
+        "method": "osm_route_stationing_interpolation",
+        "status": "provisional",
+        "stationingKm": 0.4,
+        "cameraLabelSource": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=cawang-tj-priok-ancol-timur-jembatan-tigapluit",
+        "roadGeometrySource": "https://www.openstreetmap.org/relation/5385689",
+        "roadSnapshotSource": "https://api.openstreetmap.org/api/0.6/relation/5385689/full.json",
+        "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
+        "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
+      }
     },
     {
       "id": "binamarga-jakarta-bogor-ciawi-15",
@@ -375,7 +627,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/",
         "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -405,7 +657,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/",
         "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -451,7 +703,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/",
         "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -481,7 +733,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/",
         "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -511,7 +763,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/",
         "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -541,7 +793,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/",
         "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -571,7 +823,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/",
         "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -681,7 +933,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/",
         "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -711,7 +963,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/",
         "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -741,7 +993,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/",
         "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -787,7 +1039,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/",
         "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -833,7 +1085,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/",
         "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -863,7 +1115,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/",
         "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -893,7 +1145,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/",
         "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -923,7 +1175,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/",
         "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -969,7 +1221,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/",
         "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -999,7 +1251,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/",
         "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -1029,7 +1281,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/",
         "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -1059,7 +1311,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/",
         "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -1241,7 +1493,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/",
         "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -1271,7 +1523,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/",
         "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -1301,7 +1553,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/",
         "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -1331,7 +1583,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/",
         "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -1377,7 +1629,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/",
         "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -1407,7 +1659,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/",
         "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -1437,7 +1689,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/",
         "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -1467,7 +1719,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/",
         "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -1497,7 +1749,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/",
         "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -1527,7 +1779,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/",
         "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -1595,7 +1847,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/",
         "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -1625,7 +1877,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/",
         "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -1655,7 +1907,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/",
         "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -1685,7 +1937,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/",
         "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -1715,7 +1967,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/",
         "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -1745,7 +1997,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/",
         "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -1775,7 +2027,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/",
         "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -1805,7 +2057,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/",
         "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -1835,7 +2087,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/",
         "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -1865,7 +2117,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/",
         "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -1895,7 +2147,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/",
         "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -1925,7 +2177,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/",
         "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -1955,7 +2207,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/",
         "roadSnapshotSource": "https://overpass-api.de/api/interpreter",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -2477,7 +2729,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/relation/5385689",
         "roadSnapshotSource": "https://api.openstreetmap.org/api/0.6/relation/5385689/full.json",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -2507,7 +2759,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/relation/5385689",
         "roadSnapshotSource": "https://api.openstreetmap.org/api/0.6/relation/5385689/full.json",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -2585,7 +2837,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/relation/5385689",
         "roadSnapshotSource": "https://api.openstreetmap.org/api/0.6/relation/5385689/full.json",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },
@@ -2615,7 +2867,7 @@
         "roadGeometrySource": "https://www.openstreetmap.org/relation/5385689",
         "roadSnapshotSource": "https://api.openstreetmap.org/api/0.6/relation/5385689/full.json",
         "directionConventionSource": "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
-        "provisionedAt": "2026-08-01T04:09:18.131Z",
+        "provisionedAt": "2026-08-02T06:56:24.029Z",
         "warning": "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate."
       }
     },

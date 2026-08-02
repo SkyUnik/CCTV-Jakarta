@@ -59,10 +59,10 @@ test("all current kilometer cameras can be mapped while provisional records rema
   const cameras = await readJson("../docs/data/cameras.json");
   const { groupEstimatedCameraMarkers } = await import("../docs/js/online-map.mjs");
   const result = groupEstimatedCameraMarkers(cameras.cameras, highways.features);
-  assert.equal(result.groups.reduce((total, group) => total + group.cameras.length, 0), 100);
-  assert.equal(result.unlocated.length, 12);
+  assert.equal(result.groups.reduce((total, group) => total + group.cameras.length, 0), 107);
+  assert.equal(result.unlocated.length, 5);
   assert.equal(result.groups.filter((group) => group.quality === "provisional_landmark")
-    .reduce((total, group) => total + group.cameras.length, 0), 7);
+    .reduce((total, group) => total + group.cameras.length, 0), 14);
   assert.equal(cameras.cameras.filter((camera) => camera.curationStatus === "verified").length, 0);
   assert.ok(cameras.cameras.filter((camera) => camera.curationStatus === "provisional_stationing").every((camera) =>
     camera.locationReview?.warning.includes("not a surveyed camera coordinate")
@@ -82,10 +82,10 @@ test("only explicitly directed provisional records enter automatic playback", as
   assert.equal(data.cameras.filter((camera) => camera.highwayId === "bekasi-cawang-kampung-melayu").length, 15);
   assert.equal(verifiedCameras(data.cameras, "dalam-kota", "A").length, 0);
   assert.equal(verifiedCameras(data.cameras, "dalam-kota", "B").length, 0);
-  assert.equal(data.cameras.filter((camera) => camera.enabled).length, 53);
-  assert.equal(data.cameras.filter((camera) => camera.curationStatus === "provisional_stationing").length, 46);
-  assert.equal(data.cameras.filter((camera) => camera.curationStatus === "provisional_landmark").length, 7);
-  assert.equal(data.cameras.filter((camera) => camera.curationStatus === "needs_review").length, 59);
+  assert.equal(data.cameras.filter((camera) => camera.enabled).length, 67);
+  assert.equal(data.cameras.filter((camera) => camera.curationStatus === "provisional_stationing").length, 53);
+  assert.equal(data.cameras.filter((camera) => camera.curationStatus === "provisional_landmark").length, 14);
+  assert.equal(data.cameras.filter((camera) => camera.curationStatus === "needs_review").length, 45);
   assert.equal(automaticCameras(data.cameras, "dalam-kota", "A").length, 2);
   assert.equal(automaticCameras(data.cameras, "dalam-kota", "B").length, 2);
   assert.equal(automaticCameras(data.cameras, "akses-tanjung-priok", "A").length, 19);
@@ -112,6 +112,13 @@ test("only explicitly directed provisional records enter automatic playback", as
     ["binamarga-akses-tanjung-priok-742", ["5665426814", 5_065]],
     ["binamarga-akses-tanjung-priok-743", ["10738919923", 494]],
     ["binamarga-6-tol-dalam-kota-kelapa-gading-pulo-gebang-1438", ["8956339735", 6_558]],
+    ["binamarga-bekasi-cawang-kampung-melayu-1304", ["5010909815", 2_451]],
+    ["binamarga-bekasi-cawang-kampung-melayu-1322", ["5010909815", 2_577]],
+    ["binamarga-bekasi-cawang-kampung-melayu-1323", ["12479742654", 2_099]],
+    ["binamarga-bekasi-cawang-kampung-melayu-1324", ["5212536956", 1_952]],
+    ["binamarga-bekasi-cawang-kampung-melayu-1325", ["4768696948", 1_338]],
+    ["binamarga-bekasi-cawang-kampung-melayu-1326", ["12479742678", 1_314]],
+    ["binamarga-bekasi-cawang-kampung-melayu-1327", ["4768696951", 144]],
   ]);
   const gates = data.cameras.filter((camera) => camera.cameraType === "toll_gate");
   assert.equal(gates.length, expectedGates.size);
