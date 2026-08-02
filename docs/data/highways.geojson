@@ -6298,6 +6298,125 @@
           ]
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "id": "bekasi-cawang-kampung-melayu",
+      "properties": {
+        "name": "Tol Bekasi–Cawang–Kampung Melayu (Becakayu)",
+        "zeroKmLabel": "Kampung Melayu / Cawang",
+        "terminalLabel": "Marga Jaya / Bekasi",
+        "directionA": "Menjauh dari KM 0 Cawang (ke arah Bekasi/Marga Jaya)",
+        "directionB": "Menuju KM 0 Cawang / Kampung Melayu",
+        "matchRadiusM": 60,
+        "maxAccuracyM": 100,
+        "maxMatchRadiusM": 150,
+        "passHysteresisM": 75,
+        "passConfirmationFixes": 2,
+        "cameraStationing": {
+          "quality": "estimated_stationing",
+          "anchors": [
+            {
+              "km": 2,
+              "roadPositionM": 0
+            },
+            {
+              "km": 15,
+              "roadPositionM": 13000
+            }
+          ]
+        },
+        "osmSource": "https://www.openstreetmap.org/",
+        "osmSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "attribution": "© OpenStreetMap contributors",
+        "license": "https://opendatacommons.org/licenses/odbl/1-0/",
+        "reviewStatus": "canonical_path_selected",
+        "id": "bekasi-cawang-kampung-melayu",
+        "zeroKmCoordinates": [
+          106.8837332,
+          -6.2163953
+        ],
+        "canonicalLengthM": 2579,
+        "osmStartNodeId": 4768696955,
+        "osmEndNodeId": 5010909815,
+        "osmSnapshotTimestamp": "2026-05-31T22:37:44Z",
+        "selectedWayIds": [
+          484135652
+        ]
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            106.8837332,
+            -6.2163953
+          ],
+          [
+            106.8841029,
+            -6.2165039
+          ],
+          [
+            106.8841772,
+            -6.2165215
+          ],
+          [
+            106.8845018,
+            -6.2165985
+          ],
+          [
+            106.8849704,
+            -6.2167098
+          ],
+          [
+            106.8893478,
+            -6.2177484
+          ],
+          [
+            106.8897855,
+            -6.2178523
+          ],
+          [
+            106.8912921,
+            -6.2182098
+          ],
+          [
+            106.8952968,
+            -6.2191599
+          ],
+          [
+            106.8955225,
+            -6.2192135
+          ],
+          [
+            106.8996328,
+            -6.2201886
+          ],
+          [
+            106.9001083,
+            -6.2203014
+          ],
+          [
+            106.9009066,
+            -6.2204908
+          ],
+          [
+            106.9022449,
+            -6.2208083
+          ],
+          [
+            106.902781,
+            -6.2209355
+          ],
+          [
+            106.9053108,
+            -6.2215357
+          ],
+          [
+            106.9064245,
+            -6.2218
+          ]
+        ]
+      }
     }
   ]
 }

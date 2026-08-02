@@ -160,6 +160,40 @@
         "license": "https://opendatacommons.org/licenses/odbl/1-0/",
         "reviewStatus": "canonical_path_selected"
       }
+    },
+    {
+      "id": "bekasi-cawang-kampung-melayu",
+      "input": "data-source/osm-motorways-jakarta-north.json",
+      "sourceType": "namedWays",
+      "wayNames": [
+        "Jalan Tol Bekasi–Cawang–Kampung Melayu"
+      ],
+      "startNodeId": 4768696955,
+      "endNodeId": 5010909815,
+      "properties": {
+        "name": "Tol Bekasi–Cawang–Kampung Melayu (Becakayu)",
+        "zeroKmLabel": "Kampung Melayu / Cawang",
+        "terminalLabel": "Marga Jaya / Bekasi",
+        "directionA": "Menjauh dari KM 0 Cawang (ke arah Bekasi/Marga Jaya)",
+        "directionB": "Menuju KM 0 Cawang / Kampung Melayu",
+        "matchRadiusM": 60,
+        "maxAccuracyM": 100,
+        "maxMatchRadiusM": 150,
+        "passHysteresisM": 75,
+        "passConfirmationFixes": 2,
+        "cameraStationing": {
+          "quality": "estimated_stationing",
+          "anchors": [
+            { "km": 2.0, "roadPositionM": 0 },
+            { "km": 15.0, "roadPositionM": 13000 }
+          ]
+        },
+        "osmSource": "https://www.openstreetmap.org/",
+        "osmSnapshotSource": "https://overpass-api.de/api/interpreter",
+        "attribution": "© OpenStreetMap contributors",
+        "license": "https://opendatacommons.org/licenses/odbl/1-0/",
+        "reviewStatus": "canonical_path_selected"
+      }
     }
   ]
 }

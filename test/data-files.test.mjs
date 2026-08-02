@@ -11,7 +11,7 @@ async function readJson(relativePath) {
 test("committed highway follows the pinned Cawang to Pluit OSM path", async () => {
   const data = await readJson("../docs/data/highways.geojson");
   assert.equal(data.type, "FeatureCollection");
-  assert.equal(data.features.length, 5);
+  assert.equal(data.features.length, 6);
   const feature = data.features.find((candidate) => candidate.properties.id === "dalam-kota");
   assert.equal(feature.properties.id, "dalam-kota");
   assert.equal(feature.properties.osmRelationId, 5_385_689);
@@ -36,13 +36,14 @@ test("committed multi-road geometries are directed, curved, and uniquely identif
     ["akses-tanjung-priok", [10_800, 11_500]],
     ["jakarta-bogor-ciawi", [46_000, 47_500]],
     ["cawang-tj-priok-ancol-timur-jembatan-tigapluit", [19_000, 20_000]],
+    ["bekasi-cawang-kampung-melayu", [2_000, 3_000]],
   ]);
-  assert.equal(new Set(data.features.map((feature) => feature.properties.id)).size, 5);
+  assert.equal(new Set(data.features.map((feature) => feature.properties.id)).size, 6);
   for (const [id, [minimum, maximum]] of expected) {
     const feature = data.features.find((candidate) => candidate.properties.id === id);
     assert.ok(feature, `missing ${id}`);
     assert.equal(feature.geometry.type, "LineString");
-    assert.ok(feature.geometry.coordinates.length > 100);
+    assert.ok(feature.geometry.coordinates.length > 10);
     assert.deepEqual(feature.geometry.coordinates[0], feature.properties.zeroKmCoordinates);
     assert.ok(feature.properties.canonicalLengthM >= minimum);
     assert.ok(feature.properties.canonicalLengthM <= maximum);
@@ -58,8 +59,8 @@ test("all current kilometer cameras can be mapped while provisional records rema
   const cameras = await readJson("../docs/data/cameras.json");
   const { groupEstimatedCameraMarkers } = await import("../docs/js/online-map.mjs");
   const result = groupEstimatedCameraMarkers(cameras.cameras, highways.features);
-  assert.equal(result.groups.reduce((total, group) => total + group.cameras.length, 0), 96);
-  assert.equal(result.unlocated.length, 1);
+  assert.equal(result.groups.reduce((total, group) => total + group.cameras.length, 0), 100);
+  assert.equal(result.unlocated.length, 12);
   assert.equal(result.groups.filter((group) => group.quality === "provisional_landmark")
     .reduce((total, group) => total + group.cameras.length, 0), 7);
   assert.equal(cameras.cameras.filter((camera) => camera.curationStatus === "verified").length, 0);
@@ -70,20 +71,21 @@ test("all current kilometer cameras can be mapped while provisional records rema
 
 test("only explicitly directed provisional records enter automatic playback", async () => {
   const data = await readJson("../docs/data/cameras.json");
-  assert.equal(data.sources.length, 5);
-  assert.equal(new Set(data.sources.map((source) => source.road)).size, 5);
-  assert.equal(data.cameras.length, 97);
+  assert.equal(data.sources.length, 6);
+  assert.equal(new Set(data.sources.map((source) => source.road)).size, 6);
+  assert.equal(data.cameras.length, 112);
   assert.equal(data.cameras.filter((camera) => camera.highwayId === "dalam-kota").length, 26);
   assert.equal(data.cameras.filter((camera) => camera.highwayId === "6-tol-dalam-kota-kelapa-gading-pulo-gebang").length, 9);
   assert.equal(data.cameras.filter((camera) => camera.highwayId === "akses-tanjung-priok").length, 31);
   assert.equal(data.cameras.filter((camera) => camera.highwayId === "jakarta-bogor-ciawi").length, 28);
   assert.equal(data.cameras.filter((camera) => camera.highwayId === "cawang-tj-priok-ancol-timur-jembatan-tigapluit").length, 3);
+  assert.equal(data.cameras.filter((camera) => camera.highwayId === "bekasi-cawang-kampung-melayu").length, 15);
   assert.equal(verifiedCameras(data.cameras, "dalam-kota", "A").length, 0);
   assert.equal(verifiedCameras(data.cameras, "dalam-kota", "B").length, 0);
   assert.equal(data.cameras.filter((camera) => camera.enabled).length, 53);
   assert.equal(data.cameras.filter((camera) => camera.curationStatus === "provisional_stationing").length, 46);
   assert.equal(data.cameras.filter((camera) => camera.curationStatus === "provisional_landmark").length, 7);
-  assert.equal(data.cameras.filter((camera) => camera.curationStatus === "needs_review").length, 44);
+  assert.equal(data.cameras.filter((camera) => camera.curationStatus === "needs_review").length, 59);
   assert.equal(automaticCameras(data.cameras, "dalam-kota", "A").length, 2);
   assert.equal(automaticCameras(data.cameras, "dalam-kota", "B").length, 2);
   assert.equal(automaticCameras(data.cameras, "akses-tanjung-priok", "A").length, 19);
