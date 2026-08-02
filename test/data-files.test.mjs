@@ -11,7 +11,7 @@ async function readJson(relativePath) {
 test("committed highway follows the pinned Cawang to Pluit OSM path", async () => {
   const data = await readJson("../docs/data/highways.geojson");
   assert.equal(data.type, "FeatureCollection");
-  assert.equal(data.features.length, 4);
+  assert.equal(data.features.length, 5);
   const feature = data.features.find((candidate) => candidate.properties.id === "dalam-kota");
   assert.equal(feature.properties.id, "dalam-kota");
   assert.equal(feature.properties.osmRelationId, 5_385_689);
@@ -35,8 +35,9 @@ test("committed multi-road geometries are directed, curved, and uniquely identif
     ["6-tol-dalam-kota-kelapa-gading-pulo-gebang", [7_000, 7_600]],
     ["akses-tanjung-priok", [10_800, 11_500]],
     ["jakarta-bogor-ciawi", [46_000, 47_500]],
+    ["cawang-tj-priok-ancol-timur-jembatan-tigapluit", [19_000, 20_000]],
   ]);
-  assert.equal(new Set(data.features.map((feature) => feature.properties.id)).size, 4);
+  assert.equal(new Set(data.features.map((feature) => feature.properties.id)).size, 5);
   for (const [id, [minimum, maximum]] of expected) {
     const feature = data.features.find((candidate) => candidate.properties.id === id);
     assert.ok(feature, `missing ${id}`);
@@ -57,8 +58,8 @@ test("all current kilometer cameras can be mapped while provisional records rema
   const cameras = await readJson("../docs/data/cameras.json");
   const { groupEstimatedCameraMarkers } = await import("../docs/js/online-map.mjs");
   const result = groupEstimatedCameraMarkers(cameras.cameras, highways.features);
-  assert.equal(result.groups.reduce((total, group) => total + group.cameras.length, 0), 93);
-  assert.equal(result.unlocated.length, 4);
+  assert.equal(result.groups.reduce((total, group) => total + group.cameras.length, 0), 96);
+  assert.equal(result.unlocated.length, 1);
   assert.equal(result.groups.filter((group) => group.quality === "provisional_landmark")
     .reduce((total, group) => total + group.cameras.length, 0), 7);
   assert.equal(cameras.cameras.filter((camera) => camera.curationStatus === "verified").length, 0);

@@ -128,6 +128,38 @@
         "license": "https://opendatacommons.org/licenses/odbl/1-0/",
         "reviewStatus": "canonical_path_selected"
       }
+    },
+    {
+      "id": "cawang-tj-priok-ancol-timur-jembatan-tigapluit",
+      "input": "data-source/osm-relation-5385689-full.json",
+      "sourceType": "relation",
+      "relationId": 5385689,
+      "startNodeId": 309137378,
+      "endNodeId": 1757817871,
+      "properties": {
+        "name": "Tol Pelabuhan / Ir. Wiyoto Wiyono (Cawang–Tanjung Priok–Pluit)",
+        "zeroKmLabel": "Simpang Susun Cawang",
+        "terminalLabel": "Simpang Susun Pluit",
+        "directionA": "Menjauh dari KM 0 Cawang (ke arah Tanjung Priok/Pluit)",
+        "directionB": "Menuju KM 0 Cawang",
+        "matchRadiusM": 60,
+        "maxAccuracyM": 100,
+        "maxMatchRadiusM": 150,
+        "passHysteresisM": 75,
+        "passConfirmationFixes": 2,
+        "cameraStationing": {
+          "quality": "estimated_stationing",
+          "anchors": [
+            { "km": 0.4, "roadPositionM": 400 },
+            { "km": 24.8, "roadPositionM": 24800 }
+          ]
+        },
+        "osmSource": "https://www.openstreetmap.org/relation/5385689",
+        "osmSnapshotSource": "https://api.openstreetmap.org/api/0.6/relation/5385689/full.json",
+        "attribution": "© OpenStreetMap contributors",
+        "license": "https://opendatacommons.org/licenses/odbl/1-0/",
+        "reviewStatus": "canonical_path_selected"
+      }
     }
   ]
 }
