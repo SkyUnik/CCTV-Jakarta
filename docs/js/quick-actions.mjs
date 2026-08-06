@@ -36,11 +36,19 @@ export function createQuickActionManager({
 }) {
   let actions = DEFAULT_QUICK_ACTIONS;
   let preloadedMetadata = false;
+  let pendingFullscreen = false;
   const controller = createVideoController({
     hlsClass,
     video: elements.video,
-    onReady: () => setStatus(null),
+    onReady: () => {
+      setStatus(null);
+      if (pendingFullscreen) {
+        pendingFullscreen = false;
+        void controller.enterFullscreen();
+      }
+    },
     onError: (error) => {
+      pendingFullscreen = false;
       setStatus(error?.details
         ? "Kamera publik Koja Timur tidak dapat diputar."
         : nativeMediaErrorMessage(elements.video?.error));
@@ -53,6 +61,7 @@ export function createQuickActionManager({
   }
 
   function destroyQuickPlayer(options = {}) {
+    pendingFullscreen = false;
     controller.destroy({
       clearSource: !options.reuseSource,
       preservePip: options.preservePip,
@@ -100,13 +109,21 @@ export function createQuickActionManager({
   function triggerOneTap() {
     if (!elements.overlay) return;
     elements.overlay.hidden = false;
+    pendingFullscreen = true;
+    // play() is called synchronously from the gesture inside playStream,
+    // which unlocks the video on iOS Safari for later fullscreen entry.
     playStream();
     if (elements.video) {
-      void controller.enterFullscreen();
+      // Try immediate fullscreen; succeeds if video already has metadata.
+      // If it returns null the video isn't ready yet and onReady will retry.
+      controller.enterFullscreen().then((method) => {
+        if (method) pendingFullscreen = false;
+      });
     }
   }
 
   function close() {
+    pendingFullscreen = false;
     if (!controller.isPipActive()) destroyQuickPlayer();
     if (elements.overlay) {
       elements.overlay.hidden = true;

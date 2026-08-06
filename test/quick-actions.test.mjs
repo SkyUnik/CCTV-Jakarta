@@ -72,6 +72,7 @@ test("quick action manager preloads metadata and triggers one-tap fullscreen wit
 
   await manager.init();
   manager.triggerOneTap();
+  await Promise.resolve();
 
   assert.equal(overlayHidden, false);
   assert.equal(elements.video.muted, true);
@@ -81,6 +82,76 @@ test("quick action manager preloads metadata and triggers one-tap fullscreen wit
 
   manager.close();
   assert.equal(overlayHidden, true);
+});
+
+test("defers fullscreen to onReady when iPhone Safari video has no metadata yet", async () => {
+  const fakeCamera = {
+    id: "binamarga-akses-tanjung-priok-742",
+    name: "ATP GT KOJA TIMUR",
+    streamUrl: "https://pub2.hk-opt.com/LiveApp/streams/610831844814460955304790.m3u8",
+  };
+
+  let plays = 0;
+  let fullscreens = 0;
+  let overlayHidden = true;
+  // Simulate iPhone Safari: webkitSupportsFullscreen starts false (no metadata),
+  // becomes true after loadedmetadata fires.
+  let webkitSupportsFullscreen = false;
+  let onloadedmetadata = null;
+
+  const elements = {
+    launcher: { addEventListener: () => {} },
+    overlay: {
+      get hidden() { return overlayHidden; },
+      set hidden(val) { overlayHidden = val; },
+    },
+    close: { addEventListener: () => {} },
+    video: {
+      muted: false,
+      src: "",
+      get webkitSupportsFullscreen() { return webkitSupportsFullscreen; },
+      webkitEnterFullscreen() { fullscreens += 1; },
+      canPlayType: (type) => (type.includes("mpegurl") ? "probably" : ""),
+      addEventListener: () => {},
+      setAttribute: () => {},
+      play: async () => { plays += 1; },
+      pause: () => {},
+      load: () => {},
+      removeAttribute: () => {},
+      set onloadedmetadata(fn) { onloadedmetadata = fn; },
+      get onloadedmetadata() { return onloadedmetadata; },
+      set oncanplay(_fn) {},
+      get oncanplay() { return null; },
+      set onerror(_fn) {},
+      get onerror() { return null; },
+    },
+    status: { hidden: true, textContent: "" },
+    play: { addEventListener: () => {} },
+    fullscreen: { addEventListener: () => {} },
+    retry: { addEventListener: () => {} },
+  };
+
+  const manager = createQuickActionManager({
+    elements,
+    cameras: [fakeCamera],
+    hlsClass: { isSupported: () => false },
+  });
+
+  await manager.init();
+  manager.triggerOneTap();
+  // Let the enterFullscreen().then() microtask settle
+  await Promise.resolve();
+  await Promise.resolve();
+
+  assert.equal(plays, 1, "play() called from gesture");
+  assert.equal(fullscreens, 0, "fullscreen deferred — no metadata yet");
+
+  // Simulate metadata loaded → webkitSupportsFullscreen becomes true
+  webkitSupportsFullscreen = true;
+  assert.equal(typeof onloadedmetadata, "function");
+  onloadedmetadata();
+
+  assert.equal(fullscreens, 1, "fullscreen entered from onReady after metadata loaded");
 });
 
 test("quick action manager closes overlay when clicking outside card backdrop", async () => {
