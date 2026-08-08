@@ -1,6 +1,7 @@
 import {
   createVideoController,
   nativeMediaErrorMessage,
+  prefersNativeHls,
 } from "./player.mjs";
 
 export const KOJA_TIMUR_DEFAULT_CAMERA = Object.freeze({
@@ -50,11 +51,20 @@ export function createQuickActionManager({
   actionIndex = 0,
   label = "Kamera",
 }) {
+  // On Safari, force native HLS so the video element retains its preloaded
+  // metadata from the HTML src + preload="auto". This lets
+  // webkitEnterFullscreen() succeed synchronously from the user gesture.
+  // HLS.js would take over via MSE, discarding the preloaded metadata and
+  // breaking the gesture chain required for iPhone fullscreen.
+  const effectiveHlsClass =
+    elements.video && prefersNativeHls(elements.video, hlsClass)
+      ? null
+      : hlsClass;
   let actions = DEFAULT_QUICK_ACTIONS;
   let preloadedMetadata = false;
   let pendingFullscreen = false;
   const controller = createVideoController({
-    hlsClass,
+    hlsClass: effectiveHlsClass,
     video: elements.video,
     onReady: () => {
       setStatus(null);
