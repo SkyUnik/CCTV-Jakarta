@@ -7,22 +7,27 @@ import {
   fetchQuickActions,
 } from "../docs/js/quick-actions.mjs";
 
-test("quick action registry has valid structure for Koja Timur", async () => {
+test("quick action registry has valid structure for JOR Priuk and Koja Timur", async () => {
   const content = await readFile(new URL("../docs/data/quick-actions.json", import.meta.url), "utf8");
   const data = JSON.parse(content);
   assert.equal(Array.isArray(data), true);
-  assert.equal(data.length >= 1, true);
-  const action = data[0];
-  assert.equal(action.id, "koja-timur-quick");
-  assert.equal(action.label, "Koja Timur");
-  assert.equal(action.layout, "single");
-  assert.deepEqual(action.cameraIds, ["binamarga-akses-tanjung-priok-742"]);
+  assert.equal(data.length, 2);
+  const jor = data[0];
+  assert.equal(jor.id, "jor-priuk-quick");
+  assert.equal(jor.label, "JOR Priuk");
+  assert.equal(jor.layout, "single");
+  assert.deepEqual(jor.cameraIds, ["binamarga-akses-tanjung-priok-753"]);
+  const koja = data[1];
+  assert.equal(koja.id, "koja-timur-quick");
+  assert.equal(koja.label, "Koja Timur");
+  assert.deepEqual(koja.cameraIds, ["binamarga-akses-tanjung-priok-742"]);
 });
 
 test("fetchQuickActions returns parsed registry data or fallback", async () => {
   const actions = await fetchQuickActions();
   assert.equal(Array.isArray(actions), true);
-  assert.equal(actions[0].id, "koja-timur-quick");
+  assert.equal(actions[0].id, "jor-priuk-quick");
+  assert.equal(actions[1].id, "koja-timur-quick");
 
   const fallback = await fetchQuickActions("./data/non-existent.json");
   assert.deepEqual(fallback, DEFAULT_QUICK_ACTIONS);
@@ -68,6 +73,8 @@ test("quick action manager preloads metadata and triggers one-tap fullscreen wit
   const manager = createQuickActionManager({
     elements,
     cameras: [fakeCamera],
+    actionIndex: 1,
+    label: "Koja Timur",
   });
 
   await manager.init();

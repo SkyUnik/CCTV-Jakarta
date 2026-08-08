@@ -40,6 +40,14 @@ const elements = {
   gpsDebug: document.querySelector("#gps-debug-link"),
   highwayList: document.querySelector("#highway-list"),
   journeyStatus: document.querySelector("#journey-status"),
+  jorPriukQuick: document.querySelector("#jor-priuk-quick-button"),
+  jorPriukOverlay: document.querySelector("#jor-priuk-overlay"),
+  jorPriukClose: document.querySelector("#jor-priuk-close"),
+  jorPriukVideo: document.querySelector("#jor-priuk-video"),
+  jorPriukStatus: document.querySelector("#jor-priuk-status"),
+  jorPriukPlay: document.querySelector("#jor-priuk-play"),
+  jorPriukFullscreen: document.querySelector("#jor-priuk-fullscreen"),
+  jorPriukRetry: document.querySelector("#jor-priuk-retry"),
   kojaQuick: document.querySelector("#koja-quick-button"),
   manualCameraButton: document.querySelector("#manual-camera-button"),
   manualCameraPicker: document.querySelector("#manual-camera-picker"),
@@ -933,9 +941,29 @@ async function loadData() {
       },
       cameras: state.cameras,
       hlsClass: typeof window !== "undefined" ? window.Hls : null,
+      actionIndex: 1,
+      label: "Koja Timur",
     });
     state.quickActionManager.bindEvents();
     void state.quickActionManager.init();
+    state.jorPriukManager = createQuickActionManager({
+      elements: {
+        launcher: elements.jorPriukQuick,
+        overlay: elements.jorPriukOverlay,
+        close: elements.jorPriukClose,
+        video: elements.jorPriukVideo,
+        status: elements.jorPriukStatus,
+        play: elements.jorPriukPlay,
+        fullscreen: elements.jorPriukFullscreen,
+        retry: elements.jorPriukRetry,
+      },
+      cameras: state.cameras,
+      hlsClass: typeof window !== "undefined" ? window.Hls : null,
+      actionIndex: 0,
+      label: "JOR Priuk",
+    });
+    state.jorPriukManager.bindEvents();
+    void state.jorPriukManager.init();
     if (state.simulator) {
       document.body.classList.add("is-simulator");
       document.title = "Simulator GPS — Jalur CCTV";

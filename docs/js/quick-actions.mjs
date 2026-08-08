@@ -9,12 +9,26 @@ export const KOJA_TIMUR_DEFAULT_CAMERA = Object.freeze({
   streamUrl: "https://pub2.hk-opt.com/LiveApp/streams/610831844814460955304790.m3u8",
 });
 
+export const JOR_PRIUK_DEFAULT_CAMERA = Object.freeze({
+  id: "binamarga-akses-tanjung-priok-753",
+  name: "ATP KM 61+400 A",
+  streamUrl: "https://pub2.hk-opt.com/LiveApp/streams/756751654695732090756915.m3u8",
+});
+
 export const DEFAULT_QUICK_ACTIONS = Object.freeze([
+  {
+    id: "jor-priuk-quick",
+    label: "JOR Priuk",
+    layout: "single",
+    cameraIds: ["binamarga-akses-tanjung-priok-753"],
+    defaultCamera: JOR_PRIUK_DEFAULT_CAMERA,
+  },
   {
     id: "koja-timur-quick",
     label: "Koja Timur",
     layout: "single",
     cameraIds: ["binamarga-akses-tanjung-priok-742"],
+    defaultCamera: KOJA_TIMUR_DEFAULT_CAMERA,
   },
 ]);
 
@@ -33,6 +47,8 @@ export function createQuickActionManager({
   elements,
   cameras = [],
   hlsClass = typeof window !== "undefined" ? window.Hls : null,
+  actionIndex = 0,
+  label = "Kamera",
 }) {
   let actions = DEFAULT_QUICK_ACTIONS;
   let preloadedMetadata = false;
@@ -50,14 +66,16 @@ export function createQuickActionManager({
     onError: (error) => {
       pendingFullscreen = false;
       setStatus(error?.details
-        ? "Kamera publik Koja Timur tidak dapat diputar."
+        ? `Kamera publik ${label} tidak dapat diputar.`
         : nativeMediaErrorMessage(elements.video?.error));
     },
   });
 
   function findActiveCamera() {
-    const targetId = actions[0]?.cameraIds?.[0] || KOJA_TIMUR_DEFAULT_CAMERA.id;
-    return cameras.find((c) => c.id === targetId) || KOJA_TIMUR_DEFAULT_CAMERA;
+    const action = actions[actionIndex] ?? actions[0];
+    const fallback = action?.defaultCamera ?? KOJA_TIMUR_DEFAULT_CAMERA;
+    const targetId = action?.cameraIds?.[0] || fallback.id;
+    return cameras.find((c) => c.id === targetId) || fallback;
   }
 
   function destroyQuickPlayer(options = {}) {
@@ -99,7 +117,7 @@ export function createQuickActionManager({
   function playStream() {
     if (!elements.video) return;
     const camera = findActiveCamera();
-    setStatus("Memuat stream Koja Timur…");
+    setStatus(`Memuat stream ${label}…`);
     elements.video.muted = true;
     if (!controller.load(camera, { continuePlaying: true })) {
       setStatus("Browser tidak mendukung format pemutaran video ini.");

@@ -37,6 +37,14 @@ test("static page exposes the required accessible controls with relative assets"
     "map-camera-card",
     "map-camera-list",
     "koja-quick-button",
+    "jor-priuk-quick-button",
+    "jor-priuk-overlay",
+    "jor-priuk-close",
+    "jor-priuk-video",
+    "jor-priuk-status",
+    "jor-priuk-play",
+    "jor-priuk-fullscreen",
+    "jor-priuk-retry",
     "quick-camera-overlay",
     "quick-camera-close",
     "quick-camera-video",
@@ -54,6 +62,9 @@ test("static page exposes the required accessible controls with relative assets"
   assert.equal($("#camera-video").attr("preload"), "metadata");
   assert.equal($("#camera-video").attr("x-webkit-airplay"), "allow");
   assert.equal($("#quick-camera-video").is("[disablepictureinpicture]"), false);
+  assert.equal($("#jor-priuk-video").is("[disablepictureinpicture]"), false);
+  assert.equal($("#jor-priuk-video").is("[playsinline]"), true);
+  assert.equal($("#jor-priuk-video").is("[muted]"), true);
   assert.equal($("script[src^='http']").length, 0);
   assert.equal($("#map-toggle").is("[checked]"), true);
   assert.match($("#route-map").attr("aria-label"), /OpenStreetMap/i);

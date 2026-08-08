@@ -1,5 +1,11 @@
 [
   {
+    "id": "jor-priuk-quick",
+    "label": "JOR Priuk",
+    "layout": "single",
+    "cameraIds": ["binamarga-akses-tanjung-priok-753"]
+  },
+  {
     "id": "koja-timur-quick",
     "label": "Koja Timur",
     "layout": "single",

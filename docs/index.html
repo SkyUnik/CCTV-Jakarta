@@ -283,6 +283,15 @@
     <div class="floating-actions" aria-label="Navigasi cepat">
       <button
         class="floating-action floating-action-wide"
+        id="jor-priuk-quick-button"
+        type="button"
+        aria-label="Kamera cepat JOR Priuk layar penuh"
+        title="JOR Priuk"
+      >
+        <span>JOR Priuk</span>
+      </button>
+      <button
+        class="floating-action floating-action-wide"
         id="koja-quick-button"
         type="button"
         aria-label="Kamera cepat Koja Timur layar penuh"
@@ -310,6 +319,27 @@
         <span aria-hidden="true">#1</span>
       </button>
     </div>
+
+    <section class="quick-camera-overlay" id="jor-priuk-overlay" role="dialog" aria-modal="true" aria-labelledby="jor-priuk-title" hidden>
+      <div class="quick-camera-card">
+        <div class="quick-camera-header">
+          <div>
+            <span class="step-label">Aksi Cepat</span>
+            <h2 id="jor-priuk-title">ATP KM 61+400 A</h2>
+          </div>
+          <button class="button button-small button-quiet" id="jor-priuk-close" type="button">Tutup</button>
+        </div>
+        <div class="quick-camera-media">
+          <video id="jor-priuk-video" controls muted playsinline webkit-playsinline preload="auto" src="https://pub2.hk-opt.com/LiveApp/streams/756751654695732090756915.m3u8" x-webkit-airplay="allow" aria-label="Siaran cepat JOR Priuk"></video>
+        </div>
+        <div class="quick-camera-status" id="jor-priuk-status" hidden></div>
+        <div class="quick-camera-actions">
+          <button class="button button-primary" id="jor-priuk-play" type="button">JOR Priuk</button>
+          <button class="button button-small" id="jor-priuk-fullscreen" type="button">Layar Penuh</button>
+          <button class="button button-small button-quiet" id="jor-priuk-retry" type="button">Coba Lagi</button>
+        </div>
+      </div>
+    </section>
 
     <section class="quick-camera-overlay" id="quick-camera-overlay" role="dialog" aria-modal="true" aria-labelledby="quick-camera-title" hidden>
       <div class="quick-camera-card">
