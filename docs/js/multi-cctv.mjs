@@ -107,7 +107,7 @@ export function createMultiCctvManager({
     card.className = `multi-cctv-card${isTollGate(camera) ? " is-gt" : ""}`;
     card.dataset.cameraId = camera.id;
     card.dataset.index = String(index);
-    card.style.minHeight = "280px";
+    card.style.minHeight = "300px";
 
     const header = document.createElement("div");
     header.className = "multi-cctv-card-header";
@@ -133,7 +133,9 @@ export function createMultiCctvManager({
 
     const mediaWrap = document.createElement("div");
     mediaWrap.className = "multi-cctv-media";
-    mediaWrap.style.minHeight = "220px";
+    mediaWrap.style.minHeight = "250px";
+    mediaWrap.style.height = "250px";
+    mediaWrap.style.aspectRatio = "4 / 3";
 
     const video = document.createElement("video");
     video.controls = true;
@@ -145,22 +147,13 @@ export function createMultiCctvManager({
     video.src = camera.streamUrl;
     video.setAttribute("aria-label", `Siaran CCTV ${camera.name}`);
     video.className = "multi-cctv-video";
+    video.style.minHeight = "250px";
+    video.style.height = "100%";
+    video.style.width = "100%";
+    video.style.objectFit = "contain";
+    video.style.backgroundColor = "#000";
 
-    const playOverlay = document.createElement("div");
-    playOverlay.className = "multi-cctv-play-overlay";
-
-    const playBtn = document.createElement("div");
-    playBtn.className = "multi-cctv-play-btn";
-    playBtn.setAttribute("aria-label", "Putar siaran");
-
-    const playIcon = document.createElement("span");
-    playIcon.className = "multi-cctv-play-icon";
-    playIcon.textContent = "▶";
-    playIcon.setAttribute("aria-hidden", "true");
-
-    playBtn.append(playIcon);
-    playOverlay.append(playBtn);
-    mediaWrap.append(video, playOverlay);
+    mediaWrap.append(video);
 
     // Region overlay if configured
     const region = viewRegionFor(camera, camera.side ?? "A");
@@ -238,11 +231,6 @@ export function createMultiCctvManager({
       slot.video.onloadeddata = null;
       slot.video.onplaying = null;
     }
-    const playOverlay = slot.card?.querySelector(".multi-cctv-play-overlay");
-    if (playOverlay) {
-      playOverlay.hidden = false;
-      playOverlay.style.display = "flex";
-    }
     const badge = slot.card?.querySelector(".multi-cctv-badge");
     if (badge) {
       badge.textContent = "STANDBY";
@@ -270,14 +258,9 @@ export function createMultiCctvManager({
     }
 
     const video = card.querySelector(".multi-cctv-video");
-    const playOverlay = card.querySelector(".multi-cctv-play-overlay");
     const badge = card.querySelector(".multi-cctv-badge");
 
     const revealVideo = () => {
-      if (playOverlay) {
-        playOverlay.hidden = true;
-        playOverlay.style.display = "none";
-      }
       if (badge) {
         badge.textContent = "LIVE";
         badge.classList?.add?.("is-live");
