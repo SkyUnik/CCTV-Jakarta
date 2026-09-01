@@ -817,7 +817,11 @@ body.multi-cctv-open .floating-actions {
   width: 100%;
   aspect-ratio: 16 / 9;
   min-height: 180px;
-  background: #05120e;
+  background-color: #05140f;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -827,7 +831,8 @@ body.multi-cctv-open .floating-actions {
 .multi-cctv-video {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  background: #000;
   display: block;
 }
 .multi-cctv-play-overlay {
@@ -836,34 +841,44 @@ body.multi-cctv-open .floating-actions {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgb(0 0 0 / 25%);
+  background: rgb(0 0 0 / 30%);
   transition: background 0.15s ease;
   pointer-events: none;
 }
 .multi-cctv-card:hover .multi-cctv-play-overlay {
-  background: rgb(0 0 0 / 10%);
+  background: rgb(0 0 0 / 15%);
 }
 .multi-cctv-play-overlay[hidden] {
   display: none !important;
 }
 
-.multi-cctv-play-icon {
-  width: 52px;
-  height: 38px;
-  background: rgb(0 0 0 / 75%);
-  border: 1px solid rgb(255 255 255 / 45%);
-  border-radius: 9px;
+.multi-cctv-play-btn {
   display: flex;
   align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 15px;
-  box-shadow: 0 6px 16px rgb(0 0 0 / 50%);
-  transition: transform 0.15s ease, background 0.15s ease;
+  gap: 8px;
+  background: rgb(8 33 26 / 88%);
+  border: 1.5px solid rgb(78 224 176 / 50%);
+  border-radius: 20px;
+  padding: 8px 16px;
+  color: #d6fbd0;
+  font-size: .8rem;
+  font-weight: 800;
+  box-shadow: 0 6px 20px rgb(0 0 0 / 60%);
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+  backdrop-filter: blur(4px);
 }
-.multi-cctv-card:hover .multi-cctv-play-icon {
-  transform: scale(1.08);
-  background: rgb(0 0 0 / 88%);
+.multi-cctv-card:hover .multi-cctv-play-btn {
+  transform: scale(1.04);
+  background: rgb(12 48 38 / 95%);
+  border-color: rgb(78 224 176 / 85%);
+  color: #ffffff;
+}
+.multi-cctv-play-icon {
+  font-size: .82rem;
+  color: #e6fb73;
+}
+.multi-cctv-play-text {
+  letter-spacing: -.01em;
 }
 
 .multi-cctv-card-footer {

@@ -148,12 +148,20 @@ export function createMultiCctvManager({
     const playOverlay = document.createElement("div");
     playOverlay.className = "multi-cctv-play-overlay";
 
-    const playIcon = document.createElement("div");
+    const playBtn = document.createElement("div");
+    playBtn.className = "multi-cctv-play-btn";
+
+    const playIcon = document.createElement("span");
     playIcon.className = "multi-cctv-play-icon";
     playIcon.textContent = "▶";
     playIcon.setAttribute("aria-hidden", "true");
 
-    playOverlay.append(playIcon);
+    const playText = document.createElement("span");
+    playText.className = "multi-cctv-play-text";
+    playText.textContent = "Putar Siaran";
+
+    playBtn.append(playIcon, playText);
+    playOverlay.append(playBtn);
     mediaWrap.append(video, playOverlay);
 
     // Region overlay if configured
