@@ -4,6 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Local Camera Audit — CCTV Jakarta</title>
+    <link rel="stylesheet" href="/site/vendor/leaflet/leaflet.css">
+    <link rel="stylesheet" href="/site/vendor/leaflet-markercluster/MarkerCluster.css">
+    <link rel="stylesheet" href="/site/vendor/leaflet-markercluster/MarkerCluster.Default.css">
     <link rel="stylesheet" href="./styles.css">
   </head>
   <body>
@@ -33,7 +36,127 @@
           <div><span class="eyebrow" id="editor-status">Pilih kamera</span><h1 id="editor-title">Camera audit</h1></div>
           <span id="save-state" role="status"></span>
         </div>
+
+        <div class="admin-action-bar">
+          <div class="action-buttons-row">
+            <button id="bulk-geocode" type="button" class="btn-action">Set Koordinat dari KM (Ruas Terpilih)</button>
+            <button id="bulk-gate-geocode" type="button" class="btn-action">Set Koordinat Gate (Ruas Terpilih)</button>
+            <button id="btn-highway-health" type="button" class="btn-action">Cek Kesehatan Ruas</button>
+            <button id="btn-check-duplicates" type="button" class="btn-action">Cek & Hapus Duplikat</button>
+            <button id="btn-rename-highway" type="button" class="btn-action">Ubah Nama Ruas</button>
+            <button id="btn-bulk-direction" type="button" class="btn-action">Ubah Arah Massal</button>
+            <button id="btn-bulk-enable" type="button" class="btn-action">Aktifkan Semua CCTV</button>
+            <button id="save-pin-coords" type="button" class="btn-action" disabled>Simpan Koordinat Pin</button>
+            <button id="reset-pin-coords" type="button" class="btn-action" disabled>Reset Pin</button>
+            <button id="reload-video" type="button" class="btn-action">Muat Kamera</button>
+          </div>
+          <div id="inference-status" class="inference-status" role="status">Siap</div>
+        </div>
+
+        <details class="help-accordion">
+          <summary><strong>Panduan Tombol & Status Kamera</strong></summary>
+          <div class="help-content">
+            <div class="help-section">
+              <h4>Fungsi Tombol</h4>
+              <ul>
+                <li><strong>Set Koordinat dari KM:</strong> Mengestimasi koordinat kamera berdasarkan nilai KM dan interpolasi geometri polyline ruas terpilih.</li>
+                <li><strong>Set Koordinat Gate:</strong> Mencari dan memproyeksikan data gerbang tol dari OpenStreetMap (<code>barrier=toll_booth</code>) untuk kamera bertipe gerbang pada ruas terpilih.</li>
+                <li><strong>Cek Kesehatan Ruas:</strong> Mendiagnosis status konektivitas live stream m3u8, kesegaran data scraping, dan integritas geografi/OSM ruas terpilih.</li>
+                <li><strong>Cek & Hapus Duplikat:</strong> Memeriksa kamera dengan stream URL identik (.m3u8 sama) dan menghapus entri duplikat yang tidak diinginkan.</li>
+                <li><strong>Ubah Nama Ruas:</strong> Mengubah nama tampilan (display name) ruas jalan tol pada konfigurasi dan peta.</li>
+                <li><strong>Ubah Arah Massal:</strong> Mengubah arah kamera (Belum pasti, A, B, atau A/B) untuk semua kamera pada ruas terpilih.</li>
+                <li><strong>Aktifkan Semua CCTV:</strong> Mengaktifkan (enabled) atau menonaktifkan seluruh kamera yang telah terpetakan pada ruas terpilih.</li>
+                <li><strong>Simpan Koordinat Pin:</strong> Menyalin posisi pin draf hasil geser/klik di peta ke input form longitude & latitude.</li>
+                <li><strong>Reset Pin:</strong> Mengembalikan posisi pin draf di peta ke koordinat asli kamera.</li>
+                <li><strong>Muat Kamera:</strong> Memuat ulang stream video HLS kamera yang sedang aktif jika gagal terputar otomatis.</li>
+              </ul>
+            </div>
+            <div class="help-section">
+              <h4>Siklus Status Kamera</h4>
+              <div class="status-lifecycle">
+                <span class="status-badge needs-review">needs_review</span>
+                <span class="lifecycle-arrow">→</span>
+                <span class="status-badge provisional">provisional_stationing / provisional_landmark</span>
+                <span class="lifecycle-arrow">→</span>
+                <span class="status-badge verified">verified</span>
+              </div>
+              <p class="muted">
+                • <code>needs_review</code>: Data kamera baru / belum diverifikasi.<br>
+                • <code>provisional_stationing</code>: Koordinat diperkirakan dari KM stationing jalan.<br>
+                • <code>provisional_landmark</code>: Koordinat landmark publik gerbang tol OSM diproyeksikan ke arah A/B.<br>
+                • <code>verified</code>: Koordinat titik tiang CCTV telah disurvei & diverifikasi secara presisi.
+              </p>
+            </div>
+          </div>
+        </details>
+
+        <details class="json-diff-details" id="json-diff-details" open>
+          <summary><strong>Perbandingan JSON (Before → After)</strong></summary>
+          <div class="json-diff-container">
+            <div class="diff-pane">
+              <div class="diff-pane-title">Before (Tersimpan)</div>
+              <pre id="json-diff-before" class="json-diff-code"><code>{}</code></pre>
+            </div>
+            <div class="diff-arrow" aria-hidden="true">→</div>
+            <div class="diff-pane">
+              <div class="diff-pane-title">After (Draf Form)</div>
+              <pre id="json-diff-after" class="json-diff-code"><code>{}</code></pre>
+            </div>
+          </div>
+        </details>
+
         <form id="camera-form">
+          <section class="route-map" id="route-map-panel" aria-labelledby="map-title">
+            <div class="map-heading">
+              <div>
+                <strong id="map-title">Gambaran ruas dan CCTV</strong>
+                <span id="map-summary">Memuat peta OpenStreetMap…</span>
+              </div>
+              <div class="map-heading-actions">
+                <label class="map-toggle">
+                  <input id="map-show-all-lines" type="checkbox">
+                  <span>Tampilkan semua ruas</span>
+                </label>
+                <label class="map-toggle">
+                  <input id="map-toggle" type="checkbox" checked>
+                  <span>Tampilkan peta</span>
+                </label>
+                <button class="map-close-button" id="map-close-button" type="button" hidden>
+                  Tutup peta
+                </button>
+              </div>
+            </div>
+            <div id="map-body">
+              <div class="map-canvas">
+                <div
+                  id="route-map"
+                  role="application"
+                  aria-label="Peta OpenStreetMap ruas tol, CCTV, dan lokasi GPS"
+                ></div>
+                <button
+                  class="map-expand-button"
+                  id="map-expand-button"
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls="route-map"
+                >
+                  Perbesar peta
+                </button>
+                <div class="map-tile-status" id="map-tile-status" role="status" hidden></div>
+              </div>
+              <div class="map-camera-card" id="map-camera-card" hidden>
+                <div class="map-camera-status">
+                  <strong>Lokasi perkiraan berdasarkan KM</strong>
+                  <span>Bukan koordinat kamera terverifikasi.</span>
+                </div>
+                <div id="map-camera-list"></div>
+              </div>
+              <p class="map-disclaimer">
+                Peta online OpenStreetMap—bukan navigasi. Gunakan saat berhenti atau oleh penumpang. Tile mengikuti area yang ditampilkan.
+              </p>
+            </div>
+          </section>
+
           <div class="form-grid">
             <label>ID<input id="camera-id" required readonly></label>
             <label>Provider ID<input id="provider-id" readonly></label>
@@ -42,7 +165,14 @@
             <label class="wide">Source page<input id="source-page" type="url"></label>
             <label>Ruas<select id="highway-id" required></select></label>
             <label>KM<input id="camera-km" type="number" min="0" step="0.001"></label>
-            <label>Arah<select id="camera-side"><option value="">Belum pasti</option><option>A</option><option>B</option></select></label>
+            <label>Arah
+              <select id="camera-side">
+                <option value="">Belum pasti</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="A/B">A/B (Keduanya)</option>
+              </select>
+            </label>
             <label>Status<input id="curation-status" readonly></label>
             <label>Longitude<input id="longitude" type="number" step="any"></label>
             <label>Latitude<input id="latitude" type="number" step="any"></label>
@@ -50,9 +180,10 @@
             <label class="wide">Catatan<textarea id="notes" rows="3"></textarea></label>
           </div>
 
-          <section class="frame-audit" aria-labelledby="frame-title">
-            <div class="frame-toolbar">
+          <section class="frame-audit" id="frame-audit" aria-labelledby="frame-title">
+            <div class="frame-toolbar" id="frame-toolbar" hidden>
               <div><span class="eyebrow">Area ruas pada video</span><h2 id="frame-title">Kotak merah 50%</h2></div>
+              <label class="checkbox"><input id="region-enabled" type="checkbox"> Aktifkan box merah</label>
               <select id="region-direction" aria-label="Arah region"><option>A</option><option>B</option></select>
               <button id="region-left" type="button">50% kiri</button>
               <button id="region-right" type="button">50% kanan</button>
@@ -60,9 +191,9 @@
             </div>
             <div class="video-stage" id="video-stage">
               <video id="audit-video" controls muted playsinline preload="metadata"></video>
-              <div id="red-region" class="red-region"><strong id="region-label">Ruas</strong><i aria-hidden="true"></i></div>
+              <div id="red-region" class="red-region" hidden><strong id="region-label">Ruas</strong><i aria-hidden="true"></i></div>
             </div>
-            <p class="muted">Drag box untuk memindahkan; drag titik kanan-bawah untuk resize. A default kiri, B default kanan.</p>
+            <p class="muted" id="frame-audit-guide" hidden>Drag box untuk memindahkan; drag titik kanan-bawah untuk resize. A default kiri, B default kanan.</p>
           </section>
 
           <div class="form-actions">
@@ -86,7 +217,200 @@
         </section>
       </section>
     </main>
+
+    <dialog id="gate-match-dialog" class="admin-dialog">
+      <form method="dialog" id="gate-match-form">
+        <h3>Hasil Pencarian Lokasi Gerbang Tol OSM</h3>
+        <p id="gate-match-summary" class="muted"></p>
+        <div class="dialog-table-container">
+          <table class="dialog-table">
+            <thead>
+              <tr>
+                <th>Pilih</th>
+                <th>Kamera</th>
+                <th>Kandidat OSM</th>
+                <th>Jarak Proyeksi</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="gate-match-tbody"></tbody>
+          </table>
+        </div>
+        <div class="dialog-actions">
+          <button type="button" id="gate-match-cancel" class="btn-secondary">Batal</button>
+          <button type="submit" id="gate-match-confirm" class="primary">Terapkan Koordinat Terpilih</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="rename-highway-dialog" class="admin-dialog">
+      <form method="dialog" id="rename-highway-form">
+        <h3>Ubah Nama Tampilan Ruas</h3>
+        <p id="rename-highway-target" class="muted"></p>
+        <label>
+          Nama Tampilan Baru
+          <input id="rename-highway-input" required placeholder="Contoh: Tol JORR S">
+        </label>
+        <div class="dialog-actions">
+          <button type="button" id="rename-highway-cancel" class="btn-secondary">Batal</button>
+          <button type="submit" id="rename-highway-confirm" class="primary">Simpan Nama Ruas</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="bulk-direction-dialog" class="admin-dialog">
+      <form method="dialog" id="bulk-direction-form">
+        <h3>Ubah Arah Kamera Massal</h3>
+        <p id="bulk-direction-target" class="muted"></p>
+        <label>
+          Pilih Arah Baru
+          <select id="bulk-direction-select">
+            <option value="">Belum pasti</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="A/B">A/B (Keduanya)</option>
+          </select>
+        </label>
+        <div class="dialog-actions">
+          <button type="button" id="bulk-direction-cancel" class="btn-secondary">Batal</button>
+          <button type="submit" id="bulk-direction-confirm" class="primary">Terapkan Arah ke Semua Kamera Ruas</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="bulk-enable-dialog" class="admin-dialog">
+      <form method="dialog" id="bulk-enable-form">
+        <h3>Aktifkan / Nonaktifkan Semua CCTV Ruas</h3>
+        <p id="bulk-enable-target" class="muted"></p>
+        <p id="bulk-enable-summary" class="muted"></p>
+        <label>
+          Status Penayangan Otomatis
+          <select id="bulk-enable-action">
+            <option value="enable" selected>Aktifkan Semua (Enabled: Ya)</option>
+            <option value="disable">Nonaktifkan Semua (Enabled: Tidak)</option>
+          </select>
+        </label>
+        <label class="checkbox">
+          <input type="checkbox" id="bulk-enable-bypass">
+          <span>Paksa aktifkan semua (bypass pemeriksaan koordinat &amp; arah)</span>
+        </label>
+        <div class="dialog-actions">
+          <button type="button" id="bulk-enable-cancel" class="btn-secondary">Batal</button>
+          <button type="submit" id="bulk-enable-confirm" class="primary">Terapkan Status ke Ruas</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="duplicate-cameras-dialog" class="admin-dialog">
+      <form method="dialog" id="duplicate-cameras-form">
+        <h3>Pemeriksaan &amp; Penghapusan Kamera Duplikat</h3>
+        <p id="duplicate-cameras-summary" class="muted"></p>
+        <div class="dialog-table-container">
+          <table class="dialog-table">
+            <thead>
+              <tr>
+                <th>Pilih (Hapus)</th>
+                <th>Kamera Duplikat (ID Baru)</th>
+                <th>Kamera Asli (Dipertahankan)</th>
+                <th>Stream URL (.m3u8)</th>
+              </tr>
+            </thead>
+            <tbody id="duplicate-cameras-tbody"></tbody>
+          </table>
+        </div>
+        <div class="dialog-actions">
+          <button type="button" id="duplicate-cameras-cancel" class="btn-secondary">Batal</button>
+          <button type="submit" id="duplicate-cameras-confirm" class="primary">Hapus Kamera Terpilih</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="highway-health-dialog" class="admin-dialog health-dialog">
+      <div class="health-dialog-container">
+        <div class="health-header">
+          <div>
+            <span class="eyebrow" id="health-dialog-eyebrow">Diagnostik Ruas</span>
+            <h3 id="health-dialog-title">Kesehatan Ruas Jalan Tol</h3>
+          </div>
+          <span id="health-overall-badge" class="health-badge health-badge-unknown">Memeriksa...</span>
+        </div>
+
+        <div id="health-loading" class="health-loading">
+          <span class="health-spinner"></span>
+          <p id="health-loading-text">Mendiagnosis stream live, kesegaran scrape, dan geografi OSM...</p>
+        </div>
+
+        <div id="health-content" class="health-content" hidden>
+          <div class="health-cards-grid">
+            <!-- Card 1: Live Stream -->
+            <div class="health-card" id="health-card-streams">
+              <div class="health-card-header">
+                <h4>Status Stream Kamera</h4>
+                <span id="health-stream-badge" class="health-badge"></span>
+              </div>
+              <div class="health-card-body">
+                <div class="health-metric">
+                  <span class="health-metric-value" id="health-stream-ratio">0/0</span>
+                  <span class="health-metric-label">Stream Online</span>
+                </div>
+                <details class="health-stream-accordion">
+                  <summary>Lihat Rincian Status Kamera</summary>
+                  <div class="health-stream-list" id="health-stream-list"></div>
+                </details>
+              </div>
+            </div>
+
+            <!-- Card 2: Scraping Freshness -->
+            <div class="health-card" id="health-card-scraping">
+              <div class="health-card-header">
+                <h4>Kesegaran Data Scraping</h4>
+                <span id="health-scrape-badge" class="health-badge"></span>
+              </div>
+              <div class="health-card-body">
+                <ul class="health-info-list">
+                  <li><strong>Terakhir di-scrape:</strong> <span id="health-scrape-time">-</span></li>
+                  <li><strong>Usia Data:</strong> <span id="health-scrape-age">-</span></li>
+                  <li><strong>Status URL Live:</strong> <span id="health-scrape-upstream">-</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Card 3: Geography & OSM -->
+            <div class="health-card" id="health-card-geography">
+              <div class="health-card-header">
+                <h4>Integritas Geografi & OSM</h4>
+                <span id="health-geo-badge" class="health-badge"></span>
+              </div>
+              <div class="health-card-body">
+                <ul class="health-info-list">
+                  <li><strong>Panjang Geometri:</strong> <span id="health-geo-length">-</span></li>
+                  <li><strong>Titik Koordinat:</strong> <span id="health-geo-points">-</span></li>
+                  <li><strong>Kamera Terpetakan:</strong> <span id="health-geo-mapped">-</span></li>
+                  <li><strong>Perlu Review:</strong> <span id="health-geo-review">-</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div id="health-issues-container" class="health-issues-container" hidden>
+            <h4>Catatan Masalah Ditemukan</h4>
+            <ul id="health-issues-list" class="health-issues-list"></ul>
+          </div>
+        </div>
+
+        <div class="dialog-actions health-actions">
+          <button type="button" id="health-action-refresh-scrape" class="btn-action">Refresh Stream Ruas Ini</button>
+          <button type="button" id="health-action-repair-geo" class="btn-action">Perbaiki Geografi Ruas Tol</button>
+          <button type="button" id="health-dialog-close" class="btn-secondary">Tutup</button>
+        </div>
+      </div>
+    </dialog>
+
+    <script src="/site/vendor/leaflet/leaflet.js"></script>
+    <script src="/site/vendor/leaflet-markercluster/leaflet.markercluster.js"></script>
     <script src="/site/vendor/hls.min.js"></script>
     <script type="module" src="./admin.mjs"></script>
   </body>
 </html>
+
+

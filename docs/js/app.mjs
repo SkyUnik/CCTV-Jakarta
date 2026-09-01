@@ -1,9 +1,10 @@
 import {
   adjacentCamera,
   automaticCameras,
+  createHighwayTracker,
   createPassTracker,
-  initialCamera,
   matchHighways,
+  nextCameraAtProgress,
   projectPointToLine,
   publicCameras,
 } from "./geo.mjs";
@@ -13,6 +14,7 @@ import {
   INITIAL_LOCATION_OPTIONS,
   TRACKING_LOCATION_OPTIONS,
 } from "./geolocation.mjs";
+import { createStreamAttemptTracker } from "./journey.mjs";
 import { createOnlineMap } from "./online-map.mjs";
 import { advanceRoutePosition, positionOnHighway } from "./simulator.mjs";
 import {
@@ -21,6 +23,14 @@ import {
   nativeMediaErrorMessage,
 } from "./player.mjs";
 import { createQuickActionManager } from "./quick-actions.mjs";
+import { createMultiCctvManager } from "./multi-cctv.mjs";
+import {
+  driverJourneySteps,
+  filterHighways,
+  projectHighwaysToSvg,
+  stableHighwayColor,
+  viewRegionFor,
+} from "./driving-ui.mjs";
 
 const elements = {
   accuracy: document.querySelector("#accuracy-value"),
@@ -38,7 +48,12 @@ const elements = {
   errorPanel: document.querySelector("#error-panel"),
   gpsStatus: document.querySelector("#gps-status"),
   gpsDebug: document.querySelector("#gps-debug-link"),
+  highwayLegend: document.querySelector("#highway-legend"),
   highwayList: document.querySelector("#highway-list"),
+  highwayPickerTitle: document.querySelector("#highway-picker-title"),
+  highwayResultCount: document.querySelector("#highway-result-count"),
+  highwaySilhouette: document.querySelector("#highway-silhouette"),
+  journeyStepper: document.querySelector("#journey-stepper"),
   journeyStatus: document.querySelector("#journey-status"),
   jorPriukQuick: document.querySelector("#jor-priuk-quick-button"),
   jorPriukOverlay: document.querySelector("#jor-priuk-overlay"),
@@ -61,9 +76,17 @@ const elements = {
   mapSection: document.querySelector(".route-map"),
   mapSummary: document.querySelector("#map-summary"),
   mapElement: document.querySelector("#route-map"),
+  mapShowAllLines: document.querySelector("#map-show-all-lines"),
   mapTileStatus: document.querySelector("#map-tile-status"),
   mapToggle: document.querySelector("#map-toggle"),
+  multiCctvClose: document.querySelector("#multi-cctv-close"),
+  multiCctvGrid: document.querySelector("#multi-cctv-grid"),
+  multiCctvMap: document.querySelector("#multi-cctv-map"),
+  multiCctvOverlay: document.querySelector("#multi-cctv-overlay"),
+  multiCctvSubtitle: document.querySelector("#multi-cctv-subtitle"),
+  multiCctvTitle: document.querySelector("#multi-cctv-title"),
   next: document.querySelector("#next-button"),
+  openMultiCctv: document.querySelector("#open-multi-cctv-button"),
   openPlayer: document.querySelector("#open-player-button"),
   playerCard: document.querySelector(".player-card"),
   playerHelper: document.querySelector("#player-helper"),
@@ -81,6 +104,10 @@ const elements = {
   routePanel: document.querySelector("#route-panel"),
   routeHelper: document.querySelector("#route-helper"),
   routeShortcut: document.querySelector("#route-shortcut"),
+  selectedRoadCallout: document.querySelector("#selected-road-callout"),
+  silhouetteZoomIn: document.querySelector("#silhouette-zoom-in"),
+  silhouetteZoomOut: document.querySelector("#silhouette-zoom-out"),
+  silhouetteZoomReset: document.querySelector("#silhouette-zoom-reset"),
   skip: document.querySelector("#skip-button"),
   simulatorHighway: document.querySelector("#simulator-highway"),
   simulatorPanel: document.querySelector("#simulator-panel"),
@@ -93,6 +120,9 @@ const elements = {
   trackingIndicator: document.querySelector("#tracking-indicator"),
   video: document.querySelector("#camera-video"),
   videoPlaceholder: document.querySelector("#video-placeholder"),
+  videoRegionStatus: document.querySelector("#video-region-status"),
+  videoRoadLabel: document.querySelector("#video-road-label"),
+  videoRoadRegion: document.querySelector("#video-road-region"),
 };
 
 const query = new URLSearchParams(location.search);
@@ -111,12 +141,14 @@ const state = {
   locationAttempt: 0,
   manualCameras: [],
   manualMode: false,
+  multiCctvManager: null,
   routeMap: null,
   pendingMapCamera: null,
   playIntent: false,
   playbackBlocked: false,
   playerReady: false,
   routeEnded: false,
+  roadManualOverride: false,
   simulator: query.get("simulator") === "1",
   simulatorLastTick: null,
   simulatorPositionM: 0,
@@ -124,12 +156,16 @@ const state = {
   simulatorSpeedKmh: 60,
   sourceChanging: false,
   stallTimer: null,
+  streamCycleGeneration: 0,
+  streamRetryTimer: null,
   usableCameras: [],
   videoController: null,
   watchId: null,
 };
 
 let passTracker = createPassTracker();
+const highwayTracker = createHighwayTracker();
+const streamAttemptTracker = createStreamAttemptTracker();
 
 state.videoController = createVideoController({
   hlsClass: typeof window !== "undefined" ? window.Hls : null,
@@ -170,6 +206,229 @@ function updateTrackingIndicator() {
   }
   elements.trackingIndicator.dataset.state = indicatorState;
   elements.trackingIndicator.querySelector("strong").textContent = message;
+  updateJourneyStepper();
+}
+
+function updateJourneyStepper() {
+  if (!elements.journeyStepper) return;
+  const steps = driverJourneySteps({
+    cameraName: state.currentCamera?.name ?? null,
+    direction: state.direction,
+    highwayName: state.highway?.properties?.name ?? null,
+    trackingActive: state.watchId !== null || state.simulatorTimer !== null,
+  });
+  elements.journeyStepper.replaceChildren(
+    ...steps.map((step) => {
+      const item = document.createElement("li");
+      item.className = "journey-step";
+      item.dataset.state = step.state;
+      const label = document.createElement("span");
+      label.className = "step-name";
+      label.textContent = step.label;
+      const value = document.createElement("strong");
+      value.className = "step-value";
+      value.textContent = step.value;
+      item.append(label, value);
+      return item;
+    }),
+  );
+}
+
+function renderHighwaySilhouette() {
+  if (!elements.highwaySilhouette || state.highways.length === 0) return;
+  const projected = projectHighwaysToSvg(state.highways);
+  elements.highwaySilhouette.replaceChildren();
+  const selectedId = selectedHighwayId();
+
+  for (const road of projected) {
+    const feature = state.highways.find(
+      (f) => (f.properties?.id ?? f.id) === road.id,
+    );
+    const isSelected = road.id === selectedId;
+
+    // SVG path element (clean without overlapping text)
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("d", road.path);
+    path.setAttribute("stroke", road.color);
+    path.setAttribute("fill", "none");
+    path.classList.add("silhouette-path");
+    path.dataset.highwayId = road.id;
+    if (isSelected) {
+      path.dataset.selected = "true";
+    }
+
+    const title = document.createElementNS("http://www.w3.org/2000/svg", "title");
+    title.textContent = road.name;
+    path.append(title);
+
+    path.addEventListener("mouseenter", () => {
+      if (elements.selectedRoadCallout) {
+        elements.selectedRoadCallout.textContent = road.name;
+      }
+    });
+    path.addEventListener("mouseleave", () => {
+      if (elements.selectedRoadCallout) {
+        elements.selectedRoadCallout.textContent = state.highway?.properties?.name ?? "Pilih ruas";
+      }
+    });
+    path.addEventListener("click", () => {
+      if (feature) selectHighway(feature, { manualSelection: true });
+    });
+
+    elements.highwaySilhouette.append(path);
+  }
+
+  if (!silhouetteZoom.initDone) {
+    silhouetteZoom.initDone = true;
+    resetSilhouetteZoom();
+  }
+}
+
+const silhouetteZoom = {
+  defaultScale: 2.2,
+  scale: 2.2,
+  defaultCenterX: 340,
+  defaultCenterY: 95,
+  x: 0,
+  y: 0,
+  baseWidth: 640,
+  baseHeight: 300,
+  isDragging: false,
+  initDone: false,
+};
+
+function updateSilhouetteViewBox() {
+  if (!elements.highwaySilhouette) return;
+  const width = silhouetteZoom.baseWidth / silhouetteZoom.scale;
+  const height = silhouetteZoom.baseHeight / silhouetteZoom.scale;
+  elements.highwaySilhouette.setAttribute(
+    "viewBox",
+    `${silhouetteZoom.x.toFixed(2)} ${silhouetteZoom.y.toFixed(2)} ${width.toFixed(2)} ${height.toFixed(2)}`,
+  );
+}
+
+function zoomSilhouette(factor, clientX = null, clientY = null) {
+  const oldScale = silhouetteZoom.scale;
+  const newScale = Math.min(5.0, Math.max(0.7, oldScale * factor));
+  if (newScale === oldScale) return;
+
+  const currentViewWidth = silhouetteZoom.baseWidth / oldScale;
+  const currentViewHeight = silhouetteZoom.baseHeight / oldScale;
+  const newViewWidth = silhouetteZoom.baseWidth / newScale;
+  const newViewHeight = silhouetteZoom.baseHeight / newScale;
+
+  let pivotX = silhouetteZoom.x + currentViewWidth / 2;
+  let pivotY = silhouetteZoom.y + currentViewHeight / 2;
+
+  if (clientX !== null && clientY !== null && elements.highwaySilhouette) {
+    const rect = elements.highwaySilhouette.getBoundingClientRect();
+    if (rect.width > 0 && rect.height > 0) {
+      const ratioX = (clientX - rect.left) / rect.width;
+      const ratioY = (clientY - rect.top) / rect.height;
+      pivotX = silhouetteZoom.x + ratioX * currentViewWidth;
+      pivotY = silhouetteZoom.y + ratioY * currentViewHeight;
+    }
+  }
+
+  const pivotRatioX = (pivotX - silhouetteZoom.x) / currentViewWidth;
+  const pivotRatioY = (pivotY - silhouetteZoom.y) / currentViewHeight;
+
+  silhouetteZoom.x = pivotX - pivotRatioX * newViewWidth;
+  silhouetteZoom.y = pivotY - pivotRatioY * newViewHeight;
+  silhouetteZoom.scale = newScale;
+
+  updateSilhouetteViewBox();
+}
+
+function resetSilhouetteZoom() {
+  silhouetteZoom.scale = silhouetteZoom.defaultScale;
+  const viewWidth = silhouetteZoom.baseWidth / silhouetteZoom.scale;
+  const viewHeight = silhouetteZoom.baseHeight / silhouetteZoom.scale;
+  silhouetteZoom.x = silhouetteZoom.defaultCenterX - viewWidth / 2;
+  silhouetteZoom.y = silhouetteZoom.defaultCenterY - viewHeight / 2;
+  updateSilhouetteViewBox();
+}
+
+function setupSilhouetteInteractions() {
+  if (!elements.highwaySilhouette) return;
+
+  elements.silhouetteZoomIn?.addEventListener("click", () => zoomSilhouette(1.3));
+  elements.silhouetteZoomOut?.addEventListener("click", () => zoomSilhouette(1 / 1.3));
+  elements.silhouetteZoomReset?.addEventListener("click", resetSilhouetteZoom);
+
+  let startPointerX = 0;
+  let startPointerY = 0;
+  let startViewX = 0;
+  let startViewY = 0;
+
+  elements.highwaySilhouette.addEventListener("pointerdown", (event) => {
+    if (event.button !== 0) return;
+    silhouetteZoom.isDragging = true;
+    startPointerX = event.clientX;
+    startPointerY = event.clientY;
+    startViewX = silhouetteZoom.x;
+    startViewY = silhouetteZoom.y;
+    elements.highwaySilhouette.setPointerCapture(event.pointerId);
+  });
+
+  elements.highwaySilhouette.addEventListener("pointermove", (event) => {
+    if (!silhouetteZoom.isDragging) return;
+    const dx = event.clientX - startPointerX;
+    const dy = event.clientY - startPointerY;
+    const rect = elements.highwaySilhouette.getBoundingClientRect();
+    const currentViewWidth = silhouetteZoom.baseWidth / silhouetteZoom.scale;
+    const currentViewHeight = silhouetteZoom.baseHeight / silhouetteZoom.scale;
+    const scaleFactorX = currentViewWidth / (rect.width || 1);
+    const scaleFactorY = currentViewHeight / (rect.height || 1);
+
+    silhouetteZoom.x = startViewX - dx * scaleFactorX;
+    silhouetteZoom.y = startViewY - dy * scaleFactorY;
+    updateSilhouetteViewBox();
+  });
+
+  const endDrag = (event) => {
+    if (!silhouetteZoom.isDragging) return;
+    silhouetteZoom.isDragging = false;
+    try {
+      if (elements.highwaySilhouette.hasPointerCapture(event.pointerId)) {
+        elements.highwaySilhouette.releasePointerCapture(event.pointerId);
+      }
+    } catch {}
+  };
+
+  elements.highwaySilhouette.addEventListener("pointerup", endDrag);
+  elements.highwaySilhouette.addEventListener("pointercancel", endDrag);
+
+  elements.highwaySilhouette.addEventListener("wheel", (event) => {
+    event.preventDefault();
+    const factor = event.deltaY < 0 ? 1.15 : 1 / 1.15;
+    zoomSilhouette(factor, event.clientX, event.clientY);
+  }, { passive: false });
+}
+
+function updateVideoRoadRegion() {
+  if (!elements.videoRoadRegion) return;
+  const isPlaceholderVisible = elements.videoPlaceholder && !elements.videoPlaceholder.hidden;
+  if (!state.currentCamera || !state.direction || isPlaceholderVisible) {
+    elements.videoRoadRegion.hidden = true;
+    return;
+  }
+  const region = viewRegionFor(state.currentCamera, state.direction);
+  if (!region) {
+    elements.videoRoadRegion.hidden = true;
+    return;
+  }
+  elements.videoRoadRegion.hidden = false;
+  elements.videoRoadRegion.style.left = `${(region.x * 100).toFixed(2)}%`;
+  elements.videoRoadRegion.style.top = `${(region.y * 100).toFixed(2)}%`;
+  elements.videoRoadRegion.style.width = `${(region.width * 100).toFixed(2)}%`;
+  elements.videoRoadRegion.style.height = `${(region.height * 100).toFixed(2)}%`;
+  if (elements.videoRoadLabel) {
+    elements.videoRoadLabel.textContent = state.highway?.properties?.name ?? "Ruas tol";
+  }
+  if (elements.videoRegionStatus) {
+    elements.videoRegionStatus.textContent = region.status === "confirmed" ? "Terverifikasi" : "Area inferred";
+  }
 }
 
 function updateRestartButton() {
@@ -202,6 +461,7 @@ function destroyPlayer(options = {}) {
     clearSource: !options.reuseSource,
     preservePip: options.preservePip,
   });
+  updateVideoRoadRegion();
 }
 
 function resetPlayerLoad() {
@@ -212,13 +472,21 @@ function resetPlayerLoad() {
   state.stallTimer = null;
 }
 
+function cancelCameraCycle({ resetLoad = true } = {}) {
+  state.streamCycleGeneration += 1;
+  clearTimeout(state.streamRetryTimer);
+  state.streamRetryTimer = null;
+  streamAttemptTracker.reset();
+  if (resetLoad) resetPlayerLoad();
+}
+
 function setPlayerReady(ready) {
   state.playerReady = ready;
   elements.openPlayer.disabled = !ready || !state.currentCamera;
   updateRestartButton();
 }
 
-function showPlaybackError(message) {
+function showPlaybackError(message, status) {
   clearTimeout(state.loadTimer);
   state.loadTimer = null;
   state.sourceChanging = false;
@@ -226,7 +494,7 @@ function showPlaybackError(message) {
   state.playbackBlocked = true;
   elements.errorMessage.textContent = message;
   elements.errorPanel.hidden = false;
-  setJourneyStatus("Pilih Coba lagi atau Kamera berikutnya. Pergantian otomatis dijeda.");
+  if (status) setJourneyStatus(status);
 }
 
 function clearPlaybackError() {
@@ -234,7 +502,78 @@ function clearPlaybackError() {
   elements.errorPanel.hidden = true;
 }
 
-async function playCamera(camera, options = {}) {
+function prepareCamera(camera) {
+  const changedCamera = state.currentCamera?.id !== camera.id;
+  if (changedCamera) passTracker.reset();
+  state.currentCamera = camera;
+  state.routeEnded = false;
+  updateTrackingIndicator();
+  state.routeMap?.selectCamera(camera.id);
+
+  elements.videoPlaceholder.hidden = true;
+  elements.cameraLive.hidden = false;
+  elements.cameraTitle.textContent = camera.name;
+  elements.cameraHighway.textContent = state.highway?.properties?.name ?? "Tol Jakarta";
+  elements.cameraKm.textContent = formatKm(camera.km);
+  elements.sourceLink.href = camera.streamUrl;
+  elements.sourceLink.hidden = false;
+  updateJourneyStepper();
+  updateVideoRoadRegion();
+  updateControls();
+}
+
+function cameraErrorMessage(error, context = {}) {
+  if (context.mode === "hls") {
+    return error?.type === globalThis.Hls?.ErrorTypes?.NETWORK_ERROR
+      ? "Stream tidak dapat diambil. Kamera mungkin offline atau dibatasi oleh CORS."
+      : "Browser tidak dapat memproses stream kamera ini.";
+  }
+  return nativeMediaErrorMessage(elements.video.error);
+}
+
+function finishCameraFailure(camera, cycleGeneration, message) {
+  if (cycleGeneration !== state.streamCycleGeneration) return;
+  if (!state.sourceChanging && state.loadTimer === null) return;
+  resetPlayerLoad();
+  state.sourceChanging = false;
+  const failure = streamAttemptTracker.fail(camera.id);
+  if (failure.action === "stale") return;
+  if (failure.action === "retry") {
+    showPlaybackError(
+      message,
+      `Percobaan ${failure.attempt - 1}/3 gagal • mencoba lagi dalam ${failure.delayMs / 1_000} detik.`,
+    );
+    clearTimeout(state.streamRetryTimer);
+    state.streamRetryTimer = setTimeout(() => {
+      if (cycleGeneration !== state.streamCycleGeneration) return;
+      state.streamRetryTimer = null;
+      loadCameraAttempt(camera, cycleGeneration, { reloadSource: true });
+    }, failure.delayMs);
+    return;
+  }
+
+  if (!failure.fallbackUsed && !state.manualMode) {
+    const fallback = adjacentCamera(state.usableCameras, camera.id, state.direction, 1);
+    if (fallback) {
+      showPlaybackError(
+        message,
+        `${camera.name} gagal setelah 3 percobaan • mencoba satu CCTV di depan.`,
+      );
+      playCamera(fallback, { fallbackUsed: true, forcePlay: state.playIntent });
+      return;
+    }
+  }
+
+  const status = state.manualMode
+    ? "Kamera manual gagal setelah 3 percobaan. Tekan Coba lagi untuk memulai ulang."
+    : failure.fallbackUsed
+      ? "CCTV fallback gagal setelah 3 percobaan. Menunggu GPS melewati titik ini sebelum mencoba CCTV berikutnya."
+      : "Kamera terakhir gagal setelah 3 percobaan. Sistem tetap mengikuti GPS hingga akhir ruas.";
+  showPlaybackError(message, status);
+}
+
+function loadCameraAttempt(camera, cycleGeneration, options = {}) {
+  if (cycleGeneration !== state.streamCycleGeneration) return;
   if (!camera) return;
   const continuePlaying = options.forcePlay || state.playIntent;
   const muted = elements.video.muted;
@@ -243,29 +582,22 @@ async function playCamera(camera, options = {}) {
   const generation = state.loadGeneration;
   setPlayerReady(false);
   clearPlaybackError();
-  state.currentCamera = camera;
-  state.routeEnded = false;
-  passTracker.reset();
-  updateTrackingIndicator();
-  state.routeMap?.selectCamera(camera.id);
-
   elements.video.muted = muted;
-  elements.videoPlaceholder.hidden = true;
-  elements.cameraLive.hidden = false;
-  elements.cameraTitle.textContent = camera.name;
-  elements.cameraHighway.textContent = state.highway?.properties?.name ?? "Tol Jakarta";
-  elements.cameraKm.textContent = formatKm(camera.km);
-  elements.sourceLink.href = camera.streamUrl;
-  elements.sourceLink.hidden = false;
-  updateControls();
+  const attempt = streamAttemptTracker.snapshot().attempt;
   setJourneyStatus(state.manualMode
     ? "Kamera manual aktif. Pergantian otomatis berbasis GPS tidak digunakan untuk kamera ini."
-    : camera.curationStatus === "provisional_stationing"
+    : attempt > 1
+      ? `Memuat ulang ${camera.name} • percobaan ${attempt}/3.`
+      : camera.curationStatus === "provisional_stationing"
       ? "Kamera provisional aktif berdasarkan KM dan geometri OSM. Sistem menunggu posisi GPS melewati titik perkiraan."
       : "Kamera aktif. Sistem menunggu posisi terkonfirmasi setelah kamera ini.");
 
   const onReady = (context = {}) => {
-    if (generation !== state.loadGeneration || state.playerReady) return;
+    if (
+      cycleGeneration !== state.streamCycleGeneration ||
+      generation !== state.loadGeneration ||
+      state.playerReady
+    ) return;
     elements.video.dataset.playbackTechnology = context.technology ??
       state.videoController.getTechnology();
     clearTimeout(state.loadTimer);
@@ -290,28 +622,45 @@ async function playCamera(camera, options = {}) {
   };
 
   state.loadTimer = setTimeout(() => {
-    if (generation !== state.loadGeneration) return;
-    showPlaybackError("Stream tidak merespons dalam 20 detik. Kamera mungkin offline atau jaringan sedang lambat.");
+    if (cycleGeneration !== state.streamCycleGeneration || generation !== state.loadGeneration) return;
+    finishCameraFailure(
+      camera,
+      cycleGeneration,
+      "Stream tidak merespons dalam 20 detik. Kamera mungkin offline atau jaringan sedang lambat.",
+    );
   }, 20_000);
 
   const onError = (error, context = {}) => {
-    if (generation !== state.loadGeneration) return;
-    if (context.mode === "hls") {
-      showPlaybackError(
-        error?.type === globalThis.Hls?.ErrorTypes?.NETWORK_ERROR
-          ? "Stream tidak dapat diambil. Kamera mungkin offline atau dibatasi oleh CORS."
-          : "Browser tidak dapat memproses stream kamera ini.",
-      );
-      return;
-    }
-    showPlaybackError(nativeMediaErrorMessage(elements.video.error));
+    if (cycleGeneration !== state.streamCycleGeneration || generation !== state.loadGeneration) return;
+    finishCameraFailure(camera, cycleGeneration, cameraErrorMessage(error, context));
   };
 
-  const loaded = state.videoController.load(camera, { continuePlaying, onError, onReady });
+  const loaded = state.videoController.load(camera, {
+    continuePlaying,
+    onError,
+    onReady,
+    reloadSource: options.reloadSource === true,
+  });
   elements.video.dataset.playbackTechnology = state.videoController.getTechnology();
   if (!loaded) {
-    showPlaybackError("Browser ini tidak mendukung pemutaran HLS.");
+    finishCameraFailure(
+      camera,
+      cycleGeneration,
+      "Browser ini tidak mendukung pemutaran HLS.",
+    );
   }
+}
+
+function playCamera(camera, options = {}) {
+  if (!camera) return;
+  cancelCameraCycle();
+  const cycleGeneration = state.streamCycleGeneration;
+  streamAttemptTracker.start(camera.id, { fallbackUsed: options.fallbackUsed === true });
+  prepareCamera(camera);
+  loadCameraAttempt(camera, cycleGeneration, {
+    forcePlay: options.forcePlay,
+    reloadSource: options.reloadSource,
+  });
 }
 
 async function openVideoPlayer() {
@@ -351,6 +700,9 @@ function scheduleStallStatus() {
 }
 
 function updateControls() {
+  if (elements.openMultiCctv) {
+    elements.openMultiCctv.disabled = !(state.highway && state.direction);
+  }
   const cameras = activeCameraList();
   if (!state.currentCamera || cameras.length === 0) {
     elements.previous.disabled = true;
@@ -411,11 +763,14 @@ function updateUsableCameras() {
   updateManualCameraPicker();
   elements.download.disabled = state.usableCameras.length === 0 && state.manualCameras.length === 0;
   if (state.usableCameras.length === 0) {
+    cancelCameraCycle();
     destroyPlayer();
     state.currentCamera = null;
     state.playIntent = false;
     elements.cameraLive.hidden = true;
     elements.videoPlaceholder.hidden = false;
+    updateJourneyStepper();
+    updateVideoRoadRegion();
     elements.cameraTitle.textContent = "Belum ada kamera otomatis";
     elements.cameraHighway.textContent = state.highway?.properties?.name ?? "Tol Jakarta";
     elements.cameraKm.textContent = "KM —";
@@ -433,6 +788,7 @@ function selectDirection(direction) {
   state.currentCamera = null;
   state.playIntent = false;
   state.routeEnded = false;
+  cancelCameraCycle();
   passTracker.reset();
   if (
     state.simulator &&
@@ -448,6 +804,8 @@ function selectDirection(direction) {
   updateTrackingIndicator();
   elements.directionA.setAttribute("aria-pressed", String(direction === "A"));
   elements.directionB.setAttribute("aria-pressed", String(direction === "B"));
+  updateJourneyStepper();
+  updateVideoRoadRegion();
   updateUsableCameras();
   if (
     pendingMapCamera &&
@@ -462,7 +820,7 @@ function selectDirection(direction) {
   if (state.usableCameras.length === 0) return;
   const progressM = state.currentProjection?.progressM ??
     (direction === "A" ? 0 : state.highway.properties.canonicalLengthM);
-  const camera = initialCamera(state.usableCameras, direction, progressM);
+  const camera = nextCameraAtProgress(state.usableCameras, direction, progressM);
   if (camera) playCamera(camera);
   else {
     state.routeEnded = true;
@@ -470,15 +828,27 @@ function selectDirection(direction) {
   }
 }
 
-function selectHighway(feature) {
+function trackingRequested() {
+  return state.watchId !== null ||
+    state.simulatorTimer !== null ||
+    (elements.start.disabled && !elements.stop.hidden);
+}
+
+function selectHighway(feature, options = {}) {
   const nextId = feature.properties?.id ?? feature.id;
+  if (options.manualSelection && trackingRequested()) {
+    state.roadManualOverride = true;
+    highwayTracker.reset();
+  }
   if (nextId === selectedHighwayId()) {
     state.routeMap?.selectHighway(nextId);
     return;
   }
+  const playIntent = state.playIntent;
+  cancelCameraCycle();
   state.highway = feature;
   state.currentCamera = null;
-  state.playIntent = false;
+  state.playIntent = options.preservePlayIntent ? playIntent : false;
   state.currentProjection = null;
   state.routeEnded = false;
   state.manualMode = false;
@@ -495,15 +865,23 @@ function selectHighway(feature) {
   elements.highwayList.querySelectorAll("button").forEach((button) => {
     button.setAttribute("aria-pressed", String(button.dataset.highwayId === selectedHighwayId()));
   });
+  if (elements.selectedRoadCallout) {
+    elements.selectedRoadCallout.textContent = feature.properties?.name ?? "Pilih ruas";
+  }
+  updateJourneyStepper();
+  renderHighwaySilhouette();
   if (state.lastPosition) updateProjectionForSelectedRoad(state.lastPosition);
-  if (state.direction) updateUsableCameras();
+  if (state.direction) {
+    updateUsableCameras();
+    reconcileCameraTarget();
+  }
 }
 
 function selectHighwayFromMap(highwayId) {
   const feature = state.highways.find(
     (candidate) => (candidate.properties?.id ?? candidate.id) === highwayId,
   );
-  if (feature) selectHighway(feature);
+  if (feature) selectHighway(feature, { manualSelection: true });
 }
 
 function watchCameraFromMap(camera) {
@@ -511,7 +889,7 @@ function watchCameraFromMap(camera) {
     (candidate) => (candidate.properties?.id ?? candidate.id) === camera.highwayId,
   );
   if (!feature) return;
-  selectHighway(feature);
+  selectHighway(feature, { manualSelection: true });
   state.pendingMapCamera = camera;
   if (camera.side === "A" || camera.side === "B") {
     selectDirection(camera.side);
@@ -526,40 +904,58 @@ function watchCameraFromMap(camera) {
 }
 
 function renderHighways(candidates = null) {
+  if (!elements.highwayList || state.highways.length === 0) return;
+  const allFeatures = candidates?.length
+    ? candidates.map((candidate) => candidate.feature)
+    : state.highways;
+
+  if (elements.highwayResultCount) {
+    elements.highwayResultCount.textContent = `${allFeatures.length} ruas`;
+  }
+  if (elements.selectedRoadCallout) {
+    elements.selectedRoadCallout.textContent = state.highway?.properties?.name ?? "Pilih ruas";
+  }
+
   const candidateById = new Map(
     (candidates ?? []).map((candidate) => [candidate.highwayId, candidate]),
   );
-  const features = candidates?.length
-    ? candidates.map((candidate) => candidate.feature)
-    : state.highways;
+  const selectedId = selectedHighwayId();
+  const projected = projectHighwaysToSvg(allFeatures);
+
   elements.highwayList.replaceChildren();
-  for (const feature of features) {
-    const id = feature.properties?.id ?? feature.id;
-    const candidate = candidateById.get(id);
-    const item = document.createElement("li");
-    const button = document.createElement("button");
-    button.className = "highway-button";
-    button.type = "button";
-    button.dataset.highwayId = id;
-    button.setAttribute("aria-pressed", String(id === selectedHighwayId()));
-    const label = document.createElement("span");
-    const name = document.createElement("strong");
-    const description = document.createElement("small");
-    name.textContent = feature.properties?.name ?? id;
-    const properties = feature.properties ?? {};
-    description.textContent =
-      `A → ${properties.terminalLabel ?? "KM bertambah"} • ` +
-      `B → ${properties.zeroKmLabel ?? "KM berkurang"}`;
-    label.append(name, description);
-    button.append(label);
+  for (const road of projected) {
+    const feature = allFeatures.find(
+      (f) => (f.properties?.id ?? f.id) === road.id,
+    );
+    const isSelected = road.id === selectedId;
+    const candidate = candidateById.get(road.id);
+
+    const item = document.createElement("button");
+    item.type = "button";
+    item.className = "highway-legend-item";
+    item.dataset.highwayId = road.id;
+    item.setAttribute("aria-pressed", String(isSelected));
+
+    const swatch = document.createElement("span");
+    swatch.className = "highway-legend-swatch";
+    swatch.style.backgroundColor = road.color;
+
+    const name = document.createElement("span");
+    name.className = "highway-legend-name";
+    name.textContent = road.name;
+
+    item.append(swatch, name);
+
     if (candidate) {
       const distance = document.createElement("span");
       distance.className = "highway-distance";
       distance.textContent = `${Math.round(candidate.distanceM)} m`;
-      button.append(distance);
+      item.append(distance);
     }
-    button.addEventListener("click", () => selectHighway(feature));
-    item.append(button);
+
+    item.addEventListener("click", () => {
+      if (feature) selectHighway(feature, { manualSelection: true });
+    });
     elements.highwayList.append(item);
   }
 }
@@ -635,6 +1031,42 @@ function startSimulatorTracking() {
   updateTrackingIndicator();
 }
 
+function applyAutomaticHighway(candidates) {
+  const decision = highwayTracker.update({
+    candidates,
+    currentHighwayId: selectedHighwayId(),
+    locked: state.roadManualOverride,
+  });
+  if (!decision.changed || !decision.highwayId) return decision;
+  const candidate = candidates.find(({ highwayId }) => highwayId === decision.highwayId);
+  if (candidate?.feature) {
+    selectHighway(candidate.feature, { preservePlayIntent: true });
+  }
+  return decision;
+}
+
+function reconcileCameraTarget() {
+  if (state.manualMode || !state.direction || !state.currentProjection) return;
+  if (
+    state.currentCamera &&
+    state.usableCameras.some(({ id }) => id === state.currentCamera.id)
+  ) return;
+  const target = nextCameraAtProgress(
+    state.usableCameras,
+    state.direction,
+    state.currentProjection.progressM,
+  );
+  if (target) {
+    playCamera(target);
+    return;
+  }
+  state.routeEnded = true;
+  setJourneyStatus(state.currentCamera
+    ? "Akhir daftar kamera untuk arah ini. Kamera terakhir tetap ditampilkan."
+    : "Tidak ada CCTV di depan pada ruas dan arah perjalanan ini.");
+  updateControls();
+}
+
 function handlePosition(position) {
   elements.gpsDebug.hidden = true;
   const fix = {
@@ -646,13 +1078,14 @@ function handlePosition(position) {
   updateTrackingIndicator();
   state.routeMap?.updatePosition(fix);
   elements.accuracy.textContent = `±${Math.round(fix.accuracy)} m`;
-  if (state.highway) {
-    updateProjectionForSelectedRoad(fix);
-    if (state.direction) evaluatePassing();
-  }
 
   const result = matchHighways(fix, state.highways);
   if (!result.accepted) {
+    highwayTracker.update({
+      candidates: [],
+      currentHighwayId: selectedHighwayId(),
+      locked: state.roadManualOverride,
+    });
     elements.gpsStatus.textContent = result.reason === "accuracy_too_low" ? "GPS kurang akurat" : "Ruas tidak ditemukan";
     elements.routeHelper.textContent = result.reason === "accuracy_too_low"
       ? "Tunggu akurasi GPS membaik, atau pilih ruas secara manual."
@@ -661,12 +1094,25 @@ function handlePosition(position) {
     return;
   }
 
+  const roadDecision = applyAutomaticHighway(result.candidates);
   elements.gpsStatus.textContent = state.simulator ? "GPS simulasi aktif" : "GPS aktif";
-  elements.routeHelper.textContent = result.candidates.length > 1
-    ? "Beberapa ruas terdeteksi. Pilih ruas yang sedang digunakan."
-    : "Ruas terdekat terdeteksi dari posisi saat ini.";
+  elements.routeHelper.textContent = state.roadManualOverride
+    ? "Ruas dikunci oleh pilihan manual hingga pelacakan dimulai kembali."
+    : roadDecision.pendingHighwayId
+      ? `Memastikan perpindahan ruas ${roadDecision.consecutiveFixes}/${roadDecision.requiredFixes}.`
+      : result.candidates.length > 1
+        ? "Beberapa ruas terdeteksi; ruas aktif dipertahankan sampai kandidat baru stabil."
+        : "Ruas terdekat terdeteksi dari posisi saat ini.";
   renderHighways(result.candidates);
-  if (!state.highway && result.candidates.length === 1) selectHighway(result.candidates[0].feature);
+  if (!state.highway) return;
+  const selectedRoadStillMatches = result.candidates.some(
+    ({ highwayId }) => highwayId === selectedHighwayId(),
+  );
+  if (!selectedRoadStillMatches && !state.roadManualOverride) return;
+  updateProjectionForSelectedRoad(fix);
+  if (!state.direction) return;
+  if (!state.currentCamera) reconcileCameraTarget();
+  else evaluatePassing();
 }
 
 function evaluatePassing() {
@@ -674,29 +1120,30 @@ function evaluatePassing() {
     state.manualMode ||
     !state.currentCamera ||
     !state.currentProjection ||
-    state.playbackBlocked ||
     state.routeEnded
   ) return;
   const result = passTracker.update({
+    accuracyM: state.lastPosition?.accuracy,
     cameraId: state.currentCamera.id,
     cameraPositionM: state.currentCamera.roadPositionM,
     direction: state.direction,
     progressM: state.currentProjection.progressM,
   });
   if (!result.passed) {
+    if (state.playbackBlocked) return;
     setJourneyStatus(
-      `${state.currentCamera.curationStatus === "provisional_stationing" ? "Titik KM provisional • " : ""}Melacak posisi • konfirmasi lewat kamera ${result.consecutiveFixes}/${result.requiredFixes}`,
+      `${state.currentCamera.curationStatus === "provisional_stationing" ? "Titik KM provisional • " : ""}Melacak posisi • buffer ${Math.round(result.bufferM)} m • konfirmasi lewat kamera ${result.consecutiveFixes}/${result.requiredFixes}`,
     );
     return;
   }
-  const next = adjacentCamera(
+  const next = nextCameraAtProgress(
     state.usableCameras,
-    state.currentCamera.id,
     state.direction,
-    1,
+    state.currentProjection.progressM,
   );
   if (next) playCamera(next);
   else {
+    cancelCameraCycle();
     state.routeEnded = true;
     setJourneyStatus("Akhir daftar kamera untuk arah ini. Kamera terakhir tetap ditampilkan.");
     updateControls();
@@ -742,6 +1189,8 @@ async function trackingLocationError(error, attempt) {
 
 function startTracking() {
   const attempt = ++state.locationAttempt;
+  state.roadManualOverride = false;
+  highwayTracker.reset();
   if (!window.isSecureContext || !("geolocation" in navigator)) {
     geolocationError({ code: 0 }, attempt);
     return;
@@ -784,6 +1233,7 @@ function stopTracking() {
   state.simulatorLastTick = null;
   if (state.watchId !== null) navigator.geolocation.clearWatch(state.watchId);
   state.watchId = null;
+  highwayTracker.reset();
   elements.start.disabled = false;
   elements.stop.hidden = true;
   elements.gpsStatus.textContent = state.simulator ? "Simulasi dihentikan" : "Dihentikan";
@@ -924,6 +1374,7 @@ async function loadData() {
       mapSection: elements.mapSection,
       onSelectHighway: selectHighwayFromMap,
       onWatchCamera: watchCameraFromMap,
+      showAllLinesToggle: elements.mapShowAllLines,
       summary: elements.mapSummary,
       tileUrl: query.get("tileFail") === "1"
         ? "./__tile-fallback-test__/{z}/{x}/{y}.png"
@@ -933,6 +1384,9 @@ async function loadData() {
     });
     state.routeMap.setData(state.highways, state.cameras);
     renderHighways();
+    renderHighwaySilhouette();
+    setupSilhouetteInteractions();
+    updateJourneyStepper();
     state.quickActionManager = createQuickActionManager({
       elements: {
         launcher: elements.kojaQuick,
@@ -969,6 +1423,19 @@ async function loadData() {
     });
     state.jorPriukManager.bindEvents();
     void state.jorPriukManager.init();
+    state.multiCctvManager = createMultiCctvManager({
+      closeButton: elements.multiCctvClose,
+      gridElement: elements.multiCctvGrid,
+      hlsClass: typeof window !== "undefined" ? window.Hls : null,
+      mapElement: elements.multiCctvMap,
+      overlayElement: elements.multiCctvOverlay,
+      subtitleElement: elements.multiCctvSubtitle,
+      titleElement: elements.multiCctvTitle,
+      onSelectCamera: (camera) => {
+        state.manualMode = true;
+        playCamera(camera);
+      },
+    });
     if (state.simulator) {
       document.body.classList.add("is-simulator");
       document.title = "Simulator GPS — Jalur CCTV";
@@ -1025,7 +1492,27 @@ elements.directionB.addEventListener("click", () => selectDirection("B"));
 elements.previous.addEventListener("click", () => moveCamera(-1));
 elements.next.addEventListener("click", () => moveCamera(1));
 elements.openPlayer.addEventListener("click", openVideoPlayer);
-elements.retry.addEventListener("click", () => playCamera(state.currentCamera));
+elements.openMultiCctv?.addEventListener("click", () => {
+  const roadCameras = publicCameras(
+    state.cameras,
+    selectedHighwayId(),
+    state.direction,
+  );
+  state.multiCctvManager?.open({
+    highway: state.highway,
+    direction: state.direction ?? "A",
+    cameras: roadCameras.length > 0 ? roadCameras : state.usableCameras,
+    position: state.lastPosition,
+    opener: elements.openMultiCctv,
+  });
+});
+elements.retry.addEventListener("click", () => {
+  if (!state.currentCamera) return;
+  playCamera(state.currentCamera, {
+    fallbackUsed: streamAttemptTracker.snapshot().fallbackUsed,
+    reloadSource: true,
+  });
+});
 elements.skip.addEventListener("click", () => moveCamera(1));
 elements.download.addEventListener("click", downloadM3u);
 elements.demoAdvance.addEventListener("click", advanceDemo);

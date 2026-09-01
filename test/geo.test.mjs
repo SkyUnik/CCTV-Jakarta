@@ -5,9 +5,11 @@ import {
   adjacentCamera,
   automaticCameras,
   cameraSupportsDirection,
+  createHighwayTracker,
   createPassTracker,
   initialCamera,
   matchHighways,
+  nextCameraAtProgress,
   projectPointToLine,
   publicCameras,
   verifiedCameras,
@@ -95,6 +97,51 @@ test("allows an explicitly sourced toll gate in both A and B, but not generic un
   assert.deepEqual(automaticCameras([gate, unsafe], "road", "B").map(({ id }) => id), ["gate"]);
 });
 
+test("allows confirmed wide_view cameras in both A and B, but rejects unconfirmed or generic A/B", () => {
+  const wide = {
+    id: "wide",
+    highwayId: "road",
+    side: null,
+    directions: ["A", "B"],
+    cameraType: "wide_view",
+    directionReview: { status: "confirmed", method: "admin_wide_view_selection" },
+    roadPositionM: 1_500,
+    coordinates: [106.805, -6.2],
+    enabled: true,
+    curationStatus: "provisional_stationing",
+    locationReview: { method: "osm_route_stationing_interpolation" },
+  };
+  const unconfirmed = {
+    ...wide,
+    id: "unconfirmed",
+    directionReview: { status: "needs_review" },
+    roadPositionM: 2_500,
+  };
+  const generic = {
+    ...wide,
+    id: "generic",
+    cameraType: undefined,
+    directionReview: undefined,
+    roadPositionM: 3_500,
+  };
+
+  assert.equal(cameraSupportsDirection(wide, "A"), true);
+  assert.equal(cameraSupportsDirection(wide, "B"), true);
+  assert.equal(cameraSupportsDirection(unconfirmed, "A"), false);
+  assert.equal(cameraSupportsDirection(unconfirmed, "B"), false);
+  assert.equal(cameraSupportsDirection(generic, "A"), false);
+  assert.equal(cameraSupportsDirection(generic, "B"), false);
+
+  assert.deepEqual(
+    automaticCameras([wide, unconfirmed, generic], "road", "A").map(({ id }) => id),
+    ["wide"],
+  );
+  assert.deepEqual(
+    automaticCameras([wide, unconfirmed, generic], "road", "B").map(({ id }) => id),
+    ["wide"],
+  );
+});
+
 test("matches within the dynamic threshold and rejects poor accuracy", () => {
   const matched = matchHighways(
     { longitude: 106.8101, latitude: -6.195, accuracy: 20 },
@@ -152,4 +199,83 @@ test("applies passing logic in the decreasing B direction", () => {
   const second = tracker.update({ cameraId: "camera-b", cameraPositionM: 1_000, direction: "B", progressM: 900 });
   assert.equal(first.passed, false);
   assert.equal(second.passed, true);
+});
+
+test("uses GPS accuracy as a bounded pass buffer", () => {
+  const tracker = createPassTracker();
+  const update = (progressM, accuracyM) => tracker.update({
+    accuracyM,
+    cameraId: "camera-accuracy",
+    cameraPositionM: 1_000,
+    direction: "A",
+    progressM,
+  });
+  assert.equal(update(1_080, 100).bufferM, 100);
+  assert.equal(update(1_110, 100).passed, false);
+  assert.equal(update(1_120, 100).passed, true);
+  tracker.reset();
+  assert.equal(update(1_151, 999).bufferM, 150);
+  assert.equal(update(1_170, 999).passed, true);
+});
+
+test("selects the nearest camera still ahead after a multi-camera GPS jump", () => {
+  const cameras = [
+    { id: "one", roadPositionM: 1_000 },
+    { id: "two", roadPositionM: 2_000 },
+    { id: "three", roadPositionM: 3_000 },
+    { id: "four", roadPositionM: 4_000 },
+  ];
+  assert.equal(nextCameraAtProgress(cameras, "A", 2_500)?.id, "three");
+  assert.equal(nextCameraAtProgress(cameras, "B", 2_500)?.id, "two");
+  assert.equal(nextCameraAtProgress(cameras, "A", 4_500), null);
+  assert.equal(nextCameraAtProgress(cameras, "B", 500), null);
+});
+
+test("highway tracker selects a unique first fix and stabilizes road changes", () => {
+  const tracker = createHighwayTracker();
+  const roadA = { highwayId: "a", confidence: 0.7 };
+  const roadB = { highwayId: "b", confidence: 0.95 };
+  assert.deepEqual(
+    tracker.update({ candidates: [roadA] }),
+    {
+      changed: true,
+      consecutiveFixes: 3,
+      highwayId: "a",
+      pendingHighwayId: null,
+      requiredFixes: 3,
+    },
+  );
+  assert.equal(tracker.update({ candidates: [roadB], currentHighwayId: "a" }).changed, false);
+  assert.equal(tracker.update({ candidates: [roadB], currentHighwayId: "a" }).changed, false);
+  const changed = tracker.update({ candidates: [roadB], currentHighwayId: "a" });
+  assert.equal(changed.changed, true);
+  assert.equal(changed.highwayId, "b");
+});
+
+test("highway tracker keeps a valid road unless the leader is clearly better", () => {
+  const tracker = createHighwayTracker();
+  const close = [
+    { highwayId: "b", confidence: 0.75 },
+    { highwayId: "a", confidence: 0.60 },
+  ];
+  for (let index = 0; index < 4; index += 1) {
+    assert.equal(tracker.update({ candidates: close, currentHighwayId: "a" }).highwayId, "a");
+  }
+  const clear = [
+    { highwayId: "b", confidence: 0.85 },
+    { highwayId: "a", confidence: 0.60 },
+  ];
+  assert.equal(tracker.update({ candidates: clear, currentHighwayId: "a" }).changed, false);
+  assert.equal(tracker.update({ candidates: clear, currentHighwayId: "a" }).changed, false);
+  assert.equal(tracker.update({ candidates: clear, currentHighwayId: "a" }).highwayId, "b");
+});
+
+test("manual road lock suppresses and resets pending automatic changes", () => {
+  const tracker = createHighwayTracker();
+  const candidates = [{ highwayId: "b", confidence: 1 }];
+  tracker.update({ candidates, currentHighwayId: "a" });
+  const locked = tracker.update({ candidates, currentHighwayId: "a", locked: true });
+  assert.equal(locked.highwayId, "a");
+  assert.equal(locked.pendingHighwayId, null);
+  assert.equal(tracker.update({ candidates, currentHighwayId: "a" }).consecutiveFixes, 1);
 });

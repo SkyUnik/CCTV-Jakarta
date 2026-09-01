@@ -162,11 +162,13 @@
     },
     {
       "id": "cawang-tj-priok-ancol-timur-jembatan-tigapluit",
-      "input": "data-source/osm-relation-5385689-full.json",
-      "sourceType": "relation",
-      "relationId": 5385689,
-      "startNodeId": 309137378,
-      "endNodeId": 1757817871,
+      "input": "data-source/osm-motorways-wiyoto-pelabuhan.json",
+      "sourceType": "allMotorways",
+      "startNodeId": 309084205,
+      "viaNodeIds": [
+        2415550031
+      ],
+      "endNodeId": 1757282029,
       "properties": {
         "name": "Tol Pelabuhan / Ir. Wiyoto Wiyono (Cawang–Tanjung Priok–Pluit)",
         "zeroKmLabel": "Simpang Susun Cawang",
@@ -182,17 +184,17 @@
           "quality": "estimated_stationing",
           "anchors": [
             {
-              "km": 0.4,
-              "roadPositionM": 400
+              "km": 0,
+              "roadPositionM": 0
             },
             {
               "km": 24.8,
-              "roadPositionM": 24800
+              "roadPositionM": 26995
             }
           ]
         },
-        "osmSource": "https://www.openstreetmap.org/relation/5385689",
-        "osmSnapshotSource": "https://api.openstreetmap.org/api/0.6/relation/5385689/full.json",
+        "osmSource": "https://www.openstreetmap.org/",
+        "osmSnapshotSource": "https://overpass-api.de/api/interpreter",
         "attribution": "© OpenStreetMap contributors",
         "license": "https://opendatacommons.org/licenses/odbl/1-0/",
         "reviewStatus": "canonical_path_selected"
@@ -200,13 +202,13 @@
     },
     {
       "id": "bekasi-cawang-kampung-melayu",
-      "input": "data-source/osm-motorways-jakarta-north.json",
+      "input": "data-source/osm-motorways-becakayu.json",
       "sourceType": "namedWays",
       "wayNames": [
         "Jalan Tol Bekasi–Cawang–Kampung Melayu"
       ],
-      "startNodeId": 4768696955,
-      "endNodeId": 5010909815,
+      "startNodeId": 8132773388,
+      "endNodeId": 9764361895,
       "properties": {
         "name": "Tol Bekasi–Cawang–Kampung Melayu (Becakayu)",
         "zeroKmLabel": "Kampung Melayu / Cawang",
@@ -222,12 +224,12 @@
           "quality": "estimated_stationing",
           "anchors": [
             {
-              "km": 2,
+              "km": 0,
               "roadPositionM": 0
             },
             {
-              "km": 15,
-              "roadPositionM": 13000
+              "km": 16,
+              "roadPositionM": 15771
             }
           ]
         },
@@ -449,14 +451,14 @@
       "wayNames": [
         "Jalan Tol Lingkar Luar Jakarta"
       ],
-      "startNodeId": 11017094793,
-      "endNodeId": 275843206,
+      "startNodeId": 317013132,
+      "endNodeId": 403994155,
       "properties": {
         "name": "JORR E (Bambu Apus–Rorotan)",
-        "zeroKmLabel": "Cikunir / Bambu Apus",
+        "zeroKmLabel": "Bambu Apus / KM 34",
         "terminalLabel": "Rorotan",
         "directionA": "Menjauh dari Bambu Apus (ke arah Rorotan)",
-        "directionB": "Menuju Bambu Apus / Cikunir",
+        "directionB": "Menuju Bambu Apus",
         "matchRadiusM": 60,
         "maxAccuracyM": 100,
         "maxMatchRadiusM": 150,
@@ -466,12 +468,12 @@
           "quality": "estimated_stationing",
           "anchors": [
             {
-              "km": 0,
+              "km": 34,
               "roadPositionM": 0
             },
             {
-              "km": 25,
-              "roadPositionM": 25000
+              "km": 57.5,
+              "roadPositionM": 25409
             }
           ]
         },
@@ -489,14 +491,14 @@
       "wayNames": [
         "Jalan Tol Lingkar Luar Jakarta"
       ],
-      "startNodeId": 309355852,
-      "endNodeId": 5006777314,
+      "startNodeId": 5006777314,
+      "endNodeId": 309355852,
       "properties": {
-        "name": "JORR S",
-        "zeroKmLabel": "Pondok Pinang / Ulujami",
-        "terminalLabel": "TMII / Cikunir",
-        "directionA": "Menjauh dari Pondok Pinang (ke arah Cikunir)",
-        "directionB": "Menuju Pondok Pinang",
+        "name": "Tol JORR S (Pondok Pinang–TMII/Pasar Rebo)",
+        "zeroKmLabel": "Pondok Pinang / KM 19",
+        "terminalLabel": "Pasar Rebo / TMII / KM 33.4",
+        "directionA": "Menjauh dari KM 19 Pondok Pinang (ke arah Pasar Rebo/TMII)",
+        "directionB": "Menuju KM 19 Pondok Pinang",
         "matchRadiusM": 60,
         "maxAccuracyM": 100,
         "maxMatchRadiusM": 150,
@@ -506,12 +508,12 @@
           "quality": "estimated_stationing",
           "anchors": [
             {
-              "km": 0,
+              "km": 19,
               "roadPositionM": 0
             },
             {
-              "km": 14,
-              "roadPositionM": 14000
+              "km": 33.4,
+              "roadPositionM": 13643
             }
           ]
         },
@@ -672,46 +674,6 @@
             {
               "km": 8,
               "roadPositionM": 8000
-            }
-          ]
-        },
-        "osmSource": "https://www.openstreetmap.org/",
-        "osmSnapshotSource": "https://overpass-api.de/api/interpreter",
-        "attribution": "© OpenStreetMap contributors",
-        "license": "https://opendatacommons.org/licenses/odbl/1-0/",
-        "reviewStatus": "canonical_path_selected"
-      }
-    },
-    {
-      "id": "kanci-pejagan",
-      "input": "data-source/osm-motorways-kanci-pejagan.json",
-      "sourceType": "namedWays",
-      "wayNames": [
-        "Jalan Tol Kanci–Pejagan"
-      ],
-      "startNodeId": 1780645534,
-      "endNodeId": 1780645275,
-      "properties": {
-        "name": "Tol Kanci–Pejagan",
-        "zeroKmLabel": "Kanci",
-        "terminalLabel": "Pejagan",
-        "directionA": "Menjauh dari Kanci (ke arah Pejagan)",
-        "directionB": "Menuju Kanci",
-        "matchRadiusM": 60,
-        "maxAccuracyM": 100,
-        "maxMatchRadiusM": 150,
-        "passHysteresisM": 75,
-        "passConfirmationFixes": 2,
-        "cameraStationing": {
-          "quality": "estimated_stationing",
-          "anchors": [
-            {
-              "km": 0,
-              "roadPositionM": 0
-            },
-            {
-              "km": 35,
-              "roadPositionM": 35000
             }
           ]
         },

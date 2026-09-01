@@ -33,26 +33,21 @@ export function normalizeViewRegion(region, direction) {
 }
 
 export function normalizeViewRegions(viewRegions, camera) {
-  const directions = new Set();
-  if (DIRECTIONS.has(camera?.side)) directions.add(camera.side);
-  for (const direction of camera?.directions ?? []) {
-    if (DIRECTIONS.has(direction)) directions.add(direction);
-  }
-  for (const direction of Object.keys(viewRegions ?? {})) {
-    if (DIRECTIONS.has(direction)) directions.add(direction);
+  if (!viewRegions || typeof viewRegions !== "object" || Object.keys(viewRegions).length === 0) {
+    return null;
   }
   const normalized = {};
-  for (const direction of directions) {
-    normalized[direction] = normalizeViewRegion(viewRegions?.[direction], direction);
+  for (const direction of Object.keys(viewRegions)) {
+    if (DIRECTIONS.has(direction) && viewRegions[direction]) {
+      normalized[direction] = normalizeViewRegion(viewRegions[direction], direction);
+    }
   }
-  return normalized;
+  return Object.keys(normalized).length > 0 ? normalized : null;
 }
 
 function coordinatesChanged(before, after) {
   return JSON.stringify(before?.coordinates ?? null) !== JSON.stringify(after?.coordinates ?? null) ||
-    before?.highwayId !== after?.highwayId ||
-    before?.side !== after?.side ||
-    JSON.stringify(before?.directions ?? null) !== JSON.stringify(after?.directions ?? null);
+    before?.highwayId !== after?.highwayId;
 }
 
 function streamChanged(before, after) {
@@ -67,14 +62,43 @@ export function validateAdminCamera(camera, highwayIds) {
   if (!highwayIds.has(camera.highwayId)) throw new Error(`Unknown highway: ${camera.highwayId}`);
   const streamUrl = validatePublicHlsUrl(camera.streamUrl);
   const sourcePage = validateSourcePage(camera.sourcePage);
-  const side = camera.side == null || camera.side === "" ? null : String(camera.side).toUpperCase();
+  let side = camera.side == null || camera.side === "" ? null : String(camera.side).toUpperCase();
   if (side !== null && !DIRECTIONS.has(side)) throw new Error("Side must be A, B, or empty");
-  const directions = Array.isArray(camera.directions)
+
+  let cameraType = camera.cameraType === "toll_gate" || camera.cameraType === "wide_view"
+    ? camera.cameraType
+    : undefined;
+
+  if (side !== null) {
+    cameraType = undefined;
+  }
+
+  let directions = Array.isArray(camera.directions)
     ? [...new Set(camera.directions.map((value) => String(value).toUpperCase()))]
     : undefined;
   if (directions?.some((value) => !DIRECTIONS.has(value))) {
     throw new Error("Directions may contain only A and B");
   }
+
+  let directionReview = camera.directionReview;
+  if (cameraType === "wide_view") {
+    side = null;
+    directions = ["A", "B"];
+    directionReview = camera.directionReview && typeof camera.directionReview === "object"
+      ? {
+          status: camera.directionReview.status === "confirmed" ? "confirmed" : "needs_review",
+          method: camera.directionReview.method ?? "admin_wide_view_selection",
+        }
+      : { status: "confirmed", method: "admin_wide_view_selection" };
+  } else if (cameraType === "toll_gate") {
+    side = null;
+    directions = ["A", "B"];
+    directionReview = undefined;
+  } else {
+    directions = undefined;
+    directionReview = undefined;
+  }
+
   let coordinates = null;
   if (camera.coordinates != null) {
     if (!Array.isArray(camera.coordinates) || camera.coordinates.length !== 2) {
@@ -104,8 +128,15 @@ export function validateAdminCamera(camera, highwayIds) {
     enabled: Boolean(camera.enabled),
     notes: String(camera.notes ?? ""),
   };
+  if (cameraType) normalized.cameraType = cameraType;
+  else delete normalized.cameraType;
   if (directions) normalized.directions = directions;
-  normalized.viewRegions = normalizeViewRegions(camera.viewRegions, normalized);
+  else delete normalized.directions;
+  if (directionReview) normalized.directionReview = directionReview;
+  else delete normalized.directionReview;
+  const viewRegions = normalizeViewRegions(camera.viewRegions, normalized);
+  if (viewRegions) normalized.viewRegions = viewRegions;
+  else delete normalized.viewRegions;
   return normalized;
 }
 

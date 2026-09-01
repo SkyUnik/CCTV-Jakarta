@@ -166,12 +166,15 @@ export function createOnlineMap(options) {
     mapSection,
     onSelectHighway,
     onWatchCamera,
+    showAllLinesToggle,
     summary,
     tileUrl = OSM_TILE_URL,
     tileStatus,
     toggle,
+    watchButtonLabel = "Tonton",
   } = options;
-  const routePanel = mapSection.closest(".route-panel");
+  const routePanel = mapSection?.closest?.(".route-panel");
+  let showAllLines = Boolean(showAllLinesToggle?.checked);
 
   const map = leaflet.map(mapElement, {
     attributionControl: true,
@@ -183,11 +186,12 @@ export function createOnlineMap(options) {
   map.attributionControl.setPrefix(false);
 
   const tileLayer = leaflet.tileLayer(tileUrl, {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap contributors</a>',
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap contributors</a> &copy; <a href="https://carto.com/attributions" target="_blank" rel="noreferrer">CARTO</a>',
     keepBuffer: 2,
     maxNativeZoom: 19,
     maxZoom: 19,
     noWrap: true,
+    subdomains: "abcd",
   }).addTo(map);
   const routeLayer = leaflet.featureGroup().addTo(map);
   const markerLayer = leaflet.markerClusterGroup({
@@ -202,6 +206,7 @@ export function createOnlineMap(options) {
         .reduce((total, marker) => total + (marker.__cameraCount ?? 1), 0);
       const muted = Boolean(
         selectedHighwayId &&
+        !showAllLines &&
         childMarkers.every((marker) => marker.__highwayId !== selectedHighwayId),
       );
       return leaflet.divIcon({
@@ -224,8 +229,10 @@ export function createOnlineMap(options) {
   let markerGroups = [];
   let selectedHighwayId = null;
   let tileFailed = false;
+  let tileFallbackAttempted = false;
 
   function showTileStatus(message = "") {
+    if (!tileStatus) return;
     tileStatus.hidden = !message;
     tileStatus.textContent = message;
     mapElement.classList.toggle("has-tile-error", Boolean(message));
@@ -242,11 +249,17 @@ export function createOnlineMap(options) {
   }
 
   tileLayer.on("tileerror", () => {
+    if (!tileFallbackAttempted) {
+      tileFallbackAttempted = true;
+      tileLayer.setUrl("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png");
+      return;
+    }
     tileFailed = true;
     showTileStatus("Basemap OpenStreetMap tidak tersedia. Ruas, CCTV, dan GPS tetap dapat digunakan.");
   });
-  tileLayer.on("load", () => {
-    if (!tileFailed) showTileStatus();
+  tileLayer.on("load tileload", () => {
+    tileFailed = false;
+    showTileStatus();
   });
   map.on("layeradd moveend zoomend", decorateMapTargets);
 
@@ -266,8 +279,8 @@ export function createOnlineMap(options) {
       const watch = document.createElement("button");
       watch.className = "button button-small";
       watch.type = "button";
-      watch.textContent = "Tonton";
-      watch.setAttribute("aria-label", `Tonton ${camera.name}`);
+      watch.textContent = watchButtonLabel;
+      watch.setAttribute("aria-label", `${watchButtonLabel} ${camera.name}`);
       watch.addEventListener("click", () => onWatchCamera(camera));
       item.append(description, watch);
       cameraList.append(item);
@@ -292,7 +305,7 @@ export function createOnlineMap(options) {
   function updateSelectionStyles() {
     for (const [id, entry] of routeEntries) {
       const selected = selectedHighwayId === id;
-      const muted = Boolean(selectedHighwayId && !selected);
+      const muted = Boolean(selectedHighwayId && !selected && !showAllLines);
       entry.line.setStyle({
         color: selected ? "#22614f" : "#657b73",
         opacity: muted ? 0.22 : 0.92,
@@ -302,7 +315,7 @@ export function createOnlineMap(options) {
       if (selected) entry.line.bringToFront();
     }
     for (const entry of markerEntries) {
-      const muted = Boolean(selectedHighwayId && entry.group.highwayId !== selectedHighwayId);
+      const muted = Boolean(selectedHighwayId && entry.group.highwayId !== selectedHighwayId && !showAllLines);
       entry.marker.setIcon(cameraIcon(entry.group.cameras.length, muted));
       entry.marker.setOpacity(muted ? 0.24 : 1);
     }
@@ -368,11 +381,15 @@ export function createOnlineMap(options) {
   expandButton.addEventListener("click", openExpandedMap);
   closeButton.addEventListener("click", () => closeExpandedMap());
   document.addEventListener("keydown", onDocumentKeydown);
+  showAllLinesToggle?.addEventListener("change", () => {
+    showAllLines = showAllLinesToggle.checked;
+    updateSelectionStyles();
+  });
   toggle.addEventListener("change", () => {
     body.hidden = !toggle.checked;
     if (toggle.checked) requestAnimationFrame(() => map.invalidateSize({ pan: false }));
   });
-  gpsButton.addEventListener("click", () => {
+  gpsButton?.addEventListener?.("click", () => {
     if (!gpsFix) return;
     map.setView([gpsFix.latitude, gpsFix.longitude], Math.max(map.getZoom(), 16), {
       animate: true,
@@ -380,6 +397,7 @@ export function createOnlineMap(options) {
   });
 
   return {
+    leafletMap: map,
     destroy() {
       closeExpandedMap({ restoreFocus: false });
       document.removeEventListener("keydown", onDocumentKeydown);
@@ -486,7 +504,7 @@ export function createOnlineMap(options) {
     },
     updatePosition(position) {
       gpsFix = position;
-      gpsButton.disabled = !position;
+      if (gpsButton) gpsButton.disabled = !position;
       if (!position) {
         gpsCenterTracker.reset();
         if (gpsMarker) map.removeLayer(gpsMarker);

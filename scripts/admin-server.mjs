@@ -13,6 +13,10 @@ import { hardDeleteCamera, saveAdminCamera } from "./lib/admin-camera.mjs";
 import { commitAdminChanges, inspectAdminGit, pushCurrentBranch } from "./lib/admin-git.mjs";
 import { readJsonBody, validateAdminRequest } from "./lib/admin-security.mjs";
 import { verifyCamera } from "./lib/camera-curation.mjs";
+import { verifyGateCamera } from "./lib/gate-curation.mjs";
+import { locateGatesForHighway } from "./lib/gate-locator.mjs";
+import { checkHighwayHealth, refreshRoadScrape, repairHighwayGeography } from "./lib/highway-health.mjs";
+import { bulkDeleteCameras, findDuplicateCameras } from "./lib/camera-duplicates.mjs";
 
 const execFileAsync = promisify(execFile);
 const repositoryRoot = resolve(fileURLToPath(new URL("..", import.meta.url)));
@@ -20,11 +24,20 @@ const adminRoot = resolve(repositoryRoot, "admin");
 const docsRoot = resolve(repositoryRoot, "docs");
 const cameraPath = resolve(repositoryRoot, "docs/data/cameras.json");
 const highwayPath = resolve(repositoryRoot, "docs/data/highways.geojson");
+const highwayConfigPath = resolve(repositoryRoot, "data-source/highways.config.json");
 const contentTypes = {
   ".css": "text/css; charset=utf-8",
+  ".geojson": "application/geo+json; charset=utf-8",
+  ".gif": "image/gif",
   ".html": "text/html; charset=utf-8",
+  ".jpeg": "image/jpeg",
+  ".jpg": "image/jpeg",
   ".js": "text/javascript; charset=utf-8",
+  ".json": "application/json; charset=utf-8",
   ".mjs": "text/javascript; charset=utf-8",
+  ".png": "image/png",
+  ".svg": "image/svg+xml",
+  ".webp": "image/webp",
 };
 
 async function readData() {
@@ -44,6 +57,18 @@ async function writeCameraDocument(document) {
   await rename(temporary, cameraPath);
 }
 
+async function writeHighwayConfig(config) {
+  const temporary = `${highwayConfigPath}.tmp-${process.pid}`;
+  await writeFile(temporary, `${JSON.stringify(config, null, 2)}\n`, "utf8");
+  await rename(temporary, highwayConfigPath);
+}
+
+async function writeHighwayData(data) {
+  const temporary = `${highwayPath}.tmp-${process.pid}`;
+  await writeFile(temporary, `${JSON.stringify(data, null, 2)}\n`, "utf8");
+  await rename(temporary, highwayPath);
+}
+
 function json(response, status, body) {
   response.writeHead(status, {
     "Cache-Control": "no-store",
@@ -59,7 +84,7 @@ async function serveFile(response, root, pathname) {
     const file = info.isDirectory() ? resolve(requested, "index.html") : requested;
     response.writeHead(200, {
       "Cache-Control": "no-store",
-      "Content-Security-Policy": "default-src 'self'; connect-src 'self' https:; img-src 'self' data:; media-src 'self' https: blob:; style-src 'self'; script-src 'self'; worker-src 'self' blob:; object-src 'none'; frame-ancestors 'none'",
+      "Content-Security-Policy": "default-src 'self'; connect-src 'self' https:; img-src 'self' data: https:; media-src 'self' https: blob:; style-src 'self' 'unsafe-inline'; script-src 'self'; worker-src 'self' blob:; object-src 'none'; frame-ancestors 'none'",
       "Content-Type": contentTypes[extname(file)] ?? "application/octet-stream",
       "X-Content-Type-Options": "nosniff",
       "X-Frame-Options": "DENY",
@@ -102,6 +127,306 @@ export function createAdminServer({ port = Number(process.env.ADMIN_PORT ?? 4175
         const result = saveAdminCamera(cameraDocument, highwayData, payload);
         await writeCameraDocument(result.document);
         json(response, result.created ? 201 : 200, { camera: result.camera, created: result.created });
+        return;
+      }
+
+      if (pathname === "/api/admin/locate-gates" && request.method === "POST") {
+        const payload = await readJsonBody(request);
+        const { cameraDocument, highwayData } = await readData();
+        const result = await locateGatesForHighway({
+          cameraDocument,
+          highwayData,
+          highwayId: payload.highwayId,
+        });
+        json(response, 200, result);
+        return;
+      }
+
+      if (pathname === "/api/admin/apply-gate-matches" && request.method === "POST") {
+        const payload = await readJsonBody(request);
+        const { cameraDocument, highwayData } = await readData();
+        let document = cameraDocument;
+        const updatedCameras = [];
+        for (const item of payload.matches ?? []) {
+          const result = verifyGateCamera(document, highwayData, {
+            id: item.id,
+            longitude: item.longitude,
+            latitude: item.latitude,
+            sourceUrl: item.sourceUrl,
+            osmNode: item.osmNode,
+            notes: item.notes,
+            allowDistantProjection: Boolean(item.allowDistantProjection),
+          });
+          document = result.document;
+          updatedCameras.push(result.camera);
+        }
+        await writeCameraDocument(document);
+        json(response, 200, { updated: updatedCameras });
+        return;
+      }
+
+      if (pathname === "/api/admin/apply-km-estimates" && request.method === "POST") {
+        const payload = await readJsonBody(request);
+        const { cameraDocument, highwayData } = await readData();
+        const featureById = new Map((highwayData.features ?? []).map((f) => [f.properties?.id ?? f.id, f]));
+        const updateMap = new Map((payload.updates ?? []).map((u) => [u.id, u]));
+        const provisionedAt = new Date().toISOString();
+        const updatedCameras = [];
+
+        const nextCameras = (cameraDocument.cameras ?? []).map((camera) => {
+          const update = updateMap.get(camera.id);
+          if (!update) return camera;
+
+          const feature = featureById.get(camera.highwayId);
+          const updated = {
+            ...camera,
+            coordinates: update.coordinates,
+            roadPositionM: update.roadPositionM,
+            enabled: true,
+            curationStatus: "provisional_stationing",
+            locationReview: {
+              method: "osm_route_stationing_interpolation",
+              status: "provisional",
+              stationingKm: camera.km,
+              cameraLabelSource: camera.sourcePage,
+              roadGeometrySource: feature?.properties?.osmSource,
+              roadSnapshotSource: feature?.properties?.osmSnapshotSource,
+              directionConventionSource: "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/",
+              provisionedAt,
+              warning: "Interpolated from provider KM along reviewed OSM road geometry; not a surveyed camera coordinate.",
+            },
+          };
+          updatedCameras.push(updated);
+          return updated;
+        });
+
+        const document = { ...cameraDocument, cameras: nextCameras };
+        await writeCameraDocument(document);
+        json(response, 200, { updated: updatedCameras });
+        return;
+      }
+
+      if (pathname === "/api/admin/rename-highway" && request.method === "POST") {
+        const payload = await readJsonBody(request);
+        const { highwayId, newName } = payload;
+        if (!highwayId || !newName?.trim()) {
+          throw new Error("highwayId and newName are required");
+        }
+        const trimmedName = newName.trim();
+
+        // 1. Update data-source/highways.config.json
+        const highwayConfig = JSON.parse(await readFile(highwayConfigPath, "utf8"));
+        const configHighway = (highwayConfig.highways ?? []).find((h) => h.id === highwayId);
+        if (!configHighway) throw new Error(`Highway not found in config: ${highwayId}`);
+        configHighway.properties = configHighway.properties ?? {};
+        configHighway.properties.name = trimmedName;
+        await writeHighwayConfig(highwayConfig);
+
+        // 2. Update docs/data/highways.geojson
+        const { highwayData } = await readData();
+        const feature = (highwayData.features ?? []).find((f) => (f.properties?.id ?? f.id) === highwayId);
+        if (feature) {
+          feature.properties = feature.properties ?? {};
+          feature.properties.name = trimmedName;
+          await writeHighwayData(highwayData);
+        }
+
+        json(response, 200, { highwayId, name: trimmedName });
+        return;
+      }
+
+      if (pathname === "/api/admin/bulk-update-direction" && request.method === "POST") {
+        const payload = await readJsonBody(request);
+        const { highwayId, direction } = payload;
+        if (!highwayId) {
+          throw new Error("highwayId is required");
+        }
+
+        const { cameraDocument } = await readData();
+        let updatedCount = 0;
+
+        const nextCameras = (cameraDocument.cameras ?? []).map((camera) => {
+          if (camera.highwayId !== highwayId) return camera;
+          updatedCount += 1;
+
+          if (direction === "A/B") {
+            if (camera.cameraType === "toll_gate") {
+              return {
+                ...camera,
+                side: null,
+                directions: ["A", "B"],
+              };
+            }
+            return {
+              ...camera,
+              cameraType: "wide_view",
+              side: null,
+              directions: ["A", "B"],
+              directionReview: {
+                status: "confirmed",
+                method: "admin_wide_view_selection",
+              },
+            };
+          } else if (direction === "A" || direction === "B") {
+            const updated = { ...camera, side: direction };
+            delete updated.directions;
+            delete updated.directionReview;
+            if (updated.cameraType === "wide_view" || updated.cameraType === "toll_gate") {
+              delete updated.cameraType;
+            }
+            return updated;
+          } else {
+            // "Belum pasti" / null
+            const updated = { ...camera, side: null, enabled: false };
+            delete updated.directions;
+            delete updated.directionReview;
+            if (updated.cameraType === "wide_view" || updated.cameraType === "toll_gate") {
+              delete updated.cameraType;
+            }
+            return updated;
+          }
+        });
+
+        const document = { ...cameraDocument, cameras: nextCameras };
+        await writeCameraDocument(document);
+        json(response, 200, { highwayId, updatedCount, direction });
+        return;
+      }
+
+      if (pathname === "/api/admin/bulk-update-enabled" && request.method === "POST") {
+        const payload = await readJsonBody(request);
+        const { highwayId, enabled = true, bypassValidation = false } = payload;
+        if (!highwayId) {
+          throw new Error("highwayId is required");
+        }
+
+        const { cameraDocument } = await readData();
+        let updatedCount = 0;
+        let skippedCount = 0;
+
+        const nextCameras = (cameraDocument.cameras ?? []).map((camera) => {
+          if (camera.highwayId !== highwayId) return camera;
+
+          if (enabled) {
+            const hasCoords = Array.isArray(camera.coordinates) &&
+              camera.coordinates.length === 2 &&
+              Number.isFinite(camera.coordinates[0]) &&
+              Number.isFinite(camera.coordinates[1]) &&
+              Number.isFinite(camera.roadPositionM);
+
+            const hasDirection = (camera.side === "A" || camera.side === "B") ||
+              (camera.side === null &&
+               ((camera.cameraType === "toll_gate" && camera.directions?.includes("A") && camera.directions?.includes("B")) ||
+                (camera.cameraType === "wide_view" && camera.directionReview?.status === "confirmed" && camera.directions?.includes("A") && camera.directions?.includes("B"))));
+
+            if (hasCoords && hasDirection) {
+              const curationStatus = camera.curationStatus === "needs_review" || !camera.curationStatus
+                ? (camera.cameraType === "toll_gate" ? "provisional_landmark" : "provisional_stationing")
+                : camera.curationStatus;
+
+              const locationReview = camera.locationReview ? { ...camera.locationReview } : {
+                method: camera.cameraType === "toll_gate" ? "osm_toll_booth_projection" : "osm_route_stationing_interpolation",
+                status: "provisional",
+                warning: "Provisional coordinate enabled via bulk admin action.",
+              };
+
+              if (curationStatus !== "verified" && locationReview.status !== "provisional") {
+                locationReview.status = "provisional";
+              }
+
+              updatedCount += 1;
+              return {
+                ...camera,
+                enabled: true,
+                curationStatus,
+                locationReview,
+              };
+            } else {
+              skippedCount += 1;
+              return camera;
+            }
+          } else {
+            updatedCount += 1;
+            return {
+              ...camera,
+              enabled: false,
+            };
+          }
+        });
+
+        const document = { ...cameraDocument, cameras: nextCameras };
+        await writeCameraDocument(document);
+        json(response, 200, { highwayId, updatedCount, skippedCount, enabled, bypassValidation });
+        return;
+      }
+
+      if (pathname === "/api/admin/highway-health" && request.method === "POST") {
+        const payload = await readJsonBody(request);
+        const { cameraDocument, highwayData } = await readData();
+        const result = await checkHighwayHealth({
+          cameraDocument,
+          highwayData,
+          highwayId: payload.highwayId,
+        });
+        json(response, 200, result);
+        return;
+      }
+
+      if (pathname === "/api/admin/refresh-road-scrape" && request.method === "POST") {
+        const payload = await readJsonBody(request);
+        const { cameraDocument } = await readData();
+        const result = await refreshRoadScrape({
+          cameraDocument,
+          highwayId: payload.highwayId,
+        });
+        await writeCameraDocument(result.document);
+        json(response, 200, {
+          highwayId: result.highwayId,
+          totalScraped: result.totalScraped,
+          updatedCount: result.updatedCount,
+        });
+        return;
+      }
+
+      if (pathname === "/api/admin/repair-highway-geography" && request.method === "POST") {
+        const payload = await readJsonBody(request);
+        const { cameraDocument, highwayData } = await readData();
+        const highwayConfig = JSON.parse(await readFile(highwayConfigPath, "utf8"));
+        const result = await repairHighwayGeography({
+          cameraDocument,
+          highwayData,
+          highwayConfig,
+          highwayId: payload.highwayId,
+        });
+        await Promise.all([
+          writeCameraDocument(result.cameraDocument),
+          writeHighwayData(result.highwayData),
+        ]);
+        json(response, 200, {
+          highwayId: payload.highwayId,
+          provisionedCount: result.provisionedCount,
+          gateMatchesCount: result.gateMatchesCount,
+        });
+        return;
+      }
+
+      if (pathname === "/api/admin/find-duplicate-cameras" && request.method === "POST") {
+        const payload = await readJsonBody(request);
+        const { cameraDocument } = await readData();
+        const result = findDuplicateCameras(cameraDocument, { highwayId: payload.highwayId || null });
+        json(response, 200, result);
+        return;
+      }
+
+      if (pathname === "/api/admin/bulk-delete-cameras" && request.method === "POST") {
+        const payload = await readJsonBody(request);
+        const { cameraDocument } = await readData();
+        const result = bulkDeleteCameras(cameraDocument, payload.cameraIds);
+        await writeCameraDocument(result.document);
+        json(response, 200, {
+          deletedCount: result.deletedCount,
+          remainingCount: result.document.cameras?.length ?? 0,
+        });
         return;
       }
 

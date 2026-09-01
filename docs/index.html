@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="./vendor/leaflet/leaflet.css">
     <link rel="stylesheet" href="./vendor/leaflet-markercluster/MarkerCluster.css">
     <link rel="stylesheet" href="./vendor/leaflet-markercluster/MarkerCluster.Default.css">
-    <link rel="stylesheet" href="./styles.css?v=20260801-map1">
+    <link rel="stylesheet" href="./styles.css?v=20260901-ondemand1">
   </head>
   <body>
     <header class="site-header">
@@ -30,10 +30,6 @@
       <section class="intro" aria-labelledby="page-title">
         <p class="eyebrow">Ruas tol Jakarta • GPS lokal</p>
         <h1 id="page-title">Lihat kondisi jalan di depan.</h1>
-        <p class="intro-copy">
-          Deteksi ruas tol dari lokasi Anda, pilih arah perjalanan, lalu CCTV akan
-          berganti setelah kendaraan melewati kamera aktif.
-        </p>
         <div class="intro-actions">
           <button class="button button-primary" id="start-button" type="button">
             Mulai CCTV
@@ -42,11 +38,9 @@
             Hentikan pelacakan
           </button>
         </div>
-        <p class="privacy-note">
-          <span aria-hidden="true">●</span>
-          Koordinat GPS tidak dikirim atau disimpan oleh aplikasi. Peta online memuat tile OpenStreetMap, dan provider Koja Timur dapat menerima permintaan playlist/metadata saat halaman dibuka. GPS tetap tidak pernah dikirim.
-        </p>
       </section>
+
+      <ol class="journey-stepper" id="journey-stepper" aria-label="Status pengaturan CCTV"></ol>
 
       <section class="workspace" aria-label="Pemutar CCTV">
         <aside class="route-panel" id="route-panel" aria-labelledby="route-title">
@@ -98,6 +92,10 @@
               </div>
               <div class="map-heading-actions">
                 <label class="map-toggle">
+                  <input id="map-show-all-lines" type="checkbox">
+                  <span>Tampilkan semua ruas</span>
+                </label>
+                <label class="map-toggle">
                   <input id="map-toggle" type="checkbox" checked>
                   <span>Tampilkan peta</span>
                 </label>
@@ -140,7 +138,30 @@
             </div>
           </section>
 
-          <ul class="highway-list" id="highway-list" data-testid="highway-list"></ul>
+          <section class="highway-picker" aria-labelledby="highway-picker-title">
+            <div class="highway-picker-heading">
+              <div>
+                <strong id="highway-picker-title">Jaringan tol Jakarta</strong>
+                <span id="selected-road-callout">Pilih ruas</span>
+              </div>
+              <span id="highway-result-count">0 ruas</span>
+            </div>
+            <div class="highway-silhouette-wrap">
+              <div class="silhouette-controls" aria-label="Kontrol zoom siluet">
+                <button id="silhouette-zoom-in" type="button" aria-label="Perbesar siluet" title="Perbesar">+</button>
+                <button id="silhouette-zoom-out" type="button" aria-label="Perkecil siluet" title="Perkecil">−</button>
+                <button id="silhouette-zoom-reset" type="button" aria-label="Reset zoom siluet" title="Reset zoom">↺</button>
+              </div>
+              <svg
+                class="highway-silhouette"
+                id="highway-silhouette"
+                viewBox="0 0 640 300"
+                role="img"
+                aria-label="Siluet jaringan ruas tol Jakarta"
+              ></svg>
+              <div class="highway-legend" id="highway-list" data-testid="highway-list" aria-label="Daftar pilihan ruas tol"></div>
+            </div>
+          </section>
 
           <div class="direction-section" id="direction-section" hidden>
             <p class="step-label">Langkah 2</p>
@@ -194,6 +215,10 @@
               <span>Pilih ruas dan arah untuk memulai CCTV.</span>
             </div>
             <span class="camera-live" id="camera-live" hidden>LIVE</span>
+            <div class="video-road-region" id="video-road-region" hidden>
+              <strong id="video-road-label">Ruas tol</strong>
+              <span id="video-region-status">Area inferred</span>
+            </div>
           </div>
 
           <div class="camera-info">
@@ -222,6 +247,9 @@
           <div class="launch-player">
             <button class="button button-primary" id="open-player-button" type="button" disabled>
               Buka pemutar video layar penuh
+            </button>
+            <button class="button button-quiet" id="open-multi-cctv-button" type="button" disabled>
+              Peta & Multi CCTV
             </button>
             <p id="player-helper">Di iPhone, tombol ini membuka pemutar video bawaan Safari.</p>
           </div>
@@ -259,16 +287,6 @@
             <button class="button button-small" id="demo-advance" type="button">Lewati kamera simulasi</button>
           </div>
         </section>
-      </section>
-
-      <section class="how-it-works" aria-labelledby="how-title">
-        <p class="eyebrow">Cara kerja</p>
-        <h2 id="how-title">Sederhana, tanpa mengirim lokasi.</h2>
-        <ol>
-          <li><span>01</span><div><strong>Deteksi ruas</strong><p>GPS dicocokkan dengan kurva jalan tol yang tersimpan di situs.</p></div></li>
-          <li><span>02</span><div><strong>Pilih A atau B</strong><p>A mengikuti KM bertambah; B mengikuti KM berkurang menuju KM 0 ruas.</p></div></li>
-          <li><span>03</span><div><strong>Ikuti perjalanan</strong><p>Kamera berikutnya aktif setelah dua posisi GPS memastikan kamera sudah terlewati.</p></div></li>
-        </ol>
       </section>
 
       <section class="simulator-link-card" aria-label="Pengujian GPS">
@@ -362,6 +380,23 @@
       </div>
     </section>
 
+    <section class="multi-cctv-overlay" id="multi-cctv-overlay" role="dialog" aria-modal="true" aria-labelledby="multi-cctv-title" hidden>
+      <div class="multi-cctv-panel">
+        <header class="multi-cctv-header">
+          <div>
+            <span class="step-label">Semua CCTV Arah Perjalanan</span>
+            <h2 id="multi-cctv-title">Tol Jakarta</h2>
+            <p id="multi-cctv-subtitle">Memuat CCTV…</p>
+          </div>
+          <button class="button button-small button-quiet" id="multi-cctv-close" type="button" aria-label="Tutup multi CCTV">Tutup</button>
+        </header>
+        <div class="multi-cctv-map-wrap">
+          <div id="multi-cctv-map" role="application" aria-label="Peta ruas aktif dan marker CCTV"></div>
+        </div>
+        <div class="multi-cctv-grid" id="multi-cctv-grid" role="region" aria-label="Daftar siaran CCTV berurutan"></div>
+      </div>
+    </section>
+
     <footer>
       <p>CCTV berasal dari layanan publik Bina Marga dan operator jalan tol.</p>
       <p>Data jalan © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap contributors</a>.</p>
@@ -371,6 +406,6 @@
     <script src="./vendor/leaflet/leaflet.js"></script>
     <script src="./vendor/leaflet-markercluster/leaflet.markercluster.js"></script>
     <script src="./vendor/hls.min.js"></script>
-    <script type="module" src="./js/app.mjs?v=20260801-map1"></script>
+    <script type="module" src="./js/app.mjs?v=20260901-autoswitch1"></script>
   </body>
 </html>

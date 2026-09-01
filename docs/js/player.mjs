@@ -106,7 +106,7 @@ export function createVideoController({
     technology = "unsupported";
   }
 
-  function loadNative(camera, currentGeneration, callbacks) {
+  function loadNative(camera, currentGeneration, callbacks, reloadSource = false) {
     mode = "native";
     technology = "native";
     const ready = () => {
@@ -121,7 +121,10 @@ export function createVideoController({
         (callbacks.onError ?? onError)(video.error, { camera, mode, technology });
       }
     };
-    if (video.src !== camera.streamUrl) video.src = camera.streamUrl;
+    video.setAttribute?.("preload", "auto");
+    video.setAttribute?.("src", camera.streamUrl);
+    if (video.src !== camera.streamUrl || reloadSource) video.src = camera.streamUrl;
+    if (reloadSource && !isPictureInPictureActive(video)) video.load?.();
     if (video.readyState >= 1) queueMicrotask(ready);
   }
 
@@ -210,7 +213,12 @@ export function createVideoController({
     return true;
   }
 
-  function load(camera, { continuePlaying = false, onError: loadError, onReady: loadReady } = {}) {
+  function load(camera, {
+    continuePlaying = false,
+    onError: loadError,
+    onReady: loadReady,
+    reloadSource = false,
+  } = {}) {
     if (!video || !camera?.streamUrl) return false;
     generation += 1;
     const currentGeneration = generation;
@@ -220,9 +228,9 @@ export function createVideoController({
     if (!pipActive) clearHandlers();
     if (shouldUseNativeHls(video, hlsClass)) {
       destroyHls();
-      loadNative(camera, currentGeneration, callbacks);
+      loadNative(camera, currentGeneration, callbacks, reloadSource);
     } else if (!loadHls(camera, currentGeneration, callbacks)) {
-      loadNative(camera, currentGeneration, callbacks);
+      loadNative(camera, currentGeneration, callbacks, reloadSource);
     }
     if (continuePlaying || pipActive || video.paused === false) {
       video.play?.().catch?.(() => {});

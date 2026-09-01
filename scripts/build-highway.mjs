@@ -44,7 +44,7 @@ function addEdge(graph, from, edge) {
   graph.get(from).push(edge);
 }
 
-function buildGraph(ways, nodes) {
+export function buildGraph(ways, nodes) {
   const graph = new Map();
   for (const way of ways) {
     if (!/^motorway(?:_link)?$/.test(way.tags?.highway ?? "")) continue;
@@ -60,7 +60,7 @@ function buildGraph(ways, nodes) {
   return graph;
 }
 
-function shortestPath(graph, start, end, highwayId) {
+export function shortestPath(graph, start, end, highwayId) {
   const distance = new Map([[start, 0]]);
   const previous = new Map();
   const queue = [[0, start]];
@@ -99,7 +99,7 @@ function shortestPath(graph, start, end, highwayId) {
   };
 }
 
-function selectWays(source, definition) {
+export function selectWays(source, definition) {
   if (definition.sourceType === "relation") {
     const relation = source.elements.find(
       (element) => element.type === "relation" && element.id === definition.relationId,
@@ -124,10 +124,18 @@ function selectWays(source, definition) {
       ),
     };
   }
+  if (definition.sourceType === "allMotorways") {
+    return {
+      relation: null,
+      ways: source.elements.filter(
+        (element) => element.type === "way" && /^motorway/.test(element.tags?.highway ?? ""),
+      ),
+    };
+  }
   throw new Error(`Unknown sourceType for ${definition.id}: ${definition.sourceType}`);
 }
 
-async function buildFeature(definition) {
+export async function buildFeature(definition) {
   const source = JSON.parse(await readFile(resolve(definition.input), "utf8"));
   const nodes = new Map(
     source.elements
@@ -139,13 +147,32 @@ async function buildFeature(definition) {
   }
   const { relation, ways } = selectWays(source, definition);
   if (ways.length === 0) throw new Error(`No matching motorway ways for ${definition.id}`);
-  const route = shortestPath(
-    buildGraph(ways, nodes),
+
+  const graph = buildGraph(ways, nodes);
+  const waypoints = [
     definition.startNodeId,
+    ...(definition.viaNodeIds ?? []),
     definition.endNodeId,
-    definition.id,
-  );
-  const coordinates = route.nodeIds.map((nodeId) => {
+  ];
+
+  const fullNodeIds = [];
+  const fullWayIds = [];
+  let totalDistanceM = 0;
+
+  for (let index = 0; index < waypoints.length - 1; index += 1) {
+    const fromId = waypoints[index];
+    const toId = waypoints[index + 1];
+    const segment = shortestPath(graph, fromId, toId, `${definition.id}-seg${index + 1}`);
+    totalDistanceM += segment.distanceM;
+    if (index === 0) {
+      fullNodeIds.push(...segment.nodeIds);
+    } else {
+      fullNodeIds.push(...segment.nodeIds.slice(1));
+    }
+    fullWayIds.push(...segment.wayIds);
+  }
+
+  const coordinates = fullNodeIds.map((nodeId) => {
     const node = nodes.get(nodeId);
     return [node.lon, node.lat];
   });
@@ -157,13 +184,14 @@ async function buildFeature(definition) {
       ...definition.properties,
       id: definition.id,
       zeroKmCoordinates: coordinates[0],
-      canonicalLengthM: Math.round(route.distanceM),
+      canonicalLengthM: Math.round(totalDistanceM),
       ...(definition.relationId ? { osmRelationId: definition.relationId } : {}),
       osmStartNodeId: definition.startNodeId,
       osmEndNodeId: definition.endNodeId,
+      ...(definition.viaNodeIds ? { osmViaNodeIds: definition.viaNodeIds } : {}),
       osmSnapshotTimestamp: sourceTimestamp,
       ...(relation?.timestamp ? { osmRelationTimestamp: relation.timestamp } : {}),
-      selectedWayIds: route.wayIds,
+      selectedWayIds: Array.from(new Set(fullWayIds)),
     },
     geometry: { type: "LineString", coordinates },
   };
@@ -202,7 +230,12 @@ async function main() {
   process.stdout.write(`Saved ${outputPath}\n`);
 }
 
-main().catch((error) => {
-  process.stderr.write(`Highway build failed: ${error.message}\n`);
-  process.exitCode = 1;
-});
+import { fileURLToPath } from "node:url";
+
+const isDirectRun = process.argv[1] && fileURLToPath(import.meta.url) === resolve(process.argv[1]);
+if (isDirectRun) {
+  main().catch((error) => {
+    process.stderr.write(`Highway build failed: ${error.message}\n`);
+    process.exitCode = 1;
+  });
+}

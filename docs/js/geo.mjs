@@ -114,7 +114,7 @@ export function verifiedCameras(cameras, highwayId, side) {
   return cameras
     .filter((camera) =>
       camera.highwayId === highwayId &&
-      camera.side === side &&
+      cameraSupportsDirection(camera, side) &&
       camera.enabled === true &&
       camera.curationStatus === "verified" &&
       Array.isArray(camera.coordinates) &&
@@ -125,9 +125,22 @@ export function verifiedCameras(cameras, highwayId, side) {
 
 export function cameraSupportsDirection(camera, side) {
   if (camera.side === side) return true;
-  return camera.cameraType === "toll_gate" &&
+  if (
+    camera.cameraType === "toll_gate" &&
     Array.isArray(camera.directions) &&
-    camera.directions.includes(side);
+    camera.directions.includes(side)
+  ) {
+    return true;
+  }
+  if (
+    camera.cameraType === "wide_view" &&
+    camera.directionReview?.status === "confirmed" &&
+    Array.isArray(camera.directions) &&
+    camera.directions.includes(side)
+  ) {
+    return true;
+  }
+  return false;
 }
 
 export function automaticCameras(cameras, highwayId, side) {
@@ -181,6 +194,10 @@ export function publicCameras(cameras, highwayId, side) {
 }
 
 export function initialCamera(cameras, direction, progressM) {
+  return nextCameraAtProgress(cameras, direction, progressM);
+}
+
+export function nextCameraAtProgress(cameras, direction, progressM) {
   if (direction === "A") {
     return cameras.find((camera) => camera.roadPositionM >= progressM) ?? null;
   }
@@ -198,7 +215,8 @@ export function adjacentCamera(cameras, currentId, direction, step = 1) {
 }
 
 export function createPassTracker(options = {}) {
-  const hysteresisM = options.hysteresisM ?? 75;
+  const minimumBufferM = options.minimumBufferM ?? options.hysteresisM ?? 50;
+  const maximumBufferM = options.maximumBufferM ?? 150;
   const requiredFixes = options.requiredFixes ?? 2;
   let consecutiveFixes = 0;
   let trackedCameraId = null;
@@ -208,18 +226,117 @@ export function createPassTracker(options = {}) {
       consecutiveFixes = 0;
       trackedCameraId = null;
     },
-    update({ cameraId, cameraPositionM, direction, progressM }) {
+    update({ accuracyM, cameraId, cameraPositionM, direction, progressM }) {
       if (trackedCameraId !== cameraId) {
         trackedCameraId = cameraId;
         consecutiveFixes = 0;
       }
+      const usableAccuracyM = Number.isFinite(accuracyM) && accuracyM >= 0
+        ? accuracyM
+        : minimumBufferM;
+      const bufferM = clamp(
+        Math.max(minimumBufferM, usableAccuracyM),
+        minimumBufferM,
+        maximumBufferM,
+      );
       const passed = direction === "A"
-        ? progressM >= cameraPositionM + hysteresisM
-        : progressM <= cameraPositionM - hysteresisM;
+        ? progressM >= cameraPositionM + bufferM
+        : progressM <= cameraPositionM - bufferM;
       consecutiveFixes = passed ? consecutiveFixes + 1 : 0;
       return {
         passed: consecutiveFixes >= requiredFixes,
         consecutiveFixes,
+        bufferM,
+        requiredFixes,
+      };
+    },
+  };
+}
+
+export function createHighwayTracker(options = {}) {
+  const confidenceMargin = options.confidenceMargin ?? 0.20;
+  const requiredFixes = options.requiredFixes ?? 3;
+  let pendingHighwayId = null;
+  let consecutiveFixes = 0;
+
+  function resetPending() {
+    pendingHighwayId = null;
+    consecutiveFixes = 0;
+  }
+
+  return {
+    reset: resetPending,
+    update({ candidates = [], currentHighwayId = null, locked = false } = {}) {
+      if (locked || candidates.length === 0) {
+        resetPending();
+        return {
+          changed: false,
+          consecutiveFixes,
+          highwayId: currentHighwayId,
+          pendingHighwayId,
+          requiredFixes,
+        };
+      }
+
+      const leader = candidates[0];
+      if (!currentHighwayId && candidates.length === 1) {
+        resetPending();
+        return {
+          changed: true,
+          consecutiveFixes: requiredFixes,
+          highwayId: leader.highwayId,
+          pendingHighwayId: null,
+          requiredFixes,
+        };
+      }
+
+      const current = candidates.find(({ highwayId }) => highwayId === currentHighwayId);
+      if (leader.highwayId === currentHighwayId) {
+        resetPending();
+        return {
+          changed: false,
+          consecutiveFixes,
+          highwayId: currentHighwayId,
+          pendingHighwayId,
+          requiredFixes,
+        };
+      }
+
+      const leaderClearlyBetter = !current ||
+        leader.confidence >= current.confidence + confidenceMargin;
+      if (!leaderClearlyBetter) {
+        resetPending();
+        return {
+          changed: false,
+          consecutiveFixes,
+          highwayId: currentHighwayId,
+          pendingHighwayId,
+          requiredFixes,
+        };
+      }
+
+      if (pendingHighwayId === leader.highwayId) consecutiveFixes += 1;
+      else {
+        pendingHighwayId = leader.highwayId;
+        consecutiveFixes = 1;
+      }
+      if (consecutiveFixes < requiredFixes) {
+        return {
+          changed: false,
+          consecutiveFixes,
+          highwayId: currentHighwayId,
+          pendingHighwayId,
+          requiredFixes,
+        };
+      }
+
+      const highwayId = pendingHighwayId;
+      resetPending();
+      return {
+        changed: highwayId !== currentHighwayId,
+        consecutiveFixes: requiredFixes,
+        highwayId,
+        pendingHighwayId: null,
         requiredFixes,
       };
     },

@@ -10,6 +10,7 @@
     "camera:verify": "node scripts/verify-camera.mjs",
     "camera:verify-gate": "node scripts/verify-gate-camera.mjs",
     "camera:provision": "node scripts/provision-cameras.mjs",
+    "camera:refresh-scrape": "node scripts/scrape-all.mjs",
     "camera:locate": "node scripts/locate-camera.mjs",
     "highway:build": "node scripts/build-highway.mjs",
     "scrape": "node scripts/scrape-binamarga.mjs",

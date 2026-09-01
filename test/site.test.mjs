@@ -52,6 +52,13 @@ test("static page exposes the required accessible controls with relative assets"
     "quick-camera-play",
     "quick-camera-fullscreen",
     "quick-camera-retry",
+    "open-multi-cctv-button",
+    "multi-cctv-overlay",
+    "multi-cctv-close",
+    "multi-cctv-title",
+    "multi-cctv-subtitle",
+    "multi-cctv-map",
+    "multi-cctv-grid",
   ]) {
     assert.equal($(`#${id}`).length, 1, `Missing unique #${id}`);
   }
@@ -92,14 +99,25 @@ test("start and floating shortcut smoothly reveal step one without delaying GPS"
   assert.match(app, /elements\.restart\.addEventListener\("click",\s*restartSavedSelection\)/);
   assert.match(app, /function restartSavedSelection\(\)[\s\S]*const savedSelection[\s\S]*stopTracking\(\);[\s\S]*void openVideoPlayer\(\);\s*if \(state\.simulator\) startSimulatorTracking\(\);\s*else if \(!state\.demo\) startTracking\(\);/);
   assert.match(app, /message = "Pelacakan kamera via GPS: aktif"/);
-  assert.match(app, /async function playCamera\(camera, options = \{\}\)[\s\S]*resetPlayerLoad\(\);[\s\S]*state\.videoController\.load\(camera/);
-  assert.doesNotMatch(app, /async function playCamera\(camera, options = \{\}\)[\s\S]{0,500}destroyPlayer\(/);
+  assert.match(app, /function playCamera\(camera, options = \{\}\)[\s\S]*cancelCameraCycle\(\);[\s\S]*loadCameraAttempt\(camera/);
+  assert.match(app, /function loadCameraAttempt\(camera[\s\S]*resetPlayerLoad\(\);[\s\S]*state\.videoController\.load\(camera/);
+  assert.doesNotMatch(app, /function loadCameraAttempt\(camera[\s\S]{0,800}destroyPlayer\(/);
 });
 
 test("manual camera selection and playback synchronize the map marker", async () => {
   const source = await readFile(new URL("../docs/js/app.mjs", import.meta.url), "utf8");
   assert.match(source, /state\.routeMap\?\.selectCamera\(camera\.id\)/);
   assert.match(source, /manualCameraSelect\.addEventListener\("change", previewManualCameraOnMap\)/);
+});
+
+test("GPS journey wires stable roads, position reconciliation, and one-step stream fallback", async () => {
+  const source = await readFile(new URL("../docs/js/app.mjs", import.meta.url), "utf8");
+  assert.match(source, /createHighwayTracker\(\)/);
+  assert.match(source, /function applyAutomaticHighway\(candidates\)[\s\S]*highwayTracker\.update/);
+  assert.match(source, /function evaluatePassing\(\)[\s\S]*accuracyM:[\s\S]*nextCameraAtProgress/);
+  assert.match(source, /if \(!failure\.fallbackUsed && !state\.manualMode\)[\s\S]*adjacentCamera[\s\S]*fallbackUsed: true/);
+  assert.match(source, /CCTV fallback gagal setelah 3 percobaan\. Menunggu GPS melewati titik ini/);
+  assert.doesNotMatch(source, /if \(!state\.highway && state\.highways\.length > 0\)[\s\S]{0,100}selectHighway\(state\.highways\[0\]\)/);
 });
 
 test("the shared simulator mode exposes road, position, direction, and speed controls", async () => {
@@ -167,7 +185,7 @@ test("automatic switching data is either verified or explicitly provisional", as
   );
   assert.ok(data.cameras.length > 0);
   const enabled = data.cameras.filter((camera) => camera.enabled);
-  assert.equal(enabled.length, 96);
+  assert.equal(enabled.length, 166);
   assert.ok(enabled.every((camera) =>
     camera.curationStatus === "verified" ||
     (camera.curationStatus === "provisional_stationing" &&

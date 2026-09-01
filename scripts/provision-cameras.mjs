@@ -4,6 +4,7 @@ import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 import { estimateCameraOnHighway } from "../docs/js/online-map.mjs";
+import { parseSide } from "./lib/binamarga.mjs";
 
 const DIRECTION_SOURCE = "https://bpjt.pu.go.id/telah-uji-laik-fungsi-jalan-tol-indralaya-prabumulih-akan-segera-dioperasikan/";
 
@@ -50,13 +51,22 @@ async function main() {
   let excluded = 0;
 
   cameraData.cameras = cameraData.cameras.map((camera) => {
-    if (camera.curationStatus === "verified") {
+    if (camera.curationStatus === "verified" || camera.curationStatus === "provisional_landmark") {
       retainedVerified += 1;
       return camera;
     }
     const feature = featureById.get(camera.highwayId);
-    const estimate = estimateCameraOnHighway(camera, feature);
-    const hasExplicitDirection = camera.side === "A" || camera.side === "B";
+    const cameraToEstimate = camera.curationStatus === "provisional_stationing"
+      ? { ...camera, coordinates: null, roadPositionM: null }
+      : camera;
+    const estimate = estimateCameraOnHighway(cameraToEstimate, feature);
+    const isWideView = camera.cameraType === "wide_view" &&
+      Array.isArray(camera.directions) &&
+      camera.directions.includes("A") &&
+      camera.directions.includes("B") &&
+      camera.directionReview?.status === "confirmed";
+    const side = isWideView ? null : (camera.side ?? parseSide(camera.name));
+    const hasExplicitDirection = isWideView || side === "A" || side === "B";
     if (!estimate || !hasExplicitDirection) {
       excluded += 1;
       if (camera.curationStatus !== "provisional_stationing") return camera;
@@ -72,6 +82,7 @@ async function main() {
     provisioned += 1;
     return {
       ...camera,
+      side,
       coordinates: roundedCoordinate(estimate.coordinate),
       roadPositionM: Math.round(estimate.roadPositionM),
       enabled: true,

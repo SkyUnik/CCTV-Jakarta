@@ -88,6 +88,59 @@ test("video controller switches while PiP is active without clearing the element
   assert.equal(plays, 1);
 });
 
+test("native reload eagerly sets source before load and preserves PiP", () => {
+  const order = [];
+  const attributes = {};
+  const video = {
+    paused: true,
+    src: "https://media.example/cam.m3u8",
+    canPlayType: () => "probably",
+    load: () => { order.push("load"); },
+    setAttribute(name, value) {
+      attributes[name] = value;
+      order.push(`${name}:${value}`);
+    },
+  };
+  const controller = createVideoController({ video, hlsClass: { isSupported: () => false } });
+  controller.load(
+    { streamUrl: "https://media.example/cam.m3u8" },
+    { reloadSource: true },
+  );
+  assert.equal(attributes.preload, "auto");
+  assert.equal(attributes.src, "https://media.example/cam.m3u8");
+  assert.ok(order.indexOf("src:https://media.example/cam.m3u8") < order.indexOf("load"));
+
+  order.length = 0;
+  video.webkitPresentationMode = "picture-in-picture";
+  controller.load(
+    { streamUrl: "https://media.example/cam.m3u8" },
+    { reloadSource: true },
+  );
+  assert.equal(order.includes("load"), false, "PiP retry does not call video.load()");
+});
+
+test("HLS.js reloads the same URL through the existing attached instance", () => {
+  let instanceCount = 0;
+  const sources = [];
+  const video = { paused: true, canPlayType: () => "" };
+  const FakeHls = function () {
+    instanceCount += 1;
+    this.on = () => {};
+    this.attachMedia = () => {};
+    this.loadSource = (url) => { sources.push(url); };
+    this.transferMedia = () => ({ media: video, mediaSource: {}, tracks: {} });
+    this.destroy = () => {};
+  };
+  FakeHls.isSupported = () => true;
+  FakeHls.Events = { MANIFEST_PARSED: "manifest", ERROR: "error" };
+  const controller = createVideoController({ video, hlsClass: FakeHls });
+  const camera = { streamUrl: "https://media.example/cam.m3u8" };
+  controller.load(camera);
+  controller.load(camera, { reloadSource: true });
+  assert.equal(instanceCount, 1);
+  assert.deepEqual(sources, [camera.streamUrl, camera.streamUrl]);
+});
+
 test("destroy with preservePip then load keeps PiP video playing", () => {
   let pauseCalls = 0;
   let removeCalls = 0;
