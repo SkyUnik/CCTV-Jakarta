@@ -161,6 +161,11 @@
               ></svg>
               <div class="highway-legend" id="highway-list" data-testid="highway-list" aria-label="Daftar pilihan ruas tol"></div>
             </div>
+            <div class="highway-picker-actions">
+              <button class="button button-quiet" id="open-multi-cctv-button" type="button" disabled>
+                Buka Multi CCTV (Semua Arah)
+              </button>
+            </div>
           </section>
 
           <div class="direction-section" id="direction-section" hidden>
@@ -247,9 +252,6 @@
           <div class="launch-player">
             <button class="button button-primary" id="open-player-button" type="button" disabled>
               Buka pemutar video layar penuh
-            </button>
-            <button class="button button-quiet" id="open-multi-cctv-button" type="button" disabled>
-              Peta & Multi CCTV
             </button>
             <p id="player-helper">Di iPhone, tombol ini membuka pemutar video bawaan Safari.</p>
           </div>
@@ -390,9 +392,6 @@
           </div>
           <button class="button button-small button-quiet" id="multi-cctv-close" type="button" aria-label="Tutup multi CCTV">Tutup</button>
         </header>
-        <div class="multi-cctv-map-wrap">
-          <div id="multi-cctv-map" role="application" aria-label="Peta ruas aktif dan marker CCTV"></div>
-        </div>
         <div class="multi-cctv-grid" id="multi-cctv-grid" role="region" aria-label="Daftar siaran CCTV berurutan"></div>
       </div>
     </section>

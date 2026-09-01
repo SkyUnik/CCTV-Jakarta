@@ -32,7 +32,14 @@ function createMockElement(tag = "div") {
     style: {},
     children: [],
     hidden: false,
-    textContent: "",
+    _textContent: undefined,
+    get textContent() {
+      if (this._textContent !== undefined) return this._textContent;
+      return this.children.map((c) => c.textContent || "").join(" ");
+    },
+    set textContent(v) {
+      this._textContent = v;
+    },
     innerHTML: "",
     append(...elements) {
       this.children.push(...elements);
@@ -50,6 +57,9 @@ function createMockElement(tag = "div") {
             return child;
           }
           if (selector.startsWith("#") && child.id === selector.slice(1)) {
+            return child;
+          }
+          if (child.tagName === selector.toUpperCase()) {
             return child;
           }
           const found = findDescendant(child);
@@ -167,29 +177,38 @@ test("multi-cctv manager handles open/close, on-demand play toggling, and backdr
   assert.equal(manager.isOpen(), true);
   assert.equal(title.textContent, "Tol Jagorawi");
   assert.match(subtitle.textContent, /Semua Arah/);
-  assert.equal(grid.children.length, 3);
-  assert.equal(grid.children[0].dataset.cameraId, "g1");
-  assert.equal(grid.children[1].dataset.cameraId, "c1");
-  assert.equal(grid.children[2].dataset.cameraId, "c2");
+
+  // GT heading + 1 GT card + Road heading + 2 Road cards = 5 elements
+  assert.equal(grid.children.length, 5);
+  assert.match(grid.children[0].innerHTML, /Gerbang Tol/);
+  assert.equal(grid.children[1].dataset.cameraId, "g1");
+  assert.match(grid.children[2].innerHTML, /Jalur Utama/);
+  assert.equal(grid.children[3].dataset.cameraId, "c1");
+  assert.equal(grid.children[4].dataset.cameraId, "c2");
 
   // Initial standby cards do not preload or set src eagerly
-  const card0 = grid.children[0];
-  const video0 = card0.children[0].children[0];
-  assert.equal(video0.getAttribute("preload"), "none");
-  assert.equal(video0.src, undefined);
+  const cardGt = grid.children[1];
+  const videoGt = cardGt.querySelector(".multi-cctv-video");
+  assert.equal(videoGt.getAttribute("preload"), "none");
+  assert.equal(videoGt.src, undefined);
   assert.equal(manager.getActiveSlots().size, 0);
+
+  // Card header contains camera number and name
+  const header = cardGt.querySelector(".multi-cctv-card-header");
+  assert.ok(header);
+  assert.match(cardGt.textContent, /GT Ciawi/);
 
   // Click card to attach slot and start live stream
-  card0.dispatchEvent({ type: "click", target: card0 });
+  cardGt.dispatchEvent({ type: "click", target: cardGt });
   assert.equal(manager.getActiveSlots().size, 1);
-  assert.equal(video0.getAttribute("preload"), "auto");
-  assert.equal(video0.src, "https://example.com/g1.m3u8");
+  assert.equal(videoGt.getAttribute("preload"), "auto");
+  assert.equal(videoGt.src, "https://example.com/g1.m3u8");
 
   // Click card again to detach slot and clean up stream
-  card0.dispatchEvent({ type: "click", target: card0 });
+  cardGt.dispatchEvent({ type: "click", target: cardGt });
   assert.equal(manager.getActiveSlots().size, 0);
-  assert.equal(video0.getAttribute("preload"), "none");
-  assert.equal(video0.src, undefined);
+  assert.equal(videoGt.getAttribute("preload"), "none");
+  assert.equal(videoGt.src, undefined);
 
   // Clicking backdrop closes modal
   overlay.dispatchEvent({ type: "click", target: overlay });

@@ -88,7 +88,6 @@ export function createMultiCctvManager({
   closeButton,
   gridElement,
   hlsClass = globalThis.Hls,
-  mapElement,
   overlayElement,
   subtitleElement,
   titleElement,
@@ -97,10 +96,6 @@ export function createMultiCctvManager({
 } = {}) {
   let activeHighway = null;
   let activeCameras = [];
-  let currentPosition = null;
-  let mapInstance = null;
-  let mapLayers = null;
-  let mapResizeObserver = null;
   let isOpen = false;
   let openerButton = null;
 
@@ -109,9 +104,31 @@ export function createMultiCctvManager({
 
   function buildCard(camera, index) {
     const card = document.createElement("article");
-    card.className = "multi-cctv-card";
+    card.className = `multi-cctv-card${isTollGate(camera) ? " is-gt" : ""}`;
     card.dataset.cameraId = camera.id;
     card.dataset.index = String(index);
+
+    const header = document.createElement("div");
+    header.className = "multi-cctv-card-header";
+
+    const titleGroup = document.createElement("div");
+    titleGroup.className = "multi-cctv-card-title";
+
+    const num = document.createElement("span");
+    num.className = "camera-num";
+    num.textContent = `#${index + 1}`;
+
+    const name = document.createElement("strong");
+    name.textContent = camera.name;
+    name.title = camera.name;
+
+    titleGroup.append(num, name);
+
+    const liveBadge = document.createElement("span");
+    liveBadge.className = "multi-cctv-badge";
+    liveBadge.textContent = "STANDBY";
+
+    header.append(titleGroup, liveBadge);
 
     const mediaWrap = document.createElement("div");
     mediaWrap.className = "multi-cctv-media";
@@ -158,20 +175,16 @@ export function createMultiCctvManager({
     const footer = document.createElement("div");
     footer.className = "multi-cctv-card-footer";
 
-    const titleGroup = document.createElement("div");
-    const name = document.createElement("strong");
-    name.textContent = camera.name;
-    const meta = document.createElement("span");
-    meta.className = "meta";
-    meta.textContent = `${formatKm(camera.km)} • ${formatDirection(camera)}`;
-    titleGroup.append(name, meta);
+    const kmTag = document.createElement("span");
+    kmTag.className = "meta-tag km";
+    kmTag.textContent = formatKm(camera.km);
 
-    const liveBadge = document.createElement("span");
-    liveBadge.className = "multi-cctv-badge";
-    liveBadge.textContent = "STANDBY";
+    const dirTag = document.createElement("span");
+    dirTag.className = `meta-tag dir${isTollGate(camera) ? " is-gt" : ""}`;
+    dirTag.textContent = formatDirection(camera);
 
-    footer.append(titleGroup, liveBadge);
-    card.append(mediaWrap, footer);
+    footer.append(kmTag, dirTag);
+    card.append(header, mediaWrap, footer);
 
     card.addEventListener("click", (event) => {
       if (activeSlots.has(camera.id)) {
@@ -290,82 +303,6 @@ export function createMultiCctvManager({
     });
   }
 
-  function initMap(highway, cameras, position) {
-    const leaflet = globalThis.L;
-    if (!leaflet?.map || !mapElement) return;
-
-    if (!mapInstance) {
-      mapInstance = leaflet.map(mapElement, {
-        attributionControl: false,
-        zoomControl: true,
-        scrollWheelZoom: true,
-      });
-      leaflet.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        maxZoom: 19,
-      }).addTo(mapInstance);
-      mapLayers = leaflet.featureGroup().addTo(mapInstance);
-    }
-
-    mapLayers.clearLayers();
-    if (highway?.geometry?.coordinates) {
-      const latLngs = highway.geometry.coordinates.map(([lon, lat]) => [lat, lon]);
-      leaflet.polyline(latLngs, {
-        color: "#22614f",
-        weight: 6,
-        opacity: 0.95,
-        lineCap: "round",
-        lineJoin: "round",
-      }).addTo(mapLayers);
-    }
-
-    for (let i = 0; i < cameras.length; i += 1) {
-      const cam = cameras[i];
-      if (Array.isArray(cam.coordinates) && cam.coordinates.length >= 2) {
-        const [lon, lat] = cam.coordinates;
-        const icon = leaflet.divIcon({
-          className: "camera-map-icon is-mini",
-          html: `<span>${i + 1}</span>`,
-          iconSize: [24, 24],
-          iconAnchor: [12, 12],
-        });
-        leaflet.marker([lat, lon], {
-          icon,
-          title: `${i + 1}. ${cam.name} (${formatKm(cam.km)})`,
-        }).addTo(mapLayers);
-      }
-    }
-
-    if (position && Number.isFinite(position.latitude) && Number.isFinite(position.longitude)) {
-      const gpsIcon = leaflet.divIcon({
-        className: "gps-map-pin",
-        iconSize: [16, 16],
-        iconAnchor: [8, 8],
-      });
-      leaflet.marker([position.latitude, position.longitude], {
-        icon: gpsIcon,
-        title: "Posisi Kendaraan",
-      }).addTo(mapLayers);
-    }
-
-    if (typeof ResizeObserver !== "undefined" && mapElement) {
-      mapResizeObserver?.disconnect();
-      mapResizeObserver = new ResizeObserver(() => {
-        if (isOpen && mapInstance) {
-          mapInstance.invalidateSize({ pan: false });
-        }
-      });
-      mapResizeObserver.observe(mapElement);
-    }
-
-    const bounds = mapLayers.getBounds();
-    if (bounds?.isValid?.()) {
-      requestAnimationFrame(() => {
-        mapInstance.invalidateSize({ pan: false });
-        mapInstance.fitBounds(bounds, { padding: [20, 20], maxZoom: 14 });
-      });
-    }
-  }
-
   function handleKeydown(event) {
     if (!isOpen) return;
     if (escapeKey(event)) {
@@ -390,12 +327,11 @@ export function createMultiCctvManager({
     }
   }
 
-  function open({ highway, cameras = [], position = null, opener = null } = {}) {
+  function open({ highway, cameras = [], opener = null } = {}) {
     if (isOpen) return;
     isOpen = true;
     openerButton = opener;
     activeHighway = highway;
-    currentPosition = position;
     activeCameras = orderCamerasForMultiCctv(cameras);
 
     document?.body?.classList?.add("multi-cctv-open");
@@ -405,25 +341,50 @@ export function createMultiCctvManager({
       titleElement.textContent = highway?.properties?.name ?? "Ruas Tol Jakarta";
     }
     if (subtitleElement) {
-      subtitleElement.textContent = `Semua Arah • ${activeCameras.length} CCTV (Urutan GT & KM Terendah)`;
+      subtitleElement.textContent = `Semua Arah • ${activeCameras.length} CCTV`;
     }
 
     if (gridElement) {
       gridElement.replaceChildren();
+      const gtCameras = activeCameras.filter(isTollGate);
+      const roadCameras = activeCameras.filter((c) => !isTollGate(c));
+
       if (activeCameras.length === 0) {
         const emptyNotice = document.createElement("p");
         emptyNotice.className = "multi-cctv-empty";
         emptyNotice.textContent = "Belum ada CCTV untuk ruas tol ini.";
         gridElement.append(emptyNotice);
       } else {
-        for (let i = 0; i < activeCameras.length; i += 1) {
-          const card = buildCard(activeCameras[i], i);
-          gridElement.append(card);
+        let globalIndex = 0;
+
+        if (gtCameras.length > 0) {
+          const gtHeading = document.createElement("div");
+          gtHeading.className = "multi-cctv-section-heading is-gt-section";
+          gtHeading.innerHTML = `<span class="title">📍 Gerbang Tol (GT)</span><span class="count">${gtCameras.length} CCTV</span>`;
+          gridElement.append(gtHeading);
+
+          for (let i = 0; i < gtCameras.length; i += 1) {
+            const card = buildCard(gtCameras[i], globalIndex);
+            globalIndex += 1;
+            gridElement.append(card);
+          }
+        }
+
+        if (roadCameras.length > 0) {
+          const roadHeading = document.createElement("div");
+          roadHeading.className = "multi-cctv-section-heading is-road-section";
+          roadHeading.innerHTML = `<span class="title">🛣️ Jalur Utama Tol</span><span class="count">${roadCameras.length} CCTV</span>`;
+          gridElement.append(roadHeading);
+
+          for (let i = 0; i < roadCameras.length; i += 1) {
+            const card = buildCard(roadCameras[i], globalIndex);
+            globalIndex += 1;
+            gridElement.append(card);
+          }
         }
       }
     }
 
-    initMap(activeHighway, activeCameras, currentPosition);
     if (typeof globalThis.document?.addEventListener === "function") {
       document.addEventListener("keydown", handleKeydown);
     }
@@ -439,7 +400,6 @@ export function createMultiCctvManager({
   function close() {
     if (!isOpen) return;
     isOpen = false;
-    mapResizeObserver?.disconnect();
     if (typeof globalThis.document?.removeEventListener === "function") {
       document.removeEventListener("keydown", handleKeydown);
     }
@@ -484,10 +444,6 @@ export function createMultiCctvManager({
     close,
     destroy() {
       close();
-      if (mapInstance) {
-        mapInstance.remove();
-        mapInstance = null;
-      }
     },
     detachSlot,
     getActiveSlots: () => activeSlots,

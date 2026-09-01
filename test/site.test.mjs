@@ -57,7 +57,6 @@ test("static page exposes the required accessible controls with relative assets"
     "multi-cctv-close",
     "multi-cctv-title",
     "multi-cctv-subtitle",
-    "multi-cctv-map",
     "multi-cctv-grid",
   ]) {
     assert.equal($(`#${id}`).length, 1, `Missing unique #${id}`);
