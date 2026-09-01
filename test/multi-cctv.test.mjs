@@ -186,11 +186,11 @@ test("multi-cctv manager handles open/close, on-demand play toggling, and backdr
   assert.equal(grid.children[3].dataset.cameraId, "c1");
   assert.equal(grid.children[4].dataset.cameraId, "c2");
 
-  // Initial standby cards do not preload or set src eagerly
+  // Initial standby cards eagerly set src for thumbnail loading
   const cardGt = grid.children[1];
   const videoGt = cardGt.querySelector(".multi-cctv-video");
-  assert.equal(videoGt.getAttribute("preload"), "none");
-  assert.equal(videoGt.src, undefined);
+  assert.equal(videoGt.getAttribute("preload"), "metadata");
+  assert.equal(videoGt.src, "https://example.com/g1.m3u8");
   assert.equal(manager.getActiveSlots().size, 0);
 
   // Card header contains camera number and name
@@ -204,11 +204,11 @@ test("multi-cctv manager handles open/close, on-demand play toggling, and backdr
   assert.equal(videoGt.getAttribute("preload"), "auto");
   assert.equal(videoGt.src, "https://example.com/g1.m3u8");
 
-  // Click card again to detach slot and clean up stream
+  // Click card again to detach slot — restores thumbnail state
   cardGt.dispatchEvent({ type: "click", target: cardGt });
   assert.equal(manager.getActiveSlots().size, 0);
-  assert.equal(videoGt.getAttribute("preload"), "none");
-  assert.equal(videoGt.src, undefined);
+  assert.equal(videoGt.getAttribute("preload"), "metadata");
+  assert.equal(videoGt.src, "https://example.com/g1.m3u8");
 
   // Clicking backdrop closes modal
   overlay.dispatchEvent({ type: "click", target: overlay });

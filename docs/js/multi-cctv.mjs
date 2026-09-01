@@ -141,7 +141,8 @@ export function createMultiCctvManager({
     video.playsInline = true;
     video.setAttribute("playsinline", "");
     video.setAttribute("webkit-playsinline", "");
-    video.setAttribute("preload", "none");
+    video.setAttribute("preload", "metadata");
+    video.src = camera.streamUrl;
     video.setAttribute("aria-label", `Siaran CCTV ${camera.name}`);
     video.className = "multi-cctv-video";
 
@@ -228,9 +229,15 @@ export function createMultiCctvManager({
     }
     slot.controller?.destroy({ clearSource: true, preservePip: false });
     if (slot.video) {
-      slot.video.removeAttribute("src");
-      slot.video.setAttribute("preload", "none");
-      slot.video.load?.();
+      // Restore thumbnail: re-set src with metadata-only preload
+      const streamUrl = slot.camera?.streamUrl;
+      if (streamUrl) {
+        slot.video.src = streamUrl;
+        slot.video.setAttribute("preload", "metadata");
+      } else {
+        slot.video.removeAttribute("src");
+        slot.video.setAttribute("preload", "none");
+      }
       slot.video.onloadeddata = null;
       slot.video.onplaying = null;
     }
