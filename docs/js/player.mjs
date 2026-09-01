@@ -7,15 +7,18 @@ export function supportsNativeHls(video) {
   return HLS_MIME_TYPES.some((type) => Boolean(video.canPlayType?.(type)));
 }
 
-export function prefersNativeHls(video, hlsApi) {
-  if (!supportsNativeHls(video)) return false;
-  const hasSafariVideoApi = typeof video.webkitEnterFullscreen === "function" ||
-    typeof video.webkitSetPresentationMode === "function";
-  return hasSafariVideoApi || !hlsApi?.isSupported?.();
-}
-
 export function shouldUseNativeHls(video, hlsApi) {
   return supportsNativeHls(video) && !hlsApi?.isSupported?.();
+}
+
+export function playbackTechnology(video, hlsApi, scope = globalThis) {
+  if (hlsApi?.isSupported?.()) {
+    const mediaSource = hlsApi.getMediaSource?.();
+    return scope?.ManagedMediaSource && mediaSource === scope.ManagedMediaSource
+      ? "hls-mms"
+      : "hls-mse";
+  }
+  return supportsNativeHls(video) ? "native" : "unsupported";
 }
 
 export function fullscreenMethod(video) {
@@ -67,7 +70,11 @@ export function createVideoController({
 } = {}) {
   let generation = 0;
   let hls = null;
+  let hlsAttached = false;
   let mode = null;
+  let technology = "unsupported";
+  let activeLoad = null;
+  let mediaRecoveryAttempts = 0;
 
   function clearHandlers() {
     if (!video) return;
@@ -80,10 +87,13 @@ export function createVideoController({
     if (!hls) return;
     hls.destroy();
     hls = null;
+    hlsAttached = false;
   }
 
   function destroy({ preservePip = false, clearSource = true } = {}) {
     generation += 1;
+    activeLoad = null;
+    mediaRecoveryAttempts = 0;
     destroyHls();
     clearHandlers();
     if (!video) return;
@@ -93,29 +103,43 @@ export function createVideoController({
       video.load?.();
     }
     mode = null;
+    technology = "unsupported";
   }
 
   function loadNative(camera, currentGeneration, callbacks) {
     mode = "native";
+    technology = "native";
     const ready = () => {
-      if (currentGeneration === generation) (callbacks.onReady ?? onReady)({ camera, mode });
+      if (currentGeneration === generation) {
+        (callbacks.onReady ?? onReady)({ camera, mode, technology });
+      }
     };
     video.onloadedmetadata = ready;
     video.oncanplay = ready;
     video.onerror = () => {
-      if (currentGeneration === generation) (callbacks.onError ?? onError)(video.error, { camera, mode });
+      if (currentGeneration === generation) {
+        (callbacks.onError ?? onError)(video.error, { camera, mode, technology });
+      }
     };
     if (video.src !== camera.streamUrl) video.src = camera.streamUrl;
+    if (video.readyState >= 1) queueMicrotask(ready);
   }
 
-  function loadHls(camera, currentGeneration, callbacks) {
-    if (!hlsClass?.isSupported?.()) return false;
-    mode = "hls";
-    destroyHls();
-    clearHandlers();
+  function eventUrl(data) {
+    return data?.url ?? data?.frag?.url ?? data?.context?.url ?? null;
+  }
+
+  function eventMatchesActiveLoad(data) {
+    const url = eventUrl(data);
+    return !url || url === activeLoad?.camera?.streamUrl;
+  }
+
+  function ensureHls() {
+    if (hls) return hls;
     hls = new hlsClass({
       enableWorker: true,
       lowLatencyMode: true,
+      preferManagedMediaSource: true,
       backBufferLength: 30,
       liveSyncDurationCount: 3,
       liveMaxLatencyDurationCount: 8,
@@ -123,22 +147,66 @@ export function createVideoController({
       levelLoadingMaxRetry: 2,
       fragLoadingMaxRetry: 2,
     });
-    hls.on(hlsClass.Events.MANIFEST_PARSED, () => {
-      if (currentGeneration === generation) (callbacks.onReady ?? onReady)({ camera, mode });
-    });
-    hls.on(hlsClass.Events.ERROR, (_, data) => {
-      if (currentGeneration === generation && data?.fatal) {
-        if (supportsNativeHls(video)) {
-          destroyHls();
-          loadNative(camera, currentGeneration, callbacks);
-          if (!video.paused || isPictureInPictureActive(video)) video.play?.().catch?.(() => {});
-          return;
-        }
-        (callbacks.onError ?? onError)(data, { camera, mode });
+    hls.on(hlsClass.Events.MANIFEST_PARSED, (_, data) => {
+      if (!activeLoad || !eventMatchesActiveLoad(data)) return;
+      const { callbacks, camera, generation: loadGeneration } = activeLoad;
+      if (loadGeneration === generation) {
+        (callbacks.onReady ?? onReady)({ camera, mode: "hls", technology });
       }
     });
-    hls.attachMedia(video);
-    hls.loadSource(camera.streamUrl);
+    hls.on(hlsClass.Events.ERROR, (_, data) => {
+      if (!activeLoad || !eventMatchesActiveLoad(data) || !data?.fatal) return;
+      const { callbacks, camera, generation: loadGeneration } = activeLoad;
+      if (loadGeneration === generation) {
+        if (
+          data?.type === hlsClass.ErrorTypes?.MEDIA_ERROR &&
+          mediaRecoveryAttempts < 1 &&
+          typeof hls.recoverMediaError === "function"
+        ) {
+          mediaRecoveryAttempts += 1;
+          hls.recoverMediaError();
+          return;
+        }
+        if (supportsNativeHls(video)) {
+          const shouldContinue = !video.paused || isPictureInPictureActive(video);
+          destroyHls();
+          clearHandlers();
+          loadNative(camera, loadGeneration, callbacks);
+          if (shouldContinue) video.play?.().catch?.(() => {});
+          return;
+        }
+        (callbacks.onError ?? onError)(data, { camera, mode: "hls", technology });
+      }
+    });
+    return hls;
+  }
+
+  function loadHls(camera, currentGeneration, callbacks) {
+    if (!hlsClass?.isSupported?.()) return false;
+    mode = "hls";
+    technology = playbackTechnology(video, hlsClass);
+    clearHandlers();
+    const instance = ensureHls();
+    activeLoad = { callbacks, camera, generation: currentGeneration };
+    mediaRecoveryAttempts = 0;
+    if (!hlsAttached) {
+      instance.attachMedia(video);
+      hlsAttached = true;
+    } else {
+      // HLS.js loadSource() normally detaches and recreates MediaSource when
+      // the URL changes. transferMedia() lets us reset the stream controllers
+      // while keeping the same HTMLVideoElement and MediaSource attachment,
+      // which prevents iOS fullscreen/PiP geometry from being torn down.
+      const transferredMedia = instance.transferMedia?.();
+      if (transferredMedia) {
+        hlsAttached = false;
+        instance.loadSource(camera.streamUrl);
+        instance.attachMedia(transferredMedia);
+        hlsAttached = true;
+        return true;
+      }
+    }
+    instance.loadSource(camera.streamUrl);
     return true;
   }
 
@@ -148,6 +216,7 @@ export function createVideoController({
     const currentGeneration = generation;
     const callbacks = { onError: loadError, onReady: loadReady };
     const pipActive = isPictureInPictureActive(video);
+    activeLoad = null;
     if (!pipActive) clearHandlers();
     if (shouldUseNativeHls(video, hlsClass)) {
       destroyHls();
@@ -155,7 +224,7 @@ export function createVideoController({
     } else if (!loadHls(camera, currentGeneration, callbacks)) {
       loadNative(camera, currentGeneration, callbacks);
     }
-    if (continuePlaying || pipActive || !video.paused) {
+    if (continuePlaying || pipActive || video.paused === false) {
       video.play?.().catch?.(() => {});
     }
     return true;
@@ -165,6 +234,7 @@ export function createVideoController({
     destroy,
     enterFullscreen: () => enterVideoFullscreen(video),
     getMode: () => mode,
+    getTechnology: () => technology,
     isPipActive: () => isPictureInPictureActive(video),
     load,
     play: () => video?.play?.(),

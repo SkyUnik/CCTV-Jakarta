@@ -17,6 +17,28 @@ Use this playbook when updating roads or cameras. It is the canonical procedure;
 4. Check manifests with `npm run streams:check`; do not fetch media segments.
 5. Run focused tests, then one `npm test`. Commit and push are separate review actions.
 
+## Local audit UI
+
+- Start it with `npm run admin`; it must remain bound to `127.0.0.1` and must
+  never be copied into the GitHub Pages `docs/` output.
+- Save, validation, diff, commit, and push are separate actions. The Git helper
+  may stage only `docs/data/cameras.json` and must refuse unrelated tracked
+  changes.
+- Provider camera IDs and camera IDs are stable identities. A stream, road,
+  direction, or coordinate change disables the camera and returns it to
+  `needs_review` until verification succeeds.
+- Hard delete intentionally leaves no tombstone, so a later provider scrape can
+  rediscover the same stable provider ID. Use it only after confirming the
+  exact ID in the UI.
+
+## Programmatic location candidates
+
+Run `npm run camera:locate -- --id <camera-id>` to generate an OSM candidate
+report under `.review/`. The tool may query public Nominatim and Overpass,
+records exact OSM element URLs and projection distances, and never edits or
+enables camera data. A road landmark is evidence for review, not proof of the
+physical CCTV mounting point.
+
 ## Toll-gate cameras without KM
 
 Treat labels matching `GT`, `GERBANG TOL`, or `GARDU TOL` as toll-gate candidates, never as automatically verified cameras.

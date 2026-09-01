@@ -1,7 +1,6 @@
 import {
   createVideoController,
   nativeMediaErrorMessage,
-  prefersNativeHls,
 } from "./player.mjs";
 
 export const KOJA_TIMUR_DEFAULT_CAMERA = Object.freeze({
@@ -51,22 +50,21 @@ export function createQuickActionManager({
   actionIndex = 0,
   label = "Kamera",
 }) {
-  // On Safari, force native HLS so the video element retains its preloaded
-  // metadata from the HTML src + preload="auto". This lets
-  // webkitEnterFullscreen() succeed synchronously from the user gesture.
-  // HLS.js would take over via MSE, discarding the preloaded metadata and
-  // breaking the gesture chain required for iPhone fullscreen.
-  const effectiveHlsClass =
-    elements.video && prefersNativeHls(elements.video, hlsClass)
-      ? null
-      : hlsClass;
   let actions = DEFAULT_QUICK_ACTIONS;
+  let loadedCameraId = null;
+  let playerReady = false;
   let preloadedMetadata = false;
   let pendingFullscreen = false;
   const controller = createVideoController({
-    hlsClass: effectiveHlsClass,
+    hlsClass,
     video: elements.video,
-    onReady: () => {
+    onReady: (context = {}) => {
+      playerReady = true;
+      preloadedMetadata = true;
+      if (elements.video?.dataset) {
+        elements.video.dataset.playbackTechnology = context.technology ??
+          controller.getTechnology();
+      }
       setStatus(null);
       if (pendingFullscreen) {
         pendingFullscreen = false;
@@ -74,6 +72,7 @@ export function createQuickActionManager({
       }
     },
     onError: (error) => {
+      playerReady = false;
       pendingFullscreen = false;
       setStatus(error?.details
         ? `Kamera publik ${label} tidak dapat diputar.`
@@ -90,6 +89,9 @@ export function createQuickActionManager({
 
   function destroyQuickPlayer(options = {}) {
     pendingFullscreen = false;
+    loadedCameraId = null;
+    playerReady = false;
+    preloadedMetadata = false;
     controller.destroy({
       clearSource: !options.reuseSource,
       preservePip: options.preservePip,
@@ -106,29 +108,28 @@ export function createQuickActionManager({
     }
   }
 
-  async function preloadMetadata(camera) {
-    if (!camera?.streamUrl || preloadedMetadata) return;
-    try {
-      const res = await fetch(camera.streamUrl, { method: "HEAD" });
-      if (res.ok) preloadedMetadata = true;
-    } catch {
-      // Ignore preloading network failures; stream will retry on user tap
-    }
-  }
-
   async function init() {
     actions = await fetchQuickActions();
     const activeCamera = findActiveCamera();
-    if (activeCamera) {
-      void preloadMetadata(activeCamera);
+    if (activeCamera?.streamUrl && elements.video) {
+      loadedCameraId = activeCamera.id;
+      controller.load(activeCamera);
     }
   }
 
-  function playStream() {
+  function playStream({ forceReload = false } = {}) {
     if (!elements.video) return;
     const camera = findActiveCamera();
     setStatus(`Memuat stream ${label}…`);
     elements.video.muted = true;
+    if (!forceReload && playerReady && loadedCameraId === camera.id) {
+      controller.play()?.catch?.(() => {
+        setStatus(`Tekan Putar untuk membuka kamera ${label}.`);
+      });
+      return;
+    }
+    loadedCameraId = camera.id;
+    playerReady = false;
     if (!controller.load(camera, { continuePlaying: true })) {
       setStatus("Browser tidak mendukung format pemutaran video ini.");
     }
@@ -184,7 +185,7 @@ export function createQuickActionManager({
       });
     }
     if (elements.retry) {
-      elements.retry.addEventListener("click", playStream);
+      elements.retry.addEventListener("click", () => playStream({ forceReload: true }));
     }
   }
 

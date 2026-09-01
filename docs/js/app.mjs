@@ -197,15 +197,19 @@ function formatKm(km) {
 }
 
 function destroyPlayer(options = {}) {
+  resetPlayerLoad();
+  state.videoController?.destroy({
+    clearSource: !options.reuseSource,
+    preservePip: options.preservePip,
+  });
+}
+
+function resetPlayerLoad() {
   state.loadGeneration += 1;
   clearTimeout(state.loadTimer);
   state.loadTimer = null;
   clearTimeout(state.stallTimer);
   state.stallTimer = null;
-  state.videoController?.destroy({
-    clearSource: !options.reuseSource,
-    preservePip: options.preservePip,
-  });
 }
 
 function setPlayerReady(ready) {
@@ -235,10 +239,7 @@ async function playCamera(camera, options = {}) {
   const continuePlaying = options.forcePlay || state.playIntent;
   const muted = elements.video.muted;
   state.sourceChanging = true;
-  destroyPlayer({
-    preservePip: state.videoController?.isPipActive(),
-    reuseSource: true,
-  });
+  resetPlayerLoad();
   const generation = state.loadGeneration;
   setPlayerReady(false);
   clearPlaybackError();
@@ -263,8 +264,10 @@ async function playCamera(camera, options = {}) {
       ? "Kamera provisional aktif berdasarkan KM dan geometri OSM. Sistem menunggu posisi GPS melewati titik perkiraan."
       : "Kamera aktif. Sistem menunggu posisi terkonfirmasi setelah kamera ini.");
 
-  const onReady = () => {
+  const onReady = (context = {}) => {
     if (generation !== state.loadGeneration || state.playerReady) return;
+    elements.video.dataset.playbackTechnology = context.technology ??
+      state.videoController.getTechnology();
     clearTimeout(state.loadTimer);
     state.loadTimer = null;
     state.sourceChanging = false;
@@ -304,7 +307,9 @@ async function playCamera(camera, options = {}) {
     showPlaybackError(nativeMediaErrorMessage(elements.video.error));
   };
 
-  if (!state.videoController.load(camera, { continuePlaying, onError, onReady })) {
+  const loaded = state.videoController.load(camera, { continuePlaying, onError, onReady });
+  elements.video.dataset.playbackTechnology = state.videoController.getTechnology();
+  if (!loaded) {
     showPlaybackError("Browser ini tidak mendukung pemutaran HLS.");
   }
 }

@@ -56,6 +56,45 @@ editorial fields when `--merge` is used.
 Highway definitions will live in `docs/data/highways.geojson`. Coordinates use
 GeoJSON order: `[longitude, latitude]`.
 
+### Local camera audit app
+
+Run the write-capable audit UI only on the local machine:
+
+```sh
+npm run admin
+```
+
+Open `http://127.0.0.1:4175/admin/`. The service binds only to loopback and the
+admin assets are outside `docs/`, so GitHub Pages remains read-only. The UI can
+create, edit, verify, and hard-delete camera records; preview a public stream;
+and drag/resize the red A/B road region stored as normalized `viewRegions`.
+
+Saving changes never commits or pushes. The checkpoint panel runs the test
+suite and shows the allowlisted camera-data diff. Commit and push are separate,
+explicit actions. Commit is refused while any tracked file outside
+`docs/data/cameras.json` is dirty.
+
+Changing a verified camera's stream, road, direction, or coordinates
+automatically disables it and returns it to `needs_review`. Use the verify
+action or the existing `camera:verify`/`camera:verify-gate` commands after
+checking a public source.
+
+### Programmatic geography candidates
+
+Another agent can produce a sourced OSM review report without editing camera
+data:
+
+```sh
+npm run camera:locate -- --id CAMERA_ID
+```
+
+The command builds searches from the provider name, road, and KM metadata;
+queries public Nominatim and nearby Overpass toll/surveillance landmarks;
+projects candidates onto the committed road geometry; and writes a ranked
+report to `.review/<camera-id>-candidates.json`. Public responses are cached in
+`.review/osm-cache/`. A candidate is never called a verified CCTV coordinate
+and is never applied or enabled automatically.
+
 Highway definitions are configured in `data-source/highways.config.json`. Each
 entry pins its reviewed OSM source, directed start/end nodes, labels, and GPS
 thresholds. The browser receives only the generated static GeoJSON and never
@@ -197,22 +236,20 @@ available over a plain background. Combine it with demo mode using
 
 ### iPhone Safari player
 
-Safari receives the original public HLS playlist directly through its native
-`<video>` element; HLS.js is not placed in front of Safari's built-in HLS
-implementation. After selecting a road and direction, wait until **Buka pemutar
-video layar penuh** is enabled and tap it. On iPhone this opens the system video
-controller, which is the intended primary experience. The embedded video also
-keeps native controls as a fallback.
+On iOS 17.1 and newer, the pinned HLS.js player uses Managed Media Source when
+the browser and stream codecs support it. Camera changes transfer the existing
+MediaSource before loading the next playlist, so automatic switching does not
+clear the `<video>` element or recreate its full-screen/Picture-in-Picture
+geometry. Streams that cannot run through HLS.js fall back to Safari native HLS.
 
-The page deliberately omits `playsinline`, because Apple documents that iPhone
-video without that attribute uses the native full-screen controller. Playback
-is muted initially so a newly selected live camera has the best chance of
-resuming under Safari's media policies; sound can be changed from the native
-controls if the source includes audio.
+After selecting a road and direction, wait until **Buka pemutar video layar
+penuh** is enabled and tap it. Playback and full-screen entry begin from the
+same user gesture. The video remains muted initially and keeps native controls,
+inline playback, Picture-in-Picture, and AirPlay affordances where Safari makes
+them available.
 
-If a camera change causes iOS to leave full screen, the same launch button can
-be tapped again. This is an iOS user-gesture restriction: the page must not
-silently force full screen after an asynchronous GPS update.
+The hot-swap guarantee is scoped to iOS 17.1 and newer. Older Safari versions
+retain native HLS playback but require separate physical-device validation.
 
 ### Check public stream compatibility
 

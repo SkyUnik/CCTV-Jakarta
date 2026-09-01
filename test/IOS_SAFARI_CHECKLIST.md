@@ -7,25 +7,30 @@ site while driving.
 
 - Publish the `docs/` directory over HTTPS. GitHub Pages satisfies the secure
   context requirement for geolocation.
-- Test current stable iOS Safari on a physical iPhone. A desktop responsive
-  preview cannot prove native HLS decoding, GPS behavior, or the iOS system
-  full-screen controller.
+- Test iOS 17.1 or newer Safari on a physical iPhone. A desktop responsive
+  preview cannot prove Managed Media Source decoding, GPS behavior, PiP, or the
+  iOS system full-screen controller.
 - Keep `docs/data/cameras.json` unchanged until camera coordinates and A/B sides
   have been verified. Use `?demo=1` for player-only testing.
 
-## Native player
+## MMS hot-swap player
 
 1. Open `?demo=1` in Safari, select A, and wait for the full-screen button.
 2. Confirm **Buka pemutar video layar penuh** opens the iOS system player.
-3. Confirm the native Play/Pause, mute, seek/live-edge, AirPlay, rotation, and
-   Done controls behave normally.
-4. Exit full screen, reopen it, and confirm there is still exactly one video
+3. In Web Inspector, confirm the main player reports `hls-mms` rather than
+   falling back to `native` for a known HLS.js-compatible stream.
+4. Confirm Play/Pause, mute, live-edge, rotation, PiP, and Done controls behave
+   normally.
+5. Exit full screen, reopen it, and confirm there is still exactly one video
    playing.
-5. Change camera with Next. If iOS exits full screen during a source change,
-   confirm the launch button is available again; iOS requires a fresh tap.
-6. Lock and unlock the phone, then background and restore Safari. Confirm the
+6. While full screen remains open, switch across at least three cameras whose
+   streams have different aspect ratios. Confirm every image is fully contained,
+   centered, and never remains cropped to the previous stream's bounds.
+7. Repeat the same three-camera switch in PiP. Confirm PiP stays open, playback
+   resumes, and no `src` removal or `video.load()` occurs during the swap.
+8. Lock and unlock the phone, then background and restore Safari. Confirm the
    page does not create duplicate audio/video playback.
-7. Repeat once on Wi-Fi and once on cellular data.
+9. Repeat once on Wi-Fi and once on cellular data.
 
 ## Failure recovery
 

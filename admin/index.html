@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Local Camera Audit — CCTV Jakarta</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <header>
+      <div><strong>Local Camera Audit</strong><span>Loopback only • perubahan belum dipublikasikan</span></div>
+      <button id="new-camera" type="button">+ Kamera baru</button>
+    </header>
+    <main>
+      <aside class="camera-browser">
+        <div class="filters">
+          <input id="search" type="search" placeholder="Cari ID, nama, provider…" aria-label="Cari kamera">
+          <select id="road-filter" aria-label="Filter ruas"><option value="">Semua ruas</option></select>
+          <select id="status-filter" aria-label="Filter status">
+            <option value="">Semua status</option>
+            <option value="needs_review">Needs review</option>
+            <option value="verified">Verified</option>
+            <option value="provisional_stationing">Provisional KM</option>
+            <option value="provisional_landmark">Provisional landmark</option>
+          </select>
+        </div>
+        <p id="camera-count" class="muted"></p>
+        <div id="camera-list" class="camera-list"></div>
+      </aside>
+
+      <section class="editor" aria-labelledby="editor-title">
+        <div class="editor-heading">
+          <div><span class="eyebrow" id="editor-status">Pilih kamera</span><h1 id="editor-title">Camera audit</h1></div>
+          <span id="save-state" role="status"></span>
+        </div>
+        <form id="camera-form">
+          <div class="form-grid">
+            <label>ID<input id="camera-id" required readonly></label>
+            <label>Provider ID<input id="provider-id" readonly></label>
+            <label class="wide">Nama kamera<input id="camera-name" required></label>
+            <label class="wide">Stream `.m3u8`<input id="stream-url" type="url" required></label>
+            <label class="wide">Source page<input id="source-page" type="url"></label>
+            <label>Ruas<select id="highway-id" required></select></label>
+            <label>KM<input id="camera-km" type="number" min="0" step="0.001"></label>
+            <label>Arah<select id="camera-side"><option value="">Belum pasti</option><option>A</option><option>B</option></select></label>
+            <label>Status<input id="curation-status" readonly></label>
+            <label>Longitude<input id="longitude" type="number" step="any"></label>
+            <label>Latitude<input id="latitude" type="number" step="any"></label>
+            <label class="checkbox"><input id="enabled" type="checkbox"> Enabled</label>
+            <label class="wide">Catatan<textarea id="notes" rows="3"></textarea></label>
+          </div>
+
+          <section class="frame-audit" aria-labelledby="frame-title">
+            <div class="frame-toolbar">
+              <div><span class="eyebrow">Area ruas pada video</span><h2 id="frame-title">Kotak merah 50%</h2></div>
+              <select id="region-direction" aria-label="Arah region"><option>A</option><option>B</option></select>
+              <button id="region-left" type="button">50% kiri</button>
+              <button id="region-right" type="button">50% kanan</button>
+              <button id="region-confirm" type="button">Konfirmasi area</button>
+            </div>
+            <div class="video-stage" id="video-stage">
+              <video id="audit-video" controls muted playsinline preload="metadata"></video>
+              <div id="red-region" class="red-region"><strong id="region-label">Ruas</strong><i aria-hidden="true"></i></div>
+            </div>
+            <p class="muted">Drag box untuk memindahkan; drag titik kanan-bawah untuk resize. A default kiri, B default kanan.</p>
+          </section>
+
+          <div class="form-actions">
+            <button class="primary" id="save-camera" type="submit">Simpan perubahan</button>
+            <button id="verify-camera" type="button">Verifikasi koordinat</button>
+            <button class="danger" id="delete-camera" type="button">Hard delete</button>
+          </div>
+        </form>
+
+        <section class="publish" aria-labelledby="publish-title">
+          <div class="editor-heading"><div><span class="eyebrow">Checkpoint</span><h2 id="publish-title">Validate, diff, commit, push</h2></div><button id="refresh-git" type="button">Refresh diff</button></div>
+          <p id="git-summary" class="muted"></p>
+          <pre id="git-diff">Belum ada diff.</pre>
+          <div class="publish-actions">
+            <button id="run-tests" type="button">Jalankan npm test</button>
+            <input id="commit-message" placeholder="Commit message" aria-label="Commit message">
+            <button id="commit" type="button">Commit setelah review</button>
+            <button class="primary" id="push" type="button">Push current branch</button>
+          </div>
+          <pre id="command-output" aria-live="polite"></pre>
+        </section>
+      </section>
+    </main>
+    <script src="/site/vendor/hls.min.js"></script>
+    <script type="module" src="./admin.mjs"></script>
+  </body>
+</html>

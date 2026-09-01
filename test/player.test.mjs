@@ -7,7 +7,7 @@ import {
   fullscreenMethod,
   isPictureInPictureActive,
   nativeMediaErrorMessage,
-  prefersNativeHls,
+  playbackTechnology,
   supportsNativeHls,
 } from "../docs/js/player.mjs";
 
@@ -19,13 +19,27 @@ test("detects Safari native HLS using either registered MIME spelling", () => {
   assert.equal(supportsNativeHls({ canPlayType: () => "" }), false);
 });
 
-test("prefers native HLS only for Safari APIs or when HLS.js is unavailable", () => {
-  const hls = { isSupported: () => true };
-  const chromiumLike = { canPlayType: () => "maybe" };
-  const safariLike = { canPlayType: () => "maybe", webkitEnterFullscreen() {} };
-  assert.equal(prefersNativeHls(chromiumLike, hls), false);
-  assert.equal(prefersNativeHls(safariLike, hls), true);
-  assert.equal(prefersNativeHls(chromiumLike, { isSupported: () => false }), true);
+test("reports Managed Media Source separately from standard MSE", () => {
+  function ManagedMediaSource() {}
+  function MediaSource() {}
+  const video = { canPlayType: () => "probably" };
+  const mmsHls = {
+    getMediaSource: () => ManagedMediaSource,
+    isSupported: () => true,
+  };
+  const mseHls = {
+    getMediaSource: () => MediaSource,
+    isSupported: () => true,
+  };
+  assert.equal(
+    playbackTechnology(video, mmsHls, { ManagedMediaSource }),
+    "hls-mms",
+  );
+  assert.equal(
+    playbackTechnology(video, mseHls, { ManagedMediaSource }),
+    "hls-mse",
+  );
+  assert.equal(playbackTechnology(video, { isSupported: () => false }, {}), "native");
 });
 
 test("prefers the iPhone video full-screen API", async () => {
@@ -107,10 +121,12 @@ test("destroy with preservePip then load keeps PiP video playing", () => {
   assert.equal(removeCalls, 0, "src never removed during entire sequence");
 });
 
-test("HLS.js PiP switch destroys old instance and attaches new without clearing src", () => {
+test("HLS.js hot-swap reuses one attached instance without clearing the PiP element", () => {
   let hlsDestroys = 0;
   let hlsAttaches = 0;
   let hlsSources = [];
+  let hlsTransfers = 0;
+  const attachArguments = [];
   let removeCalls = 0;
   let videoLoadCalls = 0;
   const video = {
@@ -133,8 +149,15 @@ test("HLS.js PiP switch destroys old instance and attaches new without clearing 
     instanceCount += 1;
     this._listeners = {};
     this.on = (event, fn) => { this._listeners[event] = fn; };
-    this.attachMedia = () => { hlsAttaches += 1; };
+    this.attachMedia = (value) => {
+      hlsAttaches += 1;
+      attachArguments.push(value);
+    };
     this.loadSource = (url) => { hlsSources.push(url); };
+    this.transferMedia = () => {
+      hlsTransfers += 1;
+      return { media: video, mediaSource: {}, tracks: {} };
+    };
     this.destroy = () => { hlsDestroys += 1; };
   };
   originalHlsClass.isSupported = FakeHls.isSupported;
@@ -148,20 +171,90 @@ test("HLS.js PiP switch destroys old instance and attaches new without clearing 
   assert.equal(hlsAttaches, 1);
   assert.deepEqual(hlsSources, ["https://media.example/cam-1.m3u8"]);
 
-  // Switch during PiP — simulate auto-switch
-  controller.destroy({ preservePip: true, clearSource: false });
-  assert.equal(hlsDestroys, 1, "old HLS.js instance destroyed");
-  assert.equal(removeCalls, 0, "no src removal during PiP");
-
+  // Normal auto-switch keeps the MMS/MSE attachment and video element intact.
   controller.load({ streamUrl: "https://media.example/cam-2.m3u8" });
-  assert.equal(instanceCount, 2, "new HLS.js instance created");
-  assert.equal(hlsAttaches, 2, "new instance attached to same video");
+  assert.equal(instanceCount, 1, "HLS.js instance reused");
+  assert.equal(hlsTransfers, 1, "MediaSource transferred before URL change");
+  assert.equal(hlsAttaches, 2, "transferred MediaSource reattached without replacing video");
+  assert.equal(attachArguments[0], video);
+  assert.equal(attachArguments[1].media, video);
+  assert.equal(hlsDestroys, 0, "controller not destroyed during hot-swap");
   assert.deepEqual(hlsSources, [
     "https://media.example/cam-1.m3u8",
     "https://media.example/cam-2.m3u8",
   ]);
   assert.equal(videoLoadCalls, 0, "video.load() never called during PiP");
   assert.equal(removeCalls, 0, "src never cleared");
+
+  // A terminal destroy still releases the instance; a later load starts fresh.
+  controller.destroy({ preservePip: true, clearSource: false });
+  assert.equal(hlsDestroys, 1);
+  controller.load({ streamUrl: "https://media.example/cam-3.m3u8" });
+  assert.equal(instanceCount, 2, "destroy + load creates a fresh instance");
+  assert.equal(hlsAttaches, 3);
+});
+
+test("HLS.js recovers one fatal media error before reporting or falling back", () => {
+  let instance;
+  let recoveries = 0;
+  let errors = 0;
+  const video = {
+    paused: true,
+    canPlayType: () => "",
+  };
+  const FakeHls = function () {
+    instance = this;
+    this.listeners = {};
+    this.on = (event, fn) => { this.listeners[event] = fn; };
+    this.attachMedia = () => {};
+    this.loadSource = () => {};
+    this.recoverMediaError = () => { recoveries += 1; };
+    this.destroy = () => {};
+  };
+  FakeHls.isSupported = () => true;
+  FakeHls.Events = { MANIFEST_PARSED: "manifest", ERROR: "error" };
+  FakeHls.ErrorTypes = { MEDIA_ERROR: "mediaError" };
+
+  const controller = createVideoController({
+    video,
+    hlsClass: FakeHls,
+    onError: () => { errors += 1; },
+  });
+  controller.load({ streamUrl: "https://media.example/cam.m3u8" });
+  instance.listeners.error(null, { fatal: true, type: "mediaError" });
+  instance.listeners.error(null, { fatal: true, type: "mediaError" });
+  assert.equal(recoveries, 1, "only one in-place recovery attempted");
+  assert.equal(errors, 1, "second fatal error is surfaced");
+});
+
+test("late HLS events from the previous URL do not ready the new camera", () => {
+  let instance;
+  const ready = [];
+  const video = { paused: true, canPlayType: () => "" };
+  const FakeHls = function () {
+    instance = this;
+    this.listeners = {};
+    this.on = (event, fn) => { this.listeners[event] = fn; };
+    this.attachMedia = () => {};
+    this.loadSource = () => {};
+    this.transferMedia = () => ({ media: video, mediaSource: {}, tracks: {} });
+    this.destroy = () => {};
+  };
+  FakeHls.isSupported = () => true;
+  FakeHls.Events = { MANIFEST_PARSED: "manifest", ERROR: "error" };
+
+  const controller = createVideoController({ video, hlsClass: FakeHls });
+  controller.load(
+    { id: "one", streamUrl: "https://media.example/one.m3u8" },
+    { onReady: ({ camera }) => ready.push(camera.id) },
+  );
+  controller.load(
+    { id: "two", streamUrl: "https://media.example/two.m3u8" },
+    { onReady: ({ camera }) => ready.push(camera.id) },
+  );
+  instance.listeners.manifest(null, { url: "https://media.example/one.m3u8" });
+  instance.listeners.manifest(null, { url: "https://media.example/two.m3u8" });
+  assert.deepEqual(ready, ["two"]);
 });
 
 test("play and enterFullscreen are synchronously callable from one gesture", async () => {

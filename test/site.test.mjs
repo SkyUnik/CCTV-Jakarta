@@ -59,7 +59,7 @@ test("static page exposes the required accessible controls with relative assets"
   assert.equal($("#camera-video").is("[disablepictureinpicture]"), false);
   assert.equal($("#camera-video").is("[muted]"), true);
   assert.equal($("#camera-video").is("[controls]"), true);
-  assert.equal($("#camera-video").attr("preload"), "metadata");
+  assert.equal($("#camera-video").attr("preload"), "auto");
   assert.equal($("#camera-video").attr("x-webkit-airplay"), "allow");
   assert.equal($("#quick-camera-video").is("[disablepictureinpicture]"), false);
   assert.equal($("#jor-priuk-video").is("[disablepictureinpicture]"), false);
@@ -92,6 +92,8 @@ test("start and floating shortcut smoothly reveal step one without delaying GPS"
   assert.match(app, /elements\.restart\.addEventListener\("click",\s*restartSavedSelection\)/);
   assert.match(app, /function restartSavedSelection\(\)[\s\S]*const savedSelection[\s\S]*stopTracking\(\);[\s\S]*void openVideoPlayer\(\);\s*if \(state\.simulator\) startSimulatorTracking\(\);\s*else if \(!state\.demo\) startTracking\(\);/);
   assert.match(app, /message = "Pelacakan kamera via GPS: aktif"/);
+  assert.match(app, /async function playCamera\(camera, options = \{\}\)[\s\S]*resetPlayerLoad\(\);[\s\S]*state\.videoController\.load\(camera/);
+  assert.doesNotMatch(app, /async function playCamera\(camera, options = \{\}\)[\s\S]{0,500}destroyPlayer\(/);
 });
 
 test("manual camera selection and playback synchronize the map marker", async () => {

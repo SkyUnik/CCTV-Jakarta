@@ -5,10 +5,12 @@
   "type": "module",
   "description": "Privacy-first Jakarta toll CCTV player and safe public metadata collector",
   "scripts": {
+    "admin": "node scripts/admin-server.mjs",
     "camera:add": "node scripts/add-camera.mjs",
     "camera:verify": "node scripts/verify-camera.mjs",
     "camera:verify-gate": "node scripts/verify-gate-camera.mjs",
     "camera:provision": "node scripts/provision-cameras.mjs",
+    "camera:locate": "node scripts/locate-camera.mjs",
     "highway:build": "node scripts/build-highway.mjs",
     "scrape": "node scripts/scrape-binamarga.mjs",
     "serve": "node scripts/serve.mjs",

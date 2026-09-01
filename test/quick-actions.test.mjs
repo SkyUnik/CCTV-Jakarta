@@ -161,6 +161,46 @@ test("defers fullscreen to onReady when iPhone Safari video has no metadata yet"
   assert.equal(fullscreens, 1, "fullscreen entered from onReady after metadata loaded");
 });
 
+test("quick actions keep HLS.js enabled on MMS-capable iPhone Safari", async () => {
+  let instances = 0;
+  let attaches = 0;
+  const sources = [];
+  const FakeHls = function () {
+    instances += 1;
+    this.on = () => {};
+    this.attachMedia = () => { attaches += 1; };
+    this.loadSource = (url) => { sources.push(url); };
+    this.destroy = () => {};
+  };
+  FakeHls.isSupported = () => true;
+  FakeHls.Events = { MANIFEST_PARSED: "manifest", ERROR: "error" };
+
+  const elements = {
+    overlay: { hidden: true },
+    video: {
+      paused: true,
+      src: "",
+      canPlayType: () => "probably",
+      webkitEnterFullscreen() {},
+      play: async () => {},
+      pause() {},
+      removeAttribute() {},
+      load() {},
+    },
+    status: { hidden: true, textContent: "" },
+  };
+  const manager = createQuickActionManager({
+    elements,
+    cameras: [],
+    hlsClass: FakeHls,
+  });
+  await manager.init();
+
+  assert.equal(instances, 1, "Safari native HLS support does not disable HLS.js");
+  assert.equal(attaches, 1);
+  assert.deepEqual(sources, [DEFAULT_QUICK_ACTIONS[0].defaultCamera.streamUrl]);
+});
+
 test("quick action manager closes overlay when clicking outside card backdrop", async () => {
   let overlayHidden = false;
   let clickHandler = null;

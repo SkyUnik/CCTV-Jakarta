@@ -1,0 +1,36 @@
+:root { color-scheme: light; --ink:#13231e; --muted:#66736e; --line:#d7ded9; --green:#1f624f; --red:#d72222; --paper:#f4f5f0; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--paper); color:var(--ink); font:14px/1.45 system-ui,-apple-system,sans-serif; }
+button,input,select,textarea { font:inherit; }
+button { min-height:40px; border:1px solid var(--line); border-radius:9px; padding:0 12px; background:white; color:var(--ink); font-weight:750; cursor:pointer; }
+button.primary { background:var(--green); border-color:var(--green); color:white; }
+button.danger { border-color:#e8aaaa; color:#a41414; }
+header { position:sticky; top:0; z-index:10; display:flex; justify-content:space-between; align-items:center; gap:16px; padding:14px 20px; background:#10251f; color:white; }
+header strong,header span { display:block; } header span { color:#c8d8d1; font-size:12px; }
+main { display:grid; grid-template-columns:minmax(260px,340px) minmax(0,1fr); min-height:calc(100vh - 68px); }
+.camera-browser { border-right:1px solid var(--line); padding:16px; background:#eef1eb; }
+.filters { display:grid; gap:8px; } input,select,textarea { width:100%; border:1px solid #bcc8c1; border-radius:8px; padding:9px 10px; background:white; color:var(--ink); }
+.camera-list { display:grid; gap:7px; max-height:calc(100vh - 225px); overflow:auto; }
+.camera-item { width:100%; height:auto; min-height:56px; display:block; text-align:left; }
+.camera-item strong,.camera-item span { display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.camera-item span { margin-top:3px; color:var(--muted); font-size:11px; }
+.camera-item[aria-pressed="true"] { border-color:var(--green); box-shadow:0 0 0 2px #b9d9cc; }
+.editor { padding:20px; min-width:0; }
+.editor-heading,.frame-toolbar,.form-actions,.publish-actions { display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+h1,h2 { margin:2px 0 12px; line-height:1.15; } .eyebrow { color:var(--green); font-size:11px; font-weight:850; text-transform:uppercase; letter-spacing:.08em; }
+.muted { color:var(--muted); font-size:12px; }
+form,.publish { padding:18px; border:1px solid var(--line); border-radius:14px; background:white; box-shadow:0 6px 22px rgb(30 60 48 / 7%); }
+.form-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+label { color:var(--muted); font-size:11px; font-weight:750; } label input,label select,label textarea { display:block; margin-top:5px; color:var(--ink); font-weight:500; }
+.wide { grid-column:1/-1; } .checkbox { display:flex; align-items:center; gap:8px; color:var(--ink); } .checkbox input { width:auto; margin:0; }
+.frame-audit { margin:18px 0; padding-top:18px; border-top:1px solid var(--line); }
+.frame-toolbar { justify-content:flex-start; } .frame-toolbar > div { margin-right:auto; }
+.video-stage { position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; border-radius:12px; background:#111; touch-action:none; }
+.video-stage video { width:100%; height:100%; object-fit:contain; }
+.red-region { position:absolute; left:0; top:0; width:50%; height:100%; border:5px solid var(--red); background:rgb(215 34 34 / 8%); color:white; cursor:move; user-select:none; }
+.red-region strong { position:absolute; left:7px; top:7px; max-width:calc(100% - 14px); padding:4px 7px; background:var(--red); font-size:11px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.red-region i { position:absolute; right:-7px; bottom:-7px; width:22px; height:22px; border:3px solid white; border-radius:50%; background:var(--red); cursor:nwse-resize; }
+.form-actions { justify-content:flex-start; }
+.publish { margin-top:18px; } pre { max-height:320px; overflow:auto; padding:12px; border-radius:9px; background:#101814; color:#dbe9e2; font:11px/1.45 ui-monospace,monospace; white-space:pre-wrap; }
+.publish-actions { justify-content:flex-start; } .publish-actions input { width:min(360px,100%); }
+@media (max-width:800px) { main { grid-template-columns:1fr; } .camera-browser { border:0; } .camera-list { max-height:240px; } .editor { padding:12px; } .form-grid { grid-template-columns:1fr; } .wide { grid-column:auto; } }
