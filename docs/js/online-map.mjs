@@ -396,9 +396,20 @@ export function createOnlineMap(options) {
     });
   });
 
+  const mapCanvas = mapSection.querySelector(".map-canvas") ?? mapContainer;
+  const resizeObserver = typeof ResizeObserver !== "undefined" && mapCanvas
+    ? new ResizeObserver(() => {
+        if (!body.hidden) {
+          map.invalidateSize({ pan: false });
+        }
+      })
+    : null;
+  if (mapCanvas) resizeObserver?.observe(mapCanvas);
+
   return {
     leafletMap: map,
     destroy() {
+      resizeObserver?.disconnect();
       closeExpandedMap({ restoreFocus: false });
       document.removeEventListener("keydown", onDocumentKeydown);
       map.remove();

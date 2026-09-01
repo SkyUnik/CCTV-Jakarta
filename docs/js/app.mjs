@@ -701,7 +701,7 @@ function scheduleStallStatus() {
 
 function updateControls() {
   if (elements.openMultiCctv) {
-    elements.openMultiCctv.disabled = !(state.highway && state.direction);
+    elements.openMultiCctv.disabled = !state.highway;
   }
   const cameras = activeCameraList();
   if (!state.currentCamera || cameras.length === 0) {
@@ -1432,8 +1432,8 @@ async function loadData() {
       subtitleElement: elements.multiCctvSubtitle,
       titleElement: elements.multiCctvTitle,
       onSelectCamera: (camera) => {
-        state.manualMode = true;
-        playCamera(camera);
+        state.currentCamera = camera;
+        state.onlineMap?.selectCamera(camera.id);
       },
     });
     if (state.simulator) {
@@ -1493,15 +1493,16 @@ elements.previous.addEventListener("click", () => moveCamera(-1));
 elements.next.addEventListener("click", () => moveCamera(1));
 elements.openPlayer.addEventListener("click", openVideoPlayer);
 elements.openMultiCctv?.addEventListener("click", () => {
+  if (elements.video && !state.videoController?.isPipActive()) {
+    elements.video.pause?.();
+  }
   const roadCameras = publicCameras(
     state.cameras,
     selectedHighwayId(),
-    state.direction,
   );
   state.multiCctvManager?.open({
     highway: state.highway,
-    direction: state.direction ?? "A",
-    cameras: roadCameras.length > 0 ? roadCameras : state.usableCameras,
+    cameras: roadCameras.length > 0 ? roadCameras : state.cameras.filter((c) => c.highwayId === selectedHighwayId()),
     position: state.lastPosition,
     opener: elements.openMultiCctv,
   });

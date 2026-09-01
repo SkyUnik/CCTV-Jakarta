@@ -3,25 +3,63 @@ import { createVideoController, isPictureInPictureActive } from "./player.mjs";
 
 export const MAX_LIVE_CONTROLLERS = 4;
 
-export function orderCamerasForJourney(cameras = [], direction = "A") {
+export function isTollGate(camera) {
+  if (!camera) return false;
+  if (camera.cameraType === "toll_gate") return true;
+  const name = String(camera.name ?? "").toUpperCase();
+  return /\bGT\b|GERBANG TOL/.test(name);
+}
+
+export function orderCamerasForMultiCctv(cameras = []) {
   const list = [...cameras].filter((camera) =>
     camera &&
     typeof camera.streamUrl === "string" &&
-    camera.streamUrl.length > 0 &&
-    (Number.isFinite(camera.km) || Number.isFinite(camera.roadPositionM))
+    camera.streamUrl.length > 0
   );
-  if (direction === "B") {
+
+  return list.sort((a, b) => {
+    const isGateA = isTollGate(a);
+    const isGateB = isTollGate(b);
+
+    // GT first
+    if (isGateA && !isGateB) return -1;
+    if (!isGateA && isGateB) return 1;
+
+    // Within same group (GT or regular), sort by KM ascending
+    const kmA = Number.isFinite(a.km)
+      ? a.km
+      : (Number.isFinite(a.roadPositionM) ? a.roadPositionM / 1_000 : Number.POSITIVE_INFINITY);
+    const kmB = Number.isFinite(b.km)
+      ? b.km
+      : (Number.isFinite(b.roadPositionM) ? b.roadPositionM / 1_000 : Number.POSITIVE_INFINITY);
+
+    if (kmA !== kmB) return kmA - kmB;
+    return (a.name ?? "").localeCompare(b.name ?? "", "id") || a.id.localeCompare(b.id);
+  });
+}
+
+export function orderCamerasForJourney(cameras = [], direction = null) {
+  if (direction === "A" || direction === "B") {
+    const list = [...cameras].filter((camera) =>
+      camera &&
+      typeof camera.streamUrl === "string" &&
+      camera.streamUrl.length > 0 &&
+      (Number.isFinite(camera.km) || Number.isFinite(camera.roadPositionM))
+    );
+    if (direction === "B") {
+      return list.sort((a, b) => {
+        const kmA = Number.isFinite(a.km) ? a.km : (Number.isFinite(a.roadPositionM) ? a.roadPositionM / 1_000 : 0);
+        const kmB = Number.isFinite(b.km) ? b.km : (Number.isFinite(b.roadPositionM) ? b.roadPositionM / 1_000 : 0);
+        return kmB - kmA || b.id.localeCompare(a.id);
+      });
+    }
     return list.sort((a, b) => {
       const kmA = Number.isFinite(a.km) ? a.km : (Number.isFinite(a.roadPositionM) ? a.roadPositionM / 1_000 : 0);
       const kmB = Number.isFinite(b.km) ? b.km : (Number.isFinite(b.roadPositionM) ? b.roadPositionM / 1_000 : 0);
-      return kmB - kmA || b.id.localeCompare(a.id);
+      return kmA - kmB || a.id.localeCompare(b.id);
     });
   }
-  return list.sort((a, b) => {
-    const kmA = Number.isFinite(a.km) ? a.km : (Number.isFinite(a.roadPositionM) ? a.roadPositionM / 1_000 : 0);
-    const kmB = Number.isFinite(b.km) ? b.km : (Number.isFinite(b.roadPositionM) ? b.roadPositionM / 1_000 : 0);
-    return kmA - kmB || a.id.localeCompare(b.id);
-  });
+  return orderCamerasForMultiCctv(cameras);
 }
 
 function escapeKey(event) {
@@ -33,6 +71,17 @@ function formatKm(km) {
   const whole = Math.floor(km);
   const meters = Math.round((km - whole) * 1_000);
   return `KM ${String(whole).padStart(2, "0")}+${String(meters).padStart(3, "0")}`;
+}
+
+function formatDirection(camera) {
+  if (camera.cameraType === "toll_gate") return "Gerbang Tol";
+  if (camera.cameraType === "wide_view") return "Dua Arah (A/B)";
+  if (camera.side === "A") return "Arah A";
+  if (camera.side === "B") return "Arah B";
+  if (Array.isArray(camera.directions) && camera.directions.includes("A") && camera.directions.includes("B")) {
+    return "Arah A/B";
+  }
+  return "Arah —";
 }
 
 export function createMultiCctvManager({
@@ -47,11 +96,11 @@ export function createMultiCctvManager({
   onSelectCamera = () => {},
 } = {}) {
   let activeHighway = null;
-  let activeDirection = "A";
   let activeCameras = [];
   let currentPosition = null;
   let mapInstance = null;
   let mapLayers = null;
+  let mapResizeObserver = null;
   let isOpen = false;
   let openerButton = null;
 
@@ -73,8 +122,7 @@ export function createMultiCctvManager({
     video.playsInline = true;
     video.setAttribute("playsinline", "");
     video.setAttribute("webkit-playsinline", "");
-    video.setAttribute("preload", "auto");
-    video.src = camera.streamUrl;
+    video.setAttribute("preload", "none");
     video.setAttribute("aria-label", `Siaran CCTV ${camera.name}`);
     video.className = "multi-cctv-video";
 
@@ -90,7 +138,7 @@ export function createMultiCctvManager({
     mediaWrap.append(video, playOverlay);
 
     // Region overlay if configured
-    const region = viewRegionFor(camera, activeDirection);
+    const region = viewRegionFor(camera, camera.side ?? "A");
     if (region) {
       const regionBox = document.createElement("div");
       regionBox.className = "video-road-region multi-cctv-region";
@@ -115,7 +163,7 @@ export function createMultiCctvManager({
     name.textContent = camera.name;
     const meta = document.createElement("span");
     meta.className = "meta";
-    meta.textContent = `${formatKm(camera.km)} • Arah ${activeDirection}`;
+    meta.textContent = `${formatKm(camera.km)} • ${formatDirection(camera)}`;
     titleGroup.append(name, meta);
 
     const liveBadge = document.createElement("span");
@@ -125,8 +173,9 @@ export function createMultiCctvManager({
     footer.append(titleGroup, liveBadge);
     card.append(mediaWrap, footer);
 
-    card.addEventListener("click", () => {
+    card.addEventListener("click", (event) => {
       if (activeSlots.has(camera.id)) {
+        if (event.target === video) return;
         detachSlot(camera.id);
       } else {
         attachSlot(camera, card);
@@ -154,13 +203,20 @@ export function createMultiCctvManager({
       slot.pinned = true;
       return; // Never interrupt PiP
     }
-    slot.controller?.destroy({ clearSource: false, preservePip: false });
-    const playOverlay = slot.card.querySelector(".multi-cctv-play-overlay");
+    slot.controller?.destroy({ clearSource: true, preservePip: false });
+    if (slot.video) {
+      slot.video.removeAttribute("src");
+      slot.video.setAttribute("preload", "none");
+      slot.video.load?.();
+      slot.video.onloadeddata = null;
+      slot.video.onplaying = null;
+    }
+    const playOverlay = slot.card?.querySelector(".multi-cctv-play-overlay");
     if (playOverlay) {
       playOverlay.hidden = false;
       playOverlay.style.display = "flex";
     }
-    const badge = slot.card.querySelector(".multi-cctv-badge");
+    const badge = slot.card?.querySelector(".multi-cctv-badge");
     if (badge) {
       badge.textContent = "STANDBY";
       badge.classList.remove("is-live");
@@ -197,12 +253,13 @@ export function createMultiCctvManager({
       }
       if (badge) {
         badge.textContent = "LIVE";
-        badge.classList.add("is-live");
+        badge.classList?.add?.("is-live");
       }
       video?.play?.()?.catch?.(() => {});
     };
 
     if (video) {
+      video.setAttribute("preload", "auto");
       video.onloadeddata = revealVideo;
       video.onplaying = revealVideo;
     }
@@ -216,12 +273,12 @@ export function createMultiCctvManager({
       onError: () => {
         if (badge) {
           badge.textContent = "OFFLINE";
-          badge.classList.remove("is-live");
+          badge.classList?.remove?.("is-live");
         }
       },
     });
 
-    controller.load(camera, { continuePlaying: true });
+    controller.load(camera, { continuePlaying: true, reloadSource: true });
     revealVideo();
 
     activeSlots.set(camera.id, {
@@ -290,6 +347,16 @@ export function createMultiCctvManager({
       }).addTo(mapLayers);
     }
 
+    if (typeof ResizeObserver !== "undefined" && mapElement) {
+      mapResizeObserver?.disconnect();
+      mapResizeObserver = new ResizeObserver(() => {
+        if (isOpen && mapInstance) {
+          mapInstance.invalidateSize({ pan: false });
+        }
+      });
+      mapResizeObserver.observe(mapElement);
+    }
+
     const bounds = mapLayers.getBounds();
     if (bounds?.isValid?.()) {
       requestAnimationFrame(() => {
@@ -323,14 +390,13 @@ export function createMultiCctvManager({
     }
   }
 
-  function open({ highway, direction = "A", cameras = [], position = null, opener = null } = {}) {
+  function open({ highway, cameras = [], position = null, opener = null } = {}) {
     if (isOpen) return;
     isOpen = true;
     openerButton = opener;
     activeHighway = highway;
-    activeDirection = direction;
     currentPosition = position;
-    activeCameras = orderCamerasForJourney(cameras, direction);
+    activeCameras = orderCamerasForMultiCctv(cameras);
 
     document?.body?.classList?.add("multi-cctv-open");
     overlayElement.hidden = false;
@@ -339,10 +405,7 @@ export function createMultiCctvManager({
       titleElement.textContent = highway?.properties?.name ?? "Ruas Tol Jakarta";
     }
     if (subtitleElement) {
-      const dirText = direction === "A"
-        ? (highway?.properties?.directionA ?? "Arah A")
-        : (highway?.properties?.directionB ?? "Arah B");
-      subtitleElement.textContent = `Arah ${direction} (${dirText}) • ${activeCameras.length} CCTV Berurutan`;
+      subtitleElement.textContent = `Semua Arah • ${activeCameras.length} CCTV (Urutan GT & KM Terendah)`;
     }
 
     if (gridElement) {
@@ -350,7 +413,7 @@ export function createMultiCctvManager({
       if (activeCameras.length === 0) {
         const emptyNotice = document.createElement("p");
         emptyNotice.className = "multi-cctv-empty";
-        emptyNotice.textContent = "Belum ada CCTV terverifikasi untuk arah perjalanan ini.";
+        emptyNotice.textContent = "Belum ada CCTV untuk ruas tol ini.";
         gridElement.append(emptyNotice);
       } else {
         for (let i = 0; i < activeCameras.length; i += 1) {
@@ -376,13 +439,21 @@ export function createMultiCctvManager({
   function close() {
     if (!isOpen) return;
     isOpen = false;
+    mapResizeObserver?.disconnect();
     if (typeof globalThis.document?.removeEventListener === "function") {
       document.removeEventListener("keydown", handleKeydown);
     }
 
     for (const [id, slot] of activeSlots) {
       if (!slot.video || !isPictureInPictureActive(slot.video)) {
-        slot.controller?.destroy({ clearSource: false, preservePip: false });
+        slot.controller?.destroy({ clearSource: true, preservePip: false });
+        if (slot.video) {
+          slot.video.removeAttribute("src");
+          slot.video.setAttribute("preload", "none");
+          slot.video.load?.();
+          slot.video.onloadeddata = null;
+          slot.video.onplaying = null;
+        }
         activeSlots.delete(id);
       }
     }

@@ -4,14 +4,30 @@ import test from "node:test";
 import {
   MAX_LIVE_CONTROLLERS,
   createMultiCctvManager,
+  isTollGate,
   orderCamerasForJourney,
+  orderCamerasForMultiCctv,
 } from "../docs/js/multi-cctv.mjs";
 
 function createMockElement(tag = "div") {
   const listeners = new Map();
+  const attributes = new Map();
   return {
     tagName: tag.toUpperCase(),
     className: "",
+    classList: {
+      add(...cls) {
+        this._classes = this._classes || new Set();
+        cls.forEach((c) => this._classes.add(c));
+      },
+      remove(...cls) {
+        this._classes = this._classes || new Set();
+        cls.forEach((c) => this._classes.delete(c));
+      },
+      contains(c) {
+        return this._classes?.has(c) ?? false;
+      },
+    },
     dataset: {},
     style: {},
     children: [],
@@ -27,14 +43,35 @@ function createMockElement(tag = "div") {
     replaceChildren(...elements) {
       this.children = [...elements];
     },
-    querySelector() {
-      return createMockElement();
+    querySelector(selector) {
+      function findDescendant(node) {
+        for (const child of node.children) {
+          if (selector.startsWith(".") && (child.className?.includes(selector.slice(1)) || child.classList?.contains(selector.slice(1)))) {
+            return child;
+          }
+          if (selector.startsWith("#") && child.id === selector.slice(1)) {
+            return child;
+          }
+          const found = findDescendant(child);
+          if (found) return found;
+        }
+        return null;
+      }
+      return findDescendant(this) || createMockElement();
     },
     querySelectorAll() {
       return [];
     },
-    setAttribute() {},
-    removeAttribute() {},
+    setAttribute(k, v) {
+      attributes.set(k, String(v));
+    },
+    getAttribute(k) {
+      return attributes.get(k);
+    },
+    removeAttribute(k) {
+      attributes.delete(k);
+      if (k === "src") delete this.src;
+    },
     addEventListener(event, handler) {
       listeners.set(event, handler);
     },
@@ -48,6 +85,27 @@ function createMockElement(tag = "div") {
     remove() {},
   };
 }
+
+test("orderCamerasForMultiCctv puts GT first then regular cameras sorted by lowest KM", () => {
+  const mockCameras = [
+    { id: "cam-3", name: "KM 30", km: 30, streamUrl: "https://example.com/3.m3u8" },
+    { id: "gate-2", name: "GT Pasar Rebo 2", km: 21, cameraType: "toll_gate", streamUrl: "https://example.com/g2.m3u8" },
+    { id: "cam-1", name: "KM 10", km: 10, streamUrl: "https://example.com/1.m3u8" },
+    { id: "gate-1", name: "GT Fatmawati 1", km: 15, streamUrl: "https://example.com/g1.m3u8" },
+    { id: "cam-2", name: "KM 20", km: 20, streamUrl: "https://example.com/2.m3u8" },
+    { id: "cam-no-km", name: "Ruas Cilandak", km: null, streamUrl: "https://example.com/nokm.m3u8" },
+  ];
+
+  assert.equal(isTollGate(mockCameras[1]), true);
+  assert.equal(isTollGate(mockCameras[3]), true);
+  assert.equal(isTollGate(mockCameras[0]), false);
+
+  const ordered = orderCamerasForMultiCctv(mockCameras);
+  assert.deepEqual(
+    ordered.map((c) => c.id),
+    ["gate-1", "gate-2", "cam-1", "cam-2", "cam-3", "cam-no-km"],
+  );
+});
 
 test("orderCamerasForJourney sorts cameras ascending for A and descending for B based on kilometer", () => {
   const mockCameras = [
@@ -99,17 +157,39 @@ test("multi-cctv manager handles open/close, on-demand play toggling, and backdr
 
   manager.open({
     highway: { properties: { name: "Tol Jagorawi", directionA: "Ciawi" } },
-    direction: "A",
     cameras: [
-      { id: "c1", name: "KM 01", roadPositionM: 1000, streamUrl: "https://example.com/1.m3u8" },
-      { id: "c2", name: "KM 02", roadPositionM: 2000, streamUrl: "https://example.com/2.m3u8" },
+      { id: "c2", name: "KM 02", km: 2, streamUrl: "https://example.com/2.m3u8" },
+      { id: "g1", name: "GT Ciawi", km: 1, cameraType: "toll_gate", streamUrl: "https://example.com/g1.m3u8" },
+      { id: "c1", name: "KM 01", km: 1, streamUrl: "https://example.com/1.m3u8" },
     ],
   });
 
   assert.equal(manager.isOpen(), true);
   assert.equal(title.textContent, "Tol Jagorawi");
-  assert.match(subtitle.textContent, /Arah A/);
-  assert.equal(grid.children.length, 2);
+  assert.match(subtitle.textContent, /Semua Arah/);
+  assert.equal(grid.children.length, 3);
+  assert.equal(grid.children[0].dataset.cameraId, "g1");
+  assert.equal(grid.children[1].dataset.cameraId, "c1");
+  assert.equal(grid.children[2].dataset.cameraId, "c2");
+
+  // Initial standby cards do not preload or set src eagerly
+  const card0 = grid.children[0];
+  const video0 = card0.children[0].children[0];
+  assert.equal(video0.getAttribute("preload"), "none");
+  assert.equal(video0.src, undefined);
+  assert.equal(manager.getActiveSlots().size, 0);
+
+  // Click card to attach slot and start live stream
+  card0.dispatchEvent({ type: "click", target: card0 });
+  assert.equal(manager.getActiveSlots().size, 1);
+  assert.equal(video0.getAttribute("preload"), "auto");
+  assert.equal(video0.src, "https://example.com/g1.m3u8");
+
+  // Click card again to detach slot and clean up stream
+  card0.dispatchEvent({ type: "click", target: card0 });
+  assert.equal(manager.getActiveSlots().size, 0);
+  assert.equal(video0.getAttribute("preload"), "none");
+  assert.equal(video0.src, undefined);
 
   // Clicking backdrop closes modal
   overlay.dispatchEvent({ type: "click", target: overlay });

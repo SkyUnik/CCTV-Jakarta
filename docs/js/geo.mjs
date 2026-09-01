@@ -172,12 +172,13 @@ export function automaticCameras(cameras, highwayId, side) {
 }
 
 export function publicCameras(cameras, highwayId, side) {
-  const sorted = cameras
+  const sorted = (cameras ?? [])
     .filter((camera) =>
+      camera &&
       camera.highwayId === highwayId &&
       typeof camera.streamUrl === "string" &&
       camera.streamUrl.length > 0 &&
-      (camera.side === null || camera.side === side)
+      (side === undefined || camera.side === null || camera.side === side)
     )
     .sort((a, b) => {
       const kilometerA = Number.isFinite(a.km) ? a.km : Number.POSITIVE_INFINITY;

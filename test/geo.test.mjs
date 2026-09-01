@@ -49,6 +49,7 @@ test("manual camera lists include matching and unknown sides without enabling au
   ];
   assert.deepEqual(publicCameras(cameras, "road", "A").map((camera) => camera.id), ["a", "u"]);
   assert.deepEqual(publicCameras(cameras, "road", "B").map((camera) => camera.id), ["b", "u"]);
+  assert.deepEqual(publicCameras(cameras, "road").map((camera) => camera.id), ["b", "a", "u"]);
   assert.equal(verifiedCameras(cameras, "road", "A").length, 0);
   assert.equal(automaticCameras(cameras, "road", "A").length, 0);
 });
