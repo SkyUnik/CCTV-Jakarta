@@ -869,6 +869,7 @@ function selectHighway(feature, options = {}) {
   }
   updateJourneyStepper();
   renderHighwaySilhouette();
+  updateControls();
   if (state.lastPosition) updateProjectionForSelectedRoad(state.lastPosition);
   if (state.direction) {
     updateUsableCameras();

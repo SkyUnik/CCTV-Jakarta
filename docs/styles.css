@@ -227,14 +227,46 @@ h1 { font-size: clamp(2.8rem, 8vw, 5.8rem); line-height: .94; letter-spacing: -.
   margin-top: 4px;
   display: block;
 }
-#highway-result-count { font-size: .7rem; color: var(--muted); background: #f0f2eb; padding: 4px 9px; border-radius: 8px; font-weight: 800; white-space: nowrap; }
 .highway-picker-actions {
-  margin-top: -2px;
+  margin-top: 10px;
 }
-.highway-picker-actions .button {
+.highway-picker-actions #open-multi-cctv-button {
   width: 100%;
-  min-height: 48px;
-  font-size: .88rem;
+  min-height: 50px;
+  font-size: .92rem;
+  font-weight: 850;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  letter-spacing: -.01em;
+  transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.15s ease, box-shadow 0.18s ease;
+}
+.highway-picker-actions #open-multi-cctv-button:disabled {
+  background: #e8ebe4;
+  color: #8c9c94;
+  border: 1px solid #d2ded7;
+  cursor: not-allowed;
+  opacity: 0.6;
+  box-shadow: none;
+}
+.highway-picker-actions #open-multi-cctv-button:not(:disabled) {
+  background: #093427;
+  color: #e6fb73;
+  border: 1.5px solid #287a5f;
+  box-shadow: 0 4px 18px rgb(9 52 39 / 35%), 0 1px 3px rgb(0 0 0 / 20%);
+  cursor: pointer;
+}
+.highway-picker-actions #open-multi-cctv-button:not(:disabled):hover {
+  background: #0e4534;
+  border-color: #4ee0b0;
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgb(9 52 39 / 45%), 0 2px 6px rgb(0 0 0 / 25%);
+}
+.highway-picker-actions #open-multi-cctv-button:not(:disabled):active {
+  transform: translateY(0);
 }
 
 .highway-silhouette-wrap {
@@ -716,6 +748,7 @@ body.multi-cctv-open .floating-actions {
 .multi-cctv-card {
   display: flex;
   flex-direction: column;
+  min-height: 240px;
   background: #0e271f;
   border: 1px solid #1a4235;
   border-radius: 14px;
@@ -744,6 +777,7 @@ body.multi-cctv-open .floating-actions {
   padding: 9px 12px;
   background: #091c16;
   border-bottom: 1px solid #15382c;
+  flex: 0 0 auto;
 }
 .multi-cctv-card.is-gt .multi-cctv-card-header {
   background: #1c180e;
@@ -782,14 +816,13 @@ body.multi-cctv-open .floating-actions {
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
-  min-height: 160px;
-  height: 160px;
+  min-height: 180px;
   background: #05120e;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex: 0 0 160px;
+  flex: 0 0 auto;
 }
 .multi-cctv-video {
   width: 100%;
@@ -913,17 +946,19 @@ body.multi-cctv-open .floating-actions {
     border-radius: 0;
     border: 0;
   }
-  .multi-cctv-header {
-    padding: 10px 14px;
-  }
   .multi-cctv-grid {
     grid-template-columns: 1fr;
-    gap: 14px;
-    padding: 12px 14px 24px;
+    gap: 16px;
+    padding: 12px 14px 28px;
+  }
+  .multi-cctv-card {
+    min-height: 230px;
   }
   .multi-cctv-media {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    min-height: 180px;
     height: auto;
-    min-height: 0;
     flex: 0 0 auto;
   }
   .simulator-link-card { align-items: stretch; flex-direction: column; }
