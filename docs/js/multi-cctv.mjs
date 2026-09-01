@@ -107,7 +107,7 @@ export function createMultiCctvManager({
     card.className = `multi-cctv-card${isTollGate(camera) ? " is-gt" : ""}`;
     card.dataset.cameraId = camera.id;
     card.dataset.index = String(index);
-    card.style.minHeight = "230px";
+    card.style.minHeight = "280px";
 
     const header = document.createElement("div");
     header.className = "multi-cctv-card-header";
@@ -133,7 +133,7 @@ export function createMultiCctvManager({
 
     const mediaWrap = document.createElement("div");
     mediaWrap.className = "multi-cctv-media";
-    mediaWrap.style.minHeight = "180px";
+    mediaWrap.style.minHeight = "220px";
 
     const video = document.createElement("video");
     video.controls = true;
@@ -151,17 +151,14 @@ export function createMultiCctvManager({
 
     const playBtn = document.createElement("div");
     playBtn.className = "multi-cctv-play-btn";
+    playBtn.setAttribute("aria-label", "Putar siaran");
 
     const playIcon = document.createElement("span");
     playIcon.className = "multi-cctv-play-icon";
     playIcon.textContent = "▶";
     playIcon.setAttribute("aria-hidden", "true");
 
-    const playText = document.createElement("span");
-    playText.className = "multi-cctv-play-text";
-    playText.textContent = "Putar Siaran";
-
-    playBtn.append(playIcon, playText);
+    playBtn.append(playIcon);
     playOverlay.append(playBtn);
     mediaWrap.append(video, playOverlay);
 

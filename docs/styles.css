@@ -748,7 +748,7 @@ body.multi-cctv-open .floating-actions {
 .multi-cctv-card {
   display: flex;
   flex-direction: column;
-  min-height: 240px;
+  min-height: 270px;
   background: #0e271f;
   border: 1px solid #1a4235;
   border-radius: 14px;
@@ -815,8 +815,8 @@ body.multi-cctv-open .floating-actions {
 .multi-cctv-media {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
-  min-height: 180px;
+  aspect-ratio: 4 / 3;
+  min-height: 220px;
   background-color: #05140f;
   background-image:
     linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
@@ -855,30 +855,26 @@ body.multi-cctv-open .floating-actions {
 .multi-cctv-play-btn {
   display: flex;
   align-items: center;
-  gap: 8px;
-  background: rgb(8 33 26 / 88%);
-  border: 1.5px solid rgb(78 224 176 / 50%);
-  border-radius: 20px;
-  padding: 8px 16px;
-  color: #d6fbd0;
-  font-size: .8rem;
-  font-weight: 800;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgb(8 33 26 / 85%);
+  border: 1.5px solid rgb(78 224 176 / 60%);
   box-shadow: 0 6px 20px rgb(0 0 0 / 60%);
   transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
   backdrop-filter: blur(4px);
 }
 .multi-cctv-card:hover .multi-cctv-play-btn {
-  transform: scale(1.04);
+  transform: scale(1.1);
   background: rgb(12 48 38 / 95%);
-  border-color: rgb(78 224 176 / 85%);
-  color: #ffffff;
+  border-color: rgb(78 224 176 / 90%);
 }
 .multi-cctv-play-icon {
-  font-size: .82rem;
+  font-size: 1.1rem;
   color: #e6fb73;
-}
-.multi-cctv-play-text {
-  letter-spacing: -.01em;
+  line-height: 1;
+  margin-left: 2px;
 }
 
 .multi-cctv-card-footer {
@@ -967,12 +963,12 @@ body.multi-cctv-open .floating-actions {
     padding: 12px 14px 28px;
   }
   .multi-cctv-card {
-    min-height: 230px;
+    min-height: 280px;
   }
   .multi-cctv-media {
     width: 100%;
-    aspect-ratio: 16 / 9;
-    min-height: 180px;
+    aspect-ratio: 4 / 3;
+    min-height: 240px;
     height: auto;
     flex: 0 0 auto;
   }
