@@ -107,6 +107,7 @@ export function createMultiCctvManager({
     card.className = `multi-cctv-card${isTollGate(camera) ? " is-gt" : ""}`;
     card.dataset.cameraId = camera.id;
     card.dataset.index = String(index);
+    card.style.minHeight = "230px";
 
     const header = document.createElement("div");
     header.className = "multi-cctv-card-header";
@@ -132,6 +133,7 @@ export function createMultiCctvManager({
 
     const mediaWrap = document.createElement("div");
     mediaWrap.className = "multi-cctv-media";
+    mediaWrap.style.minHeight = "180px";
 
     const video = document.createElement("video");
     video.controls = true;
