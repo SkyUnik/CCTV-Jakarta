@@ -11,11 +11,14 @@ Use this playbook when updating roads or cameras. It is the canonical procedure;
 
 ## Routine camera refresh
 
-1. Run the configured road scraper with `npm run scrape -- --road <slug> --out .review/<slug>.json --merge docs/data/cameras.json`.
-2. Review additions, changes, missing streams, duplicate provider IDs, KM parsing, and A/B parsing.
-3. Merge only reviewed data. The scraper preserves `side`, `directions`, `cameraType`, coordinates, route position, enablement, curation status, notes, and location review.
-4. Check manifests with `npm run streams:check`; do not fetch media segments.
-5. Run focused tests, then one `npm test`. Commit and push are separate review actions.
+1. Create a review artifact first with `npm run scrape -- --road <slug> --out .review/<slug>.json --merge docs/data/cameras.json`.
+2. Review additions, removals, URL changes, duplicate provider IDs, KM parsing, and A/B parsing. A provider may rotate every `.m3u8` URL at once; confirm that stable provider IDs still map to the same labels before accepting it.
+3. Apply an accepted refresh with `npm run scrape -- --road <slug> --out docs/data/cameras.json --merge docs/data/cameras.json`. The scraper preserves `side`, `directions`, `cameraType`, coordinates, route position, enablement, curation status, notes, and location review.
+4. Keep the aggregate camera order stable when only one road is refreshed so the diff shows provider changes instead of unrelated JSON movement. Confirm that other roads and all editorial fields are semantically unchanged.
+5. Check manifests with `npm run streams:check -- --out docs/data/stream-compatibility.json`; do not fetch media segments. Treat the report as a time-limited pre-publish check, not a permanent availability guarantee.
+6. Run focused tests, then one `npm test`. Commit and push are separate review actions and require checkpoint approval.
+
+For Tol Dalam Kota (Cawang–Pluit), `<slug>` is `dalam-kota`. Refreshing this road should update the `sources` entry and the `scrapedAt` value of its provider records. A URL-only rotation must not alter provider camera IDs, labels, curation, direction review, coordinates, or enablement.
 
 ## Local audit UI
 
@@ -30,6 +33,17 @@ Use this playbook when updating roads or cameras. It is the canonical procedure;
 - Hard delete intentionally leaves no tombstone, so a later provider scrape can
   rediscover the same stable provider ID. Use it only after confirming the
   exact ID in the UI.
+
+## Player and multi-CCTV invariants
+
+- Keep Picture-in-Picture available on every video element. Never add `disablepictureinpicture`.
+- Automatic camera changes must preserve the existing video element and active PiP/full-screen geometry. Do not clear `src` or call `video.load()` before the replacement source is set. Reuse the HLS.js instance and transfer its media attachment when supported.
+- Set native `src` and `preload` synchronously before playback or full-screen calls made from a user gesture. Standby multi-CCTV cards keep the stream URL eagerly assigned with `preload="metadata"`; active cards switch to `preload="auto"`.
+- Multi-CCTV cards use native video controls without a custom play text or play overlay. Preserve `object-fit: contain`, the black video background, the 300 px card minimum, and the 250 px media/video minimum-height fallback unless a reviewed design change replaces them across desktop and mobile.
+- Preserve the current ordering contract: toll gates are grouped first; ordinary journey cameras follow KM order, ascending for A and descending for B. Wide-view cameras may serve both directions through `directions: ["A", "B"]`.
+- Keep the live-controller limit and never evict a stream that is active in PiP. Detaching an ordinary card may destroy its controller, but must restore its metadata thumbnail source.
+- When deployed CSS or JavaScript changes, bump the matching cache-busting query tokens in `docs/index.html`.
+- Player work requires unit/integration coverage for destroy + load lifecycle, HLS.js instance reuse/swapping, PiP-safe automatic switching, and synchronous user-gesture playback. Multi-CCTV changes also require ordering, controller-limit, detach/restore, and layout-invariant coverage.
 
 ## Programmatic location candidates
 

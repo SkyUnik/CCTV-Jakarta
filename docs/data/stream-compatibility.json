@@ -1,21 +1,31 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-08-01T03:24:35.536Z",
+  "checkedAt": "2026-09-02T15:48:47.565Z",
   "sourceFile": "docs/data/cameras.json",
-  "requestedOrigin": "https://skyunik.github.io",
+  "requestedOrigin": "https://example.github.io",
   "scope": "Public HLS playlists only; no media segments requested",
   "summary": {
-    "uniqueStreams": 84,
-    "validManifests": 66,
-    "safariNativeCandidates": 66,
-    "hlsJsCandidates": 66
+    "uniqueStreams": 226,
+    "validManifests": 119,
+    "safariNativeCandidates": 119,
+    "hlsJsCandidates": 119
   },
   "checks": [
     {
       "cameraIds": [
-        "binamarga-jakarta-bogor-ciawi-15"
+        "binamarga-jorr-w2u-ulujami-kembangan-257"
       ],
-      "url": "https://jmlive.jasamarga.com/hls/1/a331bd2a-0af7-401e-926e-a7f73846084e/index.m3u8",
+      "url": "https://jmlive.jasamarga.com/hls/10/2283ae2e-ce70-4ec3-b487-d7bde9495981/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-w2u-ulujami-kembangan-258"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/10/50eedc30-8242-497d-9603-e7108b62a011/index.m3u8",
       "status": 502,
       "contentType": "text/html",
       "contentLength": 497,
@@ -31,25 +41,1763 @@
     },
     {
       "cameraIds": [
-        "binamarga-jakarta-bogor-ciawi-592"
+        "binamarga-jorr-w2u-ulujami-kembangan-259"
       ],
-      "url": "https://jmlive.jasamarga.com/hls/1/55a848f4-a1cc-470c-8ff4-76d166abd76e/index.m3u8",
+      "url": "https://jmlive.jasamarga.com/hls/10/b4f2ea70-3f9c-4a19-ab0a-2bb5ab8eb7ee/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-w2u-ulujami-kembangan-260"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/10/2f37d469-b98b-4d9d-af0f-dabd6bdf3312/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-w2u-ulujami-kembangan-261"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/10/c96d6aad-4a0f-420d-a0c1-38c71988419d/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-w2u-ulujami-kembangan-262"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/10/d9df193b-71f3-4be0-83fa-ab9efdf719ba/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-w2u-ulujami-kembangan-263"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/10/0559d3f1-df83-4aae-a405-5b3acdc08e47/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-w2u-ulujami-kembangan-264"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/10/6a3100de-11eb-4ec0-81e0-1ea3b5783674/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-w2u-ulujami-kembangan-265"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/10/bbec57da-6e20-464a-b30c-48af478653bd/index.m3u8",
+      "status": 502,
+      "contentType": "text/html",
+      "contentLength": 497,
+      "corsAllowOrigin": null,
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false,
+      "warnings": [
+        "unexpected_content_type:text/html",
+        "cors_not_confirmed",
+        "invalid_hls_manifest"
+      ]
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-w2u-ulujami-kembangan-266"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/10/0f65988e-fb05-41fb-a142-34b77ef952ad/index.m3u8",
+      "status": 502,
+      "contentType": "text/html",
+      "contentLength": 497,
+      "corsAllowOrigin": null,
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false,
+      "warnings": [
+        "unexpected_content_type:text/html",
+        "cors_not_confirmed",
+        "invalid_hls_manifest"
+      ]
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-w2u-ulujami-kembangan-267"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/10/a61e9ac5-0271-49ac-8690-28a35d85495c/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-w2s-pondok-ranji-ulujami-pondok-pinang-244",
+        "binamarga-jorr-w2s-pondok-ranji-ulujami-pondok-pinang-245"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/9/309e0037-e792-4973-ad09-5eb00573e6a2/index.m3u8",
+      "status": 502,
+      "contentType": "text/html",
+      "contentLength": 497,
+      "corsAllowOrigin": null,
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false,
+      "warnings": [
+        "unexpected_content_type:text/html",
+        "cors_not_confirmed",
+        "invalid_hls_manifest"
+      ]
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-w2s-pondok-ranji-ulujami-pondok-pinang-246",
+        "binamarga-jorr-w2s-pondok-ranji-ulujami-pondok-pinang-247"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/9/6fe7a188-e098-4d83-a738-ab923dc8dbf9/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-w2s-pondok-ranji-ulujami-pondok-pinang-248",
+        "binamarga-jorr-w2s-pondok-ranji-ulujami-pondok-pinang-249"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/9/44cbb63e-3be8-4f4c-969c-24fea64fb945/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-w2s-pondok-ranji-ulujami-pondok-pinang-250",
+        "binamarga-jorr-w2s-pondok-ranji-ulujami-pondok-pinang-251"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/9/5953a45b-425d-4b56-9924-20fdc80478cd/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-w2s-pondok-ranji-ulujami-pondok-pinang-252",
+        "binamarga-jorr-w2s-pondok-ranji-ulujami-pondok-pinang-253"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/9/e83d3fb8-3e75-4a50-98d2-1027a72beaa1/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-w2s-pondok-ranji-ulujami-pondok-pinang-254",
+        "binamarga-jorr-w2s-pondok-ranji-ulujami-pondok-pinang-255"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/9/0329931b-0bda-4273-948f-dbb26e3e2a3d/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-w2s-pondok-ranji-ulujami-pondok-pinang-256"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/9/afdbb1ad-1cd2-40f0-8ef4-64f4b083fd9f/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-w1-914"
+      ],
+      "url": "https://cctvjorrw1.com/JLB/KM8+430A.m3u8",
+      "status": 404,
+      "contentType": "text/html",
+      "contentLength": null,
+      "corsAllowOrigin": null,
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false,
+      "warnings": [
+        "unexpected_content_type:text/html",
+        "cors_not_confirmed",
+        "invalid_hls_manifest"
+      ]
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-w1-1256"
+      ],
+      "url": "https://cctvjorrw1.com/KM/7+950B.m3u8",
+      "status": 404,
+      "contentType": "text/html",
+      "contentLength": null,
+      "corsAllowOrigin": null,
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false,
+      "warnings": [
+        "unexpected_content_type:text/html",
+        "cors_not_confirmed",
+        "invalid_hls_manifest"
+      ]
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-w1-1257"
+      ],
+      "url": "https://cctvjorrw1.com/JLB/KM4+380B.m3u8",
+      "status": 404,
+      "contentType": "text/html",
+      "contentLength": null,
+      "corsAllowOrigin": null,
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false,
+      "warnings": [
+        "unexpected_content_type:text/html",
+        "cors_not_confirmed",
+        "invalid_hls_manifest"
+      ]
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-w1-1258"
+      ],
+      "url": "https://cctvjorrw1.com/JLB/KM3+415B.m3u8",
+      "status": 404,
+      "contentType": "text/html",
+      "contentLength": null,
+      "corsAllowOrigin": null,
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false,
+      "warnings": [
+        "unexpected_content_type:text/html",
+        "cors_not_confirmed",
+        "invalid_hls_manifest"
+      ]
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-w1-1264"
+      ],
+      "url": "https://cctvjorrw1.com/KM/0+500B.m3u8",
+      "status": 404,
+      "contentType": "text/html",
+      "contentLength": null,
+      "corsAllowOrigin": null,
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false,
+      "warnings": [
+        "unexpected_content_type:text/html",
+        "cors_not_confirmed",
+        "invalid_hls_manifest"
+      ]
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-w1-1521"
+      ],
+      "url": "https://cctvjorrw1.com/JLB/KM4+900B.m3u8",
+      "status": 404,
+      "contentType": "text/html",
+      "contentLength": null,
+      "corsAllowOrigin": null,
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false,
+      "warnings": [
+        "unexpected_content_type:text/html",
+        "cors_not_confirmed",
+        "invalid_hls_manifest"
+      ]
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-w1-1522"
+      ],
+      "url": "https://cctvjorrw1.com/JLB/KM3+415A.m3u8",
+      "status": 404,
+      "contentType": "text/html",
+      "contentLength": null,
+      "corsAllowOrigin": null,
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false,
+      "warnings": [
+        "unexpected_content_type:text/html",
+        "cors_not_confirmed",
+        "invalid_hls_manifest"
+      ]
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-810"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/805476032194386565347579.m3u8",
       "status": 206,
-      "contentType": "text/plain",
-      "contentLength": 325,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-796"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/965292045493317236595034.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-797"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/768053906099639875515809.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-801"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/039381128256008706551669.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-802"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/090097396103176470086786.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-803"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/199446466305883459721900.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-804"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/548853102262453987779962.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-805"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/309430648597231213602103.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-806"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/746991492646583252398044.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-807"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/146024230666959414726933.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-808"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/452218312235468702302329.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-809"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/854107383579084611495985.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-795"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/178201133461271928605115.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-811"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/329355223439296950556355.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-812"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/882624657831398134353315.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-813"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/338106711025024740618299.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-814"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/235783955983767649922256.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-815"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/742441725283948460839902.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-816"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/531345685980475209810923.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-817"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/977652092975610429297766.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 350,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-818"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/303549026471898651386718.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 350,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-819"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/298760837680959605712264.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-820"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/542240865799532088567034.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-784"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/743206696886685995011480.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-773"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/645733666909706688403926.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-774"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/464822683082385104405863.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 349,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-775"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/837865507132921558450011.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-776"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/420058855294412322884038.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-777"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/501026346597024351642009.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-778"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/439272921460954347649828.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-779"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/720556408093325199948146.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-780"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/786252567929925275184104.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 350,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-781"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/288999494098565239566328.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-782"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/977760504019242121012038.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-783"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/052053429007064876625130.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-772"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/314944433014333275671534.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-785"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/977787495230088227640516.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-786"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/269363542266933731794240.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-787"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/121810470572829194057319.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-788"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/271820726275436138198288.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-789"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/101502919369166746058073.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-790"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/222888349210580537521273.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-791"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/529068807902101265499497.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-792"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/179954112963766001683574.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-793"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/393537034871811406318656.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-s-794"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/108824399705771324185498.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-e-bambu-apus-rorotan-235"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/8/313a0a5d-2609-47ae-a34d-fea4b69283ad/index.m3u8",
+      "status": 502,
+      "contentType": "text/html",
+      "contentLength": 497,
+      "corsAllowOrigin": null,
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false,
+      "warnings": [
+        "unexpected_content_type:text/html",
+        "cors_not_confirmed",
+        "invalid_hls_manifest"
+      ]
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-e-bambu-apus-rorotan-227"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/8/fd7ba507-9cf8-4687-863e-5bf3512c14d4/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-e-bambu-apus-rorotan-228"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/8/beadb569-a148-4c38-9d86-a3b3aad932aa/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-e-bambu-apus-rorotan-229"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/8/22f4eba9-0995-46f3-93e3-cdc52f731ca9/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-e-bambu-apus-rorotan-230"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/8/53373402-431f-4a3f-80e1-b00f351a572e/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-e-bambu-apus-rorotan-232"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/8/05dce211-65c5-4a64-8c96-3357761e03c2/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-e-bambu-apus-rorotan-233"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/8/4a0bd5e6-e345-4c0b-823d-268f3176a7b6/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-e-bambu-apus-rorotan-237"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/8/d6203224-482e-44aa-9ef0-778f5b0863e9/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-e-bambu-apus-rorotan-239"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/8/7b19c65f-a19c-4428-aa4f-54ca5fde6bd6/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-e-bambu-apus-rorotan-241"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/8/b6383f6a-9d74-40a7-b186-18eae124516a/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-e-bambu-apus-rorotan-242"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/8/3a9286c7-3290-4415-be21-a2c510c2e5e0/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-e-bambu-apus-rorotan-243"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/8/1649e655-08f7-4999-b79f-0af9941b5087/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-e-bambu-apus-rorotan-218"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/8/397849a9-10f5-445b-95f7-f7fe2a869e4f/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-e-bambu-apus-rorotan-210"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/8/5a122359-e2a6-4019-bb08-e0b6068dde7d/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-e-bambu-apus-rorotan-211"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/8/d4f6b93b-22af-423b-a669-b633cf47a701/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-e-bambu-apus-rorotan-213"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/8/c5332715-203f-4b75-b471-575e1aee07e5/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-e-bambu-apus-rorotan-215"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/8/fcecfd64-46a4-48da-a71b-e4fb5ae4c467/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-e-bambu-apus-rorotan-217"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/8/be6df931-f8f8-473e-886d-dd0db5438bfc/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-e-bambu-apus-rorotan-209"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/8/5b03ecde-f516-4e3b-92ca-557bf7ec9259/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-e-bambu-apus-rorotan-219"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/8/cec36e31-aa41-416f-a64f-2d8b22a73df1/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-e-bambu-apus-rorotan-220"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/8/be31e7db-65f8-4dac-9246-17ab1b6d872d/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-e-bambu-apus-rorotan-222"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/8/cac0665f-f613-4b99-9ec6-3bb11baef649/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-e-bambu-apus-rorotan-224"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/8/28b67b05-8bf2-422e-9608-afd5550a63b4/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-2-serpong-kunciran-466"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/28/33b8aaa3-c340-45c5-ae80-d9d7f2e5eba7/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-2-serpong-kunciran-467"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/28/e4cc134e-2935-4e39-a422-3cdfa37e0608/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-2-serpong-kunciran-468"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/28/3265984d-da85-4458-87d0-ddeb551c36a9/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-2-serpong-kunciran-469"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/28/3835cfac-4aa6-434b-812d-f78a876cce64/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-2-serpong-kunciran-470"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/28/7fc2bfd3-49f4-4065-88d6-f39efaff5488/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-2-serpong-kunciran-471"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/28/d543a871-7dc8-4648-9cf1-da443b58e2ae/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-2-serpong-kunciran-472"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/28/3ebe03ca-a1e7-4d75-ab64-b9e68adfd5e4/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-2-serpong-kunciran-473"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/28/82a76e44-44d5-4be6-a63f-895535fd4e23/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-2-serpong-cinere-559"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/32/7dd41f45-09b1-4d22-80f8-aad01c16bd70/index.m3u8",
+      "status": 503,
+      "contentType": "text/html",
+      "contentLength": 286,
+      "corsAllowOrigin": null,
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false,
+      "warnings": [
+        "unexpected_content_type:text/html",
+        "cors_not_confirmed",
+        "invalid_hls_manifest"
+      ]
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-2-serpong-cinere-560"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/32/a7370cb6-dcbf-4272-8a20-6f4b37d6e79a/index.m3u8",
+      "status": 503,
+      "contentType": "text/html",
+      "contentLength": 286,
+      "corsAllowOrigin": null,
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false,
+      "warnings": [
+        "unexpected_content_type:text/html",
+        "cors_not_confirmed",
+        "invalid_hls_manifest"
+      ]
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-2-serpong-cinere-561"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/32/0444943c-0b51-45d2-84c3-c1e674f78aca/index.m3u8",
+      "status": 502,
+      "contentType": "text/html",
+      "contentLength": 497,
+      "corsAllowOrigin": null,
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false,
+      "warnings": [
+        "unexpected_content_type:text/html",
+        "cors_not_confirmed",
+        "invalid_hls_manifest"
+      ]
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-2-kunciran-cengkareng-562"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/33/14435a60-e36a-4a2b-ac9e-495c49cfd8af/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-2-kunciran-cengkareng-563"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/33/66248b3f-0bc6-476d-b1ec-4967749e5d8a/index.m3u8",
+      "status": 502,
+      "contentType": "text/html",
+      "contentLength": 497,
+      "corsAllowOrigin": null,
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false,
+      "warnings": [
+        "unexpected_content_type:text/html",
+        "cors_not_confirmed",
+        "invalid_hls_manifest"
+      ]
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-2-kunciran-cengkareng-564"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/33/c2db94ca-4291-44aa-a057-b47680f3b15b/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jorr-2-kunciran-cengkareng-565"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/33/ea4cc2c9-274f-42ac-b334-c343ecbaeaad/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jakarta-tangerang-73"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/4/ff334e49-48ad-48de-9cee-21ea1cc85b4e/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jakarta-tangerang-74"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/4/dbb1db02-ba40-4922-a6e9-a6e79faf1db5/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jakarta-tangerang-75",
+        "binamarga-jakarta-tangerang-76"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/4/a27afb65-c042-4fa4-94d7-518b96492c42/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jakarta-tangerang-77",
+        "binamarga-jakarta-tangerang-78"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/4/ffd733bc-514b-4f25-a7d8-691d5af9a8e0/index.m3u8",
+      "status": 502,
+      "contentType": "text/html",
+      "contentLength": 497,
+      "corsAllowOrigin": null,
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false,
+      "warnings": [
+        "unexpected_content_type:text/html",
+        "cors_not_confirmed",
+        "invalid_hls_manifest"
+      ]
+    },
+    {
+      "cameraIds": [
+        "binamarga-jakarta-tangerang-79",
+        "binamarga-jakarta-tangerang-80"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/4/9810e63c-0bae-421e-8678-a66366dd1647/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jakarta-tangerang-81"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/4/710edb3e-5de3-41c5-b313-4a7912f9dac1/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jakarta-tangerang-82"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/4/4e1090d4-e803-4339-a906-44b2890b0dc5/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jakarta-tangerang-83"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/4/38db8757-5a66-4d94-b2b9-629f8ed7a3fc/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jakarta-tangerang-84",
+        "binamarga-jakarta-tangerang-85"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/4/faa82474-3436-4413-bd4c-fec26eb91e70/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jakarta-tangerang-86"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/4/180d4ccd-d2c2-42f3-8ef1-950b1190d0ad/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jakarta-tangerang-87"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/4/254c0732-9f28-4734-ad91-83fb75483dce/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-depok-antasari-667"
+      ],
+      "url": "https://cctv.cctvdesari.online/2/video/stream.m3u8",
+      "error": "fetch failed",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-depok-antasari-1252"
+      ],
+      "url": "https://cctv.cctvdesari.online/1/video/stream.m3u8",
+      "error": "fetch failed",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-depok-antasari-1300"
+      ],
+      "url": "https://cctv.cctvdesari.online/3/video/stream.m3u8",
+      "error": "fetch failed",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-bekasi-cawang-kampung-melayu-892"
+      ],
+      "url": "https://cctv.kkdm.co.id/api/cctv/1/39/index.m3u8",
+      "status": 200,
+      "contentType": "application/octet-stream",
+      "contentLength": 409,
       "corsAllowOrigin": "*",
       "validManifest": true,
       "safariNativeCandidate": true,
       "hlsJsCandidate": true,
       "warnings": [
-        "unexpected_content_type:text/plain"
+        "unexpected_content_type:application/octet-stream"
       ]
+    },
+    {
+      "cameraIds": [
+        "binamarga-bekasi-cawang-kampung-melayu-1249"
+      ],
+      "url": "https://cctv.kkdm.co.id/api/cctv/1/37/index.m3u8",
+      "status": 200,
+      "contentType": "application/octet-stream",
+      "contentLength": 409,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": [
+        "unexpected_content_type:application/octet-stream"
+      ]
+    },
+    {
+      "cameraIds": [
+        "binamarga-bekasi-cawang-kampung-melayu-1250"
+      ],
+      "url": "https://cctv.kkdm.co.id/api/cctv/1/35/index.m3u8",
+      "status": 200,
+      "contentType": "application/octet-stream",
+      "contentLength": 409,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": [
+        "unexpected_content_type:application/octet-stream"
+      ]
+    },
+    {
+      "cameraIds": [
+        "binamarga-bekasi-cawang-kampung-melayu-1308"
+      ],
+      "url": "https://cctv.kkdm.co.id/api/cctv/3/42/index.m3u8",
+      "status": 200,
+      "contentType": "application/octet-stream",
+      "contentLength": 409,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": [
+        "unexpected_content_type:application/octet-stream"
+      ]
+    },
+    {
+      "cameraIds": [
+        "binamarga-bekasi-cawang-kampung-melayu-1309"
+      ],
+      "url": "https://cctv.kkdm.co.id/api/cctv/1/3/index.m3u8",
+      "status": 200,
+      "contentType": "application/octet-stream",
+      "contentLength": 409,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": [
+        "unexpected_content_type:application/octet-stream"
+      ]
+    },
+    {
+      "cameraIds": [
+        "binamarga-bekasi-cawang-kampung-melayu-1310"
+      ],
+      "url": "https://cctv.kkdm.co.id/api/cctv/1/4/index.m3u8",
+      "status": 200,
+      "contentType": "application/octet-stream",
+      "contentLength": 409,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": [
+        "unexpected_content_type:application/octet-stream"
+      ]
+    },
+    {
+      "cameraIds": [
+        "binamarga-bekasi-cawang-kampung-melayu-1313"
+      ],
+      "url": "https://cctv.kkdm.co.id/api/cctv/1/40/index.m3u8",
+      "status": 200,
+      "contentType": "application/octet-stream",
+      "contentLength": 409,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": [
+        "unexpected_content_type:application/octet-stream"
+      ]
+    },
+    {
+      "cameraIds": [
+        "binamarga-bekasi-cawang-kampung-melayu-1314"
+      ],
+      "url": "https://cctv.kkdm.co.id/api/cctv/1/50/index.m3u8",
+      "status": 200,
+      "contentType": "application/octet-stream",
+      "contentLength": 409,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": [
+        "unexpected_content_type:application/octet-stream"
+      ]
+    },
+    {
+      "cameraIds": [
+        "binamarga-bekasi-cawang-kampung-melayu-1315"
+      ],
+      "url": "https://cctv.kkdm.co.id/api/cctv/1/47/index.m3u8",
+      "status": 200,
+      "contentType": "application/octet-stream",
+      "contentLength": 409,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": [
+        "unexpected_content_type:application/octet-stream"
+      ]
+    },
+    {
+      "cameraIds": [
+        "binamarga-bekasi-cawang-kampung-melayu-1326"
+      ],
+      "url": "https://cctv.kkdm.co.id/api/cctv/1/1/index.m3u8",
+      "status": 200,
+      "contentType": "application/octet-stream",
+      "contentLength": 409,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": [
+        "unexpected_content_type:application/octet-stream"
+      ]
+    },
+    {
+      "cameraIds": [
+        "binamarga-cawang-tj-priok-ancol-timur-jembatan-tigapluit-800"
+      ],
+      "url": "https://cctv.citramarga.com/hls/cam3-interchange-pluit/stream.m3u8",
+      "status": 206,
+      "contentType": "application/vnd.apple.mpegurl",
+      "contentLength": 184,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-cawang-tj-priok-ancol-timur-jembatan-tigapluit-845"
+      ],
+      "url": "https://cctv.citramarga.com/hls/cam2-interchange-priok/stream.m3u8",
+      "status": 206,
+      "contentType": "application/vnd.apple.mpegurl",
+      "contentLength": 184,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-cawang-tj-priok-ancol-timur-jembatan-tigapluit-858"
+      ],
+      "url": "https://cctv.citramarga.com/hls/cam1-interchange-cawang/stream.m3u8",
+      "status": 206,
+      "contentType": "application/vnd.apple.mpegurl",
+      "contentLength": 184,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-jakarta-bogor-ciawi-15"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/1/8c638f6a-82cd-497b-b73f-2b55f07dec07/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jakarta-bogor-ciawi-596"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/1/1d95be94-bb94-4eb6-9547-05240535d7d2/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
     },
     {
       "cameraIds": [
         "binamarga-jakarta-bogor-ciawi-27"
       ],
-      "url": "https://jmlive.jasamarga.com/hls/1/46864250-2cec-414e-84ab-1389a578daa5/index.m3u8",
+      "url": "https://jmlive.jasamarga.com/hls/1/7229930d-6fe3-4d4e-9a10-a6fb5cca0f45/index.m3u8",
       "status": 502,
       "contentType": "text/html",
       "contentLength": 497,
@@ -67,7 +1815,27 @@
       "cameraIds": [
         "binamarga-jakarta-bogor-ciawi-26"
       ],
-      "url": "https://jmlive.jasamarga.com/hls/1/8a670299-d98d-46ca-b686-4db0eb21cc37/index.m3u8",
+      "url": "https://jmlive.jasamarga.com/hls/1/88a07f23-9054-417a-9948-1403358e5533/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jakarta-bogor-ciawi-25"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/1/fffb4413-3c75-425f-b77f-09a72a8b5df7/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jakarta-bogor-ciawi-24"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/1/cdadd2b7-0f4b-41b3-8e63-b3fbf7c7e363/index.m3u8",
       "status": 502,
       "contentType": "text/html",
       "contentLength": 497,
@@ -79,214 +1847,166 @@
         "unexpected_content_type:text/html",
         "cors_not_confirmed",
         "invalid_hls_manifest"
-      ]
-    },
-    {
-      "cameraIds": [
-        "binamarga-jakarta-bogor-ciawi-25"
-      ],
-      "url": "https://jmlive.jasamarga.com/hls/1/806820bf-a702-4be7-b72c-9951c415a64d/index.m3u8",
-      "status": 206,
-      "contentType": "text/plain",
-      "contentLength": 325,
-      "corsAllowOrigin": "*",
-      "validManifest": true,
-      "safariNativeCandidate": true,
-      "hlsJsCandidate": true,
-      "warnings": [
-        "unexpected_content_type:text/plain"
-      ]
-    },
-    {
-      "cameraIds": [
-        "binamarga-jakarta-bogor-ciawi-24"
-      ],
-      "url": "https://jmlive.jasamarga.com/hls/1/11f61d86-a630-4f7b-a229-f8ad3c57c233/index.m3u8",
-      "status": 206,
-      "contentType": "text/plain",
-      "contentLength": 325,
-      "corsAllowOrigin": "*",
-      "validManifest": true,
-      "safariNativeCandidate": true,
-      "hlsJsCandidate": true,
-      "warnings": [
-        "unexpected_content_type:text/plain"
       ]
     },
     {
       "cameraIds": [
         "binamarga-jakarta-bogor-ciawi-23"
       ],
-      "url": "https://jmlive.jasamarga.com/hls/1/44872c7f-c407-4309-a1eb-1fb758829fc4/index.m3u8",
-      "status": 206,
-      "contentType": "text/plain",
-      "contentLength": 325,
-      "corsAllowOrigin": "*",
-      "validManifest": true,
-      "safariNativeCandidate": true,
-      "hlsJsCandidate": true,
-      "warnings": [
-        "unexpected_content_type:text/plain"
-      ]
+      "url": "https://jmlive.jasamarga.com/hls/1/ba2aacf7-99eb-4b7b-82c6-69ef97efff78/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
     },
     {
       "cameraIds": [
         "binamarga-jakarta-bogor-ciawi-22",
         "binamarga-jakarta-bogor-ciawi-21"
       ],
-      "url": "https://jmlive.jasamarga.com/hls/1/5ab5e79f-ad81-4feb-842d-eb145751e184/index.m3u8",
-      "status": 502,
-      "contentType": "text/html",
-      "contentLength": 497,
-      "corsAllowOrigin": null,
+      "url": "https://jmlive.jasamarga.com/hls/1/49b83a89-70ae-4c7b-9cd4-5b7a311dbf05/index.m3u8",
+      "error": "terminated",
       "validManifest": false,
       "safariNativeCandidate": false,
-      "hlsJsCandidate": false,
-      "warnings": [
-        "unexpected_content_type:text/html",
-        "cors_not_confirmed",
-        "invalid_hls_manifest"
-      ]
+      "hlsJsCandidate": false
     },
     {
       "cameraIds": [
         "binamarga-jakarta-bogor-ciawi-20",
         "binamarga-jakarta-bogor-ciawi-19"
       ],
-      "url": "https://jmlive.jasamarga.com/hls/1/43195cd2-5f10-4aed-9ea2-773117ae7051/index.m3u8",
-      "status": 206,
-      "contentType": "text/plain",
-      "contentLength": 325,
-      "corsAllowOrigin": "*",
-      "validManifest": true,
-      "safariNativeCandidate": true,
-      "hlsJsCandidate": true,
-      "warnings": [
-        "unexpected_content_type:text/plain"
-      ]
+      "url": "https://jmlive.jasamarga.com/hls/1/f4ebc6b4-9ffd-4501-90f2-04941d114814/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
     },
     {
       "cameraIds": [
         "binamarga-jakarta-bogor-ciawi-18",
         "binamarga-jakarta-bogor-ciawi-17"
       ],
-      "url": "https://jmlive.jasamarga.com/hls/1/dbaf1579-3449-4663-8fca-5989169aae07/index.m3u8",
-      "status": 502,
-      "contentType": "text/html",
-      "contentLength": 497,
-      "corsAllowOrigin": null,
+      "url": "https://jmlive.jasamarga.com/hls/1/159c09a9-75c5-476d-808e-ee17ffde620d/index.m3u8",
+      "error": "terminated",
       "validManifest": false,
       "safariNativeCandidate": false,
-      "hlsJsCandidate": false,
-      "warnings": [
-        "unexpected_content_type:text/html",
-        "cors_not_confirmed",
-        "invalid_hls_manifest"
-      ]
+      "hlsJsCandidate": false
     },
     {
       "cameraIds": [
         "binamarga-jakarta-bogor-ciawi-16"
       ],
-      "url": "https://jmlive.jasamarga.com/hls/1/a8eca099-ef47-46d1-8bdb-19929f5528dd/index.m3u8",
-      "status": 502,
-      "contentType": "text/html",
-      "contentLength": 497,
-      "corsAllowOrigin": null,
+      "url": "https://jmlive.jasamarga.com/hls/1/4d865844-9037-4ce0-a7ab-3b0f57b2c3ba/index.m3u8",
+      "error": "terminated",
       "validManifest": false,
       "safariNativeCandidate": false,
-      "hlsJsCandidate": false,
-      "warnings": [
-        "unexpected_content_type:text/html",
-        "cors_not_confirmed",
-        "invalid_hls_manifest"
-      ]
+      "hlsJsCandidate": false
     },
     {
       "cameraIds": [
         "binamarga-jakarta-bogor-ciawi-1"
       ],
-      "url": "https://jmlive.jasamarga.com/hls/1/3e89b687-fb04-4025-993c-4e5cbada02de/index.m3u8",
-      "status": 206,
-      "contentType": "text/plain",
-      "contentLength": 325,
-      "corsAllowOrigin": "*",
-      "validManifest": true,
-      "safariNativeCandidate": true,
-      "hlsJsCandidate": true,
-      "warnings": [
-        "unexpected_content_type:text/plain"
-      ]
+      "url": "https://jmlive.jasamarga.com/hls/1/7c3beea8-a67a-46a7-8374-93c2112fed0f/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
     },
     {
       "cameraIds": [
         "binamarga-jakarta-bogor-ciawi-14"
       ],
-      "url": "https://jmlive.jasamarga.com/hls/1/150f43ec-7bde-4672-be35-30b7efa849dc/index.m3u8",
-      "status": 206,
-      "contentType": "text/plain",
-      "contentLength": 325,
-      "corsAllowOrigin": "*",
-      "validManifest": true,
-      "safariNativeCandidate": true,
-      "hlsJsCandidate": true,
-      "warnings": [
-        "unexpected_content_type:text/plain"
-      ]
+      "url": "https://jmlive.jasamarga.com/hls/1/8b6359b4-9d25-4846-9b07-ef27030afc3e/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
     },
     {
       "cameraIds": [
         "binamarga-jakarta-bogor-ciawi-13"
       ],
-      "url": "https://jmlive.jasamarga.com/hls/1/44dda90b-fc42-4705-8a4d-718d27db3dc8/index.m3u8",
-      "status": 206,
-      "contentType": "text/plain",
-      "contentLength": 325,
-      "corsAllowOrigin": "*",
-      "validManifest": true,
-      "safariNativeCandidate": true,
-      "hlsJsCandidate": true,
-      "warnings": [
-        "unexpected_content_type:text/plain"
-      ]
+      "url": "https://jmlive.jasamarga.com/hls/1/de868883-06f2-4272-ba1c-a54c716bbee6/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
     },
     {
       "cameraIds": [
         "binamarga-jakarta-bogor-ciawi-12"
       ],
-      "url": "https://jmlive.jasamarga.com/hls/1/178a08e1-5802-4fa6-8d6f-6203c2f04aa8/index.m3u8",
-      "status": 206,
-      "contentType": "text/plain",
-      "contentLength": 325,
-      "corsAllowOrigin": "*",
-      "validManifest": true,
-      "safariNativeCandidate": true,
-      "hlsJsCandidate": true,
-      "warnings": [
-        "unexpected_content_type:text/plain"
-      ]
+      "url": "https://jmlive.jasamarga.com/hls/1/6ea8c3ac-5eda-4a35-825d-a2c49b9db775/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
     },
     {
       "cameraIds": [
         "binamarga-jakarta-bogor-ciawi-11"
       ],
-      "url": "https://jmlive.jasamarga.com/hls/1/5498ae0b-687c-4a98-b8f9-62062e40cd89/index.m3u8",
-      "status": 206,
-      "contentType": "text/plain",
-      "contentLength": 325,
-      "corsAllowOrigin": "*",
-      "validManifest": true,
-      "safariNativeCandidate": true,
-      "hlsJsCandidate": true,
-      "warnings": [
-        "unexpected_content_type:text/plain"
-      ]
+      "url": "https://jmlive.jasamarga.com/hls/1/9dc9d26b-7b6c-456b-871f-8afd878a2fda/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
     },
     {
       "cameraIds": [
         "binamarga-jakarta-bogor-ciawi-10"
       ],
-      "url": "https://jmlive.jasamarga.com/hls/1/a7ea810b-8bdb-4a11-98b7-0ca4838e39f5/index.m3u8",
+      "url": "https://jmlive.jasamarga.com/hls/1/e9ba703c-eefa-47fe-9795-b02f290e5e4d/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jakarta-bogor-ciawi-9"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/1/8972429b-0c3e-4208-a1c1-01a13311062d/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jakarta-bogor-ciawi-8"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/1/e0b32e60-b9e8-4b05-87eb-23fcc9188fa1/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jakarta-bogor-ciawi-7"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/1/ec95f47d-230c-417c-ac51-1efda9ab598d/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jakarta-bogor-ciawi-6"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/1/24371f50-f62a-452d-ab82-ca4144eb6dc0/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
+    },
+    {
+      "cameraIds": [
+        "binamarga-jakarta-bogor-ciawi-5"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/1/7207b186-416c-434c-9e9e-a1480c8d0ea6/index.m3u8",
       "status": 502,
       "contentType": "text/html",
       "contentLength": 497,
@@ -298,102 +2018,24 @@
         "unexpected_content_type:text/html",
         "cors_not_confirmed",
         "invalid_hls_manifest"
-      ]
-    },
-    {
-      "cameraIds": [
-        "binamarga-jakarta-bogor-ciawi-9"
-      ],
-      "url": "https://jmlive.jasamarga.com/hls/1/20e03d21-58dd-4b9e-b1e5-36e7e4c1386b/index.m3u8",
-      "status": 206,
-      "contentType": "text/plain",
-      "contentLength": 325,
-      "corsAllowOrigin": "*",
-      "validManifest": true,
-      "safariNativeCandidate": true,
-      "hlsJsCandidate": true,
-      "warnings": [
-        "unexpected_content_type:text/plain"
-      ]
-    },
-    {
-      "cameraIds": [
-        "binamarga-jakarta-bogor-ciawi-8"
-      ],
-      "url": "https://jmlive.jasamarga.com/hls/1/3d64906d-116a-49e8-a204-560c79660d1f/index.m3u8",
-      "status": 206,
-      "contentType": "text/plain",
-      "contentLength": 325,
-      "corsAllowOrigin": "*",
-      "validManifest": true,
-      "safariNativeCandidate": true,
-      "hlsJsCandidate": true,
-      "warnings": [
-        "unexpected_content_type:text/plain"
-      ]
-    },
-    {
-      "cameraIds": [
-        "binamarga-jakarta-bogor-ciawi-7"
-      ],
-      "url": "https://jmlive.jasamarga.com/hls/1/631a64e0-60e0-49f6-8d6f-2480a68b2b23/index.m3u8",
-      "status": 206,
-      "contentType": "text/plain",
-      "contentLength": 325,
-      "corsAllowOrigin": "*",
-      "validManifest": true,
-      "safariNativeCandidate": true,
-      "hlsJsCandidate": true,
-      "warnings": [
-        "unexpected_content_type:text/plain"
-      ]
-    },
-    {
-      "cameraIds": [
-        "binamarga-jakarta-bogor-ciawi-6"
-      ],
-      "url": "https://jmlive.jasamarga.com/hls/1/fb8df093-c8b8-49e3-a447-54b9071a505d/index.m3u8",
-      "status": 206,
-      "contentType": "text/plain",
-      "contentLength": 325,
-      "corsAllowOrigin": "*",
-      "validManifest": true,
-      "safariNativeCandidate": true,
-      "hlsJsCandidate": true,
-      "warnings": [
-        "unexpected_content_type:text/plain"
-      ]
-    },
-    {
-      "cameraIds": [
-        "binamarga-jakarta-bogor-ciawi-5"
-      ],
-      "url": "https://jmlive.jasamarga.com/hls/1/0dd1fe8e-9902-4185-a9c4-4aab6d9c99fd/index.m3u8",
-      "status": 206,
-      "contentType": "text/plain",
-      "contentLength": 325,
-      "corsAllowOrigin": "*",
-      "validManifest": true,
-      "safariNativeCandidate": true,
-      "hlsJsCandidate": true,
-      "warnings": [
-        "unexpected_content_type:text/plain"
       ]
     },
     {
       "cameraIds": [
         "binamarga-jakarta-bogor-ciawi-4"
       ],
-      "url": "https://jmlive.jasamarga.com/hls/1/f0143b95-6a14-43fb-9931-0fd67b00b125/index.m3u8",
-      "status": 206,
-      "contentType": "text/plain",
-      "contentLength": 325,
-      "corsAllowOrigin": "*",
-      "validManifest": true,
-      "safariNativeCandidate": true,
-      "hlsJsCandidate": true,
+      "url": "https://jmlive.jasamarga.com/hls/1/2768a6ae-0dab-43c5-ab62-ecfd19857b35/index.m3u8",
+      "status": 502,
+      "contentType": "text/html",
+      "contentLength": 497,
+      "corsAllowOrigin": null,
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false,
       "warnings": [
-        "unexpected_content_type:text/plain"
+        "unexpected_content_type:text/html",
+        "cors_not_confirmed",
+        "invalid_hls_manifest"
       ]
     },
     {
@@ -401,26 +2043,20 @@
         "binamarga-jakarta-bogor-ciawi-3",
         "binamarga-jakarta-bogor-ciawi-2"
       ],
-      "url": "https://jmlive.jasamarga.com/hls/1/e1d4cdc3-d723-48e1-95a1-ae0ae38432af/index.m3u8",
-      "status": 206,
-      "contentType": "text/plain",
-      "contentLength": 325,
-      "corsAllowOrigin": "*",
-      "validManifest": true,
-      "safariNativeCandidate": true,
-      "hlsJsCandidate": true,
-      "warnings": [
-        "unexpected_content_type:text/plain"
-      ]
+      "url": "https://jmlive.jasamarga.com/hls/1/8242635a-7b1a-406b-b9b2-c1173419d38a/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
     },
     {
       "cameraIds": [
-        "binamarga-akses-tanjung-priok-757"
+        "binamarga-akses-tanjung-priok-761"
       ],
       "url": "https://pub2.hk-opt.com/LiveApp/streams/131194518355658410125310.m3u8",
       "status": 206,
       "contentType": "application/x-mpegurl",
-      "contentLength": 352,
+      "contentLength": 351,
       "corsAllowOrigin": "*",
       "validManifest": true,
       "safariNativeCandidate": true,
@@ -429,12 +2065,12 @@
     },
     {
       "cameraIds": [
-        "binamarga-akses-tanjung-priok-1514"
+        "binamarga-akses-tanjung-priok-1518"
       ],
       "url": "https://pub2.hk-opt.com/LiveApp/streams/710404214066673275657182.m3u8",
       "status": 206,
       "contentType": "application/x-mpegurl",
-      "contentLength": 352,
+      "contentLength": 351,
       "corsAllowOrigin": "*",
       "validManifest": true,
       "safariNativeCandidate": true,
@@ -443,51 +2079,9 @@
     },
     {
       "cameraIds": [
-        "binamarga-akses-tanjung-priok-1176"
+        "binamarga-akses-tanjung-priok-1180"
       ],
       "url": "https://pub2.hk-opt.com/LiveApp/streams/849705788476171969074221.m3u8",
-      "status": 206,
-      "contentType": "application/x-mpegurl",
-      "contentLength": 352,
-      "corsAllowOrigin": "*",
-      "validManifest": true,
-      "safariNativeCandidate": true,
-      "hlsJsCandidate": true,
-      "warnings": []
-    },
-    {
-      "cameraIds": [
-        "binamarga-akses-tanjung-priok-1175"
-      ],
-      "url": "https://pub2.hk-opt.com/LiveApp/streams/800925316301503102079844.m3u8",
-      "status": 206,
-      "contentType": "application/x-mpegurl",
-      "contentLength": 352,
-      "corsAllowOrigin": "*",
-      "validManifest": true,
-      "safariNativeCandidate": true,
-      "hlsJsCandidate": true,
-      "warnings": []
-    },
-    {
-      "cameraIds": [
-        "binamarga-akses-tanjung-priok-1174"
-      ],
-      "url": "https://pub2.hk-opt.com/LiveApp/streams/539029826611825636156852.m3u8",
-      "status": 206,
-      "contentType": "application/x-mpegurl",
-      "contentLength": 352,
-      "corsAllowOrigin": "*",
-      "validManifest": true,
-      "safariNativeCandidate": true,
-      "hlsJsCandidate": true,
-      "warnings": []
-    },
-    {
-      "cameraIds": [
-        "binamarga-akses-tanjung-priok-1140"
-      ],
-      "url": "https://pub2.hk-opt.com/LiveApp/streams/062223762734246730973930.m3u8",
       "status": 206,
       "contentType": "application/x-mpegurl",
       "contentLength": 350,
@@ -499,12 +2093,57 @@
     },
     {
       "cameraIds": [
-        "binamarga-akses-tanjung-priok-767"
+        "binamarga-akses-tanjung-priok-1179"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/800925316301503102079844.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-akses-tanjung-priok-1178"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/539029826611825636156852.m3u8",
+      "status": 404,
+      "contentType": "text/html",
+      "contentLength": null,
+      "corsAllowOrigin": "*",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false,
+      "warnings": [
+        "unexpected_content_type:text/html",
+        "invalid_hls_manifest"
+      ]
+    },
+    {
+      "cameraIds": [
+        "binamarga-akses-tanjung-priok-1144"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/062223762734246730973930.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-akses-tanjung-priok-771"
       ],
       "url": "https://pub2.hk-opt.com/LiveApp/streams/356285838211375724458124.m3u8",
       "status": 206,
       "contentType": "application/x-mpegurl",
-      "contentLength": 352,
+      "contentLength": 351,
       "corsAllowOrigin": "*",
       "validManifest": true,
       "safariNativeCandidate": true,
@@ -513,12 +2152,12 @@
     },
     {
       "cameraIds": [
-        "binamarga-akses-tanjung-priok-766"
+        "binamarga-akses-tanjung-priok-770"
       ],
       "url": "https://pub2.hk-opt.com/LiveApp/streams/806970033882204083458834.m3u8",
       "status": 206,
       "contentType": "application/x-mpegurl",
-      "contentLength": 352,
+      "contentLength": 351,
       "corsAllowOrigin": "*",
       "validManifest": true,
       "safariNativeCandidate": true,
@@ -527,12 +2166,12 @@
     },
     {
       "cameraIds": [
-        "binamarga-akses-tanjung-priok-765"
+        "binamarga-akses-tanjung-priok-769"
       ],
       "url": "https://pub2.hk-opt.com/LiveApp/streams/613685260667025565685154.m3u8",
       "status": 206,
       "contentType": "application/x-mpegurl",
-      "contentLength": 352,
+      "contentLength": 351,
       "corsAllowOrigin": "*",
       "validManifest": true,
       "safariNativeCandidate": true,
@@ -541,7 +2180,7 @@
     },
     {
       "cameraIds": [
-        "binamarga-akses-tanjung-priok-764"
+        "binamarga-akses-tanjung-priok-768"
       ],
       "url": "https://pub2.hk-opt.com/LiveApp/streams/056605534596645381685649.m3u8",
       "status": 206,
@@ -555,12 +2194,68 @@
     },
     {
       "cameraIds": [
-        "binamarga-akses-tanjung-priok-763"
+        "binamarga-akses-tanjung-priok-767"
       ],
       "url": "https://pub2.hk-opt.com/LiveApp/streams/282683392556897946274334.m3u8",
       "status": 206,
       "contentType": "application/x-mpegurl",
-      "contentLength": 352,
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-akses-tanjung-priok-766"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/167891762725762261014120.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-akses-tanjung-priok-765"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/732329756425808171838308.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-akses-tanjung-priok-764"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/359581681833174683835659.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-akses-tanjung-priok-763"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/395196439889823078971618.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
       "corsAllowOrigin": "*",
       "validManifest": true,
       "safariNativeCandidate": true,
@@ -571,66 +2266,10 @@
       "cameraIds": [
         "binamarga-akses-tanjung-priok-762"
       ],
-      "url": "https://pub2.hk-opt.com/LiveApp/streams/167891762725762261014120.m3u8",
-      "status": 206,
-      "contentType": "application/x-mpegurl",
-      "contentLength": 352,
-      "corsAllowOrigin": "*",
-      "validManifest": true,
-      "safariNativeCandidate": true,
-      "hlsJsCandidate": true,
-      "warnings": []
-    },
-    {
-      "cameraIds": [
-        "binamarga-akses-tanjung-priok-761"
-      ],
-      "url": "https://pub2.hk-opt.com/LiveApp/streams/732329756425808171838308.m3u8",
-      "status": 206,
-      "contentType": "application/x-mpegurl",
-      "contentLength": 352,
-      "corsAllowOrigin": "*",
-      "validManifest": true,
-      "safariNativeCandidate": true,
-      "hlsJsCandidate": true,
-      "warnings": []
-    },
-    {
-      "cameraIds": [
-        "binamarga-akses-tanjung-priok-760"
-      ],
-      "url": "https://pub2.hk-opt.com/LiveApp/streams/359581681833174683835659.m3u8",
-      "status": 206,
-      "contentType": "application/x-mpegurl",
-      "contentLength": 352,
-      "corsAllowOrigin": "*",
-      "validManifest": true,
-      "safariNativeCandidate": true,
-      "hlsJsCandidate": true,
-      "warnings": []
-    },
-    {
-      "cameraIds": [
-        "binamarga-akses-tanjung-priok-759"
-      ],
-      "url": "https://pub2.hk-opt.com/LiveApp/streams/395196439889823078971618.m3u8",
-      "status": 206,
-      "contentType": "application/x-mpegurl",
-      "contentLength": 352,
-      "corsAllowOrigin": "*",
-      "validManifest": true,
-      "safariNativeCandidate": true,
-      "hlsJsCandidate": true,
-      "warnings": []
-    },
-    {
-      "cameraIds": [
-        "binamarga-akses-tanjung-priok-758"
-      ],
       "url": "https://pub2.hk-opt.com/LiveApp/streams/884788511122999510332002.m3u8",
       "status": 206,
       "contentType": "application/x-mpegurl",
-      "contentLength": 352,
+      "contentLength": 351,
       "corsAllowOrigin": "*",
       "validManifest": true,
       "safariNativeCandidate": true,
@@ -639,7 +2278,7 @@
     },
     {
       "cameraIds": [
-        "binamarga-akses-tanjung-priok-742"
+        "binamarga-akses-tanjung-priok-746"
       ],
       "url": "https://pub2.hk-opt.com/LiveApp/streams/610831844814460955304790.m3u8",
       "status": 206,
@@ -653,12 +2292,12 @@
     },
     {
       "cameraIds": [
-        "binamarga-akses-tanjung-priok-756"
+        "binamarga-akses-tanjung-priok-760"
       ],
       "url": "https://pub2.hk-opt.com/LiveApp/streams/929965054608082862392361.m3u8",
       "status": 206,
       "contentType": "application/x-mpegurl",
-      "contentLength": 352,
+      "contentLength": 351,
       "corsAllowOrigin": "*",
       "validManifest": true,
       "safariNativeCandidate": true,
@@ -667,12 +2306,12 @@
     },
     {
       "cameraIds": [
-        "binamarga-akses-tanjung-priok-755"
+        "binamarga-akses-tanjung-priok-759"
       ],
       "url": "https://pub2.hk-opt.com/LiveApp/streams/341140856007945232503242.m3u8",
       "status": 206,
       "contentType": "application/x-mpegurl",
-      "contentLength": 352,
+      "contentLength": 351,
       "corsAllowOrigin": "*",
       "validManifest": true,
       "safariNativeCandidate": true,
@@ -681,7 +2320,7 @@
     },
     {
       "cameraIds": [
-        "binamarga-akses-tanjung-priok-754"
+        "binamarga-akses-tanjung-priok-758"
       ],
       "url": "https://pub2.hk-opt.com/LiveApp/streams/241370079371388169899174.m3u8",
       "status": 206,
@@ -695,7 +2334,7 @@
     },
     {
       "cameraIds": [
-        "binamarga-akses-tanjung-priok-753"
+        "binamarga-akses-tanjung-priok-757"
       ],
       "url": "https://pub2.hk-opt.com/LiveApp/streams/756751654695732090756915.m3u8",
       "status": 206,
@@ -709,23 +2348,9 @@
     },
     {
       "cameraIds": [
-        "binamarga-akses-tanjung-priok-752"
+        "binamarga-akses-tanjung-priok-756"
       ],
       "url": "https://pub2.hk-opt.com/LiveApp/streams/936875605865456745186345.m3u8",
-      "status": 206,
-      "contentType": "application/x-mpegurl",
-      "contentLength": 352,
-      "corsAllowOrigin": "*",
-      "validManifest": true,
-      "safariNativeCandidate": true,
-      "hlsJsCandidate": true,
-      "warnings": []
-    },
-    {
-      "cameraIds": [
-        "binamarga-akses-tanjung-priok-751"
-      ],
-      "url": "https://pub2.hk-opt.com/LiveApp/streams/215099945954037183566898.m3u8",
       "status": 206,
       "contentType": "application/x-mpegurl",
       "contentLength": 351,
@@ -737,7 +2362,21 @@
     },
     {
       "cameraIds": [
-        "binamarga-akses-tanjung-priok-750"
+        "binamarga-akses-tanjung-priok-755"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/215099945954037183566898.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 355,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-akses-tanjung-priok-754"
       ],
       "url": "https://pub2.hk-opt.com/LiveApp/streams/381024135984437558197100.m3u8",
       "status": 206,
@@ -751,12 +2390,68 @@
     },
     {
       "cameraIds": [
-        "binamarga-akses-tanjung-priok-749"
+        "binamarga-akses-tanjung-priok-753"
       ],
       "url": "https://pub2.hk-opt.com/LiveApp/streams/742155705555120746594962.m3u8",
       "status": 206,
       "contentType": "application/x-mpegurl",
-      "contentLength": 352,
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-akses-tanjung-priok-752"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/675323017321643087627650.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-akses-tanjung-priok-751"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/956464037412277558025165.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-akses-tanjung-priok-750"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/095660838019901274554950.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 351,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": []
+    },
+    {
+      "cameraIds": [
+        "binamarga-akses-tanjung-priok-749"
+      ],
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/501264524429471982550467.m3u8",
+      "status": 206,
+      "contentType": "application/x-mpegurl",
+      "contentLength": 350,
       "corsAllowOrigin": "*",
       "validManifest": true,
       "safariNativeCandidate": true,
@@ -767,10 +2462,10 @@
       "cameraIds": [
         "binamarga-akses-tanjung-priok-748"
       ],
-      "url": "https://pub2.hk-opt.com/LiveApp/streams/675323017321643087627650.m3u8",
+      "url": "https://pub2.hk-opt.com/LiveApp/streams/687489889091511277827377.m3u8",
       "status": 206,
       "contentType": "application/x-mpegurl",
-      "contentLength": 352,
+      "contentLength": 351,
       "corsAllowOrigin": "*",
       "validManifest": true,
       "safariNativeCandidate": true,
@@ -781,66 +2476,10 @@
       "cameraIds": [
         "binamarga-akses-tanjung-priok-747"
       ],
-      "url": "https://pub2.hk-opt.com/LiveApp/streams/956464037412277558025165.m3u8",
-      "status": 206,
-      "contentType": "application/x-mpegurl",
-      "contentLength": 352,
-      "corsAllowOrigin": "*",
-      "validManifest": true,
-      "safariNativeCandidate": true,
-      "hlsJsCandidate": true,
-      "warnings": []
-    },
-    {
-      "cameraIds": [
-        "binamarga-akses-tanjung-priok-746"
-      ],
-      "url": "https://pub2.hk-opt.com/LiveApp/streams/095660838019901274554950.m3u8",
-      "status": 206,
-      "contentType": "application/x-mpegurl",
-      "contentLength": 352,
-      "corsAllowOrigin": "*",
-      "validManifest": true,
-      "safariNativeCandidate": true,
-      "hlsJsCandidate": true,
-      "warnings": []
-    },
-    {
-      "cameraIds": [
-        "binamarga-akses-tanjung-priok-745"
-      ],
-      "url": "https://pub2.hk-opt.com/LiveApp/streams/501264524429471982550467.m3u8",
-      "status": 206,
-      "contentType": "application/x-mpegurl",
-      "contentLength": 352,
-      "corsAllowOrigin": "*",
-      "validManifest": true,
-      "safariNativeCandidate": true,
-      "hlsJsCandidate": true,
-      "warnings": []
-    },
-    {
-      "cameraIds": [
-        "binamarga-akses-tanjung-priok-744"
-      ],
-      "url": "https://pub2.hk-opt.com/LiveApp/streams/687489889091511277827377.m3u8",
-      "status": 206,
-      "contentType": "application/x-mpegurl",
-      "contentLength": 352,
-      "corsAllowOrigin": "*",
-      "validManifest": true,
-      "safariNativeCandidate": true,
-      "hlsJsCandidate": true,
-      "warnings": []
-    },
-    {
-      "cameraIds": [
-        "binamarga-akses-tanjung-priok-743"
-      ],
       "url": "https://pub2.hk-opt.com/LiveApp/streams/316164049687665625966374.m3u8",
       "status": 206,
       "contentType": "application/x-mpegurl",
-      "contentLength": 352,
+      "contentLength": 350,
       "corsAllowOrigin": "*",
       "validManifest": true,
       "safariNativeCandidate": true,
@@ -849,7 +2488,7 @@
     },
     {
       "cameraIds": [
-        "binamarga-6-tol-dalam-kota-kelapa-gading-pulo-gebang-1069"
+        "binamarga-6-tol-dalam-kota-kelapa-gading-pulo-gebang-1073"
       ],
       "url": "https://camera.jtd.co.id/camera/share/tios/4/35/index.m3u8",
       "status": 200,
@@ -865,7 +2504,7 @@
     },
     {
       "cameraIds": [
-        "binamarga-6-tol-dalam-kota-kelapa-gading-pulo-gebang-1302"
+        "binamarga-6-tol-dalam-kota-kelapa-gading-pulo-gebang-1306"
       ],
       "url": "https://camera.jtd.co.id/camera/share/tios/2/78/index.m3u8",
       "status": 200,
@@ -881,8 +2520,8 @@
     },
     {
       "cameraIds": [
-        "binamarga-6-tol-dalam-kota-kelapa-gading-pulo-gebang-1303",
-        "binamarga-6-tol-dalam-kota-kelapa-gading-pulo-gebang-1515"
+        "binamarga-6-tol-dalam-kota-kelapa-gading-pulo-gebang-1307",
+        "binamarga-6-tol-dalam-kota-kelapa-gading-pulo-gebang-1519"
       ],
       "url": "https://camera.jtd.co.id/camera/share/tios/2/20/index.m3u8",
       "status": 200,
@@ -898,7 +2537,7 @@
     },
     {
       "cameraIds": [
-        "binamarga-6-tol-dalam-kota-kelapa-gading-pulo-gebang-1435"
+        "binamarga-6-tol-dalam-kota-kelapa-gading-pulo-gebang-1439"
       ],
       "url": "https://camera.jtd.co.id/camera/share/tios/2/19/index.m3u8",
       "status": 200,
@@ -914,7 +2553,7 @@
     },
     {
       "cameraIds": [
-        "binamarga-6-tol-dalam-kota-kelapa-gading-pulo-gebang-1436"
+        "binamarga-6-tol-dalam-kota-kelapa-gading-pulo-gebang-1440"
       ],
       "url": "https://camera.jtd.co.id/camera/share/tios/2/80/index.m3u8",
       "status": 200,
@@ -930,7 +2569,7 @@
     },
     {
       "cameraIds": [
-        "binamarga-6-tol-dalam-kota-kelapa-gading-pulo-gebang-1437"
+        "binamarga-6-tol-dalam-kota-kelapa-gading-pulo-gebang-1441"
       ],
       "url": "https://camera.jtd.co.id/camera/share/tios/2/27/index.m3u8",
       "status": 200,
@@ -946,7 +2585,7 @@
     },
     {
       "cameraIds": [
-        "binamarga-6-tol-dalam-kota-kelapa-gading-pulo-gebang-1438"
+        "binamarga-6-tol-dalam-kota-kelapa-gading-pulo-gebang-1442"
       ],
       "url": "https://camera.jtd.co.id/camera/share/tios/2/81/index.m3u8",
       "status": 200,
@@ -962,7 +2601,7 @@
     },
     {
       "cameraIds": [
-        "binamarga-6-tol-dalam-kota-kelapa-gading-pulo-gebang-1516"
+        "binamarga-6-tol-dalam-kota-kelapa-gading-pulo-gebang-1520"
       ],
       "url": "https://camera.jtd.co.id/camera/share/tios/2/25/index.m3u8",
       "status": 200,
@@ -981,10 +2620,10 @@
         "binamarga-dalam-kota-41",
         "binamarga-dalam-kota-40"
       ],
-      "url": "https://jmlive.jasamarga.com/hls/2/b8f305e9-2f65-4eb9-8dc3-affa7ae13fb4/index.m3u8",
+      "url": "https://jmlive.jasamarga.com/hls/2/edd0da08-d14b-4765-bbe7-752e209d24d4/index.m3u8",
       "status": 206,
       "contentType": "text/plain",
-      "contentLength": 325,
+      "contentLength": 333,
       "corsAllowOrigin": "*",
       "validManifest": true,
       "safariNativeCandidate": true,
@@ -997,46 +2636,42 @@
       "cameraIds": [
         "binamarga-dalam-kota-53"
       ],
-      "url": "https://jmlive.jasamarga.com/hls/2/335693fd-305f-421d-9c85-a4a95dba4001/index.m3u8",
-      "status": 502,
-      "contentType": "text/html",
-      "contentLength": 497,
-      "corsAllowOrigin": null,
-      "validManifest": false,
-      "safariNativeCandidate": false,
-      "hlsJsCandidate": false,
+      "url": "https://jmlive.jasamarga.com/hls/2/8ff61b3e-3733-4152-bd06-150605018970/index.m3u8",
+      "status": 206,
+      "contentType": "text/plain",
+      "contentLength": 333,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
       "warnings": [
-        "unexpected_content_type:text/html",
-        "cors_not_confirmed",
-        "invalid_hls_manifest"
+        "unexpected_content_type:text/plain"
       ]
     },
     {
       "cameraIds": [
         "binamarga-dalam-kota-52"
       ],
-      "url": "https://jmlive.jasamarga.com/hls/2/250baa48-1b67-4004-90b4-d6424febfa41/index.m3u8",
-      "status": 502,
-      "contentType": "text/html",
-      "contentLength": 497,
-      "corsAllowOrigin": null,
-      "validManifest": false,
-      "safariNativeCandidate": false,
-      "hlsJsCandidate": false,
+      "url": "https://jmlive.jasamarga.com/hls/2/064d202a-bd7b-4725-8897-835870c86266/index.m3u8",
+      "status": 206,
+      "contentType": "text/plain",
+      "contentLength": 333,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
       "warnings": [
-        "unexpected_content_type:text/html",
-        "cors_not_confirmed",
-        "invalid_hls_manifest"
+        "unexpected_content_type:text/plain"
       ]
     },
     {
       "cameraIds": [
         "binamarga-dalam-kota-51"
       ],
-      "url": "https://jmlive.jasamarga.com/hls/2/8e93f7f7-ac70-4e5a-bc63-c0ee18c03949/index.m3u8",
+      "url": "https://jmlive.jasamarga.com/hls/2/066ebd2b-5443-4cca-87f1-d50fe1b83507/index.m3u8",
       "status": 206,
       "contentType": "text/plain",
-      "contentLength": 325,
+      "contentLength": 333,
       "corsAllowOrigin": "*",
       "validManifest": true,
       "safariNativeCandidate": true,
@@ -1049,10 +2684,10 @@
       "cameraIds": [
         "binamarga-dalam-kota-50"
       ],
-      "url": "https://jmlive.jasamarga.com/hls/2/08ef8863-7433-42e0-b3e8-075cf73d0867/index.m3u8",
+      "url": "https://jmlive.jasamarga.com/hls/2/df999e5b-7ede-4fd8-959e-6fc92842d7cf/index.m3u8",
       "status": 206,
       "contentType": "text/plain",
-      "contentLength": 325,
+      "contentLength": 333,
       "corsAllowOrigin": "*",
       "validManifest": true,
       "safariNativeCandidate": true,
@@ -1066,7 +2701,7 @@
         "binamarga-dalam-kota-49",
         "binamarga-dalam-kota-48"
       ],
-      "url": "https://jmlive.jasamarga.com/hls/2/9cae3799-dc63-4f36-926f-600dee3aefac/index.m3u8",
+      "url": "https://jmlive.jasamarga.com/hls/2/5a35f01e-0f52-4fe4-8b05-790f0db14eaa/index.m3u8",
       "status": 206,
       "contentType": "text/plain",
       "contentLength": 325,
@@ -1083,18 +2718,16 @@
         "binamarga-dalam-kota-47",
         "binamarga-dalam-kota-46"
       ],
-      "url": "https://jmlive.jasamarga.com/hls/2/bc9b4cb9-5891-4f47-a271-73377d35e1c5/index.m3u8",
-      "status": 502,
-      "contentType": "text/html",
-      "contentLength": 497,
-      "corsAllowOrigin": null,
-      "validManifest": false,
-      "safariNativeCandidate": false,
-      "hlsJsCandidate": false,
+      "url": "https://jmlive.jasamarga.com/hls/2/3b8c7aa7-07b8-44b2-b86e-0abecab60e17/index.m3u8",
+      "status": 206,
+      "contentType": "text/plain",
+      "contentLength": 333,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
       "warnings": [
-        "unexpected_content_type:text/html",
-        "cors_not_confirmed",
-        "invalid_hls_manifest"
+        "unexpected_content_type:text/plain"
       ]
     },
     {
@@ -1102,10 +2735,10 @@
         "binamarga-dalam-kota-45",
         "binamarga-dalam-kota-44"
       ],
-      "url": "https://jmlive.jasamarga.com/hls/2/a0fdb9e6-7ca0-4548-a358-84a54d8965a0/index.m3u8",
+      "url": "https://jmlive.jasamarga.com/hls/2/78976488-cd42-4f02-900f-64ec95174b21/index.m3u8",
       "status": 206,
       "contentType": "text/plain",
-      "contentLength": 325,
+      "contentLength": 333,
       "corsAllowOrigin": "*",
       "validManifest": true,
       "safariNativeCandidate": true,
@@ -1119,10 +2752,10 @@
         "binamarga-dalam-kota-43",
         "binamarga-dalam-kota-42"
       ],
-      "url": "https://jmlive.jasamarga.com/hls/2/c1e2db9b-e889-4f27-b380-fd0b272f0eb5/index.m3u8",
+      "url": "https://jmlive.jasamarga.com/hls/2/fe949219-601a-48b9-9c99-b847882ee564/index.m3u8",
       "status": 206,
       "contentType": "text/plain",
-      "contentLength": 325,
+      "contentLength": 333,
       "corsAllowOrigin": "*",
       "validManifest": true,
       "safariNativeCandidate": true,
@@ -1135,7 +2768,7 @@
       "cameraIds": [
         "binamarga-dalam-kota-28"
       ],
-      "url": "https://jmlive.jasamarga.com/hls/2/f87be2a1-f273-4d9f-b2f6-e9b73bfaf6aa/index.m3u8",
+      "url": "https://jmlive.jasamarga.com/hls/2/f47e6dfe-bc9a-4f7a-aa92-9b473c4b247e/index.m3u8",
       "status": 206,
       "contentType": "text/plain",
       "contentLength": 325,
@@ -1151,25 +2784,7 @@
       "cameraIds": [
         "binamarga-dalam-kota-39"
       ],
-      "url": "https://jmlive.jasamarga.com/hls/2/070fd530-1a54-4d1a-b80e-43c7df62b0b1/index.m3u8",
-      "status": 502,
-      "contentType": "text/html",
-      "contentLength": 497,
-      "corsAllowOrigin": null,
-      "validManifest": false,
-      "safariNativeCandidate": false,
-      "hlsJsCandidate": false,
-      "warnings": [
-        "unexpected_content_type:text/html",
-        "cors_not_confirmed",
-        "invalid_hls_manifest"
-      ]
-    },
-    {
-      "cameraIds": [
-        "binamarga-dalam-kota-38"
-      ],
-      "url": "https://jmlive.jasamarga.com/hls/2/9f2ba12c-2113-4227-8506-5027ecb21435/index.m3u8",
+      "url": "https://jmlive.jasamarga.com/hls/2/d1bc2d8a-f742-4da1-8ade-ab464bb872b3/index.m3u8",
       "status": 206,
       "contentType": "text/plain",
       "contentLength": 325,
@@ -1183,45 +2798,57 @@
     },
     {
       "cameraIds": [
+        "binamarga-dalam-kota-38"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/2/eea4dabd-7c07-4096-aec4-2e6897b8c26f/index.m3u8",
+      "status": 206,
+      "contentType": "text/plain",
+      "contentLength": 333,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": [
+        "unexpected_content_type:text/plain"
+      ]
+    },
+    {
+      "cameraIds": [
         "binamarga-dalam-kota-37"
       ],
-      "url": "https://jmlive.jasamarga.com/hls/2/1570e5fa-14b9-4020-8adc-8150b5d84b47/index.m3u8",
-      "status": 502,
-      "contentType": "text/html",
-      "contentLength": 497,
-      "corsAllowOrigin": null,
-      "validManifest": false,
-      "safariNativeCandidate": false,
-      "hlsJsCandidate": false,
+      "url": "https://jmlive.jasamarga.com/hls/2/4c202560-6fbc-45dc-8b40-ad11485d3d11/index.m3u8",
+      "status": 206,
+      "contentType": "text/plain",
+      "contentLength": 333,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
       "warnings": [
-        "unexpected_content_type:text/html",
-        "cors_not_confirmed",
-        "invalid_hls_manifest"
+        "unexpected_content_type:text/plain"
       ]
     },
     {
       "cameraIds": [
         "binamarga-dalam-kota-36"
       ],
-      "url": "https://jmlive.jasamarga.com/hls/2/24f4e62b-6492-4483-b0fb-23b20fe448ac/index.m3u8",
-      "status": 502,
-      "contentType": "text/html",
-      "contentLength": 497,
-      "corsAllowOrigin": null,
-      "validManifest": false,
-      "safariNativeCandidate": false,
-      "hlsJsCandidate": false,
+      "url": "https://jmlive.jasamarga.com/hls/2/fd47bac7-bccb-4618-b466-e3a839cb2460/index.m3u8",
+      "status": 206,
+      "contentType": "text/plain",
+      "contentLength": 325,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
       "warnings": [
-        "unexpected_content_type:text/html",
-        "cors_not_confirmed",
-        "invalid_hls_manifest"
+        "unexpected_content_type:text/plain"
       ]
     },
     {
       "cameraIds": [
         "binamarga-dalam-kota-35"
       ],
-      "url": "https://jmlive.jasamarga.com/hls/2/55c05940-db56-4ecf-a642-e780f3d37278/index.m3u8",
+      "url": "https://jmlive.jasamarga.com/hls/2/4f8b5964-0e4b-4fc6-bdd3-a97da4474bcd/index.m3u8",
       "status": 206,
       "contentType": "text/plain",
       "contentLength": 325,
@@ -1237,43 +2864,23 @@
       "cameraIds": [
         "binamarga-dalam-kota-34"
       ],
-      "url": "https://jmlive.jasamarga.com/hls/2/fbab6884-cfbb-4929-ab64-4628f52ae36d/index.m3u8",
-      "status": 502,
-      "contentType": "text/html",
-      "contentLength": 497,
-      "corsAllowOrigin": null,
-      "validManifest": false,
-      "safariNativeCandidate": false,
-      "hlsJsCandidate": false,
+      "url": "https://jmlive.jasamarga.com/hls/2/ba80dd14-b814-4236-9964-25b113a3edb7/index.m3u8",
+      "status": 206,
+      "contentType": "text/plain",
+      "contentLength": 333,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
       "warnings": [
-        "unexpected_content_type:text/html",
-        "cors_not_confirmed",
-        "invalid_hls_manifest"
+        "unexpected_content_type:text/plain"
       ]
     },
     {
       "cameraIds": [
         "binamarga-dalam-kota-33"
       ],
-      "url": "https://jmlive.jasamarga.com/hls/2/c5543755-b7b0-42a6-af26-973cf0523e1c/index.m3u8",
-      "status": 502,
-      "contentType": "text/html",
-      "contentLength": 497,
-      "corsAllowOrigin": null,
-      "validManifest": false,
-      "safariNativeCandidate": false,
-      "hlsJsCandidate": false,
-      "warnings": [
-        "unexpected_content_type:text/html",
-        "cors_not_confirmed",
-        "invalid_hls_manifest"
-      ]
-    },
-    {
-      "cameraIds": [
-        "binamarga-dalam-kota-32"
-      ],
-      "url": "https://jmlive.jasamarga.com/hls/2/1ab5d1eb-4bbd-4e05-9707-1f407b6824b4/index.m3u8",
+      "url": "https://jmlive.jasamarga.com/hls/2/37138fd7-eb3e-4daa-9c0a-d59e1fe7c336/index.m3u8",
       "status": 206,
       "contentType": "text/plain",
       "contentLength": 325,
@@ -1287,41 +2894,161 @@
     },
     {
       "cameraIds": [
+        "binamarga-dalam-kota-32"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/2/663389d0-cbfd-4770-a74e-60b139e35b3a/index.m3u8",
+      "status": 206,
+      "contentType": "text/plain",
+      "contentLength": 333,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": [
+        "unexpected_content_type:text/plain"
+      ]
+    },
+    {
+      "cameraIds": [
         "binamarga-dalam-kota-31"
       ],
-      "url": "https://jmlive.jasamarga.com/hls/2/98dca5ae-f420-4cd0-aa94-b6c5ce30822c/index.m3u8",
-      "error": "timeout",
-      "validManifest": false,
-      "safariNativeCandidate": false,
-      "hlsJsCandidate": false
+      "url": "https://jmlive.jasamarga.com/hls/2/10186f68-bd71-4c34-9fb5-6fb1d15bf2b6/index.m3u8",
+      "status": 206,
+      "contentType": "text/plain",
+      "contentLength": 325,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": [
+        "unexpected_content_type:text/plain"
+      ]
     },
     {
       "cameraIds": [
         "binamarga-dalam-kota-30"
       ],
-      "url": "https://jmlive.jasamarga.com/hls/2/b3e76409-ba54-42c0-a945-364f3b4b3280/index.m3u8",
-      "error": "timeout",
-      "validManifest": false,
-      "safariNativeCandidate": false,
-      "hlsJsCandidate": false
+      "url": "https://jmlive.jasamarga.com/hls/2/2e2a4511-33f9-4f8c-81d3-6dadb72c2a95/index.m3u8",
+      "status": 206,
+      "contentType": "text/plain",
+      "contentLength": 325,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": [
+        "unexpected_content_type:text/plain"
+      ]
     },
     {
       "cameraIds": [
         "binamarga-dalam-kota-29"
       ],
-      "url": "https://jmlive.jasamarga.com/hls/2/68399547-8244-480b-83b9-d68147c2e93b/index.m3u8",
-      "status": 502,
-      "contentType": "text/html",
-      "contentLength": 497,
-      "corsAllowOrigin": null,
+      "url": "https://jmlive.jasamarga.com/hls/2/27923ccb-ef3d-408a-a99b-4e7d017a529f/index.m3u8",
+      "status": 206,
+      "contentType": "text/plain",
+      "contentLength": 333,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": [
+        "unexpected_content_type:text/plain"
+      ]
+    },
+    {
+      "cameraIds": [
+        "binamarga-bekasi-cawang-kampung-melayu-1322"
+      ],
+      "url": "https://cctv.kkdm.co.id/api/cctv/1/41/index.m3u8",
+      "status": 404,
+      "contentType": "application/json",
+      "contentLength": 109,
+      "corsAllowOrigin": "*",
       "validManifest": false,
       "safariNativeCandidate": false,
       "hlsJsCandidate": false,
       "warnings": [
-        "unexpected_content_type:text/html",
-        "cors_not_confirmed",
+        "unexpected_content_type:application/json",
         "invalid_hls_manifest"
       ]
+    },
+    {
+      "cameraIds": [
+        "binamarga-bekasi-cawang-kampung-melayu-1323"
+      ],
+      "url": "https://cctv.kkdm.co.id/api/cctv/1/43/index.m3u8",
+      "status": 404,
+      "contentType": "application/json",
+      "contentLength": 109,
+      "corsAllowOrigin": "*",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false,
+      "warnings": [
+        "unexpected_content_type:application/json",
+        "invalid_hls_manifest"
+      ]
+    },
+    {
+      "cameraIds": [
+        "binamarga-bekasi-cawang-kampung-melayu-1324"
+      ],
+      "url": "https://cctv.kkdm.co.id/api/cctv/1/44/index.m3u8",
+      "status": 200,
+      "contentType": "application/octet-stream",
+      "contentLength": 409,
+      "corsAllowOrigin": "*",
+      "validManifest": true,
+      "safariNativeCandidate": true,
+      "hlsJsCandidate": true,
+      "warnings": [
+        "unexpected_content_type:application/octet-stream"
+      ]
+    },
+    {
+      "cameraIds": [
+        "binamarga-bekasi-cawang-kampung-melayu-1325"
+      ],
+      "url": "https://cctv.kkdm.co.id/api/cctv/1/46/index.m3u8",
+      "status": 404,
+      "contentType": "application/json",
+      "contentLength": 109,
+      "corsAllowOrigin": "*",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false,
+      "warnings": [
+        "unexpected_content_type:application/json",
+        "invalid_hls_manifest"
+      ]
+    },
+    {
+      "cameraIds": [
+        "binamarga-bekasi-cawang-kampung-melayu-1327"
+      ],
+      "url": "https://cctv.kkdm.co.id/api/cctv/1/49/index.m3u8",
+      "status": 404,
+      "contentType": "application/json",
+      "contentLength": 109,
+      "corsAllowOrigin": "*",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false,
+      "warnings": [
+        "unexpected_content_type:application/json",
+        "invalid_hls_manifest"
+      ]
+    },
+    {
+      "cameraIds": [
+        "binamarga-jakarta-bogor-ciawi-592"
+      ],
+      "url": "https://jmlive.jasamarga.com/hls/1/55a848f4-a1cc-470c-8ff4-76d166abd76e/index.m3u8",
+      "error": "terminated",
+      "validManifest": false,
+      "safariNativeCandidate": false,
+      "hlsJsCandidate": false
     }
   ]
 }

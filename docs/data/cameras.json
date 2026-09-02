@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "source": {
     "provider": "Direktorat Jenderal Bina Marga",
-    "road": "jorr-w2u-ulujami-kembangan",
-    "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=jorr-w2u-ulujami-kembangan",
-    "scrapedAt": "2026-09-01T08:38:37.399Z"
+    "road": "dalam-kota",
+    "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=dalam-kota",
+    "scrapedAt": "2026-09-02T15:45:05.157Z"
   },
   "sources": [
     {
@@ -16,7 +16,7 @@
       "provider": "Direktorat Jenderal Bina Marga",
       "road": "dalam-kota",
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=dalam-kota",
-      "scrapedAt": "2026-09-01T08:38:30.966Z"
+      "scrapedAt": "2026-09-02T15:45:05.157Z"
     },
     {
       "provider": "Direktorat Jenderal Bina Marga",
@@ -6194,7 +6194,7 @@
       "providerCameraId": "41",
       "highwayId": "dalam-kota",
       "name": "JTC KM 10+600",
-      "streamUrl": "https://jmlive.jasamarga.com/hls/2/6b95a51e-6997-487d-b4e0-e818c681e469/index.m3u8",
+      "streamUrl": "https://jmlive.jasamarga.com/hls/2/edd0da08-d14b-4765-bbe7-752e209d24d4/index.m3u8",
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=dalam-kota",
       "km": 10.6,
       "side": null,
@@ -6206,7 +6206,7 @@
       "enabled": true,
       "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-09-01T08:38:30.966Z",
+      "scrapedAt": "2026-09-02T15:45:05.157Z",
       "directions": [
         "A",
         "B"
@@ -6233,7 +6233,7 @@
       "providerCameraId": "53",
       "highwayId": "dalam-kota",
       "name": "JTC KM 19+000",
-      "streamUrl": "https://jmlive.jasamarga.com/hls/2/7754ef62-32ba-48da-8ef4-c2e7d20258e7/index.m3u8",
+      "streamUrl": "https://jmlive.jasamarga.com/hls/2/8ff61b3e-3733-4152-bd06-150605018970/index.m3u8",
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=dalam-kota",
       "km": 19,
       "side": null,
@@ -6245,7 +6245,7 @@
       "enabled": true,
       "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-09-01T08:38:30.966Z",
+      "scrapedAt": "2026-09-02T15:45:05.157Z",
       "directions": [
         "A",
         "B"
@@ -6272,7 +6272,7 @@
       "providerCameraId": "52",
       "highwayId": "dalam-kota",
       "name": "JTC KM 18+200",
-      "streamUrl": "https://jmlive.jasamarga.com/hls/2/8715b9ca-492a-4ae4-8090-830a0d350a89/index.m3u8",
+      "streamUrl": "https://jmlive.jasamarga.com/hls/2/064d202a-bd7b-4725-8897-835870c86266/index.m3u8",
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=dalam-kota",
       "km": 18.2,
       "side": null,
@@ -6284,7 +6284,7 @@
       "enabled": true,
       "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-09-01T08:38:30.966Z",
+      "scrapedAt": "2026-09-02T15:45:05.157Z",
       "directions": [
         "A",
         "B"
@@ -6311,7 +6311,7 @@
       "providerCameraId": "51",
       "highwayId": "dalam-kota",
       "name": "JTC KM 17+000",
-      "streamUrl": "https://jmlive.jasamarga.com/hls/2/7a9ef557-58f1-4056-bfc4-3da7c025b1a5/index.m3u8",
+      "streamUrl": "https://jmlive.jasamarga.com/hls/2/066ebd2b-5443-4cca-87f1-d50fe1b83507/index.m3u8",
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=dalam-kota",
       "km": 17,
       "side": null,
@@ -6323,7 +6323,7 @@
       "enabled": true,
       "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-09-01T08:38:30.966Z",
+      "scrapedAt": "2026-09-02T15:45:05.157Z",
       "directions": [
         "A",
         "B"
@@ -6350,7 +6350,7 @@
       "providerCameraId": "50",
       "highwayId": "dalam-kota",
       "name": "JTC KM 16+100",
-      "streamUrl": "https://jmlive.jasamarga.com/hls/2/3a553ec0-ddee-4096-9d01-e627184a93f1/index.m3u8",
+      "streamUrl": "https://jmlive.jasamarga.com/hls/2/df999e5b-7ede-4fd8-959e-6fc92842d7cf/index.m3u8",
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=dalam-kota",
       "km": 16.1,
       "side": null,
@@ -6362,7 +6362,7 @@
       "enabled": true,
       "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-09-01T08:38:30.966Z",
+      "scrapedAt": "2026-09-02T15:45:05.157Z",
       "directions": [
         "A",
         "B"
@@ -6389,7 +6389,7 @@
       "providerCameraId": "49",
       "highwayId": "dalam-kota",
       "name": "JTC KM 14+000",
-      "streamUrl": "https://jmlive.jasamarga.com/hls/2/9e35bd6c-9dcc-4415-9031-62b583e6068d/index.m3u8",
+      "streamUrl": "https://jmlive.jasamarga.com/hls/2/5a35f01e-0f52-4fe4-8b05-790f0db14eaa/index.m3u8",
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=dalam-kota",
       "km": 14,
       "side": null,
@@ -6401,7 +6401,7 @@
       "enabled": true,
       "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-09-01T08:38:30.966Z",
+      "scrapedAt": "2026-09-02T15:45:05.157Z",
       "directions": [
         "A",
         "B"
@@ -6428,7 +6428,7 @@
       "providerCameraId": "48",
       "highwayId": "dalam-kota",
       "name": "JTC KM 14+000",
-      "streamUrl": "https://jmlive.jasamarga.com/hls/2/9e35bd6c-9dcc-4415-9031-62b583e6068d/index.m3u8",
+      "streamUrl": "https://jmlive.jasamarga.com/hls/2/5a35f01e-0f52-4fe4-8b05-790f0db14eaa/index.m3u8",
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=dalam-kota",
       "km": 14,
       "side": null,
@@ -6437,14 +6437,14 @@
       "enabled": false,
       "curationStatus": "needs_review",
       "notes": "",
-      "scrapedAt": "2026-09-01T08:38:30.966Z"
+      "scrapedAt": "2026-09-02T15:45:05.157Z"
     },
     {
       "id": "binamarga-dalam-kota-47",
       "providerCameraId": "47",
       "highwayId": "dalam-kota",
       "name": "JTC KM 13+200",
-      "streamUrl": "https://jmlive.jasamarga.com/hls/2/57a9c9bb-3e72-4313-bf64-cd9babb91ef0/index.m3u8",
+      "streamUrl": "https://jmlive.jasamarga.com/hls/2/3b8c7aa7-07b8-44b2-b86e-0abecab60e17/index.m3u8",
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=dalam-kota",
       "km": 13.2,
       "side": null,
@@ -6456,7 +6456,7 @@
       "enabled": true,
       "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-09-01T08:38:30.966Z",
+      "scrapedAt": "2026-09-02T15:45:05.157Z",
       "directions": [
         "A",
         "B"
@@ -6483,7 +6483,7 @@
       "providerCameraId": "46",
       "highwayId": "dalam-kota",
       "name": "JTC KM 13+200",
-      "streamUrl": "https://jmlive.jasamarga.com/hls/2/57a9c9bb-3e72-4313-bf64-cd9babb91ef0/index.m3u8",
+      "streamUrl": "https://jmlive.jasamarga.com/hls/2/3b8c7aa7-07b8-44b2-b86e-0abecab60e17/index.m3u8",
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=dalam-kota",
       "km": 13.2,
       "side": null,
@@ -6492,14 +6492,14 @@
       "enabled": false,
       "curationStatus": "needs_review",
       "notes": "",
-      "scrapedAt": "2026-09-01T08:38:30.966Z"
+      "scrapedAt": "2026-09-02T15:45:05.157Z"
     },
     {
       "id": "binamarga-dalam-kota-45",
       "providerCameraId": "45",
       "highwayId": "dalam-kota",
       "name": "JTC KM 12+000",
-      "streamUrl": "https://jmlive.jasamarga.com/hls/2/1417b08c-4c9c-42e8-bb89-07962c742220/index.m3u8",
+      "streamUrl": "https://jmlive.jasamarga.com/hls/2/78976488-cd42-4f02-900f-64ec95174b21/index.m3u8",
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=dalam-kota",
       "km": 12,
       "side": null,
@@ -6511,7 +6511,7 @@
       "enabled": true,
       "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-09-01T08:38:30.966Z",
+      "scrapedAt": "2026-09-02T15:45:05.157Z",
       "directions": [
         "A",
         "B"
@@ -6538,7 +6538,7 @@
       "providerCameraId": "44",
       "highwayId": "dalam-kota",
       "name": "JTC KM 12+000",
-      "streamUrl": "https://jmlive.jasamarga.com/hls/2/1417b08c-4c9c-42e8-bb89-07962c742220/index.m3u8",
+      "streamUrl": "https://jmlive.jasamarga.com/hls/2/78976488-cd42-4f02-900f-64ec95174b21/index.m3u8",
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=dalam-kota",
       "km": 12,
       "side": null,
@@ -6547,14 +6547,14 @@
       "enabled": false,
       "curationStatus": "needs_review",
       "notes": "",
-      "scrapedAt": "2026-09-01T08:38:30.966Z"
+      "scrapedAt": "2026-09-02T15:45:05.157Z"
     },
     {
       "id": "binamarga-dalam-kota-43",
       "providerCameraId": "43",
       "highwayId": "dalam-kota",
       "name": "JTC KM 11+000",
-      "streamUrl": "https://jmlive.jasamarga.com/hls/2/e04f918f-7330-4b2f-9362-5f8411cb9bd8/index.m3u8",
+      "streamUrl": "https://jmlive.jasamarga.com/hls/2/fe949219-601a-48b9-9c99-b847882ee564/index.m3u8",
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=dalam-kota",
       "km": 11,
       "side": null,
@@ -6566,7 +6566,7 @@
       "enabled": true,
       "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-09-01T08:38:30.966Z",
+      "scrapedAt": "2026-09-02T15:45:05.157Z",
       "directions": [
         "A",
         "B"
@@ -6593,7 +6593,7 @@
       "providerCameraId": "42",
       "highwayId": "dalam-kota",
       "name": "JTC KM 11+000",
-      "streamUrl": "https://jmlive.jasamarga.com/hls/2/e04f918f-7330-4b2f-9362-5f8411cb9bd8/index.m3u8",
+      "streamUrl": "https://jmlive.jasamarga.com/hls/2/fe949219-601a-48b9-9c99-b847882ee564/index.m3u8",
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=dalam-kota",
       "km": 11,
       "side": null,
@@ -6602,14 +6602,14 @@
       "enabled": false,
       "curationStatus": "needs_review",
       "notes": "",
-      "scrapedAt": "2026-09-01T08:38:30.966Z"
+      "scrapedAt": "2026-09-02T15:45:05.157Z"
     },
     {
       "id": "binamarga-dalam-kota-28",
       "providerCameraId": "28",
       "highwayId": "dalam-kota",
       "name": "JTC KM 00+400 | CAWANG-CILILITAN",
-      "streamUrl": "https://jmlive.jasamarga.com/hls/2/a2aa1728-10e6-4b18-b8eb-d84c1eeff813/index.m3u8",
+      "streamUrl": "https://jmlive.jasamarga.com/hls/2/f47e6dfe-bc9a-4f7a-aa92-9b473c4b247e/index.m3u8",
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=dalam-kota",
       "km": 0.4,
       "side": null,
@@ -6621,7 +6621,7 @@
       "enabled": true,
       "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-09-01T08:38:30.966Z",
+      "scrapedAt": "2026-09-02T15:45:05.157Z",
       "directions": [
         "A",
         "B"
@@ -6648,7 +6648,7 @@
       "providerCameraId": "40",
       "highwayId": "dalam-kota",
       "name": "JTC KM 10+600",
-      "streamUrl": "https://jmlive.jasamarga.com/hls/2/6b95a51e-6997-487d-b4e0-e818c681e469/index.m3u8",
+      "streamUrl": "https://jmlive.jasamarga.com/hls/2/edd0da08-d14b-4765-bbe7-752e209d24d4/index.m3u8",
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=dalam-kota",
       "km": 10.6,
       "side": null,
@@ -6657,14 +6657,14 @@
       "enabled": false,
       "curationStatus": "needs_review",
       "notes": "",
-      "scrapedAt": "2026-09-01T08:38:30.966Z"
+      "scrapedAt": "2026-09-02T15:45:05.157Z"
     },
     {
       "id": "binamarga-dalam-kota-39",
       "providerCameraId": "39",
       "highwayId": "dalam-kota",
       "name": "JTC KM 10+100",
-      "streamUrl": "https://jmlive.jasamarga.com/hls/2/f761b073-6ba1-4620-89c3-c958ad68b0cb/index.m3u8",
+      "streamUrl": "https://jmlive.jasamarga.com/hls/2/d1bc2d8a-f742-4da1-8ade-ab464bb872b3/index.m3u8",
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=dalam-kota",
       "km": 10.1,
       "side": null,
@@ -6676,7 +6676,7 @@
       "enabled": true,
       "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-09-01T08:38:30.966Z",
+      "scrapedAt": "2026-09-02T15:45:05.157Z",
       "directions": [
         "A",
         "B"
@@ -6703,7 +6703,7 @@
       "providerCameraId": "38",
       "highwayId": "dalam-kota",
       "name": "JTC KM 07+000",
-      "streamUrl": "https://jmlive.jasamarga.com/hls/2/a73df85d-ac69-4349-a7bd-edfa823503df/index.m3u8",
+      "streamUrl": "https://jmlive.jasamarga.com/hls/2/eea4dabd-7c07-4096-aec4-2e6897b8c26f/index.m3u8",
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=dalam-kota",
       "km": 7,
       "side": null,
@@ -6715,7 +6715,7 @@
       "enabled": true,
       "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-09-01T08:38:30.966Z",
+      "scrapedAt": "2026-09-02T15:45:05.157Z",
       "directions": [
         "A",
         "B"
@@ -6742,7 +6742,7 @@
       "providerCameraId": "37",
       "highwayId": "dalam-kota",
       "name": "JTC KM 06+000",
-      "streamUrl": "https://jmlive.jasamarga.com/hls/2/cb9e01a2-d3ff-44fa-aa0a-38de83e1f3cb/index.m3u8",
+      "streamUrl": "https://jmlive.jasamarga.com/hls/2/4c202560-6fbc-45dc-8b40-ad11485d3d11/index.m3u8",
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=dalam-kota",
       "km": 6,
       "side": null,
@@ -6754,7 +6754,7 @@
       "enabled": true,
       "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-09-01T08:38:30.966Z",
+      "scrapedAt": "2026-09-02T15:45:05.157Z",
       "directions": [
         "A",
         "B"
@@ -6781,7 +6781,7 @@
       "providerCameraId": "36",
       "highwayId": "dalam-kota",
       "name": "JTC KM 05+400 B",
-      "streamUrl": "https://jmlive.jasamarga.com/hls/2/0a89ef7b-2272-4b49-83ba-0398f1f3a03b/index.m3u8",
+      "streamUrl": "https://jmlive.jasamarga.com/hls/2/fd47bac7-bccb-4618-b466-e3a839cb2460/index.m3u8",
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=dalam-kota",
       "km": 5.4,
       "side": "B",
@@ -6793,7 +6793,7 @@
       "enabled": true,
       "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-09-01T08:38:30.966Z",
+      "scrapedAt": "2026-09-02T15:45:05.157Z",
       "locationReview": {
         "method": "osm_route_stationing_interpolation",
         "status": "provisional",
@@ -6815,7 +6815,7 @@
       "providerCameraId": "35",
       "highwayId": "dalam-kota",
       "name": "JTC KM 05+400 A",
-      "streamUrl": "https://jmlive.jasamarga.com/hls/2/8bd81e83-1672-4962-9bbf-0e32d723ad16/index.m3u8",
+      "streamUrl": "https://jmlive.jasamarga.com/hls/2/4f8b5964-0e4b-4fc6-bdd3-a97da4474bcd/index.m3u8",
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=dalam-kota",
       "km": 5.4,
       "side": "A",
@@ -6827,7 +6827,7 @@
       "enabled": true,
       "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-09-01T08:38:30.966Z",
+      "scrapedAt": "2026-09-02T15:45:05.157Z",
       "locationReview": {
         "method": "osm_route_stationing_interpolation",
         "status": "provisional",
@@ -6849,7 +6849,7 @@
       "providerCameraId": "34",
       "highwayId": "dalam-kota",
       "name": "JTC KM 03+800",
-      "streamUrl": "https://jmlive.jasamarga.com/hls/2/27432f62-4b54-4674-bb1d-a553d22fc3a4/index.m3u8",
+      "streamUrl": "https://jmlive.jasamarga.com/hls/2/ba80dd14-b814-4236-9964-25b113a3edb7/index.m3u8",
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=dalam-kota",
       "km": 3.8,
       "side": null,
@@ -6861,7 +6861,7 @@
       "enabled": true,
       "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-09-01T08:38:30.966Z",
+      "scrapedAt": "2026-09-02T15:45:05.157Z",
       "directions": [
         "A",
         "B"
@@ -6888,7 +6888,7 @@
       "providerCameraId": "33",
       "highwayId": "dalam-kota",
       "name": "JTC KM 02+100",
-      "streamUrl": "https://jmlive.jasamarga.com/hls/2/ceff1154-e6e1-4388-a99c-a09173c8bd2c/index.m3u8",
+      "streamUrl": "https://jmlive.jasamarga.com/hls/2/37138fd7-eb3e-4daa-9c0a-d59e1fe7c336/index.m3u8",
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=dalam-kota",
       "km": 2.1,
       "side": null,
@@ -6900,7 +6900,7 @@
       "enabled": true,
       "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-09-01T08:38:30.966Z",
+      "scrapedAt": "2026-09-02T15:45:05.157Z",
       "directions": [
         "A",
         "B"
@@ -6927,7 +6927,7 @@
       "providerCameraId": "32",
       "highwayId": "dalam-kota",
       "name": "JTC KM 00+700",
-      "streamUrl": "https://jmlive.jasamarga.com/hls/2/d7ffdbe3-060a-42c7-b1e9-4d424e9dd127/index.m3u8",
+      "streamUrl": "https://jmlive.jasamarga.com/hls/2/663389d0-cbfd-4770-a74e-60b139e35b3a/index.m3u8",
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=dalam-kota",
       "km": 0.7,
       "side": null,
@@ -6939,7 +6939,7 @@
       "enabled": true,
       "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-09-01T08:38:30.966Z",
+      "scrapedAt": "2026-09-02T15:45:05.157Z",
       "directions": [
         "A",
         "B"
@@ -6966,7 +6966,7 @@
       "providerCameraId": "31",
       "highwayId": "dalam-kota",
       "name": "JTC KM 00+400 A",
-      "streamUrl": "https://jmlive.jasamarga.com/hls/2/4cab3f3a-1c35-4852-b858-9dd2c467e83e/index.m3u8",
+      "streamUrl": "https://jmlive.jasamarga.com/hls/2/10186f68-bd71-4c34-9fb5-6fb1d15bf2b6/index.m3u8",
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=dalam-kota",
       "km": 0.4,
       "side": "A",
@@ -6978,7 +6978,7 @@
       "enabled": true,
       "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-09-01T08:38:30.966Z",
+      "scrapedAt": "2026-09-02T15:45:05.157Z",
       "locationReview": {
         "method": "osm_route_stationing_interpolation",
         "status": "provisional",
@@ -7000,7 +7000,7 @@
       "providerCameraId": "30",
       "highwayId": "dalam-kota",
       "name": "JTC KM 00+400 B",
-      "streamUrl": "https://jmlive.jasamarga.com/hls/2/791fbb77-88fc-41ef-8930-6a55e1c3fe72/index.m3u8",
+      "streamUrl": "https://jmlive.jasamarga.com/hls/2/2e2a4511-33f9-4f8c-81d3-6dadb72c2a95/index.m3u8",
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=dalam-kota",
       "km": 0.4,
       "side": "B",
@@ -7012,7 +7012,7 @@
       "enabled": true,
       "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-09-01T08:38:30.966Z",
+      "scrapedAt": "2026-09-02T15:45:05.157Z",
       "locationReview": {
         "method": "osm_route_stationing_interpolation",
         "status": "provisional",
@@ -7034,7 +7034,7 @@
       "providerCameraId": "29",
       "highwayId": "dalam-kota",
       "name": "JTC KM 00+400 | HALIM",
-      "streamUrl": "https://jmlive.jasamarga.com/hls/2/c7d2186b-5ce1-4277-9241-9602aa7d495c/index.m3u8",
+      "streamUrl": "https://jmlive.jasamarga.com/hls/2/27923ccb-ef3d-408a-a99b-4e7d017a529f/index.m3u8",
       "sourcePage": "https://binamarga.pu.go.id/contents/cctv_tol/?id_ruas=dalam-kota",
       "km": 0.4,
       "side": null,
@@ -7046,7 +7046,7 @@
       "enabled": true,
       "curationStatus": "provisional_stationing",
       "notes": "",
-      "scrapedAt": "2026-09-01T08:38:30.966Z",
+      "scrapedAt": "2026-09-02T15:45:05.157Z",
       "directions": [
         "A",
         "B"
